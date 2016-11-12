@@ -152,6 +152,18 @@ Output:
 ------------------------------------------------------------------- */
 STATE link_get_state(Link* link);
 
+/* --------------------------------------------------------------------
+Function: link_print
+Date: Nov. 4, 2016
+Author: Ricardo Riol
+
+Description:
+	This function prints Links.
+Input:
+	Link* link: Pointer to the Link whose state we want to get.
+Output:
+	STATUS
+------------------------------------------------------------------- */
+STATUS link_print(Link* link);
+
 #endif
-
-
