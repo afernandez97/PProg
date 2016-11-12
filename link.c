@@ -242,7 +242,7 @@ STATE link_get_state(Link* link){
 }
 
 /* --------------------------------------------------------------------
-Function: link_get_state
+Function: link_print
 Date: Nov. 4, 2016
 Author: Ricardo Riol
 
