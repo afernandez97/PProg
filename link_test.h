@@ -316,6 +316,22 @@ Output:
 int test2_link_set_state();
 
 /* --------------------------------------------------------------------
+Function: test3_link_set_state
+Date: Nov. 12, 2016
+Author: Adrián Fernández
+
+Description: 
+    Tests if you can set the state of a Link if the state inserted
+    is unassigned.
+
+Input:
+
+Output:
+    int: Returns 0 if OK or 1 if ERROR.
+-------------------------------------------------------------------- */
+int test3_link_set_state();
+
+/* --------------------------------------------------------------------
 Function: test1_link_get_state
 Date: Nov. 12, 2016
 Author: Adrián Fernández

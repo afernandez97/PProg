@@ -1,5 +1,5 @@
 /* ===================================================================
-File: link_test.h
+File: link_test.c
 Version: 1.0
 Date: Nov. 12, 2016
 Authors: Adrián Fernández
@@ -17,7 +17,7 @@ Revision history:
 #include <string.h>
 #include "player_test.h" 
 
-#define MAX_TEST_LINK 13
+#define MAX_TEST_LINK 24
 
 int main(int argc, char** argv){
 
@@ -40,16 +40,27 @@ int main(int argc, char** argv){
 	if (all || test == 1) count += test1_link_create();
 	if (all || test == 2) count += test2_link_create();
 	if (all || test == 3) count += test3_link_create();
-	if (all || test == 4) count += test1_link_destroy();
-	if (all || test == 5) count += test1_link_get_id();
-	if (all || test == 6) count += test1_link_set_name();
-	if (all || test == 7) count += test2_link_set_name();
-	if (all || test == 8) count += test1_link_get_name();
-	if (all || test == 9) count += test1_link_get_space1();
-	if (all || test == 10) count += test1_link_get_space2();
-	if (all || test == 11) count += test1_link_set_state();
-	if (all || test == 12) count += test1_link_get_state();
-	if (all || test == 13) count += test1_link_print();
+	if (all || test == 4) count += test4_link_create();
+	if (all || test == 5) count += test1_link_destroy();
+	if (all || test == 6) count += test2_link_destroy();
+	if (all || test == 7) count += test1_link_get_id();
+	if (all || test == 8) count += test2_link_get_id();
+	if (all || test == 9) count += test1_link_set_name();
+	if (all || test == 10) count += test2_link_set_name();
+	if (all || test == 11) count += test3_link_set_name();
+	if (all || test == 12) count += test1_link_get_name();
+	if (all || test == 13) count += test2_link_get_name();
+	if (all || test == 14) count += test1_link_get_space1();
+	if (all || test == 15) count += test2_link_get_space1();
+	if (all || test == 16) count += test1_link_get_space2();
+	if (all || test == 17) count += test2_link_get_space2();
+	if (all || test == 18) count += test1_link_set_state();
+	if (all || test == 19) count += test2_link_set_state();
+	if (all || test == 20) count += test3_link_set_state();
+	if (all || test == 21) count += test1_link_get_state();
+	if (all || test == 22) count += test2_link_get_state();
+	if (all || test == 23) count += test1_link_print();
+	if (all || test == 24) count += test2_link_print();
 
 	if (count == 0) {
 		fprintf (stdout, "No errors detected\n");
