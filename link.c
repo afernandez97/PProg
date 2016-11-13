@@ -1,12 +1,11 @@
 /* ===================================================================
 File: link.c
 Version: 1.0
-Date: Nov. 4, 2016
-Authors: Adrián Fernández, Ricardo Riol
+Date: 04-11-2016
+Authors: Adrian Fernández, Ricardo Riol
 
 Description:
-	Contains the implementation of the functions associated to the
-	Link data type.
+	It implements a link.
 Revision history:
 	Nov. 4, 2016: Version 1.0 (initial release)
 =================================================================== */
@@ -30,34 +29,32 @@ struct _Link{
 /* --------------------------------------------------------------------
 Function: link_create
 Date: Nov. 4, 2016
-Author: Adrián Fernández
+Author: Adrian Fernández
 
 Description: 
 	This function creates a variable of type Link.
 Input: 
-	Id id: Id of the Link.
-	Id space1: Id of the first Space.
-	Id space2: Id of the second Space.
+	Id id: the id of the link.
 Output:
-	Link*: Pointer to the variable created.
+	Link *: the link created or NULL on error.
 ------------------------------------------------------------------- */
-Link* link_create(Id id, Id space1, Id space2){
+Link * link_create(Id id){
 
-	Link* link;
+	Link *link = NULL;
 
-	if(id==NO_ID || space1==NO_Id || space2==NO_ID){
+	if(id == NO_ID){
 		return NULL;
 	}
 
-	link = (Link*) malloc (sizeof(Link));
-	if(link==NULL){
+	link = (Link *)malloc(sizeof(Link));
+	if(!link){
 		return NULL;
 	}
 
 	id(link) = id;
 	name(link) = "";
-	space1(link) = space1;
-	space2(link) = space2;
+	space1(link) = NO_ID;
+	space2(link) = NO_ID;
 	state(link) = NO_STATE;
 
 	return link;
@@ -155,6 +152,29 @@ char* link_get_name(Link* link){
 }
 
 /* --------------------------------------------------------------------
+Function: link_set_space1
+Date: Nov. 4, 2016
+Author: Alejandro Sanchez
+
+Description:
+	Sets the Id of a Link's first Space. 
+Input:
+	Link *link: the link whose first space you want to set.
+	Id space1: the id of the space you want to be link's first space.
+Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
+------------------------------------------------------------------- */
+STATUS link_set_space1(Link *link, Id space1){
+	if(!link || space1 == NO_ID){
+		return ERROR;
+	}
+	
+	space1(link) = space1;
+	
+	return OK;
+}
+
+/* --------------------------------------------------------------------
 Function: link_get_space1
 Date: Nov. 4, 2016
 Author: Adrián Fernández
@@ -174,6 +194,31 @@ Id link_get_space1(Link* link){
 
 	return space1(link);
 }
+
+
+/* --------------------------------------------------------------------
+Function: link_set_space2
+Date: Nov. 4, 2016
+Author: Alejandro Sanchez
+
+Description:
+	Sets the Id of a Link's second Space. 
+Input:
+	Link *link: the link whose second space you want to set.
+	Id space2: the id of the space you want to be link's second space.
+Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
+------------------------------------------------------------------- */
+STATUS link_set_space2(Link *link, Id space2){
+	if(!link || space2 == NO_ID){
+		return ERROR;
+	}
+	
+	space2(link) = space2;
+	
+	return OK;
+}
+
 
 /* --------------------------------------------------------------------
 Function: link_get_space2
