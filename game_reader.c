@@ -1,19 +1,23 @@
 /* =================================================================== 
    File: game_reader.c
-   Version: 3.0
-   Date: 27-10-2016
+   Version: 4.1
+   Date: 11-11-2016
    Author: Guillermo Rodriguez and Alejandro Sanchez
 
    Description:
     It implements the game reader.
 
    Revision history:
-    Sept. 30, 2016 Version 1.0 (initial release)
+    Sept. 30, 2016  Version 1.0 (initial release)
     Sept. 30, 2016  Version 2.0 
       Commented the file.
-		Oct.	27,	2016	Version 3.0
+		Oct. 27,	2016	Version 3.0
 			Created functions "game_load_objects" and "game_add_object".
       Modified function "game_load_spaces".
+    Nov. 05, 2016   Version 4.0
+      Modified functions after making "Game" structure private.
+    Nov. 11, 2016   Version 4.1
+      Created functions "game_load_links" and "game_add_link".  
 =================================================================== */
 
 #include <stdio.h>
@@ -25,6 +29,7 @@
 /*** Constant values description ***/
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
+#define links(X) (X)->links
 
 
 /*** Public functions definition ***/
@@ -50,7 +55,7 @@ STATUS game_add_space(Game *game, Space *space){
   }
 
   /* Increase the counter until finding an empty space */
-  while(i < MAX_SPACES && game_get_space_position(game,i) != NULL){
+  while(i < MAX_SPACES && game_get_space_at_position(game, i) != NULL){
     i++;
   }
 
@@ -60,8 +65,8 @@ STATUS game_add_space(Game *game, Space *space){
   }
 
   /* Set the new space */
-  if(ERROR == game_set_space_position(game,space,i)){
-	return ERROR;
+  if(game_set_space_at_position(game, space, i) == ERROR){
+    return ERROR;
   }
 
   return OK;
@@ -102,7 +107,7 @@ STATUS game_load_spaces(Game *game, char *filename){
     return ERROR;
   }
   
-  /* Read each line of the file and get the id and the coordinates of each space */
+  /* Read each line of the file and get the id and the links of each space */
   while(fgets(line, WORD_SIZE, file)){
     if(strncmp("#s:", line, 3) == 0){
       toks = strtok(line + 3, "|");
@@ -130,7 +135,7 @@ STATUS game_load_spaces(Game *game, char *filename){
         /* Set the name to the space */  
         space_set_name(space, name);
 
-        /* Set the coordinates to the space */  
+        /* Set the links to the space */  
         space_set_north(space, north);
         space_set_east(space, east);
         space_set_south(space, south);
@@ -179,7 +184,7 @@ STATUS game_add_object(Game *game, Object *object){
   }
 
   /* Increase the counter until finding an empty object */
-  while(i < MAX_OBJECTS && game_get_object_position(game,i) != NULL){
+  while(i < MAX_OBJECTS && game_get_object_at_position(game, i) != NULL){
     i++;
   }
 
@@ -189,7 +194,7 @@ STATUS game_add_object(Game *game, Object *object){
   }
 
   /* Set the new object */
-  if(ERROR == game_set_object_position(game,object,i)){
+  if(game_set_object_at_position(game, object, i) == ERROR){
     return ERROR;
 	}
 
@@ -272,46 +277,89 @@ STATUS game_load_objects(Game *game, char *filename){
   return status;
 }
 
-/* --------------------------------------------------------------------
- Function: game_load_links
- Date: 10-11-2016
- Author: Ricardo Riol
- 
- Description:
- 	This function loads Links from a file into a Game.
- 	
- Input:
- 	Game*: Pointer to the game in which we want to load the Links.
- 	char: Name of the file from which the Links are loaded.
- Output:
- 	STATUS: Returns OK if the function has done his job correctly.
- ------------------------------------------------------------------- */
-STATUS game_load_links(Game* game, char* filename){
 
-	File* file = NULL;
+
+/* ----------------------------------------------------------------------------
+   Function: game_add_link
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Adds an link to a game.
+
+   Input: 
+    Game *game: the game where you add the link.
+    Link *link: the link you want to add to the game.  
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   --------------------------------------------------------------------------- */
+STATUS game_add_link(Game *game, Link *link){
+  int i = 0;  /* Initialize the counter */
+
+  if(!game || !link){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  /* Increase the counter until finding an empty link */
+  while(i < MAX_LINKS && game_get_link_at_position(game, i) != NULL){
+    i++;
+  }
+
+  /* Check if every link is not empty */
+  if(i >= MAX_LINKS){
+    return ERROR;
+  }
+
+  /* Set the new link */
+  if(game_set_link_at_position(game, link, i) == ERROR){
+    return ERROR;
+  }
+
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_load_links
+   Date: 10-11-2016
+   Author: Ricardo Riol
+ 
+   Description:
+ 	  Loads the links from a file.
+ 	
+   Input:
+    Game *game: the game where you want to load the links.
+    char *filename: the file that contains the links. 
+   Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
+ ------------------------------------------------------------------- */
+STATUS game_load_links(Game *game, char *filename){
+	FILE *file = NULL;
 	char line[WORD_SIZE] = "";
 	Id id = NO_ID;
 	char name[WORD_SIZE] = "";
 	Id space_id1 = NO_ID;
 	Id space_id2 = NO_ID;
 	STATE link_state = NO_STATE;
-	Link* link = NULL;
+	Link *link = NULL;
 
 
-	if (!game || !filename){
+	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
 
-	file = fopen(filename, "r");	/*Open the file only to read*/
-	if (file == NULL) {				
+	file = fopen(filename, "r");	/* Open the file where the links are */
+	if(!file){				
 		return ERROR;
 	}
 
-	while (fgets(line, WORD_SIZE, file)) {
-		if (strncmp("#1:", line, 3) == 0) {
+  /* Read each line of the file and get the id, the name, the spaces and the state of the links */
+	while(fgets(line, WORD_SIZE, file)){
+		if(strncmp("#l:", line, 3) == 0){
 			toks = strtok(line + 3, "|");
 			id = atol(toks);
-			toks = strtok(NULL, "|");	/*Reads the different Link's fields*/
+			toks = strtok(NULL, "|");	
 			strcpy(name, toks);
 			toks = strtok(NULL, "|");
 			space_id1 = atol(toks);
@@ -324,19 +372,31 @@ STATUS game_load_links(Game* game, char* filename){
 	printf("Leido: %ld|%s|%ld|%ld|%d\n", id, name, space_id1, space_id2, link_state);
 #endif
 	
-     		link = link_create(id, space_id1, space_id2);	/*Initializes the Link*/
-      		if (link!= NULL) {			
-				link_set_name(link, name);
-				link_set_state(link, state);
-      		}
-    	}
-  	}
+     	link = link_create(id);	/* Create the link */
+   		if(link != NULL){
+        /* Set the name to the link */			
+  			link_set_name(link, name);
+
+        /* Set the first space to the link */
+        link_set_space1(link, space_id1);
+
+        /* Set the second space to the link */
+        link_set_space2(link, space_id2);
+
+        /* Set the state to the link */
+	   		link_set_state(link, state);
+
+        /* Add the link to the game */
+        game_add_link(game, link);  
+      }
+    } /* if(strncmp("#l:", line, 3) == 0) */
+  } /* while */
   
-  	if (ferror(file)) {
-    	status = ERROR;
-  	}
+  if(ferror(file)){
+  	status = ERROR;
+	}
   
-  	fclose(file);
+	fclose(file);
   
-  	return status;
+	return status;
 }

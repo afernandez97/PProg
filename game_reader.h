@@ -1,7 +1,7 @@
 /* =================================================================== 
    File: game_reader.h
-   Version: 3.0
-   Date: 27-10-2016
+   Version: 4.0
+   Date: 11-11-2016
    Author: Guillermo Rodriguez and Alejandro Sanchez
 
    Description:
@@ -13,6 +13,8 @@
     	Commented the file.
 		Oct.	27,	2016	Version 3.0
 			Created functions "game_load_objects" and "game_add_object".
+    Nov. 11, 2016   Version 4.0
+      Created functions "game_load_links" and "game_add_link".
 =================================================================== */
 #ifndef GAME_READER_H
 #define GAME_READER_H

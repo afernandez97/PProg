@@ -145,6 +145,123 @@ Space * game_get_space(Game *game, Id id);
 
 
 /* --------------------------------------------------------------------
+   Function: game_set_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets a space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    Space *space : the space you want to set
+    int position: the position where you want to set the space.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_space_at_position(Game *game, Space *space, int position);
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    int position: the position of the space.
+
+   Output: 
+    Space *space : the space in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Space * game_get_space_at_position(Game *game, int position);
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets an object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    Object *object : the object you want to set
+    int position: the position where you want to set the object.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_object_at_position(Game *game, Object *object, int position);
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    int position: the position of the object
+
+   Output: 
+    Object *object : the object in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Object * game_get_object_at_position(Game *game, int position);
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_link_at_position
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets a link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    Link *link : the link you want to set
+    int position: the position where you want to set the link.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_link_at_position(Game *game, Link *link, int position);
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_link_at_position
+   Date: 13-10-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gets the link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    int position: the position of the link.
+
+   Output: 
+    Link *link : the link in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Link * game_get_link_at_position(Game *game, int position);
+
+
+
+/* --------------------------------------------------------------------
    Function: game_is_over
    Date: 23-09-2016 
    Author: Alejandro Sanchez
@@ -215,77 +332,7 @@ void game_print_objects(Game *game, Space *space);
    -------------------------------------------------------------------- */
 void game_print_screen(Game *game);
 
-/* --------------------------------------------------------------------
-   Function: game_set_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
 
-   Description: 
-    Set a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Space *space : the space you want to set
-    int i: the number of the spaces
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_space_position(Game *game,Space*space,int i);
-
-
-/* --------------------------------------------------------------------
-   Function: game_set_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Set a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Object *object : the object you want to set
-    int i: the number of the object
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_object_position(Game *game, Object*object,int i);
-
-/* --------------------------------------------------------------------
-   Function: game_get_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Object *object : the object you want to know
-   -------------------------------------------------------------------- */
-
-Object * game_get_object_position(Game *game, int i);
-/* --------------------------------------------------------------------
-   Function: game_get_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Space *space : the object you want to know
-   -------------------------------------------------------------------- */
-
-Space* game_get_space_position(Game *game, int i);
 
 
 #endif

@@ -286,6 +286,36 @@ STATE link_get_state(Link* link){
 	return state(link);	
 }
 
+
+
+/* --------------------------------------------------------------------
+   Function: link_is_open
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+  
+   Description: 
+    Checks if the link is open or not.
+  
+   Input: 
+    Link *link: the link to check.
+                 
+   Output: 
+    BOOL: TRUE is the link is open or FALSE if not.
+   -------------------------------------------------------------------- */
+BOOL link_is_open(Link *link){
+	if(!link){
+		return FALSE;
+	}
+
+	if(state(link) == OPEN){
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+
+
 /* --------------------------------------------------------------------
 Function: link_print
 Date: Nov. 4, 2016

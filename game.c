@@ -342,6 +342,178 @@ Space * game_get_space(Game *game, Id id){
 
 
 /* --------------------------------------------------------------------
+   Function: game_set_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets a space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    Space *space : the space you want to set
+    int position: the position where you want to set the space.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_space_at_position(Game *game, Space *space, int position){
+  if(!game || !space || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(spaces(game)[position] != NULL){
+    space_destroy(spaces(game)[position]);
+  }
+
+  spaces(game)[position] = space;
+
+  return OK;
+}
+
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    int position: the position of the space.
+
+   Output: 
+    Space *space : the space in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Space * game_get_space_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return spaces(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets an object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    Object *object : the object you want to set
+    int position: the position where you want to set the object.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_object_at_position(Game *game, Object *object, int position){
+  if(!game || !object || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(objects(game)[position] != NULL){
+    object_destroy(objects(game)[position]);
+  }
+
+  objects(game)[position] = object;
+
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    int position: the position of the object
+
+   Output: 
+    Object *object : the object in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Object * game_get_object_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return objects(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_link_at_position
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets a link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    Link *link : the link you want to set
+    int position: the position where you want to set the link.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_link_at_position(Game *game, Link *link, int position){
+  if(!game || !link || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(links(game)[position] != NULL){
+    link_destroy(links(game)[position]);
+  }
+
+  links(game)[position] = link;
+
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_link_at_position
+   Date: 13-10-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gets the link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    int position: the position of the link.
+
+   Output: 
+    Link *link : the link in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Link * game_get_link_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return links(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
    Function: game_is_over
    Date: 23-09-2016 
    Author: Alejandro Sanchez
@@ -1264,102 +1436,8 @@ STATUS callback_ROLL(Game *game){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Set a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Space *space : the space you want to set
-    int i: the number of the spaces
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_space_position(Game *game,Space*space,int i){
-  if(!game || !space || i < 0){  /* Check that the input is not empty */
-    return ERROR;
-  }
-  spaces(game)[i] = space;
-  return OK;
-}
- 
-/* --------------------------------------------------------------------
-   Function: game_set_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Set a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Object *object : the object you want to set
-    int i: the number of the object
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_object_position(Game *game, Object*object,int i){
-  if(!game || !object || i < 0){  /* Check that the input is not empty */
-    return ERROR;
-  }
-  objects(game)[i] = object;
-  return OK;
 
 
-}
 
-/* --------------------------------------------------------------------
-   Function: game_get_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Object *object : the object you want to know
-   -------------------------------------------------------------------- */
-
-Object * game_get_object_position(Game *game, int i){
-	if(!game || i< 0){
-		return NULL;	
-	}
-  
-  return objects(game)[i];
-}
-
-/* --------------------------------------------------------------------
-   Function: game_get_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Space *space : the object you want to know
-   -------------------------------------------------------------------- */
-
-Space* game_get_space_position(Game *game, int i){
-	if(!game || i< 0){
-		return NULL;	
-	}
-  
-  return spaces(game)[i];
-}
 
 

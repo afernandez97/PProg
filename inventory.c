@@ -142,7 +142,7 @@ STATUS inventory_add_object(Inventory *inv, Id object){
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS inventory_del_object(Inventory *inv, Id object){
-  if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE){  /* Check that the inputs are not empty */
+  if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE)){  /* Check that the inputs are not empty */
     return ERROR;
   }
  
