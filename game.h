@@ -22,7 +22,10 @@
     Nov. 05, 2016 Version 4.0
       Made "Game" structure private.
       Modified some functions after this change.
-      Added command GO and removed commands NEXT, BACK and JUMP.      
+      Added command GO and removed commands NEXT, BACK and JUMP.   
+    Nov. 13, 2016 Version 4.1
+      Created functions "game_spaces_are_linked" and "game_is_link_open"
+      after creating ADT Link.  
 =================================================================== */
 
 #ifndef GAME_H

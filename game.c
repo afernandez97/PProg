@@ -42,6 +42,9 @@
       Made "Game" structure private.
       Modified some functions after this change.
       Added command GO and removed commands NEXT, BACK and JUMP.
+    Nov. 13, 2016 Version 4.1
+      Added field "Link *links" to the structure after creating ADT Link.
+      Created functions "game_spaces_are_linked" and "game_is_link_open"
 =================================================================== */
 
 #include <stdio.h>
@@ -92,6 +95,9 @@ Id game_get_player_location(Game *game);
 
 STATUS game_set_object_location(Game *game, Id object, Id id);
 Id game_get_object_location(Game *game, Id object);
+
+BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
+BOOL game_is_link_open(Game *game, Id link);
 
 
 /*** Game interface implementation ***/
@@ -801,6 +807,123 @@ Id game_get_object_location(Game *game, Id object){
 
   /* Get its location */
   return object_get_location(obj);
+}
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_link
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gives a specific link.
+
+   Input: 
+    Game *game: the game where the link is.
+    Id id: the id of the link you want.
+
+   Output: 
+    Link *: the link you want or NULL on error.
+   -------------------------------------------------------------------- */
+Link * game_get_link(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
+  }
+
+  /* Look for the link you want */
+  for(i=0; i < MAX_OBJECTS && links(game)[i] != NULL; i++){
+    if(id == link_get_id(links(game)[i])){
+      return links(game)[i];
+    }
+  }
+    
+  return NULL;
+}
+
+
+/* --------------------------------------------------------------------
+   Function: game_spaces_are_linked
+   Date: 11-11-2016 
+   Author: Alejandro Sanchez
+ 
+   Description: 
+    Checks if there is a link between two spaces.
+ 
+   Input: 
+    Game *game: the game where the link and spaces are.
+    Space *space1: one of the spaces you want to know if is linked.
+    Space *space2: the other space you want to know if is linked.
+   Output: 
+    BOOL: TRUE if the spaces are linked and FALSE in other cases. 
+   -------------------------------------------------------------------- */
+BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2){
+  Id aux1, aux2, space1, space2;
+  int i = 0, flag = 0;
+
+  if(!game || !space1 || !space2){
+    return FALSE;
+  }
+
+  space1 = space_get_id(space1);
+  space2 = space_get_id(space2);
+
+  while(i < MAX_LINKS && flag == 0){
+    aux1 = link_get_space(links(game)[i]);
+    switch(aux1){
+      case space1:
+        aux2 = link_get_space(links(game)[i]);
+        if(aux2 == space2){
+          flag = 1;
+        } 
+        break;
+      case space2:
+        aux2 = link_get_space(links(game)[i]);
+        if(aux2 == space1){
+          flag = 1;
+        }         
+        break;
+      default:
+        break;
+    }
+    i++;
+  }
+
+  if(flag == 0){
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/* --------------------------------------------------------------------
+   Function: game_is_link_open
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+  
+   Description: 
+    Checks if a link of the game is open or not.
+  
+   Input: 
+    Game *game: the game where the link is.
+    Id link: the identifier of the link to check.
+                 
+   Output: 
+    BOOL: TRUE is the link is open or FALSE if not.
+   -------------------------------------------------------------------- */
+BOOL game_is_link_open(Game *game, Id link){
+  Link *lnk = NULL;
+
+  if(!game || link == NO_ID){
+    return FALSE;
+  }
+
+  /* Get the link */
+  lnk = game_get_link(game, link);
+
+  /* Check if the link is open or not */
+  return link_is_open(lnk);
 }
 
 
