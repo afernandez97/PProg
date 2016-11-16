@@ -35,6 +35,7 @@
 #include "space.h"
 #include "object.h"
 #include "player.h"
+#include "link.h"
 #include "die.h"
 #include "types.h"
 

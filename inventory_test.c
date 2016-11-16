@@ -10,6 +10,9 @@ Revision history:
 	Nov. 4, 2016: Version 1.0 (initial release)
 =================================================================== */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "inventory.h"
 #include "set.h"
 

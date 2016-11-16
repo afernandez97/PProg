@@ -669,7 +669,7 @@ void game_print_screen(Game *game){
   char *name = NULL;
   Object *object = NULL;
   int i, count;
-  Set *set; 
+  Inventory *inv = NULL; 
     
   if(!game){ /* Check that the input is not empty */
     return;
@@ -790,12 +790,12 @@ void game_print_screen(Game *game){
   }
 
   /* Print the objects of the game*/  
-  set = player_get_object(player(game));
-  count = set_get_count(set);
+  inv = player_get_inventory(player(game));
+  count = inventory_get_count(inv);
   printf("\nPlayer objects: ");
   /* Get the different names of the objects and print them */
 	for(i=0; i<count; i++){    
-	  object = game_get_object(game, set_get_object_at_position(set, i));
+	  object = game_get_object(game, set_get_object_at_position(inventory_get_bag(inv), i));
     name = object_get_name(object);
     printf("%s, ",name);
   }
@@ -1031,33 +1031,28 @@ Link * game_get_link(Game *game, Id id){
     BOOL: TRUE if the spaces are linked and FALSE in other cases. 
    -------------------------------------------------------------------- */
 BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2){
-  Id aux1, aux2, space1, space2;
+  Id aux1, aux2, id_space1, id_space2;
   int i = 0, flag = 0;
 
   if(!game || !space1 || !space2){
     return FALSE;
   }
 
-  space1 = space_get_id(space1);
-  space2 = space_get_id(space2);
+  id_space1 = space_get_id(space1);
+  id_space2 = space_get_id(space2);
 
-  while(i < MAX_LINKS && flag == 0){
-    aux1 = link_get_space(links(game)[i]);
-    switch(aux1){
-      case space1:
-        aux2 = link_get_space(links(game)[i]);
-        if(aux2 == space2){
+  while(1 < MAX_LINKS && flag == 0){
+    aux1 = link_get_space1(links(game)[i]);
+    if(aux1 == id_space1){
+      aux2 = link_get_space2(links(game)[i]);
+        if(aux2 == id_space2){
           flag = 1;
         } 
-        break;
-      case space2:
-        aux2 = link_get_space(links(game)[i]);
-        if(aux2 == space1){
+    } else if(aux1 == id_space2){
+        aux2 = link_get_space2(links(game)[i]);
+        if(aux2 == id_space1){
           flag = 1;
-        }         
-        break;
-      default:
-        break;
+        }  
     }
     i++;
   }
@@ -1249,7 +1244,7 @@ STATUS callback_LEAVE(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
   int aux = NO_ID, i = 0, flag = 0, count;
   Id space_id, object_id;
-  Set *set = NULL;
+  Inventory *inv = NULL;
   Object *object = NULL;
  
   /* Check that the inputs are not empty */
@@ -1258,8 +1253,8 @@ STATUS callback_LEAVE(Game *game, char *arg){
   } 
 
   /* Get the objects that the player have */
-  set = player_get_object(player(game));
-  if(!set){ /* Check that the player has at least one object */
+  inv = player_get_inventory(player(game));
+  if(!inv){ /* Check that the player has at least one object */
     return ERROR;
   }
 
@@ -1280,12 +1275,12 @@ STATUS callback_LEAVE(Game *game, char *arg){
   }
 
   /* Get the number of objects of the player */
-  count = set_get_count(set);
+  count = inventory_get_count(inv);
 
   /* Look for the object to leave */
   i = 0;
   while(i < count && flag == 1){
-    object_id = set_get_object_at_position(set, i);
+    object_id = set_get_object_at_position(inventory_get_bag(inv), i);
     object = game_get_object(game, object_id);
     if(strcmp(arg, object_get_name(object)) == 0){
       flag = 0;
@@ -1333,7 +1328,7 @@ STATUS callback_LEAVE(Game *game, char *arg){
    -------------------------------------------------------------------- */
 STATUS callback_GO(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
-  int aux = NO_ID, auxl = NO_ID, i = 0, flag = 0, count;
+  int aux = NO_ID, auxl = NO_ID, i = 0, flag = 0;
   Id space_id, space_id2, link_id;
 
   /* Check that the inputs are not empty */
@@ -1361,13 +1356,13 @@ STATUS callback_GO(Game *game, char *arg){
   }
   
   if(!strcmp(arg, "north") || !strcmp(arg, "n")){
-  	link_id = space_get_link(spaces(game)[aux], 1);
+  	link_id = space_get_north(spaces(game)[aux]);
   } else if(!strcmp(arg, "south") || !strcmp(arg, "s")){
-  	 link_id = space_get_link(spaces(game)[aux], 2);  
+  	 link_id = space_get_south(spaces(game)[aux]);  
   } else if(!strcmp(arg, "west") || !strcmp(arg, "w")){
-  	 link_id = space_get_link(spaces(game)[aux], 3);  
+  	 link_id = space_get_west(spaces(game)[aux]);  
   } else if(!strcmp(arg, "east") || !strcmp(arg, "e")){
-  	 link_id = space_get_link(spaces(game)[aux], 4);  
+  	 link_id = space_get_east(spaces(game)[aux]);  
   } else{
       return ERROR;
   }
@@ -1392,13 +1387,13 @@ STATUS callback_GO(Game *game, char *arg){
   	return ERROR;
   }
   
-  if(space_id == link_get_space(links(game)[auxl], 1)){
-  	space_id2 = link_get_space(links(game)[auxl], 2);
+  if(space_id == link_get_space1(links(game)[auxl])){
+  	space_id2 = link_get_space2(links(game)[auxl]);
   } else{
-      space_id2 = link_get_spaces_id(links(game)[auxl], 1);  
+      space_id2 = link_get_space1(links(game)[auxl]);  
   }
 
-  /* Check the link is open */
+  /* Check that the link is open */
   if(link_is_open(links(game)[auxl]) == TRUE){
   	game_set_player_location(game, space_id2);
   	return OK; 

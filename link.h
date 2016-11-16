@@ -16,10 +16,15 @@ Revision history:
 
 #include "space.h"
 
-typedef _Link Link;
+
+/*** Data structures definition ***/
+typedef struct _Link Link;
+
+/*** Constant values description ***/
+#define MAX_LINKS 100
 
 typedef enum {	
-  NO_STATE=-1, OPEN, CLOSED
+  NO_STATE = -1, OPEN, CLOSED
 } STATE;
 
 /* --------------------------------------------------------------------

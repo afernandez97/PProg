@@ -13,6 +13,9 @@
       Created the rest of the functions and commented the file.
 =================================================================== */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "inventory.h"
 
 /* Constant values description */
@@ -204,9 +207,9 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag){
   	Inventory *inv: the inventory whose bag you want to get.
   
    Output:
-  	Inventory *: the bag of the inventory.
+  	Set *: the bag of the inventory.
 ------------------------------------------------------------------- */
-Inventory *inventory_get_bag(Inventory *inv){
+Set *inventory_get_bag(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return NULL;
 	}

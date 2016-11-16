@@ -10,6 +10,9 @@ Revision history:
 	Nov. 4, 2016: Version 1.0 (initial release)
 =================================================================== */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "link.h"
 
 #define id(X) X->id
@@ -20,7 +23,7 @@ Revision history:
 
 struct _Link{
 	Id id;
-	char name[MAX_CHAR];
+	char name[WORD_SIZE + 1];
 	Id space1;
 	Id space2;
 	STATE state;
@@ -52,7 +55,7 @@ Link * link_create(Id id){
 	}
 
 	id(link) = id;
-	name(link) = "";
+	name(link)[0] = '\0';
 	space1(link) = NO_ID;
 	space2(link) = NO_ID;
 	state(link) = NO_STATE;
@@ -238,7 +241,7 @@ Id link_get_space2(Link* link){
 		return NO_ID;
 	}
 
-	return space2(link)
+	return space2(link);
 }
 
 /* --------------------------------------------------------------------

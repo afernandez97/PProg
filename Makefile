@@ -4,7 +4,7 @@ all: ocabas die_test set_test player_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
-ocabas: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o
+ocabas: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
 	gcc -o $@ $^ 
 
 die_test: die_test.o die.o
@@ -19,7 +19,7 @@ set_test: set_test.o set.o
 die_test.o: die_test.c die.c die.h types.h
 	gcc $(CCFLAGS) die_test.c die.c
 
-player_test.o: player_test.c player.c player.h types.h
+player_test.o: player_test.c player_test.h player.c player.h types.h
 	gcc $(CCFLAGS) player_test.c player.c
 
 set_test.o: set_test.c set.c set.h types.h
@@ -55,6 +55,8 @@ set.o: set.c set.h types.h
 inventory.o: inventory.c inventory.h 
 	gcc $(CCFLAGS) inventory.c
 
+link.o: link.c link.h
+	gcc $(CCFLAGS) link.c
 
 clean: 
 	rm -rf *.o *.tgz *.log ocabas *_test

@@ -337,12 +337,14 @@ STATUS game_add_link(Game *game, Link *link){
 STATUS game_load_links(Game *game, char *filename){
 	FILE *file = NULL;
 	char line[WORD_SIZE] = "";
-	Id id = NO_ID;
 	char name[WORD_SIZE] = "";
+  char *toks = NULL;
+  Id id = NO_ID;
 	Id space_id1 = NO_ID;
 	Id space_id2 = NO_ID;
 	STATE link_state = NO_STATE;
 	Link *link = NULL;
+  STATUS status = OK;
 
 
 	if(!game || !filename){    /* Check that the inputs are not empty */
@@ -384,7 +386,7 @@ STATUS game_load_links(Game *game, char *filename){
         link_set_space2(link, space_id2);
 
         /* Set the state to the link */
-	   		link_set_state(link, state);
+	   		link_set_state(link, link_state);
 
         /* Add the link to the game */
         game_add_link(game, link);  
