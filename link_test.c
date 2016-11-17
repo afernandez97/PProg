@@ -31,7 +31,7 @@ int main(int argc, char** argv){
 		test = atoi(argv[1]);
 		all = 0;
 		printf("Testing %d:\t", test);
-		if (test < 1 && test > MAX_TEST_LINK) {
+		if (test < 1 || test > MAX_TEST_LINK) {
 			printf("Unknown test\t");
 			return 1; 
 		}
