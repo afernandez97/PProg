@@ -42,6 +42,9 @@
       Made "Game" structure private.
       Modified some functions after this change.
       Added command GO and removed commands NEXT, BACK and JUMP.
+    Nov. 13, 2016 Version 4.1
+      Added field "Link *links" to the structure after creating ADT Link.
+      Created functions "game_spaces_are_linked" and "game_is_link_open"
 =================================================================== */
 
 #include <stdio.h>
@@ -92,6 +95,9 @@ Id game_get_player_location(Game *game);
 
 STATUS game_set_object_location(Game *game, Id object, Id id);
 Id game_get_object_location(Game *game, Id object);
+
+BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
+BOOL game_is_link_open(Game *game, Id link);
 
 
 /*** Game interface implementation ***/
@@ -336,6 +342,178 @@ Space * game_get_space(Game *game, Id id){
 
 
 /* --------------------------------------------------------------------
+   Function: game_set_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets a space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    Space *space : the space you want to set
+    int position: the position where you want to set the space.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_space_at_position(Game *game, Space *space, int position){
+  if(!game || !space || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(spaces(game)[position] != NULL){
+    space_destroy(spaces(game)[position]);
+  }
+
+  spaces(game)[position] = space;
+
+  return OK;
+}
+
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_space_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the space in a specific position.
+
+   Input: 
+    Game *game: the game where the space is.
+    int position: the position of the space.
+
+   Output: 
+    Space *space : the space in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Space * game_get_space_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return spaces(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Sets an object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    Object *object : the object you want to set
+    int position: the position where you want to set the object.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_object_at_position(Game *game, Object *object, int position){
+  if(!game || !object || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(objects(game)[position] != NULL){
+    object_destroy(objects(game)[position]);
+  }
+
+  objects(game)[position] = object;
+
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_object_at_position
+   Date: 30-10-2016 
+   Author: Guillermo Rodriguez
+
+   Description: 
+    Gets the object in a specific position.
+
+   Input: 
+    Game *game: the game where the object is.
+    int position: the position of the object
+
+   Output: 
+    Object *object : the object in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Object * game_get_object_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return objects(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_set_link_at_position
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets a link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    Link *link : the link you want to set
+    int position: the position where you want to set the link.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS game_set_link_at_position(Game *game, Link *link, int position){
+  if(!game || !link || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(links(game)[position] != NULL){
+    link_destroy(links(game)[position]);
+  }
+
+  links(game)[position] = link;
+
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: game_get_link_at_position
+   Date: 13-10-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gets the link in a specific position.
+
+   Input: 
+    Game *game: the game where the link is.
+    int position: the position of the link.
+
+   Output: 
+    Link *link : the link in that position or NULL on error.
+   -------------------------------------------------------------------- */
+Link * game_get_link_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return links(game)[position];
+}
+
+
+
+/* --------------------------------------------------------------------
    Function: game_is_over
    Date: 23-09-2016 
    Author: Alejandro Sanchez
@@ -491,7 +669,7 @@ void game_print_screen(Game *game){
   char *name = NULL;
   Object *object = NULL;
   int i, count;
-  Set *set; 
+  Inventory *inv = NULL; 
     
   if(!game){ /* Check that the input is not empty */
     return;
@@ -612,12 +790,12 @@ void game_print_screen(Game *game){
   }
 
   /* Print the objects of the game*/  
-  set = player_get_object(player(game));
-  count = set_get_count(set);
+  inv = player_get_inventory(player(game));
+  count = inventory_get_count(inv);
   printf("\nPlayer objects: ");
   /* Get the different names of the objects and print them */
 	for(i=0; i<count; i++){    
-	  object = game_get_object(game, set_get_object_at_position(set, i));
+	  object = game_get_object(game, set_get_object_at_position(inventory_get_bag(inv), i));
     name = object_get_name(object);
     printf("%s, ",name);
   }
@@ -804,6 +982,118 @@ Id game_get_object_location(Game *game, Id object){
 }
 
 
+/* --------------------------------------------------------------------
+   Function: game_get_link
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gives a specific link.
+
+   Input: 
+    Game *game: the game where the link is.
+    Id id: the id of the link you want.
+
+   Output: 
+    Link *: the link you want or NULL on error.
+   -------------------------------------------------------------------- */
+Link * game_get_link(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
+  }
+
+  /* Look for the link you want */
+  for(i=0; i < MAX_OBJECTS && links(game)[i] != NULL; i++){
+    if(id == link_get_id(links(game)[i])){
+      return links(game)[i];
+    }
+  }
+    
+  return NULL;
+}
+
+
+/* --------------------------------------------------------------------
+   Function: game_spaces_are_linked
+   Date: 11-11-2016 
+   Author: Alejandro Sanchez
+ 
+   Description: 
+    Checks if there is a link between two spaces.
+ 
+   Input: 
+    Game *game: the game where the link and spaces are.
+    Space *space1: one of the spaces you want to know if is linked.
+    Space *space2: the other space you want to know if is linked.
+   Output: 
+    BOOL: TRUE if the spaces are linked and FALSE in other cases. 
+   -------------------------------------------------------------------- */
+BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2){
+  Id aux1, aux2, id_space1, id_space2;
+  int i = 0, flag = 0;
+
+  if(!game || !space1 || !space2){
+    return FALSE;
+  }
+
+  id_space1 = space_get_id(space1);
+  id_space2 = space_get_id(space2);
+
+  while(1 < MAX_LINKS && flag == 0){
+    aux1 = link_get_space1(links(game)[i]);
+    if(aux1 == id_space1){
+      aux2 = link_get_space2(links(game)[i]);
+        if(aux2 == id_space2){
+          flag = 1;
+        } 
+    } else if(aux1 == id_space2){
+        aux2 = link_get_space2(links(game)[i]);
+        if(aux2 == id_space1){
+          flag = 1;
+        }  
+    }
+    i++;
+  }
+
+  if(flag == 0){
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/* --------------------------------------------------------------------
+   Function: game_is_link_open
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+  
+   Description: 
+    Checks if a link of the game is open or not.
+  
+   Input: 
+    Game *game: the game where the link is.
+    Id link: the identifier of the link to check.
+                 
+   Output: 
+    BOOL: TRUE is the link is open or FALSE if not.
+   -------------------------------------------------------------------- */
+BOOL game_is_link_open(Game *game, Id link){
+  Link *lnk = NULL;
+
+  if(!game || link == NO_ID){
+    return FALSE;
+  }
+
+  /* Get the link */
+  lnk = game_get_link(game, link);
+
+  /* Check if the link is open or not */
+  return link_is_open(lnk);
+}
+
+
 
 /*** Callbacks implementation for each action ***/
 /* --------------------------------------------------------------------
@@ -954,7 +1244,7 @@ STATUS callback_LEAVE(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
   int aux = NO_ID, i = 0, flag = 0, count;
   Id space_id, object_id;
-  Set *set = NULL;
+  Inventory *inv = NULL;
   Object *object = NULL;
  
   /* Check that the inputs are not empty */
@@ -963,8 +1253,8 @@ STATUS callback_LEAVE(Game *game, char *arg){
   } 
 
   /* Get the objects that the player have */
-  set = player_get_object(player(game));
-  if(!set){ /* Check that the player has at least one object */
+  inv = player_get_inventory(player(game));
+  if(!inv){ /* Check that the player has at least one object */
     return ERROR;
   }
 
@@ -985,12 +1275,12 @@ STATUS callback_LEAVE(Game *game, char *arg){
   }
 
   /* Get the number of objects of the player */
-  count = set_get_count(set);
+  count = inventory_get_count(inv);
 
   /* Look for the object to leave */
   i = 0;
   while(i < count && flag == 1){
-    object_id = set_get_object_at_position(set, i);
+    object_id = set_get_object_at_position(inventory_get_bag(inv), i);
     object = game_get_object(game, object_id);
     if(strcmp(arg, object_get_name(object)) == 0){
       flag = 0;
@@ -1038,7 +1328,7 @@ STATUS callback_LEAVE(Game *game, char *arg){
    -------------------------------------------------------------------- */
 STATUS callback_GO(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
-  int aux = NO_ID, auxl = NO_ID, i = 0, flag = 0, count;
+  int aux = NO_ID, auxl = NO_ID, i = 0, flag = 0;
   Id space_id, space_id2, link_id;
 
   /* Check that the inputs are not empty */
@@ -1066,13 +1356,13 @@ STATUS callback_GO(Game *game, char *arg){
   }
   
   if(!strcmp(arg, "north") || !strcmp(arg, "n")){
-  	link_id = space_get_link(spaces(game)[aux], 1);
+  	link_id = space_get_north(spaces(game)[aux]);
   } else if(!strcmp(arg, "south") || !strcmp(arg, "s")){
-  	 link_id = space_get_link(spaces(game)[aux], 2);  
+  	 link_id = space_get_south(spaces(game)[aux]);  
   } else if(!strcmp(arg, "west") || !strcmp(arg, "w")){
-  	 link_id = space_get_link(spaces(game)[aux], 3);  
+  	 link_id = space_get_west(spaces(game)[aux]);  
   } else if(!strcmp(arg, "east") || !strcmp(arg, "e")){
-  	 link_id = space_get_link(spaces(game)[aux], 4);  
+  	 link_id = space_get_east(spaces(game)[aux]);  
   } else{
       return ERROR;
   }
@@ -1097,13 +1387,13 @@ STATUS callback_GO(Game *game, char *arg){
   	return ERROR;
   }
   
-  if(space_id == link_get_space(links(game)[auxl], 1)){
-  	space_id2 = link_get_space(links(game)[auxl], 2);
+  if(space_id == link_get_space1(links(game)[auxl])){
+  	space_id2 = link_get_space2(links(game)[auxl]);
   } else{
-      space_id2 = link_get_spaces_id(links(game)[auxl], 1);  
+      space_id2 = link_get_space1(links(game)[auxl]);  
   }
 
-  /* Check the link is open */
+  /* Check that the link is open */
   if(link_is_open(links(game)[auxl]) == TRUE){
   	game_set_player_location(game, space_id2);
   	return OK; 
@@ -1141,102 +1431,8 @@ STATUS callback_ROLL(Game *game){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Set a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Space *space : the space you want to set
-    int i: the number of the spaces
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_space_position(Game *game,Space*space,int i){
-  if(!game || !space || i < 0){  /* Check that the input is not empty */
-    return ERROR;
-  }
-  spaces(game)[i] = space;
-  return OK;
-}
- 
-/* --------------------------------------------------------------------
-   Function: game_set_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Set a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    Object *object : the object you want to set
-    int i: the number of the object
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
-STATUS game_set_object_position(Game *game, Object*object,int i){
-  if(!game || !object || i < 0){  /* Check that the input is not empty */
-    return ERROR;
-  }
-  objects(game)[i] = object;
-  return OK;
 
 
-}
 
-/* --------------------------------------------------------------------
-   Function: game_get_object_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a object in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Object *object : the object you want to know
-   -------------------------------------------------------------------- */
-
-Object * game_get_object_position(Game *game, int i){
-	if(!game || i< 0){
-		return NULL;	
-	}
-  
-  return objects(game)[i];
-}
-
-/* --------------------------------------------------------------------
-   Function: game_get_space_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
-
-   Description: 
-    Get a space in a specific position.
-
-   Input: 
-    Game *game: the game where the player is.
-    int i: the number of the object
-
-   Output: 
-      Space *space : the object you want to know
-   -------------------------------------------------------------------- */
-
-Space* game_get_space_position(Game *game, int i){
-	if(!game || i< 0){
-		return NULL;	
-	}
-  
-  return spaces(game)[i];
-}
 
 

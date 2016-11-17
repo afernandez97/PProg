@@ -40,7 +40,7 @@ typedef enum enum_Command{
   QUIT, /* Command to quit from the game */
   CATCH, /* Command to catch an object from a space */
   LEAVE, /* Command to leave an object on a space */
-  GO	     /* Command to go to another space */
+  GO,	     /* Command to go to another space */
   ROLL   /* Command to roll the die */ 
 } T_Command;
 

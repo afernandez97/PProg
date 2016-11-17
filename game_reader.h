@@ -1,7 +1,7 @@
 /* =================================================================== 
    File: game_reader.h
-   Version: 3.0
-   Date: 27-10-2016
+   Version: 4.0
+   Date: 11-11-2016
    Author: Guillermo Rodriguez and Alejandro Sanchez
 
    Description:
@@ -13,6 +13,8 @@
     	Commented the file.
 		Oct.	27,	2016	Version 3.0
 			Created functions "game_load_objects" and "game_add_object".
+    Nov. 11, 2016   Version 4.0
+      Created functions "game_load_links" and "game_add_link".
 =================================================================== */
 #ifndef GAME_READER_H
 #define GAME_READER_H
@@ -90,20 +92,36 @@ STATUS game_add_object(Game *game, Object *object);
    --------------------------------------------------------------------------- */
 STATUS game_load_objects(Game *game, char *filename);
 
-/* --------------------------------------------------------------------
- Function: game_load_links
- Date: 10-11-2016
- Author: Ricardo Riol
- 
- Description:
-  This function loads Links from a file into a Game.
+/* ----------------------------------------------------------------------------
+   Function: game_add_link
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
 
- Input:
-  Game*: Pointer to the game in which we want to load the Links.
-  char: Name of the file from which the Links are loaded.
- Output:
-  STATUS: Returns OK if the function has done his job correctly.
+   Description: 
+    Adds an link to a game.
+
+   Input: 
+    Game *game: the game where you add the link.
+    Link *link: the link you want to add to the game.  
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   --------------------------------------------------------------------------- */
+STATUS game_add_link(Game *game, Link *link);
+
+/* --------------------------------------------------------------------
+   Function: game_load_links
+   Date: 10-11-2016
+   Author: Ricardo Riol
+ 
+   Description:
+    Loads the links from a file.
+  
+   Input:
+    Game *game: the game where you want to load the links.
+    char *filename: the file that contains the links. 
+   Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
  ------------------------------------------------------------------- */
-STATUS game_load_links(Game* game, char* filename);
+STATUS game_load_links(Game *game, char *filename);
 
 #endif

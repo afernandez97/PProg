@@ -134,9 +134,9 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag);
     Inventory *: the inventory whose bag you want to get.
   
    Output:
-    Inventory *: the bag of the inventory.
+    Set *: the bag of the inventory.
 ------------------------------------------------------------------- */
-Set* inventory_get_bag(Inventory *inv);
+Set * inventory_get_bag(Inventory *inv);
 
 
 
@@ -175,6 +175,25 @@ int inventory_get_count(Inventory *inv);
     int: Maximum number of objects that the inventory can contain.
 ------------------------------------------------------------------- */
 int inventory_get_max(Inventory *inv);
+
+
+
+/* --------------------------------------------------------------------
+   Function: inventory_is_object
+   Date: 04-11-2016 
+   Author: Alejandro Sanchez
+  
+   Description: 
+    Checks if there is an especific object in the inventory.
+  
+   Input: 
+    Inventory *inv: the inventory where you want to find the object.
+    Id object: the id of the object you want to know if it is in the inventory.
+                 
+   Output: 
+    BOOL: TRUE if the object is in the inventory and FALSE in other cases. 
+   -------------------------------------------------------------------- */
+BOOL inventory_is_object(Inventory *inv, Id object);
 
 
 

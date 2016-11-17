@@ -16,27 +16,30 @@ Revision history:
 
 #include "space.h"
 
-typedef _Link Link;
+
+/*** Data structures definition ***/
+typedef struct _Link Link;
+
+/*** Constant values description ***/
+#define MAX_LINKS 100
 
 typedef enum {	
-  NO_STATE=-1, OPEN, CLOSED
+  NO_STATE = -1, OPEN, CLOSED
 } STATE;
 
 /* --------------------------------------------------------------------
 Function: link_create
 Date: Nov. 4, 2016
-Author: Adrián Fernández
+Author: Alejandro Sanchez
 
 Description: 
 	This function creates a variable of type Link.
 Input: 
-	Id id: Id of the Link.
-	Id space1: Id of the first Space.
-	Id space2: Id of the second Space.
+	Id id: the id of the link.
 Output:
-	Link*: Pointer to the variable created.
+	Link *: the link created or NULL on error.
 ------------------------------------------------------------------- */
-Link* link_create(Id id, Id space1, Id space2);
+Link * link_create(Id id);
 
 /* --------------------------------------------------------------------
 Function: link_destroy
@@ -96,6 +99,21 @@ Output:
 char* link_get_name(Link* link);
 
 /* --------------------------------------------------------------------
+Function: link_set_space1
+Date: Nov. 4, 2016
+Author: Alejandro Sanchez
+
+Description:
+	Sets the Id of a Link's first Space. 
+Input:
+	Link *link: the link whose first space you want to set.
+	Id space1: the id of the space you want to be link's first space.
+Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
+------------------------------------------------------------------- */
+STATUS link_set_space1(Link *link, Id space1);
+
+/* --------------------------------------------------------------------
 Function: link_get_space1
 Date: Nov. 4, 2016
 Author: Adrián Fernández
@@ -108,6 +126,21 @@ Output:
 	Id: The Id of the first Space.
 ------------------------------------------------------------------- */
 Id link_get_space1(Link* link);
+
+/* --------------------------------------------------------------------
+Function: link_set_space2
+Date: Nov. 4, 2016
+Author: Alejandro Sanchez
+
+Description:
+	Sets the Id of a Link's second Space. 
+Input:
+	Link *link: the link whose second space you want to set.
+	Id space2: the id of the space you want to be link's second space.
+Output:
+    STATUS: OK if you do the operation well and ERROR in other cases.
+------------------------------------------------------------------- */
+STATUS link_set_space2(Link *link, Id space2);
 
 /* --------------------------------------------------------------------
 Function: link_get_space2
@@ -151,6 +184,22 @@ Output:
 	STATE: The state of the Link.
 ------------------------------------------------------------------- */
 STATE link_get_state(Link* link);
+
+/* --------------------------------------------------------------------
+   Function: link_is_open
+   Date: 13-11-2016 
+   Author: Alejandro Sanchez
+  
+   Description: 
+    Checks if the link is open or not.
+  
+   Input: 
+    Link *link: the link to check.
+                 
+   Output: 
+    BOOL: TRUE is the link is open or FALSE if not.
+   -------------------------------------------------------------------- */
+BOOL link_is_open(Link *link);
 
 /* --------------------------------------------------------------------
 Function: link_print

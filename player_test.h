@@ -1,6 +1,9 @@
 #ifndef PLAYER_TEST_H
 #define PLAYER_TEST_H
-#include player.h
+
+#include "player.h"
+
+#define MAX_TEST 27
 #define FUNCTION_IS_CORRECT(x)\
   				if(x){\
 						fprintf(stdout,"%s %d %s Correct", __FILE__, __LINE__, __FUNCTION__);\
