@@ -21,7 +21,7 @@ int main(int argc, char **argv){
   int test = 0, todas = 1;
 
   if(argc < 2){
-  	printf("Pasando todas las pruebas al modulo Player :\t");
+  	printf("Pasando todas las pruebas al modulo Player:\n");
   } else{
     	test = atoi(argv[1]);
       todas = 0;

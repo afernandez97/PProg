@@ -10,7 +10,7 @@ ocabas: game.o game_loop.o space.o command.o game_reader.o object.o player.o die
 die_test: die_test.o die.o
 	gcc -o $@ $^ 
 
-player_test: player_test.o player.o
+player_test: player_test.o player.o inventory.o set.o
 	gcc -o $@ $^ 
 
 set_test: set_test.o set.o
@@ -19,8 +19,8 @@ set_test: set_test.o set.o
 die_test.o: die_test.c die.c die.h types.h
 	gcc $(CCFLAGS) die_test.c die.c
 
-player_test.o: player_test.c player_test.h player.c player.h types.h
-	gcc $(CCFLAGS) player_test.c player.c
+player_test.o: player_test.c player_test.h types.h 
+	gcc $(CCFLAGS) player_test.c
 
 set_test.o: set_test.c set.c set.h types.h
 	gcc $(CCFLAGS) set_test.c set.c
