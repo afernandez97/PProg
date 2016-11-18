@@ -77,16 +77,14 @@ Game* game_init(Id player, Id die);
     Initializes a game from two files which contain the spaces and objects.
 
    Input: 
-    char *filename1: the file that contains the spaces.
-    char *filename2: the file that contains the objects.
+    char *filename1: the file to concatenate the spaces,links and objects
     Id player: the identifier of the player of the game.
     Id die: the identifier of the die of the game.
    
    Output: 
     Game *game: the game initialized.
    -------------------------------------------------------------------- */
-Game * game_init_from_file(char *filename1, char *filename2, Id player, Id die);
-
+Game * game_init_from_file(char *filename1,Id player, Id die);
 
 
 /* --------------------------------------------------------------------

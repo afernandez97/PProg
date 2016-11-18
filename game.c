@@ -165,19 +165,18 @@ Game * game_init(Id player, Id die){
     Initializes a game from two files which contain the spaces and objects.
 
    Input: 
-    char *filename1: the file that contains the spaces.
-    char *filename2: the file that contains the objects.
+    char *filename1: the file to concatenate the spaces,links and objects
     Id player: the identifier of the player of the game.
     Id die: the identifier of the die of the game.
    
    Output: 
     Game *game: the game initialized.
    -------------------------------------------------------------------- */
-Game * game_init_from_file(char *filename1, char *filename2, Id player, Id die){
+Game * game_init_from_file(char *filename1,Id player, Id die){
   Game *game = NULL;
 
   /* Check that the inputs are not empty */ 
-  if(!filename1 || !filename2 || player == NO_ID || !objects(game) || die == NO_ID){  
+  if(!filename1 || player == NO_ID || !objects(game) || die == NO_ID){  
     return NULL;
   }
 
@@ -194,7 +193,11 @@ Game * game_init_from_file(char *filename1, char *filename2, Id player, Id die){
     return NULL;
   }
 
-  if(game_load_objects(game, filename2) == ERROR){
+  if(game_load_objects(game, filename1) == ERROR){
+    game_destroy(game); /* Destroy the game if it has been an error */
+    return NULL;
+  }	
+  if(game_load_links(game, filename1) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   }	
@@ -241,6 +244,10 @@ STATUS game_destroy(Game *game){
   /* Destroy the objects */
   for(i=0; i < MAX_OBJECTS; i++){
     object_destroy(objects(game)[i]);
+  }
+  /* Destroy the links*/ 
+  for(i=0; i < MAX_LINKS; i++){
+     links_destroy(links(game)[i]);
   }
 
   free(game);   /* Eliminate the memory of the game */ 
