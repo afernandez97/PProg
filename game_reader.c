@@ -102,6 +102,8 @@ STATUS game_load_spaces(Game *game, char *filename){
     return ERROR;
   }
   
+  strcat(filename,"_spaces.dat");
+  
   file = fopen(filename, "r");   /* Open the file where the spaces are */
   if(!file){
     return ERROR;
@@ -231,6 +233,8 @@ STATUS game_load_objects(Game *game, char *filename){
     return ERROR;
   }
   
+  strcat(filename,"_objects.dat");
+  
   file = fopen(filename, "r");   /* Open the file where the objects are */
   if(!file){
     return ERROR;
@@ -350,8 +354,9 @@ STATUS game_load_links(Game *game, char *filename){
 	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
-
-	file = fopen(filename, "r");	/* Open the file where the links are */
+        strcat(filename,"_links.dat");
+	
+        file = fopen(filename, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}
