@@ -21,7 +21,7 @@ Revision history:
 
 int main(int argc, char** argv){
 
-	int all, test;
+	int all, test, count;
 
 	count = 0;
 
@@ -37,30 +37,36 @@ int main(int argc, char** argv){
 		}
 	}
 
-	if (all || test == 1) test1_link_create();
-	if (all || test == 2) test2_link_create();
-	if (all || test == 3) test3_link_create();
-	if (all || test == 4) test4_link_create();
-	if (all || test == 5) test1_link_destroy();
-	if (all || test == 6) test2_link_destroy();
-	if (all || test == 7) test1_link_get_id();
-	if (all || test == 8) test2_link_get_id();
-	if (all || test == 9) test1_link_set_name();
-	if (all || test == 10) test2_link_set_name();
-	if (all || test == 11) test3_link_set_name();
-	if (all || test == 12) test1_link_get_name();
-	if (all || test == 13) test2_link_get_name();
-	if (all || test == 14) test1_link_get_space1();
-	if (all || test == 15) test2_link_get_space1();
-	if (all || test == 16) test1_link_get_space2();
-	if (all || test == 17) test2_link_get_space2();
-	if (all || test == 18) test1_link_set_state();
-	if (all || test == 19) test2_link_set_state();
-	if (all || test == 20) test3_link_set_state();
-	if (all || test == 21) test1_link_get_state();
-	if (all || test == 22) test2_link_get_state();
-	if (all || test == 23) test1_link_print();
-	if (all || test == 24) test2_link_print();
+	if (all || test == 1) count += test1_link_create();
+	if (all || test == 2) count += test2_link_create();
+	if (all || test == 3) count += test3_link_create();
+	if (all || test == 4) count += test4_link_create();
+	if (all || test == 5) count += test1_link_destroy();
+	if (all || test == 6) count += test2_link_destroy();
+	if (all || test == 7) count += test1_link_get_id();
+	if (all || test == 8) count += test2_link_get_id();
+	if (all || test == 9) count += test1_link_set_name();
+	if (all || test == 10) count += test2_link_set_name();
+	if (all || test == 11) count += test3_link_set_name();
+	if (all || test == 12) count += test1_link_get_name();
+	if (all || test == 13) count += test2_link_get_name();
+	if (all || test == 14) count += test1_link_get_space1();
+	if (all || test == 15) count += test2_link_get_space1();
+	if (all || test == 16) count += test1_link_get_space2();
+	if (all || test == 17) count += test2_link_get_space2();
+	if (all || test == 18) count += test1_link_set_state();
+	if (all || test == 19) count += test2_link_set_state();
+	if (all || test == 20) count += test3_link_set_state();
+	if (all || test == 21) count += test1_link_get_state();
+	if (all || test == 22) count += test2_link_get_state();
+	if (all || test == 23) count += test1_link_print();
+	if (all || test == 24) count += test2_link_print();
+
+	if (count == 0) {
+		fprintf (stdout, "No errors detected\n");
+	} else {
+		fprintf (stdout, "%d errors detected\n", count);
+	}
 
 	return 0;
 }
@@ -76,20 +82,23 @@ Description:
 Input:
 
 Output:
-	
+	int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_create(){
+int test1_link_create(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link != NULL);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link == NULL){
+		FUNCTION_IS_CORRECT(0);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 
@@ -104,21 +113,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_create(){
+int test2_link_create(){
 
 	Link* link;
 	Id id = 1;
 	Id noId = NO_ID;
 
-	link = link_create(noId);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link == NULL);
-	link_destroy(link);
+	link = link_create(noId, id, id);
 
-	return;
+	if (link == NULL){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -133,21 +145,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test3_link_create(){
+int test3_link_create(){
 
 	Link* link;
 	Id id = 1;
 	Id noId = NO_ID;
 
-	link = link_create(id);
-	link_set_space1(link, noId);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link == NULL);
-	link_destroy(link);
+	link = link_create(id, noId, id);
 
-	return;
+	if (link == NULL){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -162,21 +177,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test4_link_create(){
+int test4_link_create(){
 
 	Link* link;
 	Id id = 1;
 	Id noId = NO_ID;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, noId);
-	FUNCTION_IS_CORRECT(link == NULL);
-	link_destroy(link);
+	link = link_create(id, id, noId)
 
-	return;
+	if (link == NULL){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -190,19 +208,22 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_destroy(){
+int test1_link_destroy(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_destroy(link) != ERROR);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_destroy(link) == ERROR){
+		FUNCTION_IS_CORRECT(0);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -216,15 +237,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_destroy(){
+int test2_link_destroy(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_destroy(link) == ERROR);
-
-	return;
+	if (link_destroy(link) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -238,20 +263,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_get_id(){
+int test1_link_get_id(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_get_id(link) != NO_ID);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_get_id(link) == NO_ID){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -265,15 +294,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_get_id(){
+int test2_link_get_id(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_get_id(link) == NO_ID);
-
-	return;
+	if (link_get_id(link) == NO_ID){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -287,21 +320,25 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_set_name(){
+int test1_link_set_name(){
 
 	Link* link;
 	Id id = 1;
 	char name[MAX_CHAR] = "name";
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_set_name(link, name) != ERROR);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_set_name(link, name) == ERROR){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -315,16 +352,20 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_set_name(){
+int test2_link_set_name(){
 
 	Link* link;
 	char name[MAX_CHAR] = "name";
 
-	FUNCTION_IS_CORRECT(link_set_name(link, name) == ERROR);
-
-	return;
+	if (link_set_name(link, name) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -339,21 +380,25 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test3_link_set_name(){
+int test3_link_set_name(){
 
 	Link* link;
 	Id id = 1;
 	char* noName = NULL;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_set_name(link, noName) == ERROR);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_set_name(link, noName) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		link_destroy(link);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -367,20 +412,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_get_name(){
+int test1_link_get_name(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_get_name(link) != NULL);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_get_name(link) == NULL){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -394,90 +443,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_get_name(){
+int test2_link_get_name(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_get_name(link) == NULL);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test1_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can successfully set the space1 of a Link.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test1_link_set_space1(){
-
-	Link* link;
-	Id id = 1;
-
-	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space1(link, id) != ERROR);
-	link_destroy(link);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test2_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can set the space1 of an uninitialised Link.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test2_link_set_space1(){
-
-	Link* link;
-	Id id = 1;
-
-	FUNCTION_IS_CORRECT(link_set_space1(link, id) == ERROR);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test3_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can set the space1 of a Link if the string Id is 
-    not valid.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test3_link_set_space1(){
-
-	Link* link;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space1(link, noId) == ERROR);
-	link_destroy(link);
-
-	return;
+	if (link_get_name(link) == NULL){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -491,21 +469,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_get_space1(){
+int test1_link_get_space1(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_get_space1(link) != NO_ID);
+	link = link_create(id, id, id);
+
+	if (link_get_space1(link) == NO_ID){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
 	link_destroy(link);
-
-	return;
-
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -519,90 +500,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_get_space1(){
+int test2_link_get_space1(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_get_space1(link) == NO_ID);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test1_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can successfully set the space2 of a Link.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test1_link_set_space2(){
-
-	Link* link;
-	Id id = 1;
-
-	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space2(link, id) != ERROR);
-	link_destroy(link);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test2_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can set the space2 of an uninitialised Link.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test2_link_set_space2(){
-
-	Link* link;
-	Id id = 1;
-
-	FUNCTION_IS_CORRECT(link_set_space2(link, id) == ERROR);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test3_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can set the space2 of a Link if the string Id is 
-    not valid.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test3_link_set_space2(){
-
-	Link* link;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space2(link, noId) == ERROR);
-	link_destroy(link);
-
-	return;
+	if (link_get_space1(link) == NO_ID){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -616,20 +526,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_get_space2(){
+int test1_link_get_space2(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT (link_get_space2(link) != NO_ID);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_get_space1(link) == NO_ID){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -643,15 +557,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_get_space2(){
+int test2_link_get_space2(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT (link_get_space2(link) == NO_ID);
+	if (link_get_space1(link) == NO_ID){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
 	
-	return;
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -665,21 +583,25 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_set_state(){
+int test1_link_set_state(){
 
 	Link* link;
 	Id id = 1;
 	STATE state = OPEN;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_set_state(link, state) != ERROR);
-	link_destroy(link);
+	link = link_create(id, id, id);
+
+	if (link_set_state(link, state) == ERROR){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
 	
-	return;
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -693,16 +615,20 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_set_state(){
+int test2_link_set_state(){
 
 	Link* link;
 	STATE state = OPEN;
 
-	FUNCTION_IS_CORRECT(link_set_state(link, state) == ERROR);
-
-	return;
+	if (link_set_state(link, state) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -717,21 +643,25 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test3_link_set_state(){
+int test3_link_set_state(){
 
 	Link* link;
 	Id id = 1;
 	STATE noState = NO_STATE;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_set_state(link, noState) == ERROR);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_set_state(link, noState) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		link_destroy(link);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -745,20 +675,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_get_state(){
+int test1_link_get_state(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_get_state(link) != NO_STATE);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_get_state(link) == NO_STATE){
+		FUNCTION_IS_CORRECT(1);
+		link_destroy(link);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	link_destroy(link);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -772,15 +706,19 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_get_state(){
+int test2_link_get_state(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_get_state(link) == NO_STATE);
-
-	return;
+	if (link_get_state(link) == NO_STATE){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
 
 /* --------------------------------------------------------------------
@@ -794,20 +732,24 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test1_link_print(){
+int test1_link_print(){
 
 	Link* link;
 	Id id = 1;
 
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link_print(link) != ERROR);
-	link_destroy(link);
+	link = link_create(id, id, id);
 
-	return;
+	if (link_print(link) == ERROR){
+		FUNCTION_IS_CORRECT(0);
+		link_destroy(link);
+		return 1;
+	}
+	
+	FUNCTION_IS_CORRECT(1);
+	link_destroy(link);
+	return 0;
 }
 
 /* --------------------------------------------------------------------
@@ -821,13 +763,17 @@ Description:
 Input:
 
 Output:
-    
+    int: Returns 0 if OK or 1 if ERROR.
 -------------------------------------------------------------------- */
-void test2_link_print(){
+int test2_link_print(){
 
 	Link* link;
 
-	FUNCTION_IS_CORRECT(link_print(link) == ERROR):
-
-	return;
+	if (link_print(link) == ERROR){
+		FUNCTION_IS_CORRECT(1);
+		return 0;
+	}
+	
+	FUNCTION_IS_CORRECT(0);
+	return 1;
 }
