@@ -38,9 +38,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_create();
+void test1_link_create();
 
 /* --------------------------------------------------------------------
 Function: test2_link_create
@@ -53,9 +53,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_create();
+void test2_link_create();
 
 /* --------------------------------------------------------------------
 Function: test3_link_create
@@ -69,9 +69,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test3_link_create();
+void test3_link_create();
 
 /* --------------------------------------------------------------------
 Function: test4_link_create
@@ -85,9 +85,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test4_link_create();
+void test4_link_create();
 
 /* --------------------------------------------------------------------
 Function: test1_link_destroy
@@ -100,9 +100,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_destroy();
+void test1_link_destroy();
 
 /* --------------------------------------------------------------------
 Function: test2_link_destroy
@@ -115,9 +115,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_destroy();
+void test2_link_destroy();
 
 /* --------------------------------------------------------------------
 Function: test1_link_get_id
@@ -130,9 +130,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_get_id();
+void test1_link_get_id();
 
 /* --------------------------------------------------------------------
 Function: test2_link_get_id
@@ -145,9 +145,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_get_id();
+void test2_link_get_id();
 
 /* --------------------------------------------------------------------
 Function: test1_link_set_name
@@ -160,9 +160,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_set_name();
+void test1_link_set_name();
 
 /* --------------------------------------------------------------------
 Function: test2_link_set_name
@@ -175,9 +175,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_set_name();
+void test2_link_set_name();
 
 /* --------------------------------------------------------------------
 Function: test3_link_set_name
@@ -191,9 +191,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test3_link_set_name();
+void test3_link_set_name();
 
 /* --------------------------------------------------------------------
 Function: test1_link_get_name
@@ -206,9 +206,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_get_name();
+void test1_link_get_name();
 
 /* --------------------------------------------------------------------
 Function: test2_link_get_name
@@ -221,9 +221,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_get_name();
+void test2_link_get_name();
 
 /* --------------------------------------------------------------------
 Function: test1_link_get_space1
@@ -236,9 +236,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_get_space1();
+void test1_link_get_space1();
 
 /* --------------------------------------------------------------------
 Function: test2_link_get_space1
@@ -251,9 +251,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_get_space1();
+void test2_link_get_space1();
 
 /* --------------------------------------------------------------------
 Function: test1_link_get_space2
@@ -266,9 +266,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_get_space2();
+void test1_link_get_space2();
 
 /* --------------------------------------------------------------------
 Function: test2_link_get_space2
@@ -281,9 +281,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_get_space2();
+void test2_link_get_space2();
 
 /* --------------------------------------------------------------------
 Function: test1_link_set_state
@@ -296,9 +296,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_set_state();
+void test1_link_set_state();
 
 /* --------------------------------------------------------------------
 Function: test2_link_set_state
@@ -311,9 +311,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_set_state();
+void test2_link_set_state();
 
 /* --------------------------------------------------------------------
 Function: test3_link_set_state
@@ -327,9 +327,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test3_link_set_state();
+void test3_link_set_state();
 
 /* --------------------------------------------------------------------
 Function: test1_link_get_state
@@ -342,9 +342,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_get_state();
+void test1_link_get_state();
 
 /* --------------------------------------------------------------------
 Function: test2_link_get_state
@@ -357,9 +357,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_get_state();
+void test2_link_get_state();
 
 /* --------------------------------------------------------------------
 Function: test1_link_print
@@ -372,9 +372,9 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test1_link_print();
+void test1_link_print();
 
 /* --------------------------------------------------------------------
 Function: test2_link_print
@@ -387,8 +387,8 @@ Description:
 Input:
 
 Output:
-    int: Returns 0 if OK or 1 if ERROR.
+    
 -------------------------------------------------------------------- */
-int test2_link_print();
+void test2_link_print();
 
 #endif
