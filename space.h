@@ -1,7 +1,7 @@
 /* ===================================================================
    File: space.h
-   Version: 4.0
-   Date: 11-11-2016 
+   Version: 4.1
+   Date: 18-11-2016 
    Author: Guillermo Rodriguez and Alejandro Sanchez
 
    Description: 
@@ -27,6 +27,9 @@
     Nov. 11, 2016   Version 4.0
       Changed the sense of some fields of the structure. The coordinates
       are changed to links.      
+		Nov. 18, 2016	 Version 4.1
+			Added field "desc" to the structure "Space".
+			Created "space_set_desc" and "space_get_desc".
    =================================================================== */
 
 #ifndef SPACE_H
@@ -34,6 +37,7 @@
 
 #include "types.h"
 #include "set.h"
+
 /*** Data structures definition ***/
 typedef struct _Space Space;
 
@@ -353,6 +357,43 @@ Set* space_get_object(Space *space);
     BOOL: TRUE if the object is in the space and FALSE in other cases. 
    -------------------------------------------------------------------- */
 BOOL space_is_object(Space *space, Id object);
+
+
+
+/* --------------------------------------------------------------------
+   Function: space_set_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets the description of the space.
+
+   Input: 
+    Space *space: the space you want to change its description.
+    char *desc: the new description of the space.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS space_set_desc(Space *space, char *desc);
+
+
+
+/* --------------------------------------------------------------------
+   Function: space_get_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gives the information of the description of the space.
+
+   Input: 
+    Space *space: the space you want to know its description.
+
+   Output: 
+    char *: the description of the space or NULL on error.
+ -------------------------------------------------------------------- */
+char *space_get_desc(Space *space);
 
 
 

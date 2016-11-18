@@ -1,7 +1,7 @@
 /* ===================================================================
    File: space.c
-   Version: 4.0
-   Date: 11-11-2016 
+   Version: 4.1
+   Date: 18-11-2016 
    Author: Guillermo Rodriguez and Alejandro Sanchez
  
    Description: 
@@ -26,6 +26,9 @@
     Nov. 11, 2016   Version 4.0
       Changed the sense of some fields of the structure. The coordinates
       are changed to links. 
+		Nov. 18, 2016	 Version 4.1
+			Added field "desc" to the structure "Space".
+			Created "space_set_desc" and "space_get_desc".
    =================================================================== */
  
 #include <stdio.h>
@@ -41,6 +44,7 @@
 #define east(X) (X)->east
 #define west(X) (X)->west
 #define objects(X) (X)->objects
+#define desc(X) (X)->desc
 #define gdesc(X) (X)->gdesc
 
  
@@ -53,6 +57,7 @@ struct _Space{
   Id east;  /* East link of the space */
   Id west;  /* West link of the space */
   Set *objects; /*  Set of the objects,there are in the space */
+	char desc[WORD_SIZE + 1];	/* Description of the space */
   char gdesc[WORD_SIZE +1]; /* Graphic description of the space */
 };
  
@@ -523,6 +528,59 @@ BOOL space_is_object(Space *space, Id object){
 }
 
 
+/* --------------------------------------------------------------------
+   Function: space_set_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets the description of the space.
+
+   Input: 
+    Space *space: the space you want to change its description.
+    char *desc: the new description of the space.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS space_set_desc(Space *space, char *desc){
+  if(!space || !desc){   /* Check if the inputs are not empty */
+    return ERROR;
+  }
+
+  /* Set the description and check if it has worked */
+  if(!strcpy(desc(space), desc)){
+    return ERROR;
+  }  
+  
+  return OK;
+}
+
+
+
+/* --------------------------------------------------------------------
+   Function: space_get_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gives the information of the description of the space.
+
+   Input: 
+    Space *space: the space you want to know its description.
+
+   Output: 
+    char *: the description of the space or NULL on error.
+ -------------------------------------------------------------------- */
+char *space_get_desc(Space *space){
+  if(!space){  /* Check that the input is not empty */
+   return NULL;
+  }
+
+  return desc(space); 
+} 
+
+
 
 /* --------------------------------------------------------------------
    Function: space_set_gdesc
@@ -530,7 +588,7 @@ BOOL space_is_object(Space *space, Id object){
    Author: Guillermo Rodriguez
 
    Description: 
-    Sets de graphic description of the space.
+    Sets the graphic description of the space.
 
    Input: 
     Space *space: the space you want to change its graphic description.

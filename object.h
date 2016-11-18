@@ -1,7 +1,7 @@
 /* ===================================================================
    File: object.h
-   Version: 2.0
-   Date: 27-10-2016 
+   Version: 3.0
+   Date: 18-11-2016 
    Author: Guillermo Rodriguez and Alejandro Sanchez
 
    Description: 
@@ -13,6 +13,9 @@
 			Added field "location" to the structure "Object". 
       Modified the functions that are affected by this field.			
       Created "object_set_location" and "object_get_location".
+		Nov. 18, 2016	 Version 3.0
+			Added field "desc" to the structure "Object".
+			Created "object_set_desc" and "object_get_desc".
    =================================================================== */
 
 #ifndef OBJECT_H
@@ -151,6 +154,40 @@ STATUS object_set_location(Object *object, Id location);
    -------------------------------------------------------------------- */
 Id object_get_location(Object *object);
 
+
+/* --------------------------------------------------------------------
+   Function: object_set_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Sets the description of the object.
+
+   Input: 
+    Object *object: the object you want to change its description.
+    char *desc: the new description of the object.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+STATUS object_set_desc(Object *object, char *desc);
+
+
+/* --------------------------------------------------------------------
+   Function: object_get_desc
+   Date: 18-11-2016 
+   Author: Alejandro Sanchez
+
+   Description: 
+    Gives the information of the description of the object.
+
+   Input: 
+    Object *object: the object you want to know its description.
+
+   Output: 
+    char *: the description of the object or NULL on error.
+ -------------------------------------------------------------------- */
+char *object_get_desc(Object *object);
 
 
 /* --------------------------------------------------------------------
