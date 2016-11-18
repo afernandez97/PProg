@@ -13,6 +13,9 @@
       Created the rest of the functions and commented the file.
 =================================================================== */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "inventory.h"
 
 /* Constant values description */
@@ -142,7 +145,7 @@ STATUS inventory_add_object(Inventory *inv, Id object){
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS inventory_del_object(Inventory *inv, Id object){
-  if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE){  /* Check that the inputs are not empty */
+  if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE)){  /* Check that the inputs are not empty */
     return ERROR;
   }
  
@@ -204,9 +207,9 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag){
   	Inventory *inv: the inventory whose bag you want to get.
   
    Output:
-  	Inventory *: the bag of the inventory.
+  	Set *: the bag of the inventory.
 ------------------------------------------------------------------- */
-Inventory *inventory_get_bag(Inventory *inv){
+Set *inventory_get_bag(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return NULL;
 	}

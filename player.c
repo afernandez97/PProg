@@ -205,7 +205,7 @@ const char * player_get_name(Player *player){
     Status: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS player_set_location(Player *player, Id location){
-  if(!player){      /* Check that the inputs are not empty */
+  if(!player || location == NO_ID){      /* Check that the inputs are not empty */
   	return ERROR;
   }
 
@@ -257,7 +257,7 @@ Id player_get_location(Player *player){
 ------------------------------------------------------------------- */
 STATUS player_set_inventory(Player *player, Inventory *inv){
   /* Check that the inputs are not empty */
-  if(!inv || !inventory){
+  if(!player || !inv){
     return ERROR;
   }
 

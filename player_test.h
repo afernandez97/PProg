@@ -1,11 +1,16 @@
 #ifndef PLAYER_TEST_H
 #define PLAYER_TEST_H
-#include player.h
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "player.h"
+
+#define MAX_TEST 27
 #define FUNCTION_IS_CORRECT(x)\
   				if(x){\
-						fprintf(stdout,"%s %d %s Correct", __FILE__, __LINE__, __FUNCTION__);\
+						fprintf(stdout,"%s %d %s CORRECT\n", __FILE__, __LINE__, __FUNCTION__);\
 					} else{\
-							(fprintf(stdout,"%s %d %s ERROR", __FILE__, __LINE__, __FUNCTION__));\
+							(fprintf(stdout,"%s %d %s ERROR\n", __FILE__, __LINE__, __FUNCTION__));\
 					}
 
 /*** Public functions description ***/
