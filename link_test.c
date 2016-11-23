@@ -15,7 +15,7 @@ Revision history:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "player_test.h" 
+#include "link_test.h" 
 
 #define MAX_TEST_LINK 24
 
