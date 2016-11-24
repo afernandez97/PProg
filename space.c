@@ -1,32 +1,32 @@
-/* ===================================================================
-   File: space.c
-   Version: 4.1
-   Date: 18-11-2016 
-   Author: Guillermo Rodriguez and Alejandro Sanchez
+/**===================================================================
+   @file space.c
+   @version 4.1
+   @date 18-11-2016 
+   @author Guillermo Rodriguez and Alejandro Sanchez
  
-   Description: 
+   @brief 
     It implements a space.
  
-   Revision history:
+   @version
     Sept. 23, 2016  Version 1.0 (initial release)
-    Sept. 30, 2016  Version 2.0 
+    @version Sept. 30, 2016  Version 2.0 
       Commented the file and added macros for each structure field.
-    Oct.  07, 2016  Version 2.1
+    @version Oct.  07, 2016  Version 2.1
       Changed structure field "object" after creating ADT Object.
-    Oct. 25, 2016  Version 3.0
+    @version Oct. 25, 2016  Version 3.0
       Changed "objects" field to Set *.
       Modified the functions that were affected by this field. 
-    Oct. 28, 2016  Version 3.1
+    @version Oct. 28, 2016  Version 3.1
       Changed "space_set_object" to "space_add_object".
       Created function "space_del_object".  
-    Oct. 29, 2016   Version 3.2
+    @version Oct. 29, 2016   Version 3.2
       Added field "gdesc" to the structure "Space".
       Modified the functions that are affected by this field.
       Created "space_set_gdesc" and "space_get_gdesc". 
-    Nov. 11, 2016   Version 4.0
+    @version Nov. 11, 2016   Version 4.0
       Changed the sense of some fields of the structure. The coordinates
       are changed to links. 
-		Nov. 18, 2016	 Version 4.1
+     @version  Nov. 18, 2016	 Version 4.1
 			Added field "desc" to the structure "Space".
 			Created "space_set_desc" and "space_get_desc".
    =================================================================== */
@@ -50,32 +50,30 @@
  
 /*** The Space structure stores information of the different spaces that there are in the game ***/
 struct _Space{
-  Id id; /* Identifier of the space */
+  Id id; /*!< Identifier of the space */
   char name[WORD_SIZE + 1]; /* Name of the space */
-  Id north; /* North link of the space */
-  Id south; /* South link of the space */
-  Id east;  /* East link of the space */
-  Id west;  /* West link of the space */
-  Set *objects; /*  Set of the objects,there are in the space */
-	char desc[WORD_SIZE + 1];	/* Description of the space */
-  char gdesc[WORD_SIZE +1]; /* Graphic description of the space */
+  Id north; /*!< North link of the space */
+  Id south; /*!< South link of the space */
+  Id east;  /*!< East link of the space */
+  Id west;  /*!< West link of the space */
+  Set *objects; /*!<  Set of the objects,there are in the space */
+	char desc[WORD_SIZE + 1];	/*!< Description of the space */
+  char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
 };
  
  
 /*** Public functions definition ***/
-/* --------------------------------------------------------------------
-   Function: space_create
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Creates a space.
+   brief Creates a space. space_create()
  
-   Input: 
+   @param 
     Id id: the id of the space that is created.
-   Output: 
+   @return 
     Space *: the space created or NULL on error.
-   -------------------------------------------------------------------- */
+   --------------------------------------------------------------------*/
 Space * space_create(Id id){
   Space *space = NULL;
  
@@ -112,17 +110,16 @@ Space * space_create(Id id){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_destroy
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/** --------------------------------------------------------------------
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Destroys a space.
+   @brief 
+    Destroys a space. space_destroy()
  
-   Input: 
+   @param 
     Space *space: the space to destroy.
-   Output: 
+   @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
    -------------------------------------------------------------------- */
 STATUS space_destroy(Space *space){
@@ -141,17 +138,16 @@ STATUS space_destroy(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_id
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/** --------------------------------------------------------------------
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Returns a space's id.
+   @brief 
+    Returns a space's id. space_get_id()
  
-   Input: 
+   @param 
     Space *space: the space which you want the id of.
-   Output: 
+   @return 
     Id: the space's id or NO_ID on error.
    -------------------------------------------------------------------- */
 Id space_get_id(Space *space){
@@ -164,19 +160,18 @@ Id space_get_id(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_set_name
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/** --------------------------------------------------------------------
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Renames a space.
+   @brief 
+    Renames a space. space_set_name()
  
-   Input: 
+   @param 
     Space *space: the space you want to rename.
     char *name: the new name you want for the space.
    
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS space_set_name(Space *space, char *name){
@@ -194,18 +189,17 @@ STATUS space_set_name(Space *space, char *name){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_name
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/** --------------------------------------------------------------------
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Gives the information of the name of the space.
+   @brief 
+    Gives the information of the name of the space. space_get_name()
  
-   Input: 
+   @param 
     Space *space: the space you want to know the name.
  
-   Output: 
+   @return 
     const char *: the name of the space or NULL on error.
    -------------------------------------------------------------------- */
 const char * space_get_name(Space *space){
@@ -218,19 +212,18 @@ const char * space_get_name(Space *space){
  
  
 
-/* --------------------------------------------------------------------
-   Function: space_set_north
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description:
-    Sets the North link to a space.
+   @brief
+    Sets the North link to a space.space_set_north()
  
-   Input: 
+   @param 
     Space *space: the space where you want to change the North link.
     Id id: the new North link you want for the space.
  
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS space_set_north(Space *space, Id id){
@@ -244,18 +237,17 @@ STATUS space_set_north(Space *space, Id id){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_north
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016  
+   @author Alejandro Sanchez
  
-   Description: 
-    Gives the information of the North link of the space.
+   @brief 
+    Gives the information of the North link of the space.       space_get_north()
  
-   Input: 
+   @param 
     Space *space: the space you want to know the North link.
  
-   Output: 
+   @return 
     Id: the North link of the space or NO_ID on error. 
    -------------------------------------------------------------------- */
 Id space_get_north(Space *space){
@@ -268,19 +260,18 @@ Id space_get_north(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_set_south
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description:
-    Set the South link to a space.
+   @brief
+    Set the South link to a space. space_set_south()
  
-   Input: 
+   @param 
     Space *space: the space where you want to change the South link.
     Id id: the new South link you want for the space.
  
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS space_set_south(Space *space, Id id){
@@ -294,18 +285,17 @@ STATUS space_set_south(Space *space, Id id){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_south
-   Date: 11-11-2016  
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date: 11-11-2016  
+   @author: Alejandro Sanchez
  
-   Description: 
-    Gives the information of the South link of the space.
+   @brief
+    Gives the information of the South link of the space. space_get_south
  
-   Input: 
+   @param 
     Space *space: the space you want to know the South link.
  
-   Output: 
+   @return 
     Id: the South link of the space or NO_ID on error.
    -------------------------------------------------------------------- */
 Id space_get_south(Space *space){
@@ -318,19 +308,18 @@ Id space_get_south(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_set_east
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description:
-    Set the East link to a space. 
+   @brief
+    Set the East link to a space. space_set_east()
  
-   Input: 
+   @param 
     Space *space: the space where you want to change the East link.
     Id id: the new East link you want for the space.
  
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS space_set_east(Space *space, Id id){
@@ -344,18 +333,17 @@ STATUS space_set_east(Space *space, Id id){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_east
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Gives the information of the East link of the space.
+   @brief 
+    Gives the information of the East link of the space. space_get_east()
  
-   Input: 
+   @param 
     Space *space: the space you want to know the East link.
  
-   Output: 
+   @return 
     Id: the East link of the space or NO_ID on error.
    -------------------------------------------------------------------- */
 Id space_get_east(Space *space){
@@ -368,19 +356,18 @@ Id space_get_east(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_set_west
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/** --------------------------------------------------------------------
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description:
-    Set the West link to a space.
+   @brief
+    Set the West link to a space.  space_set_west()
  
-   Input: 
+   @param 
     Space *space: the space where you want to change the West link.
     Id id: the new West link you want for the space.
  
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
 STATUS space_set_west(Space *space, Id id){
