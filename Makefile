@@ -1,6 +1,6 @@
 # Author: Guillermo Rodriguez and Alejandro Sanchez
 
-all: ocabas die_test set_test player_test
+all: ocabas die_test set_test player_test inventory_test space_test link_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
@@ -13,8 +13,17 @@ die_test: die_test.o die.o
 player_test: player_test.o player.o inventory.o set.o
 	gcc -o $@ $^ 
 
+inventory_test: inventory_test.o inventory.o set.o
+	gcc -o $@ $^ 
+
 set_test: set_test.o set.o
 	gcc -o $@ $^ 
+
+space_test: space_test.o space.o
+	gcc -o $@ $^ 
+
+link_test: link_test.o link.o
+	gcc -o $@ $^
 
 die_test.o: die_test.c die.c die.h types.h
 	gcc $(CCFLAGS) die_test.c die.c
@@ -22,8 +31,17 @@ die_test.o: die_test.c die.c die.h types.h
 player_test.o: player_test.c player_test.h types.h 
 	gcc $(CCFLAGS) player_test.c
 
+inventory_test.o: inventory_test.c inventory_test.h types.h 
+	gcc $(CCFLAGS) inventory_test.c
+
 set_test.o: set_test.c set.c set.h types.h
 	gcc $(CCFLAGS) set_test.c set.c
+
+space_test.o: space_test.c space_test.h types.h
+	gcc $(CCFLAGS) space_test.c 
+
+link_test.o: link_test.c link_test.h types.h
+	gcc $(CCFLAGS) link_test.c
 
 game.o: game.c game.h 
 	gcc $(CCFLAGS) game.c
