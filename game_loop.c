@@ -28,8 +28,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>   
-#include <time.h>   
+#include <string.h>     
 #include "game.h"
 
 
@@ -48,8 +47,7 @@ int main(int argc, char *argv[]){
 	  return 1;
 	}
   
-  /* Create a seed to generate a pseudo-random number later */
-  srand(time(NULL));
+
   game = game_init_from_file(argv[1], player, die);
   /* Check if game initializes correctly */
   if(game== NULL){	

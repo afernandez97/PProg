@@ -22,18 +22,18 @@ typedef struct _Die Die;
 
 
 /*** Public functions description ***/
-/* --------------------------------------------------------------------
-   Function: die_create
-   Date: 15-10-2016 
-   Author: Guillermo Rodriguez
+/** --------------------------------------------------------------------
+   
+   @date: 15-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Creates a die.
+   @brief die_create()
+    Creates a die and creates a seed to generate pseudo-random numbers.
  
-   Input: 
-    Id id: the id of the die.
-   Output: 
-    Die *: the die created or NULL on error.
+    
+   @param Id id: the id of the die
+    
+   @return Die *: the die created or NULL on error.
    -------------------------------------------------------------------- */
 Die * die_create(Id id);
 

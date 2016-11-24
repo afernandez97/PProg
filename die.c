@@ -9,11 +9,14 @@
 
    Revision history:
     Oct. 15, 2016  Version 1.0 (initial release)
+		Nov. 24, 2016  Version 2.0 
+			Included <time.h> to use srand() in "die_create".
    =================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "die.h"
 
 /*** Constant values description ***/
@@ -37,7 +40,7 @@ struct _Die{
    @author Guillermo Rodriguez
  
    @brief die_create()
-    Creates a die.
+    Creates a die and creates a seed to generate pseudo-random numbers.
  
     
    @param Id id: the id of the die
@@ -56,6 +59,9 @@ Die * die_create(Id id){
     return NULL;
   }    
  
+  /* Create a seed to generate a pseudo-random number later */
+  srand(time(NULL));
+
   /* Initialize structure fields */
   id(die) = id;
 
