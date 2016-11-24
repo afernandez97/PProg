@@ -42,7 +42,7 @@ typedef enum enum_Command{
   LEAVE, /* Command to leave an object on a space */
   GO,	     /* Command to go to another space */
   ROLL,
-  Inspect  /* Command to roll the die */ 
+  INSPECT  /* Command to roll the die */ 
 } T_Command;
 
 /*** Data structures definition ***/
