@@ -93,6 +93,7 @@ STATUS game_load_spaces(Game *game, char *filename){
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char gdesc[WORD_SIZE] = "";
+	char desc[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Space *space = NULL;
@@ -124,13 +125,17 @@ STATUS game_load_spaces(Game *game, char *filename){
       south = atol(toks);
       toks = strtok(NULL, "|");
       east = atol(toks);
-      toks = strtok(NULL, ".");
+			toks = strtok(NULL, "|");
+			if (toks!=NULL){
+      	strcpy(desc, toks);
+			}
+      toks = strtok(NULL, "\n");
       if(toks != NULL){
         strcpy(gdesc, toks);        
       }
 
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%s\n", id, name, north, east, south, west, gdesc);
+      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%s|%s\n", id, name, north, east, south, west, desc, gdesc);
 #endif
       space = space_create(id); /* Create the space */
       if(space != NULL){
@@ -144,8 +149,12 @@ STATUS game_load_spaces(Game *game, char *filename){
         space_set_west(space, west);
 
         /* Set the graphic description to the space */ 
-        if(toks != NULL){
+        if(gdesc != NULL){
 				  space_set_gdesc(space, gdesc);
+        }
+				   /* Set the description to the space */ 
+        if(desc != NULL){
+				  space_set_desc(space, desc);
         }
         /* Add the space to the game */
         game_add_space(game, space);  
@@ -167,7 +176,7 @@ STATUS game_load_spaces(Game *game, char *filename){
 /* ----------------------------------------------------------------------------
    Function: game_add_object
    Date: 27-10-2016 
-   Author: Alejandro Sanchez
+   Author: Ricardo Riol
 
    Description: 
     Adds an object to a game.
@@ -223,6 +232,7 @@ STATUS game_load_objects(Game *game, char *filename){
   FILE *file = NULL;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
+	char desc[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, location = NO_ID;
   Object *object = NULL;
@@ -249,8 +259,12 @@ STATUS game_load_objects(Game *game, char *filename){
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       location = atol(toks);
+			toks = strtok(NULL, "|");
+			if (toks !=NULL){
+      	strcpy(desc, toks);
+			}
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld\n", id, name, location);
+      printf("Leido: %ld|%s|%ld|%s\n", id, name, location, desc);
 #endif
       object = object_create(id); /* Create the object */
       if(object != NULL){
@@ -259,15 +273,23 @@ STATUS game_load_objects(Game *game, char *filename){
 
         /* Set the location to the object */  
 				object_set_location(object, location);
+				
+				/* Set the description to the object */ 
+        if(desc != NULL){
+				  object_set_desc(object, desc);
+        }				
 
         /* Add the object to the game */
         game_add_object(game, object);  
+
 
         /* Add the object to the set of objects of its location */
         space = game_get_space(game, location);
         if(space != NULL){
           space_add_object(space, id);
-        }
+				}
+
+        
       }
     } /* if(strncmp("#o:", line, 3) == 0) */
   } /* while */

@@ -47,7 +47,7 @@ struct _Command{
 /* --------------------------------------------------------------------
    Function: get_user_input
    Date: 05-11-2016 
-   Author: Alejandro Sanchez
+   Author: Ricardo Riol
 
    Description: 
     Interprets the user's input. 
@@ -99,6 +99,9 @@ Command * get_user_input(){
       cmd(command) = CATCH; /* "Catch" case */;
       strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
+        cmd(command) = LEAVE; /* "Leave" case */
+        strcpy(arg(command), arg);
+		} else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){

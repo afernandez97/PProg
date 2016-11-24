@@ -41,7 +41,8 @@ typedef enum enum_Command{
   CATCH, /* Command to catch an object from a space */
   LEAVE, /* Command to leave an object on a space */
   GO,	     /* Command to go to another space */
-  ROLL   /* Command to roll the die */ 
+  ROLL,
+  Inspect  /* Command to roll the die */ 
 } T_Command;
 
 /*** Data structures definition ***/
