@@ -84,6 +84,7 @@ STATUS callback_CATCH(Game *game, char *arg);
 STATUS callback_LEAVE(Game *game, char *arg);
 STATUS callback_ROLL(Game *game);
 STATUS callback_GO(Game *game, char *arg);
+STATUS callback_INSPECT(Game *game, char *arg);
 
 /*** Private functions description ***/
 Id game_get_space_id_at(Game *game, int position);
@@ -260,7 +261,7 @@ STATUS game_destroy(Game *game){
 /* --------------------------------------------------------------------
    Function: game_update
    Date: 05-11-2016 
-   Author: Guillermo Rodriguez
+   Author: Ricardo Riol
 
    Description: 
     Updates a game.
@@ -300,8 +301,11 @@ STATUS game_update(Game *game, Command *command){
     case GO:
       status = callback_GO(game, arg);
       break;
+    case INSPECT:
+      status = callback_INSPECT(game, arg);
+      break;  			  
     case ROLL:
-	    status = callback_ROLL(game);
+      status = callback_ROLL(game);
       break;
     case NO_CMD:
       break;
@@ -1434,6 +1438,55 @@ STATUS callback_ROLL(Game *game){
   /* Roll the die */  
   die_roll(die(game));
 
+  return OK;
+}
+
+/* --------------------------------------------------------------------
+   Function: callback_INSPECT
+   Date: 04-11-2016 
+   Author: Ricardo Riol
+
+   Description: 
+    This function tells the space's or object's information
+
+   Input: 
+    Game *game: the game.
+
+   Output: 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   -------------------------------------------------------------------- */
+
+STATUS callback_INSPECT(Game *game, char *arg){
+  Space *space = NULL;
+  Id id_space=NO_ID;
+  int flag, aux;
+  char *description;
+  if (!game || !arg){
+    return ERROR;
+  }
+
+  if(!strcmp (arg, "s") || !strcmp (arg, "space")){
+    id_space = game_get_player_location (game);
+    space = game_get_space(game, id_space);
+    description = space_get_desc(space);
+    fprintf (stdout,"%s", description);
+    return OK;
+  }
+  else {
+    for (i=0, flag=0;i < MAX_OBJECTS+1; i++){
+      if (strcmp(object_get_name(objects(game)[i]), arg )==0){
+        aux = i;
+        flag = 1;
+      }
+
+    }
+
+    if (flag == 1){
+      fprintf (stdout, "%s", object_get_desc(objects(game)[i]));
+    } else{
+      fpritnf (stdout , "Error, the object has not been found.\n");
+    }
+  }
   return OK;
 }
 
