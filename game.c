@@ -1,8 +1,9 @@
 /* =================================================================== 
    File: game.c
-   Version: 4.0
-   Date: 05-11-2016
-   Author: Guillermo Rodriguez and Alejandro Sanchez
+   Version: 4.2
+   Date: 20-11-2016
+   Author: Guillermo Rodriguez, Alejandro Sanchez, Adrian 
+	 	Fernandez and Ricardo Riol
 
    Description:
     It implements the game interface and all the associated callbacks
@@ -41,10 +42,12 @@
     Nov. 05, 2016 Version 4.0
       Made "Game" structure private.
       Modified some functions after this change.
-      Added command GO and removed commands NEXT, BACK and JUMP.
+      Added callback GO and removed callbacks NEXT, BACK and JUMP.
     Nov. 13, 2016 Version 4.1
       Added field "Link *links" to the structure after creating ADT Link.
       Created functions "game_spaces_are_linked" and "game_is_link_open"
+    Nov. 20, 2016 Version 4.2
+      Added callback INSPECT.
 =================================================================== */
 
 #include <stdio.h>
@@ -1441,6 +1444,8 @@ STATUS callback_ROLL(Game *game){
   return OK;
 }
 
+
+
 /* --------------------------------------------------------------------
    Function: callback_INSPECT
    Date: 04-11-2016 
@@ -1455,36 +1460,35 @@ STATUS callback_ROLL(Game *game){
    Output: 
     STATUS: OK if you do the operation well and ERROR in other cases.
    -------------------------------------------------------------------- */
-
 STATUS callback_INSPECT(Game *game, char *arg){
   Space *space = NULL;
-  Id id_space=NO_ID;
+  Id id_space = NO_ID;
   int flag, aux;
-  char *description;
+  char *description = NULL;
+	/* Check that the inputs are not empty */
   if (!game || !arg){
     return ERROR;
   }
 
-  if(!strcmp (arg, "s") || !strcmp (arg, "space")){
-    id_space = game_get_player_location (game);
+	/* Check if you want a space description or an object description */
+  if(!strcmp (arg, "s") || !strcmp (arg, "space")){	/* space */
+    id_space = game_get_player_location(game);
     space = game_get_space(game, id_space);
     description = space_get_desc(space);
-    fprintf (stdout,"%s", description);
+    fprintf(stdout,"%s", description);
     return OK;
-  }
-  else {
-    for (i=0, flag=0;i < MAX_OBJECTS+1; i++){
-      if (strcmp(object_get_name(objects(game)[i]), arg )==0){
-        aux = i;
-        flag = 1;
-      }
-
-    }
-
+  } else {	/* object */
+    	for(i=0, flag=0;i < MAX_OBJECTS+1; i++){
+      	if(strcmp(object_get_name(objects(game)[i]), arg )==0){
+        	aux = i;
+        	flag = 1;
+      	}
+    	}
+	
     if (flag == 1){
-      fprintf (stdout, "%s", object_get_desc(objects(game)[i]));
+      fprintf(stdout, "%s", object_get_desc(objects(game)[i]));
     } else{
-      fpritnf (stdout , "Error, the object has not been found.\n");
+      fprintf(stdout , "Error, the object has not been found.\n");
     }
   }
   return OK;
