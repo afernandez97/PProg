@@ -1,17 +1,16 @@
-/* ===================================================================
-  File: inventory.c
-  Version: 1.1
-  Date: 04-11-2016
-  Authors: Adrian Fernandez, Alejandro Sanchez
+/**
+  @file inventory.c
+  @version 1.1
+  @date 04-11-2016
+  @author Adrian Fernandez, Alejandro Sanchez
 
-  Description:
+  @brief
     It implements an inventory.
 
-  Revision history:
-  	Nov. 03, 2016 Version 1.0 (initial release)
-    Nov. 4, 2016 Version 1.1
+  @version Nov. 03, 2016 Version 1.0 (initial release)
+  @version  Nov. 4, 2016 Version 1.1
       Created the rest of the functions and commented the file.
-=================================================================== */
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,28 +22,27 @@
 #define max(X) (X)->max
 
 
-/*** The Inventory structure stores information of the set of objects
-that contains and the maximum number of objects that can contain ***/ 
+/** The Inventory structure stores information of the set of objects
+that contains and the maximum number of objects that can contain */ 
 struct _Inventory {
-	Set* bag;
-	int max;
+	Set* bag; /*!< Bag of the inventory*/
+	int max;  /*!< Maximum number of objects in the inventory*/ 
 };
 
 
 /* Public functions definition */
-/* --------------------------------------------------------------------
-   Function: inventory_create
-   Date: 03-11-2016
-   Author: Adrian Fernández
+/**
+   @date 03-11-2016
+   @author Adrian Fernández
 
-   Description: 
-   	Creates an inventory.
+   @brief 
+   	Creates an inventory.inventory_create()
 
-   Input: 
+   @param 
 
-   Output:
+   @return
   	Inventory *: the inventory created or NULL on error.
-------------------------------------------------------------------- */
+*/
 Inventory *inventory_create(){
 	Inventory *inv = NULL;
 	
@@ -67,20 +65,19 @@ Inventory *inventory_create(){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_destroy
-   Date: 03-11-2016
-   Author: Adrian Fernández
+/**
+   @date 03-11-2016
+   @author Adrian Fernández
    
-   Description:
-   	Destroys an inventory.
+   @brief
+   	Destroys an inventory.nventory_destroy()
 
-   Input:
+   @param
   	Inventory *: the inventory to destroy.
 
-   Output:
+   @return
     STATUS: ERROR if the input is NULL and OK otherwise.
-------------------------------------------------------------------- */
+*/
 STATUS inventory_destroy(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return ERROR;
@@ -97,21 +94,20 @@ STATUS inventory_destroy(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_add_object
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
 
-   Description: 
-	  Adds an object to an inventory.
+   @brief 
+	  Adds an object to an inventory.inventory_add_object()
 
-   Input: 
-	  Inventory *inventory: the inventory that you want to change.
-	  Id object: the new object you want for the inventory.
+ 
+   @param  Inventory *inventory: the inventory that you want to change.
+   @param Id object: the new object you want for the inventory.
   
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS inventory_add_object(Inventory *inv, Id object){
 	/* Check that the inputs are not empty */
   if(!inv || object == NO_ID || inventory_is_full(inv)){  
@@ -128,22 +124,20 @@ STATUS inventory_add_object(Inventory *inv, Id object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_del_object
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Deletes an object of the inventory.
- 
-   Input: 
-    Inventory *inv: the inventory you want to change.
-    Id object: the identifier of the object you want to remove 
+   @brief
+    Deletes an object of the inventory.inventory_del_object()
+  
+   @param Inventory *inv: the inventory you want to change.
+   @param Id object: the identifier of the object you want to remove 
     from the inventory.
    
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS inventory_del_object(Inventory *inv, Id object){
   if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE)){  /* Check that the inputs are not empty */
     return ERROR;
@@ -159,21 +153,20 @@ STATUS inventory_del_object(Inventory *inv, Id object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_set_bag
-   Date: 04-11-2016
-   Author: Adrian Fernandez
+/**
+   @date 04-11-2016
+   @author Adrian Fernandez
 
-   Description:
-  	Sets the bag of an inventory.
+   @brief
+  	Sets the bag of an inventory. inventory_set_bag()
    
-   Input:
-  	Inventory *inv: the inventory whose bag you want to set.
-  	Set *bag: the bag you want to set.
+ 
+   @param  Inventory *inv: the inventory whose bag you want to set.
+   @param  Set *bag: the bag you want to set.
    
-   Output:
+   @return
     STATUS: OK if you do the operation well and ERROR in other cases.
-------------------------------------------------------------------- */
+*/
 STATUS inventory_set_bag(Inventory *inv, Set *bag){
   /* Check that the inputs are not empty or the bag contains more 
   objects than the maximum of the inventory */
@@ -195,20 +188,19 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_get_bag
-   Date: 04-11-2016
-   Author: Adrian Fernandez
+/**
+   @date 04-11-2016
+   @author Adrian Fernandez
 
-   Description:
-  	Returns the bag of an inventory.
+   @brief
+  	Returns the bag of an inventory.inventory_get_bag()
 
-   Input:
+   @param
   	Inventory *inv: the inventory whose bag you want to get.
   
-   Output:
+   @return
   	Set *: the bag of the inventory.
-------------------------------------------------------------------- */
+*/
 Set *inventory_get_bag(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return NULL;
@@ -219,21 +211,20 @@ Set *inventory_get_bag(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_get_count
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
   
-   Description: 
-    Returns the number of objects in the inventory.
+   @brief
+    Returns the number of objects in the inventory.inventory_get_count()
   
-   Input: 
+   @param 
     Inventory *inv: the inventory that you want to know its number 
     of objects.
                  
-   Output: 
+   @return 
     int: the number of objects in the inventory.
-   -------------------------------------------------------------------- */
+   */
 int inventory_get_count(Inventory *inv){
 	if(!inv){   /* Check that the input is not empty */
 		return 0;
@@ -244,21 +235,20 @@ int inventory_get_count(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_get_max
-   Date: 04-11-2016
-   Author: Adrian Fernandez
+/**
+   @date 04-11-2016
+   @author Adrian Fernandez
 
-   Description:
-  	Returns the maximum number of objects that an inventory can contain.
+   @brief
+  	Returns the maximum number of objects that an inventory can contain.inventory_get_max()
    
-   Input:
+   @param
   	Inventory *inv: the inventory whose maximum number of objects
     you want to get.
    
-   Output:
+   @return
   	int: Maximum number of objects that the inventory can contain.
-------------------------------------------------------------------- */
+*/
 int inventory_get_max(Inventory *inv){
 	if(!inv){     /* Check that the input is not empty */
 		return -1;
@@ -269,21 +259,20 @@ int inventory_get_max(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_is_object
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
   
-   Description: 
-    Checks if there is an especific object in the inventory.
+   @brief 
+    Checks if there is an especific object in the inventory.inventory_is_object()
   
-   Input: 
-    Inventory *inv: the inventory where you want to find the object.
-    Id object: the id of the object you want to know if it is in the inventory.
+    
+   @param Inventory *inv: the inventory where you want to find the object.
+   @param Id object: the id of the object you want to know if it is in the inventory.
                  
-   Output: 
+   @return 
     BOOL: TRUE if the object is in the inventory and FALSE in other cases. 
-   -------------------------------------------------------------------- */
+   */
 BOOL inventory_is_object(Inventory *inv, Id object){
 	if(!inv || object == NO_ID){   /* Check that the inputs are not empty */
     	return FALSE;
@@ -293,20 +282,19 @@ BOOL inventory_is_object(Inventory *inv, Id object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_is_empty
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
   
-   Description: 
-    Checks if the inventory is empty or not.
+   @brief 
+    Checks if the inventory is empty or not.inventory_is_empty()
   
-   Input: 
+   @param 
     Inventory *inv: the inventory to check.
                  
-   Output: 
+   @return 
     BOOL: TRUE is the inventory is empty or FALSE if not.
-   -------------------------------------------------------------------- */
+   */
 BOOL inventory_is_empty(Inventory *inv){
   /* Check if the input is empty or the number of objects is 0 */
   if(!inv || set_is_empty(bag(inv)) == TRUE){
@@ -318,20 +306,19 @@ BOOL inventory_is_empty(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_is_full
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
   
-   Description: 
-    Checks if the inventory is full or not.
+   @brief 
+    Checks if the inventory is full or not.inventory_is_full()
   
-   Input: 
+   @param 
     Inventory *inv: the inventory to check.
                  
-   Output: 
+   @return 
     BOOL: TRUE is the inventory is full or FALSE if not.
-   -------------------------------------------------------------------- */
+   */
 BOOL inventory_is_full(Inventory *inv){
   /* Check if the input is empty or the number of objects is lower 
   than the maximum number of objects that can contain the inv */
@@ -344,19 +331,18 @@ BOOL inventory_is_full(Inventory *inv){
 
 
 
-/* --------------------------------------------------------------------
-   Function: inventory_print
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 04-11-2016 
+   @author Alejandro Sanchez
 
-   Description: 
-	  Prints the information of the inventory on the screen.
+   @brief 
+	  Prints the information of the inventory on the screen.inventory_print()
 
-   Input: 
+   @param 
 	  Inventory *inv: the inventory you want to print.
-   Output: 
+   @return 
 	  STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS inventory_print(Inventory *inv){
   if(!inv){      /* Check that the input is not empty */
     return ERROR;
