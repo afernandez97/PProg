@@ -18,47 +18,47 @@
 #include "player_test.h"
 
 int main(int argc, char **argv){
-  int test = 0, todas = 1;
+  int test = 0, all = 1;
 
   if(argc < 2){
-  	printf("Pasando todas las pruebas al modulo Player:\n");
+  	printf("Testing all:\n");
   } else{
     	test = atoi(argv[1]);
-      todas = 0;
-      printf("Pasando prueba %d:\t", test);
+      all = 0;
+      printf("Testing %d:\t", test);
       if(test < 1 || test > MAX_TEST){
-  			printf("Error prueba no reconocida");
+  			printf("Unknown test\t");
         exit(EXIT_SUCCESS);
       }
     }
 
-  if (todas || test == 1)  test1_player_destroy();
-  if (todas || test == 2)  test1_player_get_id();
-  if (todas || test == 3)  test1_player_set_name();
-  if (todas || test == 4)  test1_player_get_name();
-  if (todas || test == 5)  test1_player_set_location();
-  if (todas || test == 6)  test1_player_get_location();
-  if (todas || test == 7)  test1_player_add_object();
-  if (todas || test == 8)  test1_player_del_object();
-  if (todas || test == 9)  test1_player_has_object();
-  if (todas || test == 10) test1_player_print();
-  if (todas || test == 11) test1_player_create();
-  if (todas || test == 12) test2_player_destroy();
-  if (todas || test == 13) test2_player_get_id();
-  if (todas || test == 14) test2_player_set_name();
-  if (todas || test == 15) test2_player_get_name();
-  if (todas || test == 16) test2_player_set_location();
-  if (todas || test == 17) test3_player_set_location();
-  if (todas || test == 18) test2_player_get_location();
-  if (todas || test == 19) test2_player_add_object();
-  if (todas || test == 20) test3_player_add_object();
-  if (todas || test == 21) test2_player_del_object();
-  if (todas || test == 22) test3_player_del_object();
-  if (todas || test == 23) test4_player_del_object();
-  if (todas || test == 24) test4_player_add_object();
-  if (todas || test == 25) test2_player_print();
-  if (todas || test == 26) test2_player_has_object();
-  if (todas || test == 27) test3_player_has_object();
+  if (all || test == 1)  test1_player_destroy();
+  if (all || test == 2)  test1_player_get_id();
+  if (all || test == 3)  test1_player_set_name();
+  if (all || test == 4)  test1_player_get_name();
+  if (all || test == 5)  test1_player_set_location();
+  if (all || test == 6)  test1_player_get_location();
+  if (all || test == 7)  test1_player_add_object();
+  if (all || test == 8)  test1_player_del_object();
+  if (all || test == 9)  test1_player_has_object();
+  if (all || test == 10) test1_player_print();
+  if (all || test == 11) test1_player_create();
+  if (all || test == 12) test2_player_destroy();
+  if (all || test == 13) test2_player_get_id();
+  if (all || test == 14) test2_player_set_name();
+  if (all || test == 15) test2_player_get_name();
+  if (all || test == 16) test2_player_set_location();
+  if (all || test == 17) test3_player_set_location();
+  if (all || test == 18) test2_player_get_location();
+  if (all || test == 19) test2_player_add_object();
+  if (all || test == 20) test3_player_add_object();
+  if (all || test == 21) test2_player_del_object();
+  if (all || test == 22) test3_player_del_object();
+  if (all || test == 23) test4_player_del_object();
+  if (all || test == 24) test4_player_add_object();
+  if (all || test == 25) test2_player_print();
+  if (all || test == 26) test2_player_has_object();
+  if (all || test == 27) test3_player_has_object();
 
   exit(EXIT_SUCCESS);
 }
@@ -121,7 +121,7 @@ void test1_player_get_id(){
    -------------------------------------------------------------------- */
 void test1_player_set_name(){
 	Player *player = NULL;
-  char name[10] = "Adri";
+  char name[WORD_SIZE] = "Adri";
   FUNCTION_IS_CORRECT(player_set_name(player, name) == ERROR);
   return;
 
@@ -360,7 +360,7 @@ void test2_player_get_id(){
    -------------------------------------------------------------------- */
 void test2_player_set_name(){
 	Player *player = NULL;
-  char name[10] = "Adri";
+  char name[WORD_SIZE] = "Adri";
   Id idplayer = 3;
   player = player_create(idplayer);
   FUNCTION_IS_CORRECT(player_set_name(player, name) == OK);
@@ -384,7 +384,7 @@ void test2_player_set_name(){
    -------------------------------------------------------------------- */
 void test2_player_get_name(){
 	Player *player = NULL;
-  char name[10] = "Adri";
+  char name[WORD_SIZE] = "Adri";
   Id idplayer = 3;
   player = player_create(idplayer);
   player_set_name(player, name);

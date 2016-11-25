@@ -20,7 +20,7 @@
 #include "set.h"    
 /* Constant values description */
 
-#define MAX_TEST 27
+#define MAX_TEST_INVENTORY 25
 
 #define FUNCTION_IS_CORRECT(x)\
           if(x){\
