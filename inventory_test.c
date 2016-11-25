@@ -10,7 +10,9 @@ Revision history:
 	Nov. 4, 2016: Version 1.0 (initial release)
 =================================================================== */
 
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "inventory_test.h"
 
 int main(int argc, char **argv) {
@@ -286,7 +288,7 @@ void test1_inventory_print(){
 void test1_inventory_create(){
 	Inventory *inventory = NULL;
 	inventory = inventory_create();
-	FUNCTION_IS_CORRECT(inv != NULL);
+	FUNCTION_IS_CORRECT(inventory != NULL);
 	inventory_destroy (inventory);
 	return;
 }

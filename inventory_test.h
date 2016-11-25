@@ -11,12 +11,11 @@
 		nov. 11, 2011  Version 2.0
    =================================================================== */
 
-#ifndef INVENTORY_H
-#define INVENTORY_H
+#ifndef INVENTORY_TEST_H
+#define INVENTORY_TEST_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "inventory.h"
 #include "set.h"    
 /* Constant values description */
@@ -152,7 +151,7 @@ void test1_inventory_get_max();
                  
    Output: 
    -------------------------------------------------------------------- */
-void tests1_inventory_is_object();
+void test1_inventory_is_object();
 
 /* --------------------------------------------------------------------
    Function: test1_inventory_is_empty
@@ -243,7 +242,6 @@ void test2_inventory_destroy();
    Output: 
     
    -------------------------------------------------------------------- */
-
 void test2_inventory_add_object();
 
 /* --------------------------------------------------------------------
@@ -259,7 +257,6 @@ void test2_inventory_add_object();
    Output: 
     
    -------------------------------------------------------------------- */
-
 void test3_inventory_add_object();
 
 
@@ -276,7 +273,6 @@ void test3_inventory_add_object();
    Output: 
     
    -------------------------------------------------------------------- */
-
 void test2_inventory_del_object();
 
 /* --------------------------------------------------------------------
@@ -293,7 +289,6 @@ void test2_inventory_del_object();
    Output: 
     
    -------------------------------------------------------------------- */
-
 void test3_inventory_del_object();
 
 /* --------------------------------------------------------------------
@@ -309,7 +304,6 @@ void test3_inventory_del_object();
    Output:
     
 ------------------------------------------------------------------- */
-
 void test2_inventory_set_bag();
 
 /* --------------------------------------------------------------------
@@ -325,7 +319,6 @@ void test2_inventory_set_bag();
    Output:
     
 ------------------------------------------------------------------- */
-
 void test3_inventory_set_bag();
 
 /* --------------------------------------------------------------------
@@ -384,7 +377,7 @@ void test2_inventory_get_max();
                  
    Output: 
    -------------------------------------------------------------------- */
-void tests2_inventory_is_object();
+void test2_inventory_is_object();
 
 /* --------------------------------------------------------------------
    Function: test2_inventory_is_empty

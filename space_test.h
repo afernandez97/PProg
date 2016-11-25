@@ -12,8 +12,8 @@ Revision history:
     Nov. 23, 2016: Version 2.0 (initial release)
 =================================================================== */
 
-#ifndef LINK_TEST_H
-#define LINK_TEST_H
+#ifndef SPACE_TEST_H
+#define SPACE_TEST_H
 
 #include "space.h"
 

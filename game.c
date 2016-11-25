@@ -251,7 +251,7 @@ STATUS game_destroy(Game *game){
   }
   /* Destroy the links*/ 
   for(i=0; i < MAX_LINKS; i++){
-     links_destroy(links(game)[i]);
+     link_destroy(links(game)[i]);
   }
 
   free(game);   /* Eliminate the memory of the game */ 
@@ -1463,7 +1463,7 @@ STATUS callback_ROLL(Game *game){
 STATUS callback_INSPECT(Game *game, char *arg){
   Space *space = NULL;
   Id id_space = NO_ID;
-  int flag, aux;
+  int flag, aux, i;
   char *description = NULL;
 	/* Check that the inputs are not empty */
   if (!game || !arg){
@@ -1478,7 +1478,7 @@ STATUS callback_INSPECT(Game *game, char *arg){
     fprintf(stdout,"%s", description);
     return OK;
   } else {	/* object */
-    	for(i=0, flag=0;i < MAX_OBJECTS+1; i++){
+    	for(i=0, flag=0;i < MAX_OBJECTS; i++){
       	if(strcmp(object_get_name(objects(game)[i]), arg )==0){
         	aux = i;
         	flag = 1;
