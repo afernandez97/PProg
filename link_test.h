@@ -14,6 +14,8 @@ implemented in link.c.
 
 #include "link.h"
 
+#define MAX_TEST_LINK 22
+
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
         fprintf(stdout,"%s %d %s OK\n", __FILE__, __LINE__, __FUNCTION__);\

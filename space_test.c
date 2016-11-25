@@ -14,8 +14,6 @@ functions implemented in space.c.
 #include <string.h>
 #include "space_test.h" 
 
-#define MAX_TEST_SPACE 56
-
 int main(int argc, char **argv){
 
 	int all, test;
@@ -28,68 +26,68 @@ int main(int argc, char **argv){
 		test = atoi(argv[1]);
 		all = 0;
 		printf("Testing %d:\t", test);
-		if (test < 1 || test > MAX_TEST_SPACEK) {
+		if (test < 1 || test > MAX_TEST_SPACE) {
 			printf("Unknown test\t");
 			return 1; 
 		}
 	}
 
-	if (all || test == 1) space_create_test1();
-	if (all || test == 2) space_create_test2();
-	if (all || test == 3) space_destroy_test1();
-	if (all || test == 4) space_destroy_test2();
-	if (all || test == 5) space_get_id_test1();
-	if (all || test == 6) space_get_id_test2();
-	if (all || test == 7) space_set_name_test1();
-	if (all || test == 8) space_set_name_test2();
-	if (all || test == 9) space_set_name_test3();
-	if (all || test == 10) space_get_name_test1();
-	if (all || test == 11) space_get_name_test2();
-	if (all || test == 12) space_set_north_test1();
-	if (all || test == 13) space_set_north_test2();
-	if (all || test == 14) space_set_north_test3();
-	if (all || test == 15) space_get_north_test1();
-	if (all || test == 16) space_get_north_test2();
-	if (all || test == 17) space_set_south_test1();
-	if (all || test == 18) space_set_south_test2();
-	if (all || test == 19) space_set_south_test3();
-	if (all || test == 20) space_get_south_test1();
-	if (all || test == 21) space_get_south_test2();
-	if (all || test == 22) space_set_east_test1();
-	if (all || test == 23) space_set_east_test2();
-	if (all || test == 24) space_set_east_test3();
-	if (all || test == 25) space_get_east_test1();
-	if (all || test == 26) space_get_east_test2();
-	if (all || test == 27) space_set_west_test1();
-	if (all || test == 28) space_set_west_test2();
-	if (all || test == 29) space_set_west_test3();
-	if (all || test == 30) space_get_west_test1();
-	if (all || test == 31) space_get_west_test2();
-	if (all || test == 32) space_add_object_test1();
-	if (all || test == 33) space_add_object_test2();
-	if (all || test == 34) space_add_object_test3();
-	if (all || test == 35) space_del_object_test1();
-	if (all || test == 36) space_del_object_test2();
-	if (all || test == 37) space_del_object_test3();
-	if (all || test == 38) space_get_object_test1();
-	if (all || test == 39) space_get_object_test2();
-	if (all || test == 40) space_is_object_test1();
-	if (all || test == 41) space_is_object_test2();
-	if (all || test == 42) space_is_object_test3();
-	if (all || test == 43) space_set_desc_test1();
-	if (all || test == 44) space_set_desc_test2();
-	if (all || test == 45) space_set_desc_test3();
-	if (all || test == 46) space_get_desc_test1();
-	if (all || test == 47) space_get_desc_test2();
-	if (all || test == 48) space_set_gdesc_test1();
-	if (all || test == 49) space_set_gdesc_test2();
-	if (all || test == 50) space_set_gdesc_test3();
-	if (all || test == 51) space_get_gdesc_test1();
-	if (all || test == 52) space_get_gdesc_test2();
-	if (all || test == 53) space_print_test1();
-	if (all || test == 54) space_print_test2();
-	if (all || test == 55) space_print_gdesc_test1();
-	if (all || test == 56) space_print_gdesc_test2();
+	if (all || test == 1) test1_space_create();
+	if (all || test == 2) test2_space_create();
+	if (all || test == 3) test1_space_destroy();
+	if (all || test == 4) test2_space_destroy();
+	if (all || test == 5) test1_space_get_id();
+	if (all || test == 6) test2_space_get_id();
+	if (all || test == 7) test1_space_set_name();
+	if (all || test == 8) test2_space_set_name();
+	if (all || test == 9) test3_space_set_name();
+	if (all || test == 10) test1_space_get_name();
+	if (all || test == 11) test2_space_get_name();
+	if (all || test == 12) test1_space_set_north();
+	if (all || test == 13) test2_space_set_north();
+	if (all || test == 14) test3_space_set_north();
+	if (all || test == 15) test1_space_get_north();
+	if (all || test == 16) test2_space_get_north();
+	if (all || test == 17) test1_space_set_south();
+	if (all || test == 18) test2_space_set_south();
+	if (all || test == 19) test3_space_set_south();
+	if (all || test == 20) test1_space_get_south();
+	if (all || test == 21) test2_space_get_south();
+	if (all || test == 22) test1_space_set_east();
+	if (all || test == 23) test2_space_set_east();
+	if (all || test == 24) test3_space_set_east();
+	if (all || test == 25) test1_space_get_east();
+	if (all || test == 26) test2_space_get_east();
+	if (all || test == 27) test1_space_set_west();
+	if (all || test == 28) test2_space_set_west();
+	if (all || test == 29) test3_space_set_west();
+	if (all || test == 30) test1_space_get_west();
+	if (all || test == 31) test2_space_get_west();
+	if (all || test == 32) test1_space_add_object();
+	if (all || test == 33) test2_space_add_object();
+	if (all || test == 34) test3_space_add_object();
+	if (all || test == 35) test1_space_del_object();
+	if (all || test == 36) test2_space_del_object();
+	if (all || test == 37) test3_space_del_object();
+	if (all || test == 38) test1_space_get_object();
+	if (all || test == 39) test2_space_get_object();
+	if (all || test == 40) test1_space_is_object();
+	if (all || test == 41) test2_space_is_object();
+	if (all || test == 42) test3_space_is_object();
+	if (all || test == 43) test1_space_set_desc();
+	if (all || test == 44) test2_space_set_desc();
+	if (all || test == 45) test3_space_set_desc();
+	if (all || test == 46) test1_space_get_desc();
+	if (all || test == 47) test2_space_get_desc();
+	if (all || test == 48) test1_space_set_gdesc();
+	if (all || test == 49) test2_space_set_gdesc();
+	if (all || test == 50) test3_space_set_gdesc();
+	if (all || test == 51) test1_space_get_gdesc();
+	if (all || test == 52) test2_space_get_gdesc();
+	if (all || test == 53) test1_space_print();
+	if (all || test == 54) test2_space_print();
+	if (all || test == 55) test1_space_print_gdesc();
+	if (all || test == 56) test2_space_print_gdesc();
 
 	return 0;
 }
@@ -129,7 +127,7 @@ is not valid.
 */
 void test2_space_create(){
 	Space *space = NULL;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(noId);
 	FUNCTION_IS_CORRECT(space == NULL);
@@ -228,7 +226,7 @@ Tests if you can successfully set the name of a space.
 void test1_space_set_name(){
 	Space *space = NULL;
 	Id id = 1;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_name(space, name) == OK);
@@ -273,7 +271,7 @@ is unassigned.
 void test3_space_set_name(){
 	Space *space = NULL;
 	Id id = 1;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	FUNCTION_IS_CORRECT(space_set_name(space, name) == ERROR);
 	return;
@@ -293,7 +291,7 @@ Tests if you can successfully get the name of a space.
 void test1_space_get_name(){
 	Space *space = NULL;
 	Id id = 1;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	space = space_create(id);
 	space_set_name(space, name);
@@ -315,7 +313,7 @@ Tests if you can get the name of an uninitialised space.
 */
 void test2_space_get_name(){
 	Space *space = NULL;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	space_set_name(space, name);
 	FUNCTION_IS_CORRECT(space_get_name(space) == NULL);
@@ -357,7 +355,7 @@ Tests if you can set the north of an uninitialised space.
 void test2_space_set_north(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_north(space, noId) == ERROR);
@@ -462,7 +460,7 @@ Tests if you can set the south of an uninitialised space.
 void test2_space_set_south(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_south(space, noId) == ERROR);
@@ -567,7 +565,7 @@ Tests if you can set the east of an uninitialised space.
 void test2_space_set_east(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_east(space, noId) == ERROR);
@@ -672,7 +670,7 @@ Tests if you can set the west of an uninitialised space.
 void test2_space_set_west(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_west(space, noId) == ERROR);
@@ -778,7 +776,7 @@ valid.
 void test2_space_add_object(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_add_object(space, noId) == ERROR);
@@ -842,7 +840,7 @@ valid.
 void test2_space_del_object(){
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	space_add_object(space, id);
@@ -950,7 +948,7 @@ valid.
 void test2_space_is_object();{
 	Space *space = NULL;
 	Id id = 1;
-	Id noId = -1;
+	Id noId = NO_ID;
 
 	space = space_create(id);
 	space_add_object(space, id);
@@ -993,7 +991,7 @@ Tests if you can successfully set the desc of a space.
 void test1_space_set_desc(){
 	Space* space = NULL;
 	Id id = 1;
-	char desc[MAX_CHAR] = "desc";
+	char desc[WORD_SIZE] = "desc";
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == OK);
@@ -1038,7 +1036,7 @@ Tests if you can set the desc of an uninitialised space.
 void test3_space_set_desc(char *desc){
 	Space *space = NULL;
 	Id id = 1;
-	char desc[MAX_CHAR] = "desc";
+	char desc[WORD_SIZE] = "desc";
 
 	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == ERROR);
 	return;
@@ -1058,7 +1056,7 @@ Tests if you can successfully get the desc of a space.
 void test1_space_get_desc(){
 	Space *space = NULL;
 	Id id = 1;
-	char desc[MAX_CHAR] = "desc";
+	char desc[WORD_SIZE] = "desc";
 
 	space = space_create(id);
 	space_set_desc(space, desc);
@@ -1080,7 +1078,7 @@ Tests if you can get the desc field of an uninitialised space.
 */
 void test2_space_get_desc(){
 	Space *space = NULL;
-	char desc[MAX_CHAR] = "desc";
+	char desc[WORD_SIZE] = "desc";
 
 	space_set_desc(space, desc);
 	FUNCTION_IS_CORRECT(space_get_desc(space) == NULL);
@@ -1101,7 +1099,7 @@ Tests if you can successfully set the gdesc of a space.
 void test1_space_set_gdesc(){
 	Space* space = NULL;
 	Id id = 1;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	space = space_create(id);
 	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == OK);
@@ -1146,7 +1144,7 @@ Tests if you can set the gdesc of an uninitialised space.
 void test3_space_set_gdesc(char *gdesc){
 	Space *space = NULL;
 	Id id = 1;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == ERROR);
 	return;
@@ -1166,7 +1164,7 @@ Tests if you can successfully get the gdesc of a space.
 void test1_space_get_gdesc(){
 	Space *space = NULL;
 	Id id = 1;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
@@ -1188,7 +1186,7 @@ Tests if you can get the gdesc field of an uninitialised space.
 */
 void test2_space_get_gdesc(){
 	Space *space = NULL;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	space_set_desc(space, gdesc);
 	FUNCTION_IS_CORRECT(space_get_gdesc(space) == NULL);
@@ -1209,7 +1207,7 @@ Tests if you can successfully print the gdesc of a space.
 void test1_space_print_gdesc(Space *space){
 	Space *space;
 	Id id = 1;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
@@ -1231,10 +1229,10 @@ Tests if you can print the gdesc field of an uninitialised space.
 */
 void test2_space_print_gdesc(){
 	Space *space;
-	char gdesc[MAX_CHAR] = "gdesc";
+	char gdesc[WORD_SIZE] = "gdesc";
 
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gedesc(space) == ERROR);
+	FUNCTION_IS_CORRECT(space_print_gdesc(space) == ERROR);
 	return;
 }
 

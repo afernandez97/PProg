@@ -9,10 +9,14 @@ implemented in space.c.
 @date Nov. 23, 2016
 */
 
-#ifndef space_TEST_H
-#define space_TEST_H
+#ifndef SPACE_TEST_H
+#define SPACE_TEST_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "space.h"
+
+#define MAX_TEST_SPACE 56
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\

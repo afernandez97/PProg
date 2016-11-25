@@ -14,8 +14,6 @@ functions implemented in link.c.
 #include <string.h>
 #include "link_test.h" 
 
-#define MAX_TEST_LINK 22
-
 int main(int argc, char** argv){
 
 	int all, test;
@@ -209,7 +207,7 @@ void test1_link_set_name(){
 
 	Link* link;
 	Id id = 1;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	link = link_create(id);
 	FUNCTION_IS_CORRECT(link_set_name(link, name) != ERROR);
@@ -232,7 +230,7 @@ Tests if you can set the name of an uninitialised Link.
 void test2_link_set_name(){
 
 	Link* link;
-	char name[MAX_CHAR] = "name";
+	char name[WORD_SIZE] = "name";
 
 	FUNCTION_IS_CORRECT(link_set_name(link, name) == ERROR);
 
