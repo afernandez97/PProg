@@ -276,9 +276,10 @@ Id space_get_west(Space *space);
    
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS space_add_object(Space *space, Id object);
 
-   */
+   
 
 /**
  
