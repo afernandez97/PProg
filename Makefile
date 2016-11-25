@@ -19,7 +19,7 @@ inventory_test: inventory_test.o inventory.o set.o
 set_test: set_test.o set.o
 	gcc -o $@ $^ 
 
-space_test: space_test.o space.o
+space_test: space_test.o space.o set.o
 	gcc -o $@ $^ 
 
 link_test: link_test.o link.o
