@@ -1,12 +1,15 @@
 /**
+@file space_test.c
+@version 1.0
+@date 23-11-2016
+@author Adrián Fernández
+
 @brief
 Contains the implementation of the functions used to test the
 functions implemented in space.c.
 
-@file space_test.c
-@author Adrián Fernández
-@version 1.0
-@date Nov. 23, 2016
+@version
+	Nov. 23, 2016  Version 1.0 (initial release)
 */
 
 #include <stdio.h>

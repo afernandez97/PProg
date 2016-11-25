@@ -1,12 +1,15 @@
 /**
+@file space_test.h
+@version 1.0
+@date 23-11-2016
+@author Adrián Fernández
+
 @brief
 Contains the headers of the functions used to test the functions
 implemented in space.c.
 
-@file space_test.h
-@author Adrián Fernández
-@version 1.0
-@date Nov. 23, 2016
+@version
+	Nov. 23, 2016  Version 1.0 (initial release)
 */
 
 #ifndef SPACE_TEST_H
