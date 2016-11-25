@@ -1,23 +1,20 @@
-/* ===================================================================
-File: link_test.c
-Version: 1.0
-Date: Nov. 12, 2016
-Authors: Adrián Fernández
+/**
+@brief
+Contains the implementation of the functions used to test the
+functions implemented in link.c.
 
-Description:
-	Contains the implementation of the functions used to test the
-	functions implemented in link.c.
-
-Revision history:
-	Nov. 12, 2016: Version 1.0 (initial release)
-=================================================================== */
+@file link_test.c
+@author Adrián Fernández
+@version 1.0
+@date Nov. 12, 2016
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "link_test.h" 
 
-#define MAX_TEST_LINK 24
+#define MAX_TEST_LINK 22
 
 int main(int argc, char** argv){
 
@@ -39,53 +36,47 @@ int main(int argc, char** argv){
 
 	if (all || test == 1) test1_link_create();
 	if (all || test == 2) test2_link_create();
-	if (all || test == 3) test3_link_create();
-	if (all || test == 4) test4_link_create();
-	if (all || test == 5) test1_link_destroy();
-	if (all || test == 6) test2_link_destroy();
-	if (all || test == 7) test1_link_get_id();
-	if (all || test == 8) test2_link_get_id();
-	if (all || test == 9) test1_link_set_name();
-	if (all || test == 10) test2_link_set_name();
-	if (all || test == 11) test3_link_set_name();
-	if (all || test == 12) test1_link_get_name();
-	if (all || test == 13) test2_link_get_name();
-	if (all || test == 14) test1_link_get_space1();
-	if (all || test == 15) test2_link_get_space1();
-	if (all || test == 16) test1_link_get_space2();
-	if (all || test == 17) test2_link_get_space2();
-	if (all || test == 18) test1_link_set_state();
-	if (all || test == 19) test2_link_set_state();
-	if (all || test == 20) test3_link_set_state();
-	if (all || test == 21) test1_link_get_state();
-	if (all || test == 22) test2_link_get_state();
-	if (all || test == 23) test1_link_print();
-	if (all || test == 24) test2_link_print();
+	if (all || test == 3) test1_link_destroy();
+	if (all || test == 4) test2_link_destroy();
+	if (all || test == 5) test1_link_get_id();
+	if (all || test == 6) test2_link_get_id();
+	if (all || test == 7) test1_link_set_name();
+	if (all || test == 8) test2_link_set_name();
+	if (all || test == 9) test3_link_set_name();
+	if (all || test == 10) test1_link_get_name();
+	if (all || test == 11) test2_link_get_name();
+	if (all || test == 12) test1_link_get_space1();
+	if (all || test == 13) test2_link_get_space1();
+	if (all || test == 14) test1_link_get_space2();
+	if (all || test == 15) test2_link_get_space2();
+	if (all || test == 16) test1_link_set_state();
+	if (all || test == 17) test2_link_set_state();
+	if (all || test == 18) test3_link_set_state();
+	if (all || test == 19) test1_link_get_state();
+	if (all || test == 20) test2_link_get_state();
+	if (all || test == 21) test1_link_print();
+	if (all || test == 22) test2_link_print();
 
 	return 0;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_create
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully create a Link.
+@brief test1_link_create
 
-Input:
+Tests if you can successfully create a Link.
 
-Output:
-	
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_create(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link != NULL);
 	link_destroy(link);
 
@@ -93,19 +84,18 @@ void test1_link_create(){
 }
 
 
-/* --------------------------------------------------------------------
-Function: test2_link_create
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can create a Link without specifying it's id.
+@brief test2_link_create
 
-Input:
+Tests if you can create a Link if the Id
+is not valid.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_create(){
 
 	Link* link;
@@ -113,111 +103,45 @@ void test2_link_create(){
 	Id noId = NO_ID;
 
 	link = link_create(noId);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link == NULL);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test3_link_create
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can create a Link without specifying it's first
-    Space id.
+@brief test1_link_destroy
 
-Input:
+Tests if you can successfully destroy a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
-void test3_link_create(){
-
-	Link* link;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	link = link_create(id);
-	link_set_space1(link, noId);
-	link_set_space2(link, id);
-	FUNCTION_IS_CORRECT(link == NULL);
-	link_destroy(link);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test4_link_create
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can create a Link without specifying it's second
-    Space id.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
-void test4_link_create(){
-
-	Link* link;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, noId);
-	FUNCTION_IS_CORRECT(link == NULL);
-	link_destroy(link);
-
-	return;
-}
-
-/* --------------------------------------------------------------------
-Function: test1_link_destroy
-Date: Nov. 12, 2016
-Author: Adrián Fernández
-
-Description: 
-    Tests if you can successfully destroy a Link.
-
-Input:
-
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_destroy(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_destroy(link) != ERROR);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_destroy
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can destroy an uninitialised Link.
+@brief test2_link_destroy
 
-Input:
+Tests if you can destroy an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_destroy(){
 
 	Link* link;
@@ -227,46 +151,40 @@ void test2_link_destroy(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_get_id
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully get the id of a Link.
+@brief test1_link_get_id
 
-Input:
+Tests if you can successfully get the id of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_get_id(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_get_id(link) != NO_ID);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_get_id
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can get the id of an uninitialised Link.
+@brief test2_link_get_id
 
-Input:
+Tests if you can get the id of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_get_id(){
 
 	Link* link;
@@ -276,19 +194,17 @@ void test2_link_get_id(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_set_name
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully set the name of a Link.
+@brief test1_link_set_name
 
-Input:
+Tests if you can successfully set the name of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_set_name(){
 
 	Link* link;
@@ -296,27 +212,23 @@ void test1_link_set_name(){
 	char name[MAX_CHAR] = "name";
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_set_name(link, name) != ERROR);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_set_name
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the name of an uninitialised Link.
+@brief test2_link_set_name
 
-Input:
+Tests if you can set the name of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_set_name(){
 
 	Link* link;
@@ -327,20 +239,18 @@ void test2_link_set_name(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test3_link_set_name
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the name of a Link if the string inserted
-    is unassigned.
+@brief test3_link_set_name
 
-Input:
+Tests if you can set the name of a Link if the string inserted
+is unassigned.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test3_link_set_name(){
 
 	Link* link;
@@ -348,54 +258,46 @@ void test3_link_set_name(){
 	char* noName = NULL;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_set_name(link, noName) == ERROR);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_get_name
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully get the name of a Link.
+@brief test1_link_get_name
 
-Input:
+Tests if you can successfully get the name of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_get_name(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_get_name(link) != NULL);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_get_name
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can get the name of an uninitialised Link.
+@brief test2_link_get_name
 
-Input:
+Tests if you can get the name of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_get_name(){
 
 	Link* link;
@@ -405,19 +307,17 @@ void test2_link_get_name(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully set the space1 of a Link.
+@brief test1_link_set_space1
 
-Input:
+Tests if you can successfully set the space1 of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_set_space1(){
 
 	Link* link;
@@ -430,19 +330,17 @@ void test1_link_set_space1(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the space1 of an uninitialised Link.
+@brief test2_link_set_space1
 
-Input:
+Tests if you can set the space1 of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_set_space1(){
 
 	Link* link;
@@ -453,20 +351,18 @@ void test2_link_set_space1(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test3_link_set_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the space1 of a Link if the string Id is 
-    not valid.
+@brief test3_link_set_space1
 
-Input:
+Tests if you can set the space1 of a Link if the Id is 
+not valid.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test3_link_set_space1(){
 
 	Link* link;
@@ -480,19 +376,17 @@ void test3_link_set_space1(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_get_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully get the space1 of a Link.
+@brief test1_link_get_space1
 
-Input:
+Tests if you can successfully get the space1 of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_get_space1(){
 
 	Link* link;
@@ -500,7 +394,6 @@ void test1_link_get_space1(){
 
 	link = link_create(id);
 	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_get_space1(link) != NO_ID);
 	link_destroy(link);
 
@@ -508,19 +401,17 @@ void test1_link_get_space1(){
 
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_get_space1
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can get the space1 field of an uninitialised Link.
+@brief test2_link_get_space1
 
-Input:
+Tests if you can get the space1 field of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_get_space1(){
 
 	Link* link;
@@ -530,19 +421,17 @@ void test2_link_get_space1(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully set the space2 of a Link.
+@brief test1_link_set_space2
 
-Input:
+Tests if you can successfully set the space2 of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_set_space2(){
 
 	Link* link;
@@ -555,19 +444,17 @@ void test1_link_set_space2(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the space2 of an uninitialised Link.
+@brief test2_link_set_space2
 
-Input:
+Tests if you can set the space2 of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_set_space2(){
 
 	Link* link;
@@ -578,20 +465,18 @@ void test2_link_set_space2(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test3_link_set_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the space2 of a Link if the string Id is 
-    not valid.
+@brief test3_link_set_space2
 
-Input:
+Tests if you can set the space2 of a Link if the Id is 
+not valid.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test3_link_set_space2(){
 
 	Link* link;
@@ -605,26 +490,23 @@ void test3_link_set_space2(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_get_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully get the space2 of a Link.
+@brief test1_link_get_space2
 
-Input:
+Tests if you can successfully get the space2 of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_get_space2(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
 	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT (link_get_space2(link) != NO_ID);
 	link_destroy(link);
@@ -632,19 +514,17 @@ void test1_link_get_space2(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_get_space2
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can get the space2 field of an uninitialised Link.
+@brief test2_link_get_space2
 
-Input:
+Tests if you can get the space2 field of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_get_space2(){
 
 	Link* link;
@@ -654,19 +534,17 @@ void test2_link_get_space2(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_set_state
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully set the state of a Link.
+@brief test1_link_set_state
 
-Input:
+Tests if you can successfully set the state of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_set_state(){
 
 	Link* link;
@@ -674,27 +552,23 @@ void test1_link_set_state(){
 	STATE state = OPEN;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_set_state(link, state) != ERROR);
 	link_destroy(link);
 	
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_set_state
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the state of an uninitialised Link.
+@brief test2_link_set_state
 
-Input:
+Tests if you can set the state of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_set_state(){
 
 	Link* link;
@@ -705,20 +579,18 @@ void test2_link_set_state(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test3_link_set_state
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can set the state of a Link if the state inserted
-    is unassigned.
+@brief test3_link_set_state
 
-Input:
+Tests if you can set the state of a Link if the state inserted
+is unassigned.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test3_link_set_state(){
 
 	Link* link;
@@ -726,54 +598,46 @@ void test3_link_set_state(){
 	STATE noState = NO_STATE;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_set_state(link, noState) == ERROR);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_get_state
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully get the state of a Link.
+@brief test1_link_get_state
 
-Input:
+Tests if you can successfully get the state of a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_get_state(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_get_state(link) != NO_STATE);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_get_state
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can get the state of an uninitialised Link.
+@brief test2_link_get_state
 
-Input:
+Tests if you can get the state of an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_get_state(){
 
 	Link* link;
@@ -783,46 +647,40 @@ void test2_link_get_state(){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test1_link_print
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can successfully print a Link.
+@brief test1_link_print
 
-Input:
+Tests if you can successfully print a Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test1_link_print(){
 
 	Link* link;
 	Id id = 1;
 
 	link = link_create(id);
-	link_set_space1(link, id);
-	link_set_space2(link, id);
 	FUNCTION_IS_CORRECT(link_print(link) != ERROR);
 	link_destroy(link);
 
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: test2_link_print
-Date: Nov. 12, 2016
-Author: Adrián Fernández
+/**
+@author Adrián Fernández
+@date: Nov. 12, 2016
 
-Description: 
-    Tests if you can print an uninitialised Link.
+@brief test2_link_print
 
-Input:
+Tests if you can print an uninitialised Link.
 
-Output:
-    
--------------------------------------------------------------------- */
+@param
+@return
+*/
 void test2_link_print(){
 
 	Link* link;

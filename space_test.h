@@ -1,19 +1,16 @@
-/* ===================================================================
-File: space_test.h
-Version: 2.0
-Date: Nov. 12, 2016
-Authors: Adrián Fernández
+/**
+@brief
+Contains the headers of the functions used to test the functions
+implemented in space.c.
 
-Description:
-    Contains the headers of the functions used to test the functions
-    implemented in space.c.
+@file space_test.h
+@author Adrián Fernández
+@version 1.0
+@date Nov. 23, 2016
+*/
 
-Revision history:
-    Nov. 23, 2016: Version 2.0 (initial release)
-=================================================================== */
-
-#ifndef SPACE_TEST_H
-#define SPACE_TEST_H
+#ifndef space_TEST_H
+#define space_TEST_H
 
 #include "space.h"
 
@@ -27,116 +24,743 @@ Revision history:
 
 /*** Public functions description ***/
 
-void space_create_test1();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_create_test2();
+@brief test1_space_create
 
-void space_destroy_test1();
+Tests if you can successfully create a space.
 
-void space_destroy_test2();
+@param
+@return
+*/
+void test1_space_create();
 
-void space_get_id_test1();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_id_test2();
+@brief test2_space_create
 
-void space_set_name_test1();
+Tests if you can create a space if the id
+is not valid.
 
-void space_set_name_test2();
+@param
+@return
+*/
+void test2_space_create();
 
-void space_set_name_test3();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_name_test1();
+@brief test1_space_destroy
 
-void space_get_name_test2();
+Tests if you can successfully destroy a space.
 
-void space_set_north_test1();
+@param
+@return
+*/
+void test1_space_destroy();
 
-void space_set_north_test2();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_set_north_test3();
+@brief test2_space_destroy
 
-void space_get_north_test1();
+Tests if you can destroy an uninitialised space.
 
-void space_get_north_test2();
+@param
+@return
+*/
+void test2_space_destroy();
 
-void space_set_south_test1();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_set_south_test2();
+@brief test1_space_get_id
 
-void space_set_south_test3();
+Tests if you can successfully get the id of a space.
 
-void space_get_south_test1();
+@param
+@return
+*/
+void test1_space_get_id();
 
-void space_get_south_test2();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_set_east_test1();
+@brief test2_space_get_id
 
-void space_set_east_test2();
+Tests if you can get the id of an uninitialised space.
 
-void space_set_east_test3();
+@param
+@return
+*/
+void test2_space_get_id();
 
-void space_get_east_test1();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_east_test2();
+@brief test1_space_set_name
 
-void space_set_west_test1();
+Tests if you can successfully set the name of a space.
 
-void space_set_west_test2();
+@param
+@return
+*/
+void test1_space_set_name();
 
-void space_set_west_test3();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_west_test1();
+@brief test2_space_set_name
 
-void space_get_west_test2();
+Tests if you can set the name of an uninitialised space.
 
-void space_add_object_test1();
+@param
+@return
+*/
+void test2_space_set_name();
 
-void space_add_object_test2();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_add_object_test3();
+@brief test3_space_set_name
 
-void space_del_object_test1();
+Tests if you can set the name of a space if the string inserted
+is unassigned.
 
-void space_del_object_test2();
+@param
+@return
+*/
+void test3_space_set_name();
 
-void space_del_object_test3();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_object_test1();
+@brief test1_space_get_name
 
-void space_get_object_test2();
+Tests if you can successfully get the name of a space.
 
-void space_is_object_test1();
+@param
+@return
+*/
+void test1_space_get_name();
 
-void space_is_object_test2();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_is_object_test3();
+@brief test2_space_get_name
 
-void space_set_desc_test1();
+Tests if you can get the name of an uninitialised space.
 
-void space_set_desc_test2();
+@param
+@return
+*/
+void test2_space_get_name();
 
-void space_set_desc_test3();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_get_desc_test1();
+@brief test1_space_set_north
 
-void space_get_desc_test2();
+Tests if you can successfully set the north of a space.
 
-void space_set_gdesc_test1();
+@param
+@return
+*/
+void test1_space_set_north();
 
-void space_set_gdesc_test2();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_set_gdesc_test3();
+@brief test2_space_set_north
 
-void space_get_gdesc_test1();
+Tests if you can set the north of an uninitialised space.
 
-void space_get_gdesc_test2();
+@param
+@return
+*/
+void test2_space_set_north();
 
-void space_print_test1();
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
 
-void space_print_test2();
+@brief test3_space_set_north
 
-void space_print_gdesc_test1();
+Tests if you can set the north of a space if the id is 
+not valid.
 
-void space_print_gdesc_test2();
+@param
+@return
+*/
+void test3_space_set_north();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_north
+
+Tests if you can successfully get the north of a space.
+
+@param
+@return
+*/
+void test1_space_get_north();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_north
+
+Tests if you can get the north field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_north();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_set_south
+
+Tests if you can successfully set the south of a space.
+
+@param
+@return
+*/
+void test1_space_set_south();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_set_south
+
+Tests if you can set the south of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_south();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_set_south
+
+Tests if you can set the south of a space if the id is 
+not valid.
+
+@param
+@return
+*/
+void test3_space_set_south();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_south
+
+Tests if you can successfully get the south of a space.
+
+@param
+@return
+*/
+void test1_space_get_south();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_south
+
+Tests if you can get the south field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_south();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_set_east
+
+Tests if you can successfully set the east of a space.
+
+@param
+@return
+*/
+void test1_space_set_east();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_set_east
+
+Tests if you can set the east of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_east();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_set_east
+
+Tests if you can set the east of a space if the id is 
+not valid.
+
+@param
+@return
+*/
+void test3_space_set_east();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_east
+
+Tests if you can successfully get the east of a space.
+
+@param
+@return
+*/
+void test1_space_get_east();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_east
+
+Tests if you can get the east field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_east();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_set_west
+
+Tests if you can successfully set the west of a space.
+
+@param
+@return
+*/
+void test1_space_set_west();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_set_west
+
+Tests if you can set the west of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_west();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_set_west
+
+Tests if you can set the west of a space if the id is 
+not valid.
+
+@param
+@return
+*/
+void test3_space_set_west();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_west
+
+Tests if you can successfully get the west of a space.
+
+@param
+@return
+*/
+void test1_space_get_west();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_west
+
+Tests if you can get the west field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_west();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_add_object
+
+Tests if you can successfully add an object to a space.
+
+@param
+@return
+*/
+void test1_space_add_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_add_object
+
+Tests if you can add an object to a space if the id is not
+valid.
+
+@param
+@return
+*/
+void test2_space_add_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_add_object
+
+Tests if you can add an object to an uninitialised space.
+
+@param
+@return
+*/
+void test3_space_add_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_del_object
+
+Tests if you can successfully delete an object from a space.
+
+@param
+@return
+*/
+void test1_space_del_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_del_object
+
+Tests if you can delete an object from a space if the id is not
+valid.
+
+@param
+@return
+*/
+void test2_space_del_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_del_object
+
+Tests if you can delete an object from an uninitialised space.
+
+@param
+@return
+*/
+void test3_space_del_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_object
+
+Tests if you can successfully get the object of a space.
+
+@param
+@return
+*/
+void test1_space_get_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_object
+
+Tests if you can get the object of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_is_object
+
+Tests if you can successfully find an object in a space.
+
+@param
+@return
+*/
+void test1_space_is_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_is_object
+
+Tests if you can find an object in a space if the id is not
+valid.
+
+@param
+@return
+*/
+void test2_space_is_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_is_object
+
+Tests if you can find an object in an uninitialised space.
+
+@param
+@return
+*/
+void test3_space_is_object();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_set_desc
+
+Tests if you can successfully set the desc of a space.
+
+@param
+@return
+*/
+void test1_space_set_desc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_set_desc
+
+Tests if you can set the desc of a space if the string is 
+unassigned.
+
+@param
+@return
+*/
+void test2_space_set_desc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_set_desc
+
+Tests if you can set the desc of an uninitialised space.
+
+@param
+@return
+*/
+void test3_space_set_desc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_desc
+
+Tests if you can successfully get the desc of a space.
+
+@param
+@return
+*/
+void test1_space_get_desc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_desc
+
+Tests if you can get the desc field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_desc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_set_gdesc
+
+Tests if you can successfully set the gdesc of a space.
+
+@param
+@return
+*/
+void test1_space_set_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_set_gdesc
+
+Tests if you can set the gdesc of a space if the string is 
+unassigned.
+
+@param
+@return
+*/
+void test2_space_set_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test3_space_set_gdesc
+
+Tests if you can set the gdesc of an uninitialised space.
+
+@param
+@return
+*/
+void test3_space_set_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_get_gdesc
+
+Tests if you can successfully get the gdesc of a space.
+
+@param
+@return
+*/
+void test1_space_get_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_get_gdesc
+
+Tests if you can get the gdesc field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_print_gdesc
+
+Tests if you can successfully print the gdesc of a space.
+
+@param
+@return
+*/
+void test1_space_print_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_print_gdesc
+
+Tests if you can print the gdesc field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_print_gdesc();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test1_space_print
+
+Tests if you can successfully print a space.
+
+@param
+@return
+*/
+void test1_space_print();
+
+/**
+@author Adrián Fernández
+@date: Nov. 23, 2016
+
+@brief test2_space_print
+
+Tests if you can print an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_print();
 
 #endif
