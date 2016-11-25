@@ -128,6 +128,7 @@ const char * player_get_name(Player *player);
   
    @return 
     Status: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS player_set_location(Player *player, Id location);
 
 
