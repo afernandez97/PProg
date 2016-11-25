@@ -126,7 +126,7 @@ STATUS game_load_spaces(Game *game, char *filename){
       toks = strtok(NULL, "|");
       east = atol(toks);
 			toks = strtok(NULL, "|");
-			if (toks!=NULL){
+			if(toks != NULL){
       	strcpy(desc, toks);
 			}
       toks = strtok(NULL, "\n");
@@ -149,13 +149,11 @@ STATUS game_load_spaces(Game *game, char *filename){
         space_set_west(space, west);
 
         /* Set the graphic description to the space */ 
-        if(gdesc != NULL){
-				  space_set_gdesc(space, gdesc);
-        }
-				   /* Set the description to the space */ 
-        if(desc != NULL){
-				  space_set_desc(space, desc);
-        }
+				space_set_gdesc(space, gdesc);
+        
+				/* Set the description to the space */ 
+				space_set_desc(space, desc);
+        
         /* Add the space to the game */
         game_add_space(game, space);  
       }
@@ -260,7 +258,7 @@ STATUS game_load_objects(Game *game, char *filename){
       toks = strtok(NULL, "|");
       location = atol(toks);
 			toks = strtok(NULL, "|");
-			if (toks !=NULL){
+			if(toks !=NULL){
       	strcpy(desc, toks);
 			}
 #ifdef DEBUG 
@@ -275,9 +273,8 @@ STATUS game_load_objects(Game *game, char *filename){
 				object_set_location(object, location);
 				
 				/* Set the description to the object */ 
-        if(desc != NULL){
-				  object_set_desc(object, desc);
-        }				
+				object_set_desc(object, desc);
+        		
 
         /* Add the object to the game */
         game_add_object(game, object);  

@@ -33,13 +33,13 @@
 
 
 int main(int argc, char *argv[]){						
-  Game * game;
+  Game * game = NULL;
   Command *command = NULL;
   Id player = idplayer, die = id_die;
   STATUS status;
   FILE *f = NULL;
   T_Command cmd;
-  int flag= 0,arg =2;
+  int flag = 0, arg = 2;
   
   /* Check if user enters the name of the file that contains the spaces */	
   if(argc < 2){	
@@ -50,30 +50,31 @@ int main(int argc, char *argv[]){
 
   game = game_init_from_file(argv[1], player, die);
   /* Check if game initializes correctly */
-  if(game== NULL){	
+  if(game == NULL){	
 	  fprintf(stderr, "Error while initializing game.\n"); 
 	  return 1;
 	}
    
   /* Check if user enters the command to register the results of the execution */
-  if(!strcmp(not,argv[2]){
-   flag = 1;
-   arg ++;
+  if(!strcmp("-nv", argv[2])){
+    flag = 1;
+    arg ++;
   }
-    if(strcmp(argv[arg], "-l") == 0){
-      f = fopen(argv[arg+1], "w");
-      if(!f){   /* Check if the file has been opened correctly */
-        game_destroy(game);
-        return 1;
-      }
+
+  if(strcmp(argv[arg], "-l") == 0){
+    f = fopen(argv[arg+1], "w");
+    if(!f){   /* Check if the file has been opened correctly */
+      game_destroy(game);
+      return 1;
     }
   }
+  
  
   /* Game loop */
   while((command_get_cmd(command) != QUIT) && !game_is_over(game)){	
     command_destroy(command); /* Destroy the previous command */
-    if(flag == 10){ 
-    game_print_screen(game);
+    if(flag == 0){ 
+      game_print_screen(game);
     } 
     command = get_user_input(); 
     status = game_update(game, command); 
@@ -140,4 +141,6 @@ int main(int argc, char *argv[]){
 	game_destroy(game);	/* The game finishes */
   	
   return 0;
+
 }
+
