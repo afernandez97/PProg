@@ -1,4 +1,4 @@
-/**===================================================================
+/**
    @file space.c
    @version 4.1
    @date 18-11-2016 
@@ -29,7 +29,7 @@
      @version  Nov. 18, 2016	 Version 4.1
 			Added field "desc" to the structure "Space".
 			Created "space_set_desc" and "space_get_desc".
-   =================================================================== */
+  */
  
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,7 +48,7 @@
 #define gdesc(X) (X)->gdesc
 
  
-/*** The Space structure stores information of the different spaces that there are in the game ***/
+/** @brief The Space structure stores information of the different spaces that there are in the game */
 struct _Space{
   Id id; /*!< Identifier of the space */
   char name[WORD_SIZE + 1]; /* Name of the space */
@@ -63,17 +63,17 @@ struct _Space{
  
  
 /*** Public functions definition ***/
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
-   brief Creates a space. space_create()
+   @brief Creates a space. space_create()
  
    @param 
     Id id: the id of the space that is created.
    @return 
     Space *: the space created or NULL on error.
-   --------------------------------------------------------------------*/
+  */
 Space * space_create(Id id){
   Space *space = NULL;
  
@@ -110,7 +110,7 @@ Space * space_create(Id id){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 29-10-2016 
    @author Guillermo Rodriguez
  
@@ -121,7 +121,7 @@ Space * space_create(Id id){
     Space *space: the space to destroy.
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_destroy(Space *space){
   if(!space){         /* Check that the input is not empty */
     return ERROR;
@@ -138,7 +138,7 @@ STATUS space_destroy(Space *space){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 29-10-2016 
    @author Guillermo Rodriguez
  
@@ -149,7 +149,7 @@ STATUS space_destroy(Space *space){
     Space *space: the space which you want the id of.
    @return 
     Id: the space's id or NO_ID on error.
-   -------------------------------------------------------------------- */
+   */
 Id space_get_id(Space *space){
   if(!space){       /* Check that the input is not empty */
     return NO_ID;
@@ -160,20 +160,19 @@ Id space_get_id(Space *space){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 29-10-2016 
    @author Guillermo Rodriguez
  
    @brief 
     Renames a space. space_set_name()
  
-   @param 
-    Space *space: the space you want to rename.
-    char *name: the new name you want for the space.
+   @param Space *space: the space you want to rename.
+   @param char *name: the new name you want for the space.
    
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_name(Space *space, char *name){
   if(!space || !name){          /* Check that the inputs are not empty */
     return ERROR;
@@ -189,7 +188,7 @@ STATUS space_set_name(Space *space, char *name){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 29-10-2016 
    @author Guillermo Rodriguez
  
@@ -201,7 +200,7 @@ STATUS space_set_name(Space *space, char *name){
  
    @return 
     const char *: the name of the space or NULL on error.
-   -------------------------------------------------------------------- */
+   */
 const char * space_get_name(Space *space){
   if(!space){                    /* Check that the input is not empty */
     return NULL;
@@ -212,20 +211,19 @@ const char * space_get_name(Space *space){
  
  
 
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
    @brief
     Sets the North link to a space.space_set_north()
  
-   @param 
-    Space *space: the space where you want to change the North link.
-    Id id: the new North link you want for the space.
+   @param Space *space: the space where you want to change the North link.
+   @param Id id: the new North link you want for the space.
  
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_north(Space *space, Id id){
   if(!space){       /* Check that the inputs are not empty */
     return ERROR;
@@ -237,19 +235,19 @@ STATUS space_set_north(Space *space, Id id){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016  
    @author Alejandro Sanchez
  
    @brief 
-    Gives the information of the North link of the space.       space_get_north()
+    Gives the information of the North link of the space. space_get_north()
  
    @param 
     Space *space: the space you want to know the North link.
  
    @return 
     Id: the North link of the space or NO_ID on error. 
-   -------------------------------------------------------------------- */
+   */
 Id space_get_north(Space *space){
   if(!space){                   /* Check that the input is not empty */
     return NO_ID;
@@ -260,20 +258,19 @@ Id space_get_north(Space *space){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
    @brief
     Set the South link to a space. space_set_south()
  
-   @param 
-    Space *space: the space where you want to change the South link.
-    Id id: the new South link you want for the space.
+   @param Space *space: the space where you want to change the South link.
+   @param Id id: the new South link you want for the space.
  
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_south(Space *space, Id id){
   if(!space){     /* Check that the inputs are not empty */
     return ERROR;
@@ -285,19 +282,19 @@ STATUS space_set_south(Space *space, Id id){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date: 11-11-2016  
-   @author: Alejandro Sanchez
+   @author Alejandro Sanchez
  
    @brief
-    Gives the information of the South link of the space. space_get_south
+    Gives the information of the South link of the space. space_get_south()
  
    @param 
     Space *space: the space you want to know the South link.
  
    @return 
     Id: the South link of the space or NO_ID on error.
-   -------------------------------------------------------------------- */
+   */
 Id space_get_south(Space *space){
   if(!space){                   /* Check that the input is not empty */
     return NO_ID;
@@ -308,20 +305,19 @@ Id space_get_south(Space *space){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
    @brief
     Set the East link to a space. space_set_east()
  
-   @param 
-    Space *space: the space where you want to change the East link.
-    Id id: the new East link you want for the space.
+   @param Space *space: the space where you want to change the East link.
+   @param Id id: the new East link you want for the space.
  
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_east(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
     return ERROR;
@@ -333,7 +329,7 @@ STATUS space_set_east(Space *space, Id id){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
@@ -345,7 +341,7 @@ STATUS space_set_east(Space *space, Id id){
  
    @return 
     Id: the East link of the space or NO_ID on error.
-   -------------------------------------------------------------------- */
+   */
 Id space_get_east(Space *space){
   if(!space){                    /* Check that the input is not empty */
     return NO_ID;
@@ -356,20 +352,19 @@ Id space_get_east(Space *space){
  
  
  
-/** --------------------------------------------------------------------
+/**
    @date 11-11-2016 
    @author Alejandro Sanchez
  
    @brief
     Set the West link to a space.  space_set_west()
  
-   @param 
-    Space *space: the space where you want to change the West link.
-    Id id: the new West link you want for the space.
+   @param Space *space: the space where you want to change the West link.
+   @param Id id: the new West link you want for the space.
  
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_west(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
     return ERROR;
@@ -381,20 +376,19 @@ STATUS space_set_west(Space *space, Id id){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_west
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Gives the information of the West link of the space.
+   @brief 
+    Gives the information of the West link of the space.space_get_west()
  
-   Input: 
+   @param 
     Space *space: the space you want to know the West link.
  
-   Output: 
+   @return 
     Id: the West link of the space or NO_ID on error.
-   -------------------------------------------------------------------- */
+   */
 Id space_get_west(Space *space){
   if(!space){                     /* Check that the input is not empty */
     return NO_ID;
@@ -405,22 +399,20 @@ Id space_get_west(Space *space){
  
  
  
-/* --------------------------------------------------------------------
-   Function: space_add_object
-   Date: 25-10-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 25-10-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Adds an object to the space.
+   @brief 
+    Adds an object to the space. space_add_object()
  
-   Input: 
-    Space *space: the space you want to change.
-    Id object: the identifier of the object you want to put 
+   @param Space *space: the space you want to change.
+   @param Id object: the identifier of the object you want to put 
       into the space.
    
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_add_object(Space *space, Id object){
   if(!space || object == NO_ID){  /* Check that the inputs are not empty */
     return ERROR;
@@ -436,22 +428,21 @@ STATUS space_add_object(Space *space, Id object){
  
 
 
-/* --------------------------------------------------------------------
-   Function: space_del_object
-   Date: 28-10-2016 
-   Author: Alejandro Sanchez
+/**
  
-   Description: 
-    Deletes an object to the space.
+   @date 28-10-2016 
+   @author Alejandro Sanchez
  
-   Input: 
-    Space *space: the space you want to change.
-    Id object: the identifier of the object you want to remove 
+   @brief 
+    Deletes an object to the space.space_del_object()
+ 
+   @param Space *space: the space you want to change. space_del_object()
+   @param Id object: the identifier of the object you want to remove 
       from the space.
    
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_del_object(Space *space, Id object){
   if(!space || object == NO_ID){  /* Check that the inputs are not empty */
     return ERROR;
@@ -467,21 +458,20 @@ STATUS space_del_object(Space *space, Id object){
 
  
  
-/* --------------------------------------------------------------------
-   Function: space_get_object
-   Date: 25-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 25-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-    Gives the set of objects that is in the space.
+   @brief
+    Gives the set of objects that is in the space.space_get_object()
  
-   Input: 
+   @param 
     Space *space: the space where is the object you want to know its id.
    
-   Output: 
+   @return 
     Set *: the set of objects there are in the space or NULL 
       on error.
-   -------------------------------------------------------------------- */
+   */
 Set * space_get_object(Space *space){
   if(!space){              /* Check that the input is not empty */
     return NULL;
@@ -492,21 +482,20 @@ Set * space_get_object(Space *space){
  
 
 
-/* --------------------------------------------------------------------
-   Function: space_is_object
-   Date: 25-10-2016 
-   Author: Guillermo Rodriguez 
+/**
+   @date 25-10-2016 
+   @author Guillermo Rodriguez 
   
-   Description: 
-    Checks if there is an especific object in the space.
+   @brief 
+    Checks if there is an especific object in the space.space_is_object()
   
-   Input: 
+   @param 
     Space *space: the space where you want to find the object.
     Id object: the id of the object you want to know if it is in the space.
                  
-   Output: 
+   @return 
     BOOL: TRUE if the object is in the space and FALSE in other cases. 
-   -------------------------------------------------------------------- */
+   */
 BOOL space_is_object(Space *space, Id object){
 	if(!space || object == NO_ID){
     	return FALSE;
@@ -515,21 +504,19 @@ BOOL space_is_object(Space *space, Id object){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: space_set_desc
-   Date: 18-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 18-11-2016 
+   @author Alejandro Sanchez
 
-   Description: 
-    Sets the description of the space.
+   @brief 
+    Sets the description of the space.space_set_desc()
 
-   Input: 
-    Space *space: the space you want to change its description.
-    char *desc: the new description of the space.
+   @param Space *space: the space you want to change its description.
+   @param char *desc: the new description of the space.
 
    Output: 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_desc(Space *space, char *desc){
   if(!space || !desc){   /* Check if the inputs are not empty */
     return ERROR;
@@ -545,20 +532,19 @@ STATUS space_set_desc(Space *space, char *desc){
 
 
 
-/* --------------------------------------------------------------------
-   Function: space_get_desc
-   Date: 18-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 18-11-2016 
+   @author Alejandro Sanchez
 
-   Description: 
-    Gives the information of the description of the space.
+   @brief 
+    Gives the information of the description of the space. space_get_desc()
 
-   Input: 
+   @param 
     Space *space: the space you want to know its description.
 
-   Output: 
+   @return 
     char *: the description of the space or NULL on error.
- -------------------------------------------------------------------- */
+ */
 char *space_get_desc(Space *space){
   if(!space){  /* Check that the input is not empty */
    return NULL;
@@ -569,21 +555,19 @@ char *space_get_desc(Space *space){
 
 
 
-/* --------------------------------------------------------------------
-   Function: space_set_gdesc
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
 
-   Description: 
-    Sets the graphic description of the space.
+   @brief 
+    Sets the graphic description of the space. space_set_gdesc()
 
-   Input: 
-    Space *space: the space you want to change its graphic description.
+   @param Space *space: the space you want to change its graphic description.
     char *gdesc: the new graphic description of the space.
   
-   Output: 
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_set_gdesc(Space *space, char *gdesc){
   if(!space || !gdesc){   /* Check if the inputs are not empty */
     return ERROR;
@@ -599,20 +583,19 @@ STATUS space_set_gdesc(Space *space, char *gdesc){
 
 
 
-/* --------------------------------------------------------------------
-   Function: space_get_gdesc
-   Date: 29-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 29-10-2016 
+   @author Guillermo Rodriguez
 
-   Description: 
-    Gives the information of the graphic description of the space.
+   @brief 
+    Gives the information of the graphic description of the space.space_get_gdesc()
 
-   Input: 
+   @param
     Space *space: the space you want to know its graphic description.
 
-   Output: 
+   @return 
     char *: the graphic description of the space or NULL on error.
- -------------------------------------------------------------------- */
+ */
 char *space_get_gdesc(Space *space){
   if(!space){  /* Check that the input is not empty */
    return NULL;
@@ -623,19 +606,18 @@ char *space_get_gdesc(Space *space){
 
 
 
-/* --------------------------------------------------------------------
-   Function: space_print_gdesc
-   Date: 29-10-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 29-10-2016 
+   @author Alejandro Sanchez
 
-   Description: 
-		Prints the graphic description of the space.
+   @brief 
+   Prints the graphic description of the space.space_print_gdesc()
 
-   Input: 
-		Space *space: the space you want to print its graphic description.
-   Output: 
+   @param 
+    Space *space: the space you want to print its graphic description.
+   @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_print_gdesc(Space *space){
   char gdesc[WORD_SIZE] = "", *toks = NULL;
  
@@ -661,19 +643,18 @@ STATUS space_print_gdesc(Space *space){
 
 
 
-/* --------------------------------------------------------------------
-   Function: space_print
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
+/**
+   @date 11-11-2016 
+   @author Alejandro Sanchez
  
-   Description: 
-    Prints a space on the screen.
+   @brief 
+    Prints a space on the screen.space_print()
  
-   Input: 
+   @param 
     Space *space: the space you want to print.
-   Output: 
+   @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS space_print(Space *space){
   Id idaux = NO_ID;
    
