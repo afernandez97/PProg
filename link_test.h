@@ -185,7 +185,7 @@ Tests if you can set the space1 of an uninitialised Link.
 @param
 @return
 */
-void test2_link_set_space1():
+void test2_link_set_space1();
 
 /**
 @author Adrián Fernández

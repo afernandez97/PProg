@@ -71,7 +71,7 @@ Tests if you can successfully create a Link.
 */
 void test1_link_create(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -95,8 +95,7 @@ is not valid.
 */
 void test2_link_create(){
 
-	Link* link;
-	Id id = 1;
+	Link* link = NULL;
 	Id noId = NO_ID;
 
 	link = link_create(noId);
@@ -118,7 +117,7 @@ Tests if you can successfully destroy a Link.
 */
 void test1_link_destroy(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -139,7 +138,7 @@ Tests if you can destroy an uninitialised Link.
 */
 void test2_link_destroy(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT(link_destroy(link) == ERROR);
 
@@ -158,7 +157,7 @@ Tests if you can successfully get the id of a Link.
 */
 void test1_link_get_id(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -180,7 +179,7 @@ Tests if you can get the id of an uninitialised Link.
 */
 void test2_link_get_id(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT(link_get_id(link) == NO_ID);
 
@@ -199,7 +198,7 @@ Tests if you can successfully set the name of a Link.
 */
 void test1_link_set_name(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	char name[WORD_SIZE] = "name";
 
@@ -222,7 +221,7 @@ Tests if you can set the name of an uninitialised Link.
 */
 void test2_link_set_name(){
 
-	Link* link;
+	Link* link = NULL;
 	char name[WORD_SIZE] = "name";
 
 	FUNCTION_IS_CORRECT(link_set_name(link, name) == ERROR);
@@ -243,7 +242,7 @@ is unassigned.
 */
 void test3_link_set_name(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	char* noName = NULL;
 
@@ -266,7 +265,7 @@ Tests if you can successfully get the name of a Link.
 */
 void test1_link_get_name(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -288,7 +287,7 @@ Tests if you can get the name of an uninitialised Link.
 */
 void test2_link_get_name(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT(link_get_name(link) == NULL);
 
@@ -307,7 +306,7 @@ Tests if you can successfully set the space1 of a Link.
 */
 void test1_link_set_space1(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -329,7 +328,7 @@ Tests if you can set the space1 of an uninitialised Link.
 */
 void test2_link_set_space1(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	FUNCTION_IS_CORRECT(link_set_space1(link, id) == ERROR);
@@ -350,7 +349,7 @@ not valid.
 */
 void test3_link_set_space1(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	Id noId = NO_ID;
 
@@ -373,7 +372,7 @@ Tests if you can successfully get the space1 of a Link.
 */
 void test1_link_get_space1(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -397,7 +396,7 @@ Tests if you can get the space1 field of an uninitialised Link.
 */
 void test2_link_get_space1(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT(link_get_space1(link) == NO_ID);
 
@@ -416,7 +415,7 @@ Tests if you can successfully set the space2 of a Link.
 */
 void test1_link_set_space2(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -438,7 +437,7 @@ Tests if you can set the space2 of an uninitialised Link.
 */
 void test2_link_set_space2(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	FUNCTION_IS_CORRECT(link_set_space2(link, id) == ERROR);
@@ -459,7 +458,7 @@ not valid.
 */
 void test3_link_set_space2(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	Id noId = NO_ID;
 
@@ -482,7 +481,7 @@ Tests if you can successfully get the space2 of a Link.
 */
 void test1_link_get_space2(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -505,7 +504,7 @@ Tests if you can get the space2 field of an uninitialised Link.
 */
 void test2_link_get_space2(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT (link_get_space2(link) == NO_ID);
 	
@@ -524,7 +523,7 @@ Tests if you can successfully set the state of a Link.
 */
 void test1_link_set_state(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	STATE state = OPEN;
 
@@ -547,7 +546,7 @@ Tests if you can set the state of an uninitialised Link.
 */
 void test2_link_set_state(){
 
-	Link* link;
+	Link* link = NULL;
 	STATE state = OPEN;
 
 	FUNCTION_IS_CORRECT(link_set_state(link, state) == ERROR);
@@ -568,7 +567,7 @@ is unassigned.
 */
 void test3_link_set_state(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 	STATE noState = NO_STATE;
 
@@ -591,7 +590,7 @@ Tests if you can successfully get the state of a Link.
 */
 void test1_link_get_state(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -613,7 +612,7 @@ Tests if you can get the state of an uninitialised Link.
 */
 void test2_link_get_state(){
 
-	Link* link;
+	Link* link = NULL;
 
 	FUNCTION_IS_CORRECT(link_get_state(link) == NO_STATE);
 
@@ -632,7 +631,7 @@ Tests if you can successfully print a Link.
 */
 void test1_link_print(){
 
-	Link* link;
+	Link* link = NULL;
 	Id id = 1;
 
 	link = link_create(id);
@@ -654,9 +653,9 @@ Tests if you can print an uninitialised Link.
 */
 void test2_link_print(){
 
-	Link* link;
+	Link* link = NULL;
 
-	FUNCTION_IS_CORRECT(link_print(link) == ERROR):
+	FUNCTION_IS_CORRECT(link_print(link) == ERROR);
 
 	return;
 }
