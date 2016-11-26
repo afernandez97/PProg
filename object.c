@@ -1,22 +1,18 @@
-/* ===================================================================
-   File: object.c
-   Version: 3.0
-   Date: 18-11-2016 
-   Author: Guillermo Rodriguez and Alejandro Sanchez
-
-   Description: 
-		It implements an object.
-
-   Revision history:
-		Oct. 02, 2016  Version 1.0 (initial release)
-		Oct. 27, 2016	 Version 2.0
-			Added field "location" to the structure "Object".
-      Modified the functions that are affected by this field.
-			Created "object_set_location" and "object_get_location".
-		Nov. 18, 2016	 Version 3.0
-			Added field "desc" to the structure "Object".
-			Created "object_set_desc" and "object_get_desc".
-   =================================================================== */
+/**
+   @file object.c
+   @version 3.0
+   @date 18-11-2016 
+   @author Guillermo Rodriguez and Alejandro Sanchez
+   @brief It implements an object.
+   @version Oct. 02, 2016  Version 1.0 (initial release)
+	 @version Oct. 27, 2016	 Version 2.0
+	 Added field "location" to the structure "Object".
+   Modified the functions that are affected by this field.
+	 Created "object_set_location" and "object_get_location".
+	 @version Nov. 18, 2016	 Version 3.0
+	 Added field "desc" to the structure "Object".
+	 Created "object_set_desc" and "object_get_desc".
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,30 +26,30 @@
 #define desc(X) (X)->desc
 
 
-/*** The Object structure stores information of the different objects that 
-appear in the game ***/
+/**
+@brief Object's structure
+Contains the object's fields
+*/
+
 struct _Object{
-	Id id; /* Identifier of the object */
-  char name[WORD_SIZE + 1]; /* Name of the object */
-	Id location; /* Location of the object */
-	char desc[WORD_SIZE + 1];	/* Description of the object */
+	Id id; /*!< Identifier of the object */
+  char name[WORD_SIZE + 1]; /*!< Name of the object */
+	Id location; /*!< Location of the object */
+	char desc[WORD_SIZE + 1];	/*!< Description of the object */
 };
 
 
 /*** Public functions definition ***/
-/* --------------------------------------------------------------------
-   Function: object_create
-   Date: 27-10-2016 
-   Author: Alejandro Sanchez
 
-   Description: 
-		Creates an object.
+/**
+@brief object_create
+Creates an object.
+@date 27-10-2016 
+@author Alejandro Sanchez
+@param Id id: the id of the object that is created.
+@return Object *: the object created or NULL on error.
+*/
 
-   Input: 
-		Id id: the id of the object that is created.
-   Output: 
-		Object *: the object created or NULL on error.
-   -------------------------------------------------------------------- */
 Object * object_create(Id id){
   Object *object = NULL;
 
@@ -77,19 +73,15 @@ Object * object_create(Id id){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_destroy
-   Date: 02-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_destroy
+Destroys an object.
+@date 02-10-2016 
+@author Alejandro Sanchez 
+@param Object *object: the object to destroy.
+@return STATUS: ERROR if the input is NULL and OK otherwise.
+*/
 
-   Description: 
-		Destroys an object.
-
-   Input: 
-		Object *object: the object to destroy.
-   Output: 
-		STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
 STATUS object_destroy(Object *object){
   if(!object){      /* Check that the input is not empty */ 
     return ERROR;
@@ -102,20 +94,15 @@ STATUS object_destroy(Object *object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_get_id
-   Date: 02-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_get_id
+Returns an object's id.
+@date 02-10-2016 
+@author Alejandro Sanchez
+@param Object *object: the object which you want the id of.
+@return Id: the object's id or NO_ID on error.
+*/
 
-   Description: 
-		Returns an object's id.
-
-   Input: 
-		Object *object: the object which you want the id of.
-
-   Output: 
-		Id: the object's id or NO_ID on error.
-   -------------------------------------------------------------------- */
 Id object_get_id(Object *object){
   if(!object){      /* Check that the input is not empty */ 
     return NO_ID;
@@ -126,21 +113,16 @@ Id object_get_id(Object *object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_set_name
-   Date: 02-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_set_name
+Sets a name for an object.
+@date 02-10-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to rename.
+@param char *name: the new name you want for the object.  
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 
-   Description: 
-		Sets a name for an object.
-
-   Input: 
-		Object *object: the object you want to rename.
-		char *name: the new name you want for the object.
-  
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
 STATUS object_set_name(Object *object, char *name){
   if(!object || !name){			/* Check that the inputs are not empty */
     return ERROR;
@@ -156,20 +138,15 @@ STATUS object_set_name(Object *object, char *name){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_get_name
-   Date: 02-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_get_name
+Gives the information of the name of the object.
+@date 02-10-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know the name.
+@return char *: the name of the object or NULL on error.
+*/
 
-   Description: 
-    Gives the information of the name of the object.
-
-   Input: 
-		Object *object: the object you want to know the name.
-
-   Output: 
-    char *: the name of the object or NULL on error.
-   -------------------------------------------------------------------- */
 char * object_get_name(Object *object){
   if(!object){            /* Check that the input is not empty */
     return NULL;
@@ -180,21 +157,16 @@ char * object_get_name(Object *object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_set_location
-   Date: 27-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_set_location
+Sets a location for an object.
+@date 27-10-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set the location.
+@param Id location: the new location you want for the object.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 
-   Description: 
-		Sets a location for an object.
-
-   Input: 
-		Object *object: the object you want to set the location.
-		Id location: the new location you want for the object.
-  
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
 STATUS object_set_location(Object *object, Id location){
   if(!object){			/* Check that the input is not empty */
     return ERROR;
@@ -208,20 +180,15 @@ STATUS object_set_location(Object *object, Id location){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_get_location
-   Date: 27-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_get_location
+Returns an object's location.
+@date 27-10-2016 
+@author Alejandro Sanchez
+@param Object *object: the object which you want the location of.
+@return Id: the object's location or NO_ID on error.
+*/
 
-   Description: 
-		Returns an object's location.
-
-   Input: 
-		Object *object: the object which you want the location of.
-
-   Output: 
-		Id: the object's location or NO_ID on error.
-   -------------------------------------------------------------------- */
 Id object_get_location(Object *object){
   if(!object){      /* Check that the input is not empty */ 
     return NO_ID;
@@ -232,21 +199,16 @@ Id object_get_location(Object *object){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_set_desc
-   Date: 18-11-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_set_desc
+Sets the description of the object.
+@date 18-11-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to change its description.
+@param char *desc: the new description of the object.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 
-   Description: 
-    Sets the description of the object.
-
-   Input: 
-    Object *object: the object you want to change its description.
-    char *desc: the new description of the object.
-
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
 STATUS object_set_desc(Object *object, char *desc){
   if(!object || !desc){   /* Check if the inputs are not empty */
     return ERROR;
@@ -262,20 +224,15 @@ STATUS object_set_desc(Object *object, char *desc){
 
 
 
-/* --------------------------------------------------------------------
-   Function: object_get_desc
-   Date: 18-11-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_get_desc
+Gives the information of the description of the object.
+@date 18-11-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know its description.
+@return char *: the description of the object or NULL on error.
+*/
 
-   Description: 
-    Gives the information of the description of the object.
-
-   Input: 
-    Object *object: the object you want to know its description.
-
-   Output: 
-    char *: the description of the object or NULL on error.
- -------------------------------------------------------------------- */
 char *object_get_desc(Object *object){
   if(!object){  /* Check that the input is not empty */
    return NULL;
@@ -285,19 +242,15 @@ char *object_get_desc(Object *object){
 } 
 
 
-/* --------------------------------------------------------------------
-   Function: object_print
-   Date: 27-10-2016 
-   Author: Alejandro Sanchez
+/**
+@brief object_print
+Prints the information of the object on the screen.
+@date 27-10-2016 
+@author Alejandro Sanchez
+@param Object *object the object you want to print.
+@return STATUS: ERROR if the input is NULL and OK otherwise.
+*/
 
-   Description: 
-		Prints the information of the object on the screen.
-
-   Input: 
-		Object *object the object you want to print.
-   Output: 
-		STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
 STATUS object_print(Object *object){
   if(!object){        /* Check that the input is not empty */
     return ERROR;
