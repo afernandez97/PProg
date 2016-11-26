@@ -1,15 +1,13 @@
-/* ===================================================================
-   File: inventory_test.h
-   Version: 2.0
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+	@file inventory_test.h
+	@version 1.0
+	@date Nov. 4, 2016
+	@author Ricardo Riol 
+	@brief
+	Tests inventory's functions
+	@revision Nov. 4, 2016: Version 1.0 (initial release)
+*/
 
-   Description: 
-		It defines the iventory test function's
-
-   Revision history:
-		nov. 11, 2011  Version 2.0
-   =================================================================== */
 
 #ifndef INVENTORY_TEST_H
 #define INVENTORY_TEST_H
@@ -35,409 +33,386 @@
 
 /* Public functions description */
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_destroy
-   Date: 11-11-2011
-   Author: Ricard Riol
+/**
+   @date 11-11-2011
+   @author Ricard Riol
    
-   Description:
-    Tests if destroys an inventory.
+   @brief
+    Tests if destroys an inventory.test1_inventory_destroy()
 
-   Input:
+   @param
     
 
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_destroy();          
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_add_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
 
-   Description: 
-   Tests if adds an object to an inventory.
+   @brief 
+   Tests if adds an object to an inventory.test1_inventory_add_object()
 
-   Input: 
+   @param 
   
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_inventory_add_object();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_del_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
  
-   Description: 
-    Tests if deletes an object of the inventory.
+   @brief 
+    Tests if deletes an object of the inventory.test1_inventory_del_object()
  
-   Input: 
+   @param 
   
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_inventory_del_object();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_set_bag
-   Date: 11-11-2011
-   Author: Ricardo Riol
 
-   Description:
-    Tests if sets the bag of an inventory.
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
+
+   @brief
+    Tests if sets the bag of an inventory.test1_inventory_set_bag()
    
-   Input:
+   @param
   
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_set_bag();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_get_bag
-   Date: 11-11-2011
-   Author:Ricardo Riol
-   Description:
-    Tests if returns the bag of an inventory.
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
+   @brief
+    Tests if returns the bag of an inventory.test1_inventory_get_bag()
 
-   Input:
+   @param
    
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_get_bag();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_get_count
-   Date: 11-11-2011
-   Author:Ricardo Riol
-   Description:
-    Tests if returns the number of objects of the inventory.
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
+   @brief
+    Tests if returns the number of objects of the inventory.test1_inventory_get_count()
 
-   Input:
+   @param
     
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_get_count();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_get_max
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
 
-   Description:
-    TEsts if the maximum number of objects that an inventory can contain.
+   @brief
+    Tests if the maximum number of objects that an inventory can contain.test1_inventory_get_max()
    
-   Input:
+   @param
   
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_get_max();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_is_object
-   Date: 04-11-2016 
-   Author: Ricardo Riol
+
+/**
+   @date 04-11-2016 
+   @author Ricardo Riol
   
-   Description: 
-    tests if checks if there is an especific object in the inventory.
+   @brief 
+    tests if checks if there is an especific object in the inventory.test1_inventory_is_object()
   
-   Input: 
+   @param 
                  
-   Output: 
-   -------------------------------------------------------------------- */
+   @return 
+   */
 void test1_inventory_is_object();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_is_empty
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+
+/**
+   @date 11-11-2011 
+   @author: Ricardo Riol
   
-   Description: 
-    Tests if the inventory is empty or not.
+   @brief 
+    Tests if the inventory is empty or not.test1_inventory_is_empty()
   
-   Input: 
+   @param 
                  
-   Output: 
+   @return 
    
-   -------------------------------------------------------------------- */
+   */
 void test1_inventory_is_empty();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_is_full
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
   
-   Description: 
-    Checks if the inventory is full or not.
+   @brief 
+    Checks if the inventory is full or not.test1_inventory_is_full()
   
-   Input: 
+   @param 
                  
-   Output: 
+   @return 
    
-   -------------------------------------------------------------------- */
+   */
 void test1_inventory_is_full();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_print
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
 
-   Description: 
-    checks if prints the information of the inventory on the screen.
+   @brief 
+    checks if prints the information of the inventory on the screen.test1_inventory_print()
 
-   Input: 
+   @param 
   
-   Output: 
+   @return 
 
-   -------------------------------------------------------------------- */
+   */
 void test1_inventory_print();
 
-/* --------------------------------------------------------------------
-   Function: test1_inventory_create
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
 
-   Description: 
-    Tests if an inventory is created.
+   @brief 
+    Tests if an inventory is created. test1_inventory_create()
 
-   Input: 
+   @oparam 
 
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test1_inventory_create();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_destroy
-   Date: 11-11-2011
-   Author: Ricard Riol
+/**
+   @date 11-11-2011
+   @author Ricard Riol
    
-   Description:
-    Tests if destroys an inventory.
+   @brief
+    Tests if destroys an inventory.test2_inventory_destroy()
 
-   Input:
+   @param
 
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test2_inventory_destroy();
 
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_add_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
 
-   Description: 
-   Tests if adds an object to an inventory.
+   @brief 
+   Tests if adds an object to an inventory.test2_inventory_add_object()
 
-   Input: 
+   @param 
 
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+ */
 void test2_inventory_add_object();
 
-/* --------------------------------------------------------------------
-   Function: test3_inventory_add_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
 
-   Description: 
-   Tests if adds an object to an inventory.
+   @brief 
+   Tests if adds an object to an inventory.test3_inventory_add_object()
 
-   Input: 
+   @param 
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test3_inventory_add_object();
 
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_del_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
  
-   Description: 
-    Tests if deletes an object of the inventory.
+   @brief 
+    Tests if deletes an object of the inventory.test2_inventory_del_object()
  
-   Input: 
+   @param 
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_inventory_del_object();
 
-/* --------------------------------------------------------------------
-   Function: test3_inventory_del_object
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
  
-   Description: 
-    Tests if deletes an object of the inventory.
+   @brief 
+    Tests if deletes an object of the inventory.test3_inventory_del_object()
  
-   Input: 
+   @param 
   
-   
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test3_inventory_del_object();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_set_bag
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
 
-   Description:
-    Tests if sets the bag of an inventory.
+   @brief
+    Tests if sets the bag of an inventory.test2_inventory_set_bag()
    
-   Input:
+   @param
 
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test2_inventory_set_bag();
 
-/* --------------------------------------------------------------------
-   Function: test3_inventory_set_bag
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
 
-   Description:
-    Tests if sets the bag of an inventory.
+   @brief
+    Tests if sets the bag of an inventory.test3_inventory_set_bag()
    
-   Input:
+   @param
 
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
+
 void test3_inventory_set_bag();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_get_bag
-   Date: 11-11-2011
-   Author:Ricardo Riol
-   Description:
-    Tests if returns the bag of an inventory.
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
+   @brief
+    Tests if returns the bag of an inventory.test2_inventory_get_bag()
 
-   Input:
+   @param
   
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test2_inventory_get_bag();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_get_count
-   Date: 11-11-2011
-   Author:Ricardo Riol
-   Description:
-    Tests if return sthe number of obajects of the inventory.
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
+   @brief
+    Tests if return sthe number of obajects of the inventory.test2_inventory_get_count()
 
-   Input:
+   @param
 
   
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test2_inventory_get_count();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_get_max
-   Date: 11-11-2011
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011
+   @author Ricardo Riol
 
-   Description:
-    TEsts if the maximum number of objects that an inventory can contain.
+   @brief
+    Tests if the maximum number of objects that an inventory can contain.test2_inventory_get_max()
    
-   Input:
+   @param
   
-   Output:
+   @return
     
-------------------------------------------------------------------- */
+*/
 void test2_inventory_get_max();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_is_object
-   Date: 11-11-2016 
-   Author: Ricardo Riol
+
+/**
+   @date 11-11-2016 
+   @author Ricardo Riol
   
-   Description: 
-    tests if checks if there is an especific object in the inventory.
+   @brief 
+    tests if checks if there is an especific object in the inventory.test2_inventory_is_object()
   
-   Input: 
+   @param 
                  
-   Output: 
-   -------------------------------------------------------------------- */
+   @return 
+   */
 void test2_inventory_is_object();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_is_empty
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date: 11-11-2011 
+   @author Ricardo Riol
   
-   Description: 
-    Tests if the inventory is empty or not.
+   @brief 
+    Tests if the inventory is empty or not.test2_inventory_is_empty()
   
-   Input: 
+   @param 
                  
-   Output: 
+   @return 
    
-   -------------------------------------------------------------------- */
+   */
 void test2_inventory_is_empty();
 
-/* --------------------------------------------------------------------
-   Function: test3_inventory_is_empty
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
   
-   Description: 
-    Tests if the inventory is empty or not.
+   @brief 
+    Tests if the inventory is empty or not. test3_inventory_is_empty()
   
-   Input: 
+   @param 
                  
-   Output: 
+   @return 
    
-   -------------------------------------------------------------------- */
+   */
 void test3_inventory_is_empty();
 
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_is_full
-   Date: 11-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 11-11-2011 
+   @author Ricardo Riol
   
-   Description: 
-    Checks if the inventory is full or not.
+   @brief 
+    Checks if the inventory is full or not.test2_inventory_is_full()
   
-   Input: 
+   @param 
                  
-   Output: 
+   @return
    
-   -------------------------------------------------------------------- */
+   */
 void test2_inventory_is_full();
 
-/* --------------------------------------------------------------------
-   Function: test2_inventory_print
-   Date: 01-11-2011 
-   Author: Ricardo Riol
+/**
+   @date 01-11-2011 
+   @author Ricardo Riol
 
-   Description: 
-    checks if prints the information of the inventory on the screen.
+   @brief 
+    checks if prints the information of the inventory on the screen. test2_inventory_print()
 
-   Input: 
+   @param
 
-   Output: 
+   @return 
 
-   -------------------------------------------------------------------- */
+   */
 void test2_inventory_print();
 
 
