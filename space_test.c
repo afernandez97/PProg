@@ -18,7 +18,8 @@ functions implemented in space.c.
 #include "space_test.h" 
 
 int main(int argc, char **argv){
-	int all, test;
+
+	int all = 1, test;
 
 	if (argc < 2) {
 		printf("Testing all:\n");
@@ -45,49 +46,45 @@ int main(int argc, char **argv){
 	if (all || test == 11) test2_space_get_name();
 	if (all || test == 12) test1_space_set_north();
 	if (all || test == 13) test2_space_set_north();
-	if (all || test == 14) test3_space_set_north();
-	if (all || test == 15) test1_space_get_north();
-	if (all || test == 16) test2_space_get_north();
-	if (all || test == 17) test1_space_set_south();
-	if (all || test == 18) test2_space_set_south();
-	if (all || test == 19) test3_space_set_south();
-	if (all || test == 20) test1_space_get_south();
-	if (all || test == 21) test2_space_get_south();
-	if (all || test == 22) test1_space_set_east();
-	if (all || test == 23) test2_space_set_east();
-	if (all || test == 24) test3_space_set_east();
-	if (all || test == 25) test1_space_get_east();
-	if (all || test == 26) test2_space_get_east();
-	if (all || test == 27) test1_space_set_west();
-	if (all || test == 28) test2_space_set_west();
-	if (all || test == 29) test3_space_set_west();
-	if (all || test == 30) test1_space_get_west();
-	if (all || test == 31) test2_space_get_west();
-	if (all || test == 32) test1_space_add_object();
-	if (all || test == 33) test2_space_add_object();
-	if (all || test == 34) test3_space_add_object();
-	if (all || test == 35) test1_space_del_object();
-	if (all || test == 36) test2_space_del_object();
-	if (all || test == 37) test3_space_del_object();
-	if (all || test == 38) test1_space_get_object();
-	if (all || test == 39) test2_space_get_object();
-	if (all || test == 40) test1_space_is_object();
-	if (all || test == 41) test2_space_is_object();
-	if (all || test == 42) test3_space_is_object();
-	if (all || test == 43) test1_space_set_desc();
-	if (all || test == 44) test2_space_set_desc();
-	if (all || test == 45) test3_space_set_desc();
-	if (all || test == 46) test1_space_get_desc();
-	if (all || test == 47) test2_space_get_desc();
-	if (all || test == 48) test1_space_set_gdesc();
-	if (all || test == 49) test2_space_set_gdesc();
-	if (all || test == 50) test3_space_set_gdesc();
-	if (all || test == 51) test1_space_get_gdesc();
-	if (all || test == 52) test2_space_get_gdesc();
-	if (all || test == 53) test1_space_print();
-	if (all || test == 54) test2_space_print();
-	if (all || test == 55) test1_space_print_gdesc();
-	if (all || test == 56) test2_space_print_gdesc();
+	if (all || test == 14) test1_space_get_north();
+	if (all || test == 15) test2_space_get_north();
+	if (all || test == 16) test1_space_set_south();
+	if (all || test == 17) test2_space_set_south();
+	if (all || test == 18) test1_space_get_south();
+	if (all || test == 19) test2_space_get_south();
+	if (all || test == 20) test1_space_set_east();
+	if (all || test == 21) test2_space_set_east();
+	if (all || test == 22) test1_space_get_east();
+	if (all || test == 23) test2_space_get_east();
+	if (all || test == 24) test1_space_set_west();
+	if (all || test == 25) test2_space_set_west();
+	if (all || test == 26) test1_space_get_west();
+	if (all || test == 27) test2_space_get_west();
+	if (all || test == 28) test1_space_add_object();
+	if (all || test == 29) test2_space_add_object();
+	if (all || test == 30) test3_space_add_object();
+	if (all || test == 31) test1_space_del_object();
+	if (all || test == 32) test2_space_del_object();
+	if (all || test == 33) test3_space_del_object();
+	if (all || test == 34) test1_space_get_object();
+	if (all || test == 35) test2_space_get_object();
+	if (all || test == 36) test1_space_is_object();
+	if (all || test == 37) test2_space_is_object();
+	if (all || test == 38) test3_space_is_object();
+	if (all || test == 39) test1_space_set_desc();
+	if (all || test == 40) test2_space_set_desc();
+	if (all || test == 41) test3_space_set_desc();
+	if (all || test == 42) test1_space_get_desc();
+	if (all || test == 43) test2_space_get_desc();
+	if (all || test == 44) test1_space_set_gdesc();
+	if (all || test == 45) test2_space_set_gdesc();
+	if (all || test == 46) test3_space_set_gdesc();
+	if (all || test == 47) test1_space_get_gdesc();
+	if (all || test == 48) test2_space_get_gdesc();
+	if (all || test == 39) test1_space_print();
+	if (all || test == 50) test2_space_print();
+	if (all || test == 51) test1_space_print_gdesc();
+	if (all || test == 52) test2_space_print_gdesc();
 
 	return 0;
 }
@@ -357,29 +354,6 @@ void test2_space_set_north(){
 @author Adrián Fernández
 @date Nov. 23, 2016
 
-@brief test3_space_set_north
-Tests if you can set the north of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_north(){
-	Space *space = NULL;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_north(space, noId) == ERROR);
-	space_destroy(space);
-	return;
-}
-
-
-/**
-@author Adrián Fernández
-@date Nov. 23, 2016
-
 @brief test1_space_get_north
 Tests if you can successfully get the north of a space.
 
@@ -453,29 +427,6 @@ void test2_space_set_south(){
 	FUNCTION_IS_CORRECT(space_set_south(space, id) == ERROR);
 	return;
 }
-
-/**
-@author Adrián Fernández
-@date Nov. 23, 2016
-
-@brief test3_space_set_south
-Tests if you can set the south of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_south(){
-	Space *space = NULL;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_south(space, noId) == ERROR);
-	space_destroy(space);
-	return;
-}
-
 
 /**
 @author Adrián Fernández
@@ -559,28 +510,6 @@ void test2_space_set_east(){
 @author Adrián Fernández
 @date Nov. 23, 2016
 
-@brief test3_space_set_east
-
-Tests if you can set the east of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_east(){
-	Space *space = NULL;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_east(space, noId) == ERROR);
-	space_destroy(space);
-	return;
-}
-/**
-@author Adrián Fernández
-@date Nov. 23, 2016
-
 @brief test1_space_get_east
 Tests if you can successfully get the east of a space.
 
@@ -654,29 +583,6 @@ void test2_space_set_west(){
 	FUNCTION_IS_CORRECT(space_set_west(space, id) == ERROR);
 	return;
 }
-
-/**
-@author Adrián Fernández
-@date Nov. 23, 2016
-
-@brief test3_space_set_west
-Tests if you can set the west of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_west(){
-	Space *space = NULL;
-	Id id = 1;
-	Id noId = NO_ID;
-
-	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_west(space, noId) == ERROR);
-	space_destroy(space);
-	return;
-}
-
 
 /**
 @author Adrián Fernández
@@ -1163,7 +1069,7 @@ Tests if you can successfully print the gdesc of a space.
 void test1_space_print_gdesc(){
 	Space *space = NULL;
 	Id id = 1;
-	char gdesc[WORD_SIZE] = "gdesc";
+	char gdesc[WORD_SIZE] = "       |       |       |";
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
@@ -1203,8 +1109,10 @@ Tests if you can successfully print a space.
 void test1_space_print(){
 	Space *space = NULL;
 	Id id = 1;
+	char gdesc[WORD_SIZE] = "       |       |       |";
 
 	space = space_create(id);
+	space_set_gdesc(space, gdesc);
 	FUNCTION_IS_CORRECT(space_print(space) == OK);
 	space_destroy(space);
 	return;
