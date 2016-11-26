@@ -72,7 +72,7 @@ This function destroys a variable of type Link.
 STATUS link_destroy(Link* link){
 	
 	if(link==NULL){     /* Check that the input is not empty */ 
-    return NULL;
+    return ERROR;
 		return ERROR;
 	}
 
@@ -224,7 +224,7 @@ This function sets the state field of a Link.
 */
 STATUS link_set_state(Link* link, STATE state){
 
-	if(link==NULL){   /* Check that the input is not empty */ 
+	if(link==NULL || state==NO_STATE){   /* Check that the input is not empty */ 
 		return ERROR;
 	}
 /*Sets the link's state*/
@@ -293,11 +293,11 @@ STATUS link_print(Link* link){
 	}
 /*Prints all link's fields*/
 	if(state(link)==NO_STATE){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, NO_STATE", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, NO_STATE\n", id(link), name(link), space1(link), space2(link));
 	}else if(state(link)==OPEN){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, OPEN", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, OPEN\n", id(link), name(link), space1(link), space2(link));
 	} else if(state(link)==CLOSED){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, CLOSED", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, CLOSED\n", id(link), name(link), space1(link), space2(link));
 	}
 	return OK;
 }	

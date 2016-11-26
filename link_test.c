@@ -19,7 +19,7 @@ functions implemented in link.c.
 
 int main(int argc, char** argv){
 
-	int all, test;
+	int all = 1, test;
 
 	if (argc < 2) {
 		printf("Testing all:\n");
@@ -594,6 +594,7 @@ void test1_link_get_state(){
 	Id id = 1;
 
 	link = link_create(id);
+	link_set_state(link, OPEN);
 	FUNCTION_IS_CORRECT(link_get_state(link) != NO_STATE);
 	link_destroy(link);
 
