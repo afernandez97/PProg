@@ -70,7 +70,7 @@ Inventory *inventory_create(){
    @author Adrian Fernández
    
    @brief
-   	Destroys an inventory.nventory_destroy()
+   	Destroys an inventory.inventory_destroy()
 
    @param
   	Inventory *: the inventory to destroy.

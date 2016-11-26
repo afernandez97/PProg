@@ -1,4 +1,4 @@
-/** ===================================================================
+/**
    @file die.c
    @Version 1.0
    @date 15-10-2016 
@@ -11,7 +11,7 @@
     Oct. 15, 2016  Version 1.0 (initial release)
 		Nov. 24, 2016  Version 2.0 
 			Included <time.h> to use srand() in "die_create".
-   =================================================================== */
+   */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,8 @@
 #define num(X) (X)->num
 #define min(X) (X)->min
 #define max(X) (X)->max
-
+/** The Die structure stores information of the identifier of the die,the number of the last roll and the lowest and 
+highest number of the die*/ 
 struct _Die{
   Id id;  /*!< Id of the die */
   int num;  /*!< Number of the last roll */
@@ -34,7 +35,7 @@ struct _Die{
 
 
 /*** Public functions definition ***/
-/** --------------------------------------------------------------------
+/**
    
    @date: 15-10-2016 
    @author Guillermo Rodriguez
@@ -46,7 +47,7 @@ struct _Die{
    @param Id id: the id of the die
     
    @return Die *: the die created or NULL on error.
-   -------------------------------------------------------------------- */
+   */
 Die * die_create(Id id){
   Die *die = NULL;
 
@@ -74,7 +75,7 @@ Die * die_create(Id id){
 
 
 
-/** --------------------------------------------------------------------
+/**
  
    @date: 15-10-2016 
    @author: Guillermo Rodriguez
@@ -86,7 +87,7 @@ Die * die_create(Id id){
    @param Die *die: the die to destroy.
     
    @return STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS die_destroy(Die *die){
   if(!die){         /* Check that the input is not empty */
     return ERROR;
@@ -99,7 +100,7 @@ STATUS die_destroy(Die *die){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date: 15-10-2016 
    @author: Guillermo Rodriguez
@@ -111,7 +112,7 @@ STATUS die_destroy(Die *die){
    @param Die *die: the die to roll.
     
    @return STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS die_roll(Die *die){
   if(!die){         /* Check that the input is not empty */
      return ERROR;
@@ -124,7 +125,7 @@ STATUS die_roll(Die *die){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date 15-10-2016 
    @author Guillermo Rodriguez 
@@ -137,7 +138,7 @@ STATUS die_roll(Die *die){
         
     
    @return int : the last die value or -1 on error.
-   -------------------------------------------------------------------- */
+   */
 int die_get_value(Die*die){
   if(!die){  /* Check that the input is not empty */
     return -1;
@@ -148,7 +149,7 @@ int die_get_value(Die*die){
  
 
 
-/** --------------------------------------------------------------------
+/**
   
    @date: 15-10-2016 
    @author Guillermo Rodriguez 
@@ -161,7 +162,7 @@ int die_get_value(Die*die){
 				
     
    @return STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS die_print(Die *die){
 	if(!die){  /* Check that the input is not empty */
 		return ERROR;
