@@ -1,15 +1,12 @@
-/* ===================================================================
-File: link.h
-Version: 1.0
-Date: Nov. 4, 2016
-Authors: Adrián Fernández, Ricardo Riol
+/**
+@File link.h
+@brief It implements a link.
+@version 1.0
+@date 04-11-2016
+@Author Adrian Fernández, Ricardo Riol
+@version Nov. 4, 2016: Version 1.0 (initial release)
+*/
 
-Description:
-	Contains the implementation of the functions associated to the
-	Link data type.
-Revision history:
-	Nov. 4, 2016: Version 1.0 (initial release)
-=================================================================== */
 
 #ifndef LINK_H
 #define LINK_H
@@ -17,202 +14,167 @@ Revision history:
 #include "space.h"
 
 
-/*** Data structures definition ***/
+/**
+@brief Link structure
+The Link structure stores information of the liks between spaces.
+*/
 typedef struct _Link Link;
 
 /*** Constant values description ***/
 #define MAX_LINKS 100
-
+/**
+@brief Enum to set the link's state.
+Open = 0
+Closed = 1
+No state = -1
+*/
 typedef enum {	
   NO_STATE = -1, OPEN, CLOSED
 } STATE;
 
-/* --------------------------------------------------------------------
-Function: link_create
-Date: Nov. 4, 2016
-Author: Alejandro Sanchez
+/**
+@brief link_create
+This function creates a variable of type Link.
+@date Nov. 4, 2016
+@author Adrian Fernández
+@param Id id: the id of the link.
+@return Link *: the link created or NULL on error.
+*/
 
-Description: 
-	This function creates a variable of type Link.
-Input: 
-	Id id: the id of the link.
-Output:
-	Link *: the link created or NULL on error.
-------------------------------------------------------------------- */
 Link * link_create(Id id);
 
-/* --------------------------------------------------------------------
-Function: link_destroy
-Date: Nov. 4, 2016
-Author: Adrián Fernández
- 
-Description:
-	This function destroys a variable of type Link.
-Input:
-	Link* link: Pointer to the variable that is going to destroy.
-Output:
-	STATUS: Returns OK if the function has done his job correctly.
-------------------------------------------------------------------- */
+/**
+@brief link_destroy
+This function destroys a variable of type Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the variable that is going to destroy.
+@return STATUS: Returns OK if the function has done his job correctly.
+*/
+
 STATUS link_destroy(Link* link);
 
-/* --------------------------------------------------------------------
-Function: link_get_id
-Date: Nov. 4, 2016
-Author: Adrián Fernández
-
-Description:
-	This function gets the id field of a Link.
-Input:
-	Link* link: Pointer to the Link whose id we want to get.
-Output:
-	Id: The id of the Link.
-------------------------------------------------------------------- */
+/**
+@brief link_get_id
+This function gets the id field of a Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose id we want to get.
+@return Id: The id of the Link.
+*/
 Id link_get_id(Link* link);
 
-/* --------------------------------------------------------------------
-Function: link_set_name
-Date: Nov. 4, 2016
-Author: Adrián Fernández
-
-Description:
-	This function sets the name field of a Link.
-Input:
-	Link* link: Pointer to the Link whose name we want to set.
-	char* name: The name we want to set.
-Output:
-	STATUS: Returns OK if the function has done his job correctly.
-------------------------------------------------------------------- */
+/**
+@brief link_set_name
+This function sets the name field of a Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose name we want to set.
+@param char* name: The name we want to set.
+@return STATUS: Returns OK if the function has done his job correctly.
+*/
 STATUS link_set_name(Link* link, char* name);
 
-/* --------------------------------------------------------------------
-Function: link_get_name
-Date: Nov. 4, 2016
-Author: Adrián Fernández
+/**
+@brief link_get_name
+This function gets the name field of a Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose name we want to get.
+@return char*: The name of the Link.
+*/
 
-Description:
-	This function gets the name field of a Link.
-Input:
-	Link* link: Pointer to the Link whose name we want to get.
-Output:
-	char*: The name of the Link.
-------------------------------------------------------------------- */
 char* link_get_name(Link* link);
 
-/* --------------------------------------------------------------------
-Function: link_set_space1
-Date: Nov. 4, 2016
-Author: Alejandro Sanchez
+/**
+@brief link_set_space1
+Sets the Id of a Link's first Space.
+@date Nov. 4, 2016
+@author Alejandro Sanchez
+@param Link *link: the link whose first space you want to set.
+@param Id space1: the id of the space you want to be link's first space.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 
-Description:
-	Sets the Id of a Link's first Space. 
-Input:
-	Link *link: the link whose first space you want to set.
-	Id space1: the id of the space you want to be link's first space.
-Output:
-    STATUS: OK if you do the operation well and ERROR in other cases.
-------------------------------------------------------------------- */
 STATUS link_set_space1(Link *link, Id space1);
 
-/* --------------------------------------------------------------------
-Function: link_get_space1
-Date: Nov. 4, 2016
-Author: Adrián Fernández
+/**
+@brief link_get_space1
+This function gets the Id of a Link's first Space. 
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose first Space we want to get.
+@return Id: The Id of the first Space.
+*/
 
-Description:
-	This function gets the Id of a Link's first Space. 
-Input:
-	Link* link: Pointer to the Link whose first Space we want to get.
-Output:
-	Id: The Id of the first Space.
-------------------------------------------------------------------- */
 Id link_get_space1(Link* link);
 
-/* --------------------------------------------------------------------
-Function: link_set_space2
-Date: Nov. 4, 2016
-Author: Alejandro Sanchez
+/**
+@brief link_set_space2
+Sets the Id of a Link's second Space. 
+@date Nov. 4, 2016
+@author Alejandro Sanchez
+@param Link *link: the link whose second space you want to set.
+@param Id space2: the id of the space you want to be link's second space.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 
-Description:
-	Sets the Id of a Link's second Space. 
-Input:
-	Link *link: the link whose second space you want to set.
-	Id space2: the id of the space you want to be link's second space.
-Output:
-    STATUS: OK if you do the operation well and ERROR in other cases.
-------------------------------------------------------------------- */
 STATUS link_set_space2(Link *link, Id space2);
 
-/* --------------------------------------------------------------------
-Function: link_get_space2
-Date: Nov. 4, 2016
-Author: Adrián Fernández
+/**
+@brief link_get_space2
+This function gets the Id of a Link's second Space.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose second Space we want to get.
+@return Id: The Id of the second Space.
+*/
 
-Description:
-	This function gets the Id of a Link's second Space. 
-Input:
-	Link* link: Pointer to the Link whose second Space we want to get.
-Output:
-	Id: The Id of the second Space.
-------------------------------------------------------------------- */
 Id link_get_space2(Link* link);
 
-/* --------------------------------------------------------------------
-Function: link_set_state
-Date: Nov. 4, 2016
-Author: Adrián Fernández
+/**
+@brief link_set_state
+This function sets the state field of a Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose state we want to set.
+@param STATE state: The state we want to set.
+@return STATUS: Returns OK if the function has done his job correctly.
+*/
 
-Description:
-	This function sets the state field of a Link.
-Input:
-	Link* link: Pointer to the Link whose state we want to set.
-	STATE state: The state we want to set.
-Output:
-	STATUS: Returns OK if the function has done his job correctly.
-------------------------------------------------------------------- */
 STATUS link_set_state(Link* link, STATE state);
 
-/* --------------------------------------------------------------------
-Function: link_get_state
-Date: Nov. 4, 2016
-Author: Adrián Fernández
+/**
+@brief link_get_state
+This function gets the state field of a Link.
+@date Nov. 4, 2016
+@author Adrián Fernández
+@param Link* link: Pointer to the Link whose state we want to get.
+@return STATE: The state of the Link.
+*/
 
-Description:
-	This function gets the state field of a Link.
-Input:
-	Link* link: Pointer to the Link whose state we want to get.
-Output:
-	STATE: The state of the Link.
-------------------------------------------------------------------- */
 STATE link_get_state(Link* link);
 
-/* --------------------------------------------------------------------
-   Function: link_is_open
-   Date: 13-11-2016 
-   Author: Alejandro Sanchez
-  
-   Description: 
-    Checks if the link is open or not.
-  
-   Input: 
-    Link *link: the link to check.
-                 
-   Output: 
-    BOOL: TRUE is the link is open or FALSE if not.
-   -------------------------------------------------------------------- */
+/**
+@brief link_is_open
+Checks if the link is open or not.
+@date 13-11-2016 
+@author Alejandro Sanchez
+@param Link *link: the link to check.
+@return BOOL: TRUE is the link is open or FALSE if not.
+*/
+
 BOOL link_is_open(Link *link);
 
-/* --------------------------------------------------------------------
-Function: link_print
-Date: Nov. 4, 2016
-Author: Ricardo Riol
+/**
+@brief link_print
+This function prints Links.
+@date Nov. 4, 2016
+@author Ricardo Riol
+@param Link* link: Pointer to the Link whose state we want to get.
+@return STATUS
+*/
 
-Description:
-	This function prints Links.
-Input:
-	Link* link: Pointer to the Link whose state we want to get.
-Output:
-	STATUS
-------------------------------------------------------------------- */
 STATUS link_print(Link* link);
 
 #endif
