@@ -1,15 +1,15 @@
-/* ===================================================================
-   File: player_test.c
-   Version: 1.0
-   Date: 05-11-2016 
-   Author: Guillermo Rodriguez 
+/**
+   @file player_test.c
+   @version 1.0
+   @date 05-11-2016 
+   @author Guillermo Rodriguez 
 
-   Description: 
+   @brief 
     It tests the operation of "player.c".
 
-   Revision history:
-    Nov. 5, 2016  Version 1.0 (initial release)
-   =================================================================== */
+   
+   @revision Nov. 5, 2016  Version 1.0 (initial release)
+   */
 
 
 #include <stdio.h>
@@ -64,61 +64,58 @@ int main(int argc, char **argv){
 }
 
 /*** Public functions description ***/
-/* --------------------------------------------------------------------
-   Function: test1_player_destroy 
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/** 
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors you try to destroy an uninitialized player
+   @brief 
+   Check if there aren't any errors you try to destroy an uninitialized player. test1_player_destroy ()
  
-   Input: 
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_destroy(){
   Player *player = NULL;
 	FUNCTION_IS_CORRECT(player_destroy(player) == ERROR);
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_get_id
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to get the player's id 
-   from an uninitialized player
+   from an uninitialized player.test1_player_get_id()
  
-   Input: 
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_get_id(){
 	Player *player = NULL;
   FUNCTION_IS_CORRECT(player_get_id(player) == NO_ID);
   return;
 
 }
-/* --------------------------------------------------------------------
-   Function: test1_player_set_name
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors when you try to set a name 
-   for an uninitialized player
-   Input: 
+   @brief 
+   Check if there aren't any errors when you try to set a name
+   for an uninitialized player. test1_player_set_name()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_set_name(){
 	Player *player = NULL;
   char name[WORD_SIZE] = "Adri";
@@ -128,20 +125,19 @@ void test1_player_set_name(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test1_player_get_name
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to get the player's name 
-   from an uninitialized player
-   Input: 
+   from an uninitialized player.test1_player_get_name()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_get_name(){
 	Player *player = NULL;
   FUNCTION_IS_CORRECT(player_get_name(player) == NULL);
@@ -149,20 +145,19 @@ void test1_player_get_name(){
 
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_set_location
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to set a location 
-   for an uninitialized player
-   Input: 
+   for an uninitialized player.test1_player_set_location()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_set_location(){
 	Player *player = NULL;
   Id idlocation = 345;
@@ -171,20 +166,19 @@ void test1_player_set_location(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test1_player_get_location
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to get the player's location 
-   from an uninitialized player
-   Input: 
+   from an uninitialized player.test1_player_get_location()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_get_location(){
 	Player *player = NULL;
   FUNCTION_IS_CORRECT(player_get_location(player) == NO_ID);
@@ -192,20 +186,19 @@ void test1_player_get_location(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test1_player_add_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors  when you try to add an object to 
-   an uninitialized player
-   Input: 
+   an uninitialized player.test1_player_add_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_add_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
@@ -213,20 +206,19 @@ void test1_player_add_object(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_del_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors  when you try to delete an object 
-   from an uninitialized player
-   Input: 
+   from an uninitialized player.Function: test1_player_del_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_del_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
@@ -234,20 +226,19 @@ void test1_player_del_object(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_has_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors  when you try to know if there is an 
-   specific object in the bag of an uninitialized player
-   Input: 
+   specific object in the bag of an uninitialized player.test1_player_has_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_has_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
@@ -255,38 +246,37 @@ void test1_player_has_object(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_print
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to print an uninitialized player
-   Input: 
+    test1_player_print()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_print(){
 	Player *player = NULL;
   FUNCTION_IS_CORRECT(player_print(player) == ERROR);
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test1_player_create
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors  when you init a player
-   Input: 
+   @brief 
+   Check if there aren't any errors  when you init a player.test1_player_create()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test1_player_create(){
   Player *player = NULL;
 	Id idplayer = 3;
@@ -296,20 +286,19 @@ void test1_player_create(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test2_player_destroy 
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors you try to destroy a player
+   @brief 
+   Check if there aren't any errors you try to destroy a player.test2_player_destroy ()
  
-   Input: 
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_destroy(){
   Player *player = NULL;
   Id idplayer = 3;
@@ -318,21 +307,20 @@ void test2_player_destroy(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test2_player_get_id
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to get the player's id 
-   from a player
+   from a player.test2_player_get_id()
  
-   Input: 
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_get_id(){
 	Player *player = NULL;
   Id idplayer = 3;
@@ -344,20 +332,19 @@ void test2_player_get_id(){
 
 
 
-/* --------------------------------------------------------------------
-   Function: test2_player_set_name
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to set a name 
-   for a player
-   Input: 
+   for a player.test2_player_set_name()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_set_name(){
 	Player *player = NULL;
   char name[WORD_SIZE] = "Adri";
@@ -369,19 +356,19 @@ void test2_player_set_name(){
 
 }
 
-/* --------------------------------------------------------------------
-   Function: test2_player_get_name
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors when you try to get the player's name
-   Input:
+   @brief 
+   Check if there aren't any errors when you try to get the player's name.
+   test2_player_get_name()
+   @param
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_get_name(){
 	Player *player = NULL;
   char name[WORD_SIZE] = "Adri";
@@ -395,20 +382,19 @@ void test2_player_get_name(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test2_player_set_location
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to set a location 
-   for  a player
-   Input: 
+   for  a player.test2_player_set_location()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_set_location(){
 	Player *player = NULL;
   Id idlocation = 345;
@@ -419,21 +405,21 @@ void test2_player_set_location(){
   return;
 }
 
-/* --------------------------------------------------------------------
+/**
    Function: test3_player_set_location
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to set an empty 
    location for a player
    for  a player
-   Input: 
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test3_player_set_location(){
 	Player *player = NULL;
   Id idlocation = NO_ID;
@@ -444,20 +430,19 @@ void test3_player_set_location(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test2_player_get_location
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to get the player's location 
-   from  a player
-   Input: 
+   from  a player.test2_player_get_location()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_get_location(){
 	Player *player = NULL;
   Id idlocation = 345;
@@ -469,20 +454,19 @@ void test2_player_get_location(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test2_player_add_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors  when you try to add an object to 
-   a player
-   Input: 
+   a player.test2_player_add_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_add_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
@@ -495,19 +479,19 @@ void test2_player_add_object(){
 
 
 
-/* --------------------------------------------------------------------
-   Function: test3_player_add_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors when you try to add an empty object
-   Input: 
+   @brief 
+   Check if there aren't any errors when you try to add an empty object.
+   test3_player_add_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test3_player_add_object(){
 	Player *player = NULL;
   Id idobj1 = NO_ID;
@@ -519,19 +503,19 @@ void test3_player_add_object(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test2_player_del_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors when you try to delete an object
-   Input: 
+   @brief 
+   Check if there aren't any errors when you try to delete an object.
+   test2_player_del_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_del_object(){
 	Player *player = NULL;
   Id idobj1 = 3;
@@ -545,19 +529,19 @@ void test2_player_del_object(){
 
 
 
-/* --------------------------------------------------------------------
-   Function: test3_player_del_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
-   Check if there aren't any errors  when you try to delete an empty object
-   Input: 
+   @brief 
+   Check if there aren't any errors  when you try to delete an empty object.
+   test3_player_del_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test3_player_del_object(){
 	Player *player = NULL;
   Id idobj1 = 3;
@@ -570,20 +554,19 @@ void test3_player_del_object(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test4_player_del_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to delete an object 
-   and there aren't objects in the player
-   Input: 
+   and there aren't objects in the player.test4_player_del_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test4_player_del_object(){
 	Player *player = NULL;
   Id idobj1 = 3;
@@ -596,20 +579,19 @@ void test4_player_del_object(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test4_player_add_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to add an object that 
-   is already in the bag of the player
-   Input: 
+   is already in the bag of the player.test4_player_add_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test4_player_add_object(){
 	Player *player = NULL;
   Id idobj1 = 3;
@@ -622,20 +604,19 @@ void test4_player_add_object(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test2_player_print
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors  when you print a player
-   is already in the bag of the player
-   Input: 
+   is already in the bag of the player. test2_player_print()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_print(){
 	Player *player = NULL;
   Id idobj1 = 3,idobj2=5;
@@ -649,20 +630,19 @@ void test2_player_print(){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: test2_player_has_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to know if there 
-   is an specific object in the bag of the player
-   Input: 
+   is an specific object in the bag of the player.test2_player_has_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 void test2_player_has_object(){
 	Player *player = NULL;
   Id idobj1 = 3;
@@ -674,20 +654,19 @@ void test2_player_has_object(){
   return;
 }
 
-/* --------------------------------------------------------------------
-   Function: test3_player_has_object
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/**
+   @date 05-10-2016 
+   @author Guillermo Rodriguez
  
-   Description: 
+   @brief 
    Check if there aren't any errors when you try to know if there is 
-   an specific object in the bag of the player
-   Input: 
+   an specific object in the bag of the player.test3_player_has_object()
+   @param 
     
  
-   Output: 
+   @return 
     
-   -------------------------------------------------------------------- */
+   */
 
 void test3_player_has_object(){
 	Player *player = NULL;

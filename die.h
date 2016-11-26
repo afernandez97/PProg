@@ -7,11 +7,12 @@
    @brief 
     It implements a die.
 
-   Revision history:
-    Oct. 15, 2016  Version 1.0 (initial release)
-		Nov. 24, 2016  Version 2.0 
+   
+   @revision Oct. 15, 2016  Version 1.0 (initial release)
+	 @revision Nov. 24, 2016  Version 2.0 
 			Included <time.h> to use srand() in "die_create".
    */
+
 
 #ifndef DIE_H
 #define DIE_H
