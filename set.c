@@ -1,4 +1,4 @@
-/** =================================================================== 
+/** 
    @file set.c
    @version 2.0
    @date 18-10-2016
@@ -9,7 +9,7 @@
  
    @date
     Oct. 18, 2016 Version 1.0 (initial release)
-=================================================================== */
+*/
  
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,15 +20,15 @@
 #define id(X) (X)->id
 #define count(X) (X)->count
  
-/*** The Set structure stores information of the identifiers or the objects
-that contains and the number of them ***/ 
+/** The Set structure stores information of the identifiers or the objects
+that contains and the number of them */ 
 struct _Set{
   Id id[MAX_ID]; /*!< Array of identifiers */
   int count;/*!< Number of identifiers in that moment */
 };
  
 /*** Public functions definition ***/
-/** --------------------------------------------------------------------
+/**
    @date 18-10-2016 
    @author Guillermo Rodriguez
   
@@ -39,7 +39,7 @@ struct _Set{
          
    @return 
     Set *: the set created or NULL on error.
-   -------------------------------------------------------------------- */
+   */
 Set * set_create(){
   Set *set = NULL;
 
@@ -56,7 +56,7 @@ Set * set_create(){
  
 
 
-/** --------------------------------------------------------------------
+/**
     
    @date 18-10-2016 
    @author Guillermo Rodriguez
@@ -68,7 +68,7 @@ Set * set_create(){
     Set *set: the set to destroy.
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS set_destroy(Set *set){
   if(!set){         /* Check that the input is not empty */
     return ERROR;
@@ -81,7 +81,7 @@ STATUS set_destroy(Set *set){
 
 
  
-/** --------------------------------------------------------------------
+/**
    
    @date 18-10-2016 
    @author: Guillermo Rodriguez
@@ -94,7 +94,7 @@ STATUS set_destroy(Set *set){
     @param Id id: the id of the object you want to add.
      
     @return STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS set_add(Set *set, Id id){
   /* Check that the input is not empty or the set is full */
   if(!set || set_is_full(set) == TRUE){
@@ -117,7 +117,7 @@ STATUS set_add(Set *set, Id id){
 
 
  
-/** --------------------------------------------------------------------
+/**
   
    @date: 18-10-2016 
    @author: Guillermo Rodriguez 
@@ -130,7 +130,7 @@ STATUS set_add(Set *set, Id id){
    @param the id of the object you want to delete.
     
    @return STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+   */
 STATUS set_del(Set *set, Id id){
  	/* Initialize the counter and the flag */
   int i = 0, flag = 0;
@@ -166,7 +166,7 @@ STATUS set_del(Set *set, Id id){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date 18-10-2016 
    @author Guillermo Rodriguez
@@ -179,7 +179,7 @@ STATUS set_del(Set *set, Id id){
                  
     
    @return int: the number of objects in the set.
-   -------------------------------------------------------------------- */
+   */
 int set_get_count(Set *set){
 	if(!set){
 		return 0;
@@ -190,7 +190,7 @@ int set_get_count(Set *set){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date 18-10-2016 
    @author Guillermo Rodriguez
@@ -203,7 +203,7 @@ int set_get_count(Set *set){
                  
     
    @return BOOL: TRUE is the set is empty or FALSE if not.
-   -------------------------------------------------------------------- */
+   */
 BOOL set_is_empty(Set *set){
   /* Check if the input is empty or the number of objects is 0 */
   if(!set || count(set) == 0){
@@ -215,7 +215,7 @@ BOOL set_is_empty(Set *set){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date: 18-10-2016 
    @author: Guillermo Rodriguez
@@ -228,7 +228,7 @@ BOOL set_is_empty(Set *set){
                  
     
    @return BOOL: TRUE is the set is full or FALSE if not.
-   -------------------------------------------------------------------- */
+   */
 BOOL set_is_full(Set *set){
   /* Check if the input is empty or the number of objects is lower 
   than the maximum number of objects that can contain the set */
@@ -241,7 +241,7 @@ BOOL set_is_full(Set *set){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date: 18-10-2016 
    @author: Guillermo Rodriguez
@@ -255,7 +255,7 @@ BOOL set_is_full(Set *set){
                  
     
    @return Id: the id of the object at the position i or NO_ID on error.
-   -------------------------------------------------------------------- */
+   */
 Id set_get_object_at_position(Set *set, int position){
   /* Check that the input is not empty or position is between 0 (included) 
   and the maximum number of objects that can contain the set */
@@ -268,7 +268,7 @@ Id set_get_object_at_position(Set *set, int position){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date: 18-10-2016 
    @author: Guillermo Rodriguez 
@@ -281,7 +281,7 @@ Id set_get_object_at_position(Set *set, int position){
    @param Id object: the id of the object you want to know if it is in the set.
                   
     @return BOOL: TRUE if the object is in the set and FALSE in other cases. 
-   -------------------------------------------------------------------- */
+   */
 BOOL set_is_object(Set *set, Id object){
   int i, flag = 0;  /* Initialize the flag */
 
@@ -307,7 +307,7 @@ BOOL set_is_object(Set *set, Id object){
 
 
 
-/** --------------------------------------------------------------------
+/**
    
    @date: 18-10-2016 
    @author: Guillermo Rodriguez
@@ -320,7 +320,7 @@ BOOL set_is_object(Set *set, Id object){
                  
     
    @return STATUS: ERROR if the input is NULL and OK otherwise.
-   -------------------------------------------------------------------- */
+   */
 STATUS set_print(Set *set){
   int i;
 
