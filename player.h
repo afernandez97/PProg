@@ -1,25 +1,25 @@
 /**
-   @file player.h
-   @version 2.1
-   @Date 28-10-2016 
-   @author Guillermo Rodriguez and Alejandro Sanchez
+@file player.h
+@version 2.1
+@Date 28-10-2016 
+@author Guillermo Rodriguez and Alejandro Sanchez
 
-   @brief 
-    It implements a player.
+@brief 
+It implements a player.
 
-   
-   @revision Oct. 03, 2016  Version 1.0 (initial release)
-   @revision Oct. 25, 2016  Version 2.0
-      Changed "objects" field to Set *.
-      Modified the functions that were affected by this field.
-   @revision Oct. 28, 2016  Version 2.1
-      Changed "player_set_object" to "player_add_object".
-      Created function "player_del_object".
-   @revision Nov. 05, 2016 Version 3.0
-      Changed "objects" field to Inventory *inv.
-      Modified the functions that were affected by this field.
-      Created function "player_has_object" and "player_set_object".
-    */
+
+@revision Oct. 03, 2016  Version 1.0 (initial release)
+@revision Oct. 25, 2016  Version 2.0
+  Changed "objects" field to Set *.
+  Modified the functions that were affected by this field.
+@revision Oct. 28, 2016  Version 2.1
+  Changed "player_set_object" to "player_add_object".
+  Created function "player_del_object".
+@revision Nov. 05, 2016 Version 3.0
+  Changed "objects" field to Inventory *inv.
+  Modified the functions that were affected by this field.
+  Created function "player_has_object" and "player_set_object".
+*/
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -27,11 +27,12 @@
 #include "types.h"
 
 
-/*** Data structures definition ***/
+/*!< Data structures definition */
 typedef struct _Player Player;
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
+
 /**
    @date 25-10-2016 
    @author Guillermo Rodriguez

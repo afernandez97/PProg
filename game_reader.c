@@ -32,13 +32,13 @@ Nov. 26, 2016 Version 5.0
 #include "game_reader.h"
 
 
-/*** Constant values description ***/
+/*!< Constant values description */
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
 #define links(X) (X)->links
 
 
-/*** Public functions definition ***/
+/*!< Public functions definition */
 
 /**
 @date 30-09-2016 
@@ -58,17 +58,17 @@ STATUS game_add_space(Game *game, Space *space){
     return ERROR;
   }
 
-  /*!< Increase the counter until finding an empty space */
+  /* Increase the counter until finding an empty space */
   while(i < MAX_SPACES && game_get_space_at_position(game, i) != NULL){
     i++;
   }
 
-  /*!< Check if every space is not empty */
+  /* Check if every space is not empty */
   if(i >= MAX_SPACES){
     return ERROR;
   }
 
-  /*!< Set the new space */
+  /* Set the new space */
   if(game_set_space_at_position(game, space, i) == ERROR){
     return ERROR;
   }
@@ -100,18 +100,18 @@ STATUS game_load_spaces(Game *game, char *filename){
   Space *space = NULL;
   STATUS status = OK;
   
-  if(!game || !filename){ /*!< Check that the inputs are not empty */
+  if(!game || !filename){ /* Check that the inputs are not empty */
     return ERROR;
   }
   
   strcat(filename,"_spaces.dat");
   
-  file = fopen(filename, "r");   /*!< Open the file where the spaces are */
+  file = fopen(filename, "r");   /* Open the file where the spaces are */
   if(!file){
     return ERROR;
   }
   
-  /*!< Read each line of the file and get the id and the links of each space */
+  /* Read each line of the file and get the id and the links of each space */
   while(fgets(line, WORD_SIZE, file)){
     if(strncmp("#s:", line, 3) == 0){
       toks = strtok(line + 3, "|");
@@ -138,34 +138,34 @@ STATUS game_load_spaces(Game *game, char *filename){
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%s|%s\n", id, name, north, east, south, west, desc, gdesc);
 #endif
-      space = space_create(id); /*!< Create the space */
+      space = space_create(id); /* Create the space */
       if(space != NULL){
-        /*!< Set the name to the space */  
+        /* Set the name to the space */  
         space_set_name(space, name);
 
-        /*!< Set the links to the space */  
+        /* Set the links to the space */  
         space_set_north(space, north);
         space_set_east(space, east);
         space_set_south(space, south);
         space_set_west(space, west);
 
-        /*!< Set the graphic description to the space */ 
+        /* Set the graphic description to the space */ 
 				space_set_gdesc(space, gdesc);
         
-				/*!< Set the description to the space */ 
+				/* Set the description to the space */ 
 				space_set_desc(space, desc);
         
-        /*!< Add the space to the game */
+        /* Add the space to the game */
         game_add_space(game, space);  
       }
-    } /*!< if(strncmp("#s:", line, 3) == 0) */
-  } /*!< while */
+    } /* if(strncmp("#s:", line, 3) == 0) */
+  } /* while */
   
-  if(ferror(file)){ /*!< Test the error indicator for the file */ 
+  if(ferror(file)){ /* Test the error indicator for the file */ 
     status = ERROR;
   }
   
-  fclose(file); /*!< Close the file */
+  fclose(file); /* Close the file */
   
   return status;
 }
@@ -184,23 +184,23 @@ Adds an object to a game.
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS game_add_object(Game *game, Object *object){
-  int i = 0;  /*!< Initialize the counter */
+  int i = 0;  /* Initialize the counter */
 
-  if(!game || !object){  /*!< Check that the inputs are not empty */
+  if(!game || !object){  /* Check that the inputs are not empty */
     return ERROR;
   }
 
-  /*!< Increase the counter until finding an empty object */
+  /* Increase the counter until finding an empty object */
   while(i < MAX_OBJECTS && game_get_object_at_position(game, i) != NULL){
     i++;
   }
 
-  /*!< Check if every object is not empty */
+  /* Check if every object is not empty */
   if(i >= MAX_OBJECTS){
     return ERROR;
   }
 
-  /*!< Set the new object */
+  /* Set the new object */
   if(game_set_object_at_position(game, object, i) == ERROR){
     return ERROR;
 	}
@@ -232,18 +232,18 @@ STATUS game_load_objects(Game *game, char *filename){
   Space *space = NULL;
   STATUS status = OK;
   
-  if(!game || !filename){ /*!< Check that the inputs are not empty */
+  if(!game || !filename){ /* Check that the inputs are not empty */
     return ERROR;
   }
   
   strcat(filename,"_objects.dat");
   
-  file = fopen(filename, "r");   /*!< Open the file where the objects are */
+  file = fopen(filename, "r");   /* Open the file where the objects are */
   if(!file){
     return ERROR;
   }
   
-  /*!< Read each line of the file and get the id, the name and the location of the objects */
+  /* Read each line of the file and get the id, the name and the location of the objects */
   while(fgets(line, WORD_SIZE, file)){
     if(strncmp("#o:", line, 3) == 0){
       toks = strtok(line + 3, "|");
@@ -259,23 +259,23 @@ STATUS game_load_objects(Game *game, char *filename){
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%s\n", id, name, location, desc);
 #endif
-      object = object_create(id); /*!< Create the object */
+      object = object_create(id); /* Create the object */
       if(object != NULL){
-        /*!< Set the name to the object */  
+        /* Set the name to the object */  
         object_set_name(object, name);
 
-        /*!< Set the location to the object */  
+        /* Set the location to the object */  
 				object_set_location(object, location);
 				
-				/*!< Set the description to the object */ 
+				/* Set the description to the object */ 
 				object_set_desc(object, desc);
         		
 
-        /*!< Add the object to the game */
+        /* Add the object to the game */
         game_add_object(game, object);  
 
 
-        /*!< Add the object to the set of objects of its location */
+        /* Add the object to the set of objects of its location */
         space = game_get_space(game, location);
         if(space != NULL){
           space_add_object(space, id);
@@ -283,14 +283,14 @@ STATUS game_load_objects(Game *game, char *filename){
 
         
       }
-    } /*!< if(strncmp("#o:", line, 3) == 0) */
-  } /*!< while */
+    } /* if(strncmp("#o:", line, 3) == 0) */
+  } /* while */
   
-  if(ferror(file)){ /*!< Test the error indicator for the file */ 
+  if(ferror(file)){ /* Test the error indicator for the file */ 
     status = ERROR;
   }
   
-  fclose(file); /*!< Close the file */
+  fclose(file); /* Close the file */
   
   return status;
 }
@@ -309,23 +309,23 @@ Adds an link to a game.
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS game_add_link(Game *game, Link *link){
-  int i = 0;  /*!< Initialize the counter */
+  int i = 0;  /* Initialize the counter */
 
-  if(!game || !link){  /*!< Check that the inputs are not empty */
+  if(!game || !link){  /* Check that the inputs are not empty */
     return ERROR;
   }
 
-  /*!< Increase the counter until finding an empty link */
+  /* Increase the counter until finding an empty link */
   while(i < MAX_LINKS && game_get_link_at_position(game, i) != NULL){
     i++;
   }
 
-  /*!< Check if every link is not empty */
+  /* Check if every link is not empty */
   if(i >= MAX_LINKS){
     return ERROR;
   }
 
-  /*!< Set the new link */
+  /* Set the new link */
   if(game_set_link_at_position(game, link, i) == ERROR){
     return ERROR;
   }
@@ -359,17 +359,17 @@ STATUS game_load_links(Game *game, char *filename){
   STATUS status = OK;
 
 
-	if(!game || !filename){    /*!< Check that the inputs are not empty */
+	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
         strcat(filename,"_links.dat");
 	
-        file = fopen(filename, "r");	/*!< Open the file where the links are */
+        file = fopen(filename, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}
 
-  /*!< Read each line of the file and get the id, the name, the spaces and the state of the links */
+  /* Read each line of the file and get the id, the name, the spaces and the state of the links */
 	while(fgets(line, WORD_SIZE, file)){
 		if(strncmp("#l:", line, 3) == 0){
 			toks = strtok(line + 3, "|");
@@ -387,25 +387,25 @@ STATUS game_load_links(Game *game, char *filename){
 	printf("Leido: %ld|%s|%ld|%ld|%d\n", id, name, space_id1, space_id2, link_state);
 #endif
 	
-     	link = link_create(id);	/*!< Create the link */
+     	link = link_create(id);	/* Create the link */
    		if(link != NULL){
-        /*!< Set the name to the link */			
+        /* Set the name to the link */			
   			link_set_name(link, name);
 
-        /*!< Set the first space to the link */
+        /* Set the first space to the link */
         link_set_space1(link, space_id1);
 
-        /*!< Set the second space to the link */
+        /* Set the second space to the link */
         link_set_space2(link, space_id2);
 
-        /*!< Set the state to the link */
+        /* Set the state to the link */
 	   		link_set_state(link, link_state);
 
-        /*!< Add the link to the game */
+        /* Add the link to the game */
         game_add_link(game, link);  
       }
-    } /*!< if(strncmp("#l:", line, 3) == 0) */
-  } /*!< while */
+    } /* if(strncmp("#l:", line, 3) == 0) */
+  } /* while */
   
   if(ferror(file)){
   	status = ERROR;

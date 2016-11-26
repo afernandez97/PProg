@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
   T_Command cmd;
   int flag = 0, arg = 2;
   
-  /*!< Check if user enters the name of the file that contains the spaces */	
+  /* Check if user enters the name of the file that contains the spaces */	
   if(argc < 2){	
 	  fprintf(stderr, "Use: %s <game_data_file1> <game_data_file2>\n", argv[0]); 
 	  return 1;
@@ -57,13 +57,13 @@ int main(int argc, char *argv[]){
   
 
   game = game_init_from_file(argv[1], player, die);
-  /*!< Check if game initializes correctly */
+  /* Check if game initializes correctly */
   if(game == NULL){	
 	  fprintf(stderr, "Error while initializing game.\n"); 
 	  return 1;
 	}
    
-  /*!< Check if user enters the command to register the results of the execution */
+  /* Check if user enters the command to register the results of the execution */
   if(!strcmp("-nv", argv[2])){
     flag = 1;
     arg ++;
@@ -71,22 +71,22 @@ int main(int argc, char *argv[]){
 
   if(strcmp(argv[arg], "-l") == 0){
     f = fopen(argv[arg+1], "w");
-    if(!f){   /*!< Check if the file has been opened correctly */
+    if(!f){   /* Check if the file has been opened correctly */
       game_destroy(game);
       return 1;
     }
   }
   
  
-  /*!< Game loop */
+  /* Game loop */
   while((command_get_cmd(command) != QUIT) && !game_is_over(game)){	
-    command_destroy(command); /*!< Destroy the previous command */
+    command_destroy(command); /* Destroy the previous command */
     if(flag == 0){ 
       game_print_screen(game);
     } 
     command = get_user_input(); 
     status = game_update(game, command); 
-    /*!< If the file is open, print there the status of the last command */
+    /* If the file is open, print there the status of the last command */
     if(f != NULL){ 
       cmd = command_get_cmd(command);
       switch(cmd){
@@ -134,19 +134,19 @@ int main(int argc, char *argv[]){
           break;
         case NO_CMD:
           break;
-        default: /*!< We must never arrive here */
+        default: /* We must never arrive here */
           break;
-      } /*!< switch */
-    } /*!< if(f != NULL) */
-	} /*!< while */ 
+      } /* switch */
+    } /* if(f != NULL) */
+	} /* while */ 
 	
-  /*!< If the file is open, close it */
+  /* If the file is open, close it */
   if(f != NULL){
     fclose(f);
   } 
 
-  command_destroy(command); /*!< Destroy the command */
-	game_destroy(game);	/*!< The game finishes */
+  command_destroy(command); /* Destroy the command */
+	game_destroy(game);	/* The game finishes */
   	
   return 0;
 
