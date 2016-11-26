@@ -43,15 +43,15 @@ Link * link_create(Id id){
 
 	Link *link = NULL;
 
-	if(id == NO_ID){
+	if(id == NO_ID){  /* Check if the input is empty*/
 		return NULL;
 	}
 
 	link = (Link *)malloc(sizeof(Link));
-	if(!link){
+	if(!link){         /* Check if memory has been allocated */
 		return NULL;
 	}
-
+ /* Initialize structure fields */
 	id(link) = id;
 	name(link)[0] = '\0';
 	space1(link) = NO_ID;
@@ -71,11 +71,12 @@ This function destroys a variable of type Link.
 */
 STATUS link_destroy(Link* link){
 	
-	if(link==NULL){
+	if(link==NULL){     /* Check that the input is not empty */ 
+    return NULL;
 		return ERROR;
 	}
 
-	free(link);
+	free(link);  /*Destroy the link's memory*/
 
 	return OK;
 }
@@ -90,7 +91,7 @@ This function gets the id field of a Link.
 */
 Id link_get_id(Link* link){
 	
-	if(link==NULL){
+	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_ID;
 	}
 
@@ -108,10 +109,10 @@ This function sets the name field of a Link.
 */
 STATUS link_set_name(Link* link, char* name){
 
-	if(link==NULL || name==NULL){
+	if(link==NULL || name==NULL){  /* Check that the input is not empty */ 
 		return ERROR;
 	}
-
+     /* Copies the input to the field name*/
 	if(strcpy(name(link), name)==NULL){
 		return ERROR;
 	}
@@ -129,7 +130,7 @@ This function gets the name field of a Link.
 */
 char* link_get_name(Link* link){
 
-	if(link==NULL){
+	if(link==NULL){  /* Check that the input is not empty */ 
 		return NULL;
 	}
 
@@ -138,22 +139,18 @@ char* link_get_name(Link* link){
 
 /**
 @brief link_set_space1
+Sets the Id of a Link's first Space.
 @date Nov. 4, 2016
 @author Alejandro Sanchez
-
-Description:
-	Sets the Id of a Link's first Space. 
-@param
-	Link *link: the link whose first space you want to set.
-	Id space1: the id of the space you want to be link's first space.
-@return
-    STATUS: OK if you do the operation well and ERROR in other cases.
+@param Link *link: the link whose first space you want to set.
+@param Id space1: the id of the space you want to be link's first space.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS link_set_space1(Link *link, Id space1){
-	if(!link || space1 == NO_ID){
-		return ERROR;
+	if(!link || space1 == NO_ID){  
+		return ERROR;      /* Check that the input is not empty */ 
 	}
-	
+/* Sets the space conected with the link*/	
 	space1(link) = space1;
 	
 	return OK;
@@ -161,19 +158,15 @@ STATUS link_set_space1(Link *link, Id space1){
 
 /**
 @brief link_get_space1
+This function gets the Id of a Link's first Space. 
 @date Nov. 4, 2016
 @author Adrián Fernández
-
-Description:
-	This function gets the Id of a Link's first Space. 
-@param
-	Link* link: Pointer to the Link whose first Space we want to get.
-@return
-	Id: The Id of the first Space.
+@param Link* link: Pointer to the Link whose first Space we want to get.
+@return Id: The Id of the first Space.
 */
 Id link_get_space1(Link* link){
 
-	if(link==NULL){
+	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_ID;
 	}
 
@@ -183,22 +176,19 @@ Id link_get_space1(Link* link){
 
 /**
 @brief link_set_space2
+Sets the Id of a Link's second Space. 
 @date Nov. 4, 2016
 @author Alejandro Sanchez
-
-Description:
-	Sets the Id of a Link's second Space. 
-@param
-	Link *link: the link whose second space you want to set.
-	Id space2: the id of the space you want to be link's second space.
-@return
-    STATUS: OK if you do the operation well and ERROR in other cases.
+@param Link *link: the link whose second space you want to set.
+@param Id space2: the id of the space you want to be link's second space.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS link_set_space2(Link *link, Id space2){
-	if(!link || space2 == NO_ID){
+	if(!link || space2 == NO_ID){  /* Check that the input is not empty */ 
 		return ERROR;
 	}
 	
+/* Sets the space conected with the link*/
 	space2(link) = space2;
 	
 	return OK;
@@ -207,19 +197,16 @@ STATUS link_set_space2(Link *link, Id space2){
 
 /**
 @brief link_get_space2
+This function gets the Id of a Link's second Space.
 @date Nov. 4, 2016
 @author Adrián Fernández
-
-Description:
-	This function gets the Id of a Link's second Space. 
-@param
-	Link* link: Pointer to the Link whose second Space we want to get.
-@return
-	Id: The Id of the second Space.
+@param Link* link: Pointer to the Link whose second Space we want to get.
+@return Id: The Id of the second Space.
 */
 Id link_get_space2(Link* link){
 
-	if(link==NULL){
+	if(link==NULL){    /* Check that the input is not empty */ 
+
 		return NO_ID;
 	}
 
@@ -228,23 +215,19 @@ Id link_get_space2(Link* link){
 
 /**
 @brief link_set_state
+This function sets the state field of a Link.
 @date Nov. 4, 2016
 @author Adrián Fernández
-
-Description:
-	This function sets the state field of a Link.
-@param
-	Link* link: Pointer to the Link whose state we want to set.
-	STATE state: The state we want to set.
-@return
-	STATUS: Returns OK if the function has done his job correctly.
+@param Link* link: Pointer to the Link whose state we want to set.
+@param STATE state: The state we want to set.
+@return STATUS: Returns OK if the function has done his job correctly.
 */
 STATUS link_set_state(Link* link, STATE state){
 
-	if(link==NULL){
+	if(link==NULL){   /* Check that the input is not empty */ 
 		return ERROR;
 	}
-
+/*Sets the link's state*/
 	state(link) = state;
 
 	return OK;
@@ -252,19 +235,16 @@ STATUS link_set_state(Link* link, STATE state){
 
 /**
 @brief link_get_state
+This function gets the state field of a Link.
 @date Nov. 4, 2016
 @author Adrián Fernández
-
-Description:
-	This function gets the state field of a Link.
-@param
-	Link* link: Pointer to the Link whose state we want to get.
-@return
-	STATE: The state of the Link.
+@param Link* link: Pointer to the Link whose state we want to get.
+@return STATE: The state of the Link.
 */
+
 STATE link_get_state(Link* link){
 
-	if(link==NULL){
+	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_STATE;
 	}
 
@@ -274,24 +254,19 @@ STATE link_get_state(Link* link){
 
 
 /**
-   @brief link_is_open
-   @date 13-11-2016 
-   @author Alejandro Sanchez
-  
-   Description: 
-    Checks if the link is open or not.
-  
-   @param 
-    Link *link: the link to check.
-                 
-   @return 
-    BOOL: TRUE is the link is open or FALSE if not.
-   -*/
+@brief link_is_open
+Checks if the link is open or not.
+@date 13-11-2016 
+@author Alejandro Sanchez
+@param Link *link: the link to check.
+@return BOOL: TRUE is the link is open or FALSE if not.
+*/
+
 BOOL link_is_open(Link *link){
-	if(!link){
+	if(!link){  /* Check that the input is not empty */ 
 		return FALSE;
 	}
-
+/*Checks if the link is opened*/
 	if(state(link) == OPEN){
 		return TRUE;
 	}
@@ -303,22 +278,20 @@ BOOL link_is_open(Link *link){
 
 /**
 @brief link_print
+This function prints Links.
 @date Nov. 4, 2016
 @author Ricardo Riol
-
-Description:
-	This function prints Links.
-@param
-	Link* link: Pointer to the Link whose state we want to get.
-@return
-	STATUS
+@param Link* link: Pointer to the Link whose state we want to get.
+@return STATUS
 */
+
 STATUS link_print(Link* link){
 
-	if (!link){
+	if (!link){  /* Check that the input is not empty */ 
+
 		return ERROR;
 	}
-
+/*Prints all link's fields*/
 	if(state(link)==NO_STATE){
 		fprintf (stdout, "Link: %ld, %s, %ld, %ld, NO_STATE", id(link), name(link), space1(link), space2(link));
 	}else if(state(link)==OPEN){
