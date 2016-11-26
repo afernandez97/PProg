@@ -1,54 +1,67 @@
-/* =================================================================== 
-   File: game.c
-   Version: 4.2
-   Date: 20-11-2016
-   Author: Guillermo Rodriguez, Alejandro Sanchez, Adrian 
-	 	Fernandez and Ricardo Riol
+/**
+@file game.c
+@version 5.0
+@date 20-11-2016
+@authors Guillermo Rodriguez, Alejandro Sanchez, Adrian Fernandez and Ricardo Riol
 
-   Description:
-    It implements the game interface and all the associated callbacks
-    for each command.
+@brief
+It implements the game interface and all the associated callbacks
+for each command.
 
-   Revision history:
-    Jan. 13, 2015 Version 1.0 (initial release)
-    Sept. 23, 2016  Version 2.0 
-      Commented the file.
-    Oct. 04, 2016 Version 2.1
-      Changed "Id player_location" and "Id object_location" fields 
-      for "Player *player" and "Object *object".
-      Added macros for each structure field.
-      Added input control to the functions.
-      Added two inputs (player and object) to "game_init" and 
-      "game_init_from_file" after creating ADT Player and ADT Object. 
-    Oct. 08, 2016 Version 2.2
-      Added callbacks CATCH and LEAVE.
-      Changed "game_set_player_location", "game_get_player_location", 
-      "game_set_object_location" and "game_get_object_location".
-		Oct. 20, 2016 Version 3.0
-      Modified some functions after creating ADT Die and ADT Set.
-      Added callback ROLL.
-    Oct. 27, 2016 Version 3.1
-			Created function "game_get_object".
-      Made public the function "game_get_space".
-    Oct. 30, 2016 Version 3.2
-      Modified "game_set_player_location", "game_get_player_location", 
-      "game_set_object_location" and "game_get_object_location".
-    Nov. 02, 2016 Version 3.3
-      Created function "game_print_objects" and modified function 
-      "game_print_screen" to show the graphic description.
-    Nov. 04, 2016 Version 3.4
-      Modified callbacks CATCH and LEAVE to receive input's argument.
-      Modified "game_update" and callbacks to return a status.
-    Nov. 05, 2016 Version 4.0
-      Made "Game" structure private.
-      Modified some functions after this change.
-      Added callback GO and removed callbacks NEXT, BACK and JUMP.
-    Nov. 13, 2016 Version 4.1
-      Added field "Link *links" to the structure after creating ADT Link.
-      Created functions "game_spaces_are_linked" and "game_is_link_open"
-    Nov. 20, 2016 Version 4.2
-      Added callback INSPECT.
-=================================================================== */
+@version
+Jan. 13, 2015 Version 1.0 (initial release)
+@version
+Sept. 23, 2016  Version 2.0 
+  Commented the file.
+@version
+Oct. 04, 2016 Version 2.1
+  Changed "Id player_location" and "Id object_location" fields 
+  for "Player *player" and "Object *object".
+  Added macros for each structure field.
+  Added input control to the functions.
+  Added two inputs (player and object) to "game_init" and 
+  "game_init_from_file" after creating ADT Player and ADT Object. 
+@version
+Oct. 08, 2016 Version 2.2
+  Added callbacks CATCH and LEAVE.
+  Changed "game_set_player_location", "game_get_player_location", 
+  "game_set_object_location" and "game_get_object_location".
+@version
+Oct. 20, 2016 Version 3.0
+  Modified some functions after creating ADT Die and ADT Set.
+  Added callback ROLL.
+@version
+Oct. 27, 2016 Version 3.1
+	Created function "game_get_object".
+  Made public the function "game_get_space".
+@version
+Oct. 30, 2016 Version 3.2
+  Modified "game_set_player_location", "game_get_player_location", 
+  "game_set_object_location" and "game_get_object_location".
+@version
+Nov. 02, 2016 Version 3.3
+  Created function "game_print_objects" and modified function 
+  "game_print_screen" to show the graphic description.
+@version
+Nov. 04, 2016 Version 3.4
+  Modified callbacks CATCH and LEAVE to receive input's argument.
+  Modified "game_update" and callbacks to return a status.
+@version
+Nov. 05, 2016 Version 4.0
+  Made "Game" structure private.
+  Modified some functions after this change.
+  Added callback GO and removed callbacks NEXT, BACK and JUMP.
+@version
+Nov. 13, 2016 Version 4.1
+  Added field "Link *links" to the structure after creating ADT Link.
+  Created functions "game_spaces_are_linked" and "game_is_link_open"
+@version
+Nov. 20, 2016 Version 4.2
+  Added callback INSPECT.
+@version
+Nov. 26, 2016 Version 5.0
+  Updated headers to use Doxygen.
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,25 +75,27 @@
 #define CLEAR "clear"
 #endif
 
-/*** Constant values description ***/
+/*!< Constant values description */
 #define player(X) (X)->player
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
 #define die(X) (X)->die
 #define links(X) (X)->links
 
-/* Data structure definition and description */
-/*** The Game structure stores information of the game and its elements ***/
+/**
+@brief
+The Game structure stores information of the game and its elements.
+*/
 struct _Game{
-  Player *player; /* Player of the game */
-  Object *objects[MAX_OBJECTS + 1]; /* Objects of the game */
-  Space *spaces[MAX_SPACES + 1]; /* Spaces of the game */
-  Die *die; /* Die of the game*/ 
-  Link *links[MAX_LINKS + 1]; /* Links of the game */
+  Player *player;                     /*!< Player of the game */
+  Object *objects[MAX_OBJECTS + 1];   /*!< Objects of the game */
+  Space *spaces[MAX_SPACES + 1];      /*!< Spaces of the game */
+  Die *die;                           /*!< Die of the game*/ 
+  Link *links[MAX_LINKS + 1];         /*!< Links of the game */
 };
 
 
-/*** List of callbacks for each command in the game ***/
+/*!< List of callbacks for each command in the game */
 STATUS callback_UNKNOWN(Game *game);
 STATUS callback_QUIT(Game *game);
 STATUS callback_CATCH(Game *game, char *arg);
@@ -89,7 +104,7 @@ STATUS callback_ROLL(Game *game);
 STATUS callback_GO(Game *game, char *arg);
 STATUS callback_INSPECT(Game *game, char *arg);
 
-/*** Private functions description ***/
+/*!< Private functions description */
 Id game_get_space_id_at(Game *game, int position);
 
 Object * game_get_object(Game *game, Id id);
@@ -104,23 +119,20 @@ BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
 BOOL game_is_link_open(Game *game, Id link);
 
 
-/*** Game interface implementation ***/
-/*** Public functions definition ***/
-/* --------------------------------------------------------------------
-   Function: game_init
-   Date: 05-10-2016 
-   Author: Guillermo Rodriguez
+/*!< Public functions definition */
 
-   Description: 
-    Initializes a game.
+/**
+@date 05-10-2016 
+@author Guillermo Rodriguez
 
-   Input: 
-    Id player: the identifier of the player of the game.
-    Id die: the identifier of the die of the game.
+@brief game_init
+Initializes a game.
 
-   Output: 
-    Game *game: the game initialized.
-   -------------------------------------------------------------------- */
+@param Id player: the identifier of the player of the game.
+@param Id die: the identifier of the die of the game.
+
+@return Game *game: the game initialized.
+*/
 Game * game_init(Id player, Id die){
   int i;
   Game *game=NULL;
@@ -160,22 +172,19 @@ Game * game_init(Id player, Id die){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_init_from_file
-   Date: 05-11-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 05-11-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Initializes a game from two files which contain the spaces and objects.
+@brief game_init_from_file
+Initializes a game from two files which contain the spaces and objects.
 
-   Input: 
-    char *filename1: the file to concatenate the spaces,links and objects
-    Id player: the identifier of the player of the game.
-    Id die: the identifier of the die of the game.
-   
-   Output: 
-    Game *game: the game initialized.
-   -------------------------------------------------------------------- */
+@param char *filename1: the file to concatenate the spaces,links and objects
+@param Id player: the identifier of the player of the game.
+@param Id die: the identifier of the die of the game.
+
+@return Game *game: the game initialized.
+*/
 Game * game_init_from_file(char *filename1,Id player, Id die){
   Game *game = NULL;
 
@@ -214,20 +223,17 @@ Game * game_init_from_file(char *filename1,Id player, Id die){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_destroy
-   Date: 05-11-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 05-11-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Destroys a game.
+@brief game_destroy
+Destroys a game.
 
-   Input: 
-    Game *game: the game to destroy.
+@param Game *game: the game to destroy.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_destroy(Game *game){
   int i;
 
@@ -261,21 +267,18 @@ STATUS game_destroy(Game *game){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_update
-   Date: 05-11-2016 
-   Author: Ricardo Riol
+/**
+@date 05-11-2016 
+@author Ricardo Riol
 
-   Description: 
-    Updates a game.
+@brief game_update
+Updates a game.
 
-   Input: 
-    Game *game: the game to update.
-    Command *cmd: the command typed by the user.
+@param Game *game: the game to update.
+@param Command *cmd: the command typed by the user.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_update(Game *game, Command *command){
   T_Command cmd;
   char arg[CMD_LENGTH] = "";
@@ -320,21 +323,18 @@ STATUS game_update(Game *game, Command *command){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_space
-   Date: 04-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 04-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives a specific space.
+@brief game_get_space
+Gives a specific space.
 
-   Input: 
-    Game *game: the game where the space is.
-    Id id: the id of the space you want.
+@param Game *game: the game where the space is.
+@param Id id: the id of the space you want.
 
-   Output: 
-    Space *: the space you want or NULL on error.
-   -------------------------------------------------------------------- */
+@return Space *: the space you want or NULL on error.
+*/
 Space * game_get_space(Game *game, Id id){
   int i;
 
@@ -355,22 +355,19 @@ Space * game_get_space(Game *game, Id id){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_space_at_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 30-10-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Sets a space in a specific position.
+@brief game_set_space_at_position
+Sets a space in a specific position.
 
-   Input: 
-    Game *game: the game where the space is.
-    Space *space : the space you want to set
-    int position: the position where you want to set the space.
+@param Game *game: the game where the space is.
+@param Space *space : the space you want to set
+@param int position: the position where you want to set the space.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_space_at_position(Game *game, Space *space, int position){
   if(!game || !space || position < 0){  /* Check that the inputs are not empty */
     return ERROR;
@@ -387,22 +384,18 @@ STATUS game_set_space_at_position(Game *game, Space *space, int position){
 
 
 
+/**
+@date 30-10-2016 
+@author Guillermo Rodriguez
 
-/* --------------------------------------------------------------------
-   Function: game_get_space_at_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
+@brief game_get_space_at_position
+Gets the space in a specific position.
 
-   Description: 
-    Gets the space in a specific position.
+@param Game *game: the game where the space is.
+@param int position: the position of the space.
 
-   Input: 
-    Game *game: the game where the space is.
-    int position: the position of the space.
-
-   Output: 
-    Space *space : the space in that position or NULL on error.
-   -------------------------------------------------------------------- */
+@return Space *space : the space in that position or NULL on error.
+*/
 Space * game_get_space_at_position(Game *game, int position){
   if(!game || position < 0){
     return NULL;  
@@ -413,22 +406,19 @@ Space * game_get_space_at_position(Game *game, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_object_at_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 30-10-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Sets an object in a specific position.
+@brief game_set_object_at_position
+Sets an object in a specific position.
 
-   Input: 
-    Game *game: the game where the object is.
-    Object *object : the object you want to set
-    int position: the position where you want to set the object.
+@param Game *game: the game where the object is.
+@param Object *object : the object you want to set
+@param int position: the position where you want to set the object.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_object_at_position(Game *game, Object *object, int position){
   if(!game || !object || position < 0){  /* Check that the inputs are not empty */
     return ERROR;
@@ -445,21 +435,18 @@ STATUS game_set_object_at_position(Game *game, Object *object, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_object_at_position
-   Date: 30-10-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 30-10-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Gets the object in a specific position.
+@brief game_get_object_at_position
+Gets the object in a specific position.
 
-   Input: 
-    Game *game: the game where the object is.
-    int position: the position of the object
+@param Game *game: the game where the object is.
+@param int position: the position of the object
 
-   Output: 
-    Object *object : the object in that position or NULL on error.
-   -------------------------------------------------------------------- */
+@return Object *object : the object in that position or NULL on error.
+*/
 Object * game_get_object_at_position(Game *game, int position){
   if(!game || position < 0){
     return NULL;  
@@ -470,22 +457,19 @@ Object * game_get_object_at_position(Game *game, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_link_at_position
-   Date: 13-11-2016 
-   Author: Alejandro Sanchez
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Sets a link in a specific position.
+@brief game_set_link_at_position
+Sets a link in a specific position.
 
-   Input: 
-    Game *game: the game where the link is.
-    Link *link : the link you want to set
-    int position: the position where you want to set the link.
+@param Game *game: the game where the link is.
+@param Link *link : the link you want to set
+@param int position: the position where you want to set the link.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_link_at_position(Game *game, Link *link, int position){
   if(!game || !link || position < 0){  /* Check that the inputs are not empty */
     return ERROR;
@@ -502,21 +486,18 @@ STATUS game_set_link_at_position(Game *game, Link *link, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_link_at_position
-   Date: 13-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 13-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gets the link in a specific position.
+@brief game_get_link_at_position
+Gets the link in a specific position.
 
-   Input: 
-    Game *game: the game where the link is.
-    int position: the position of the link.
+@param Game *game: the game where the link is.
+@param int position: the position of the link.
 
-   Output: 
-    Link *link : the link in that position or NULL on error.
-   -------------------------------------------------------------------- */
+@return Link *link : the link in that position or NULL on error.
+*/
 Link * game_get_link_at_position(Game *game, int position){
   if(!game || position < 0){
     return NULL;  
@@ -527,40 +508,34 @@ Link * game_get_link_at_position(Game *game, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_is_over
-   Date: 23-09-2016 
-   Author: Alejandro Sanchez
+/**
+@date 23-09-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Ends the game.
+@brief game_is_over
+Ends the game.
 
-   Input: 
-    Game *game: the game to end.
+@param Game *game: the game to end.
 
-   Output: 
-    BOOL: FALSE.
-   -------------------------------------------------------------------- */
+@return BOOL: FALSE.
+*/
 BOOL game_is_over(Game *game){
     return FALSE;
 }
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_print_data
-   Date: 20-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 20-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Prints the data of the game.
+@brief game_print_data
+Prints the data of the game.
 
-   Input: 
-    Game *game: the game to print its elements.
+@param Game *game: the game to print its elements.
 
-   Output: 
-
-   -------------------------------------------------------------------- */
+@return
+*/
 void game_print_data(Game *game){
   int i;
 
@@ -597,21 +572,18 @@ void game_print_data(Game *game){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_print_objects
-   Date: 02-11-2016 
-   Author: Alejandro Sanchez
+/**
+@date 02-11-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Prints the objects of the game (<name>:<location>).
+@brief game_print_objects
+Prints the objects of the game (<name>:<location>).
 
-   Input: 
-    Game *game: the game to print its objects.
-    Space *space: the space where you want to print the objects.
+@param Game *game: the game to print its objects.
+@param Space *space: the space where you want to print the objects.
 
-   Output: 
-
-   -------------------------------------------------------------------- */
+@return
+*/
 void game_print_objects(Game *game, Space *space){
   int i, count;
   char *name = NULL;
@@ -662,20 +634,18 @@ void game_print_objects(Game *game, Space *space){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_print_screen
-   Date: 02-11-2016 
-   Author: Alejandro Sanchez
+/**
+Function: 
+@date 02-11-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Prints the screen of the game.
+@brief game_print_screen
+Prints the screen of the game.
 
-   Input: 
-    Game *game: the game to print its screen.
+@param Game *game: the game to print its screen.
 
-   Output: 
-
-   -------------------------------------------------------------------- */
+@return
+*/
 void game_print_screen(Game *game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID;
   Id id_west = NO_ID, id_obj = NO_ID;
@@ -825,23 +795,21 @@ void game_print_screen(Game *game){
 
 
 
-/* Private functions definition */
-/* --------------------------------------------------------------------
-   Function: game_get_space_id_at
-   Date: 04-10-2016 
-   Author: Alejandro Sanchez
+/*!< Private functions definition */
 
-   Description: 
-    Gives the information of the identifier of the space at the position
-    you want.
+/**
+@date 04-10-2016 
+@author Alejandro Sanchez
 
-   Input: 
-    Game *game: the game where the space is.
-    int position: the position of the space you want the id.
+@brief game_get_space_id_at
+Gives the information of the identifier of the space at the position
+you want.
 
-   Output: 
-    Id: the identifier of the space you want or NO_ID on error.
-   -------------------------------------------------------------------- */
+@param Game *game: the game where the space is.
+@param int position: the position of the space you want the id.
+
+@return Id: the identifier of the space you want or NO_ID on error.
+*/
 Id game_get_space_id_at(Game *game, int position){
   /* Check that the inputs are correct and not empty */
   if(!game || position < 0 || position >= MAX_SPACES){   
@@ -853,21 +821,18 @@ Id game_get_space_id_at(Game *game, int position){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_object
-   Date: 27-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 27-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives a specific object.
+@brief game_get_object
+Gives a specific object.
 
-   Input: 
-    Game *game: the game where the object is.
-    Id id: the id of the object you want.
+@param Game *game: the game where the object is.
+@param Id id: the id of the object you want.
 
-   Output: 
-    Object *: the object you want or NULL on error.
-   -------------------------------------------------------------------- */
+@return Object *: the object you want or NULL on error.
+*/
 Object * game_get_object(Game *game, Id id){
   int i;
 
@@ -887,21 +852,18 @@ Object * game_get_object(Game *game, Id id){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_player_location
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Sets a location for a player.
+@brief game_set_player_location
+Sets a location for a player.
 
-   Input: 
-    Game *game: the game where the player is.
-    Id location: the location you want for the player.
+@param Game *game: the game where the player is.
+@param Id location: the location you want for the player.
 
-   Output:
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_player_location(Game *game, Id location){
   /* Set location */
   if(player_set_location(player(game), location) == ERROR){
@@ -912,20 +874,17 @@ STATUS game_set_player_location(Game *game, Id location){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_player_location
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives the location of the player.
+@brief game_get_player_location
+Gives the location of the player.
 
-   Input: 
-    Game *game: the game where the player is.
+@param Game *game: the game where the player is.
 
-   Output: 
-    Id: the location of the player or NO_ID on error.
-   -------------------------------------------------------------------- */
+@return Id: the location of the player or NO_ID on error.
+*/
 Id game_get_player_location(Game *game){
   if(!game){  /* Check that the input is not empty */
     return NO_ID;
@@ -936,21 +895,18 @@ Id game_get_player_location(Game *game){
  
 
 
-/* --------------------------------------------------------------------
-   Function: game_set_object_location
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Sets a location for an object.
+@brief game_set_object_location
+Sets a location for an object.
 
-   Input: 
-    Game *game: the game where the object is.
-    Id id: the location you want for the object.
+@param Game *game: the game where the object is.
+@param Id id: the location you want for the object.
 
-   Output:
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_object_location(Game *game, Id object, Id location){
   Object *obj = NULL;
 
@@ -967,20 +923,17 @@ STATUS game_set_object_location(Game *game, Id object, Id location){
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_object_location
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives the location of the object.
+@brief game_get_object_location
+Gives the location of the object.
 
-   Input: 
-    Game *game: the game where the object is.
+@param Game *game: the game where the object is.
 
-   Output: 
-    Id: the location of the object or NO_ID on error.
-   -------------------------------------------------------------------- */
+@return Id: the location of the object or NO_ID on error.
+*/
 Id game_get_object_location(Game *game, Id object){
   Object *obj = NULL;
 
@@ -996,21 +949,18 @@ Id game_get_object_location(Game *game, Id object){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_link
-   Date: 13-11-2016 
-   Author: Alejandro Sanchez
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives a specific link.
+@brief game_get_link
+Gives a specific link.
 
-   Input: 
-    Game *game: the game where the link is.
-    Id id: the id of the link you want.
+@param Game *game: the game where the link is.
+@param Id id: the id of the link you want.
 
-   Output: 
-    Link *: the link you want or NULL on error.
-   -------------------------------------------------------------------- */
+@return Link *: the link you want or NULL on error.
+*/
 Link * game_get_link(Game *game, Id id){
   int i;
 
@@ -1029,21 +979,18 @@ Link * game_get_link(Game *game, Id id){
 }
 
 
-/* --------------------------------------------------------------------
-   Function: game_spaces_are_linked
-   Date: 11-11-2016 
-   Author: Alejandro Sanchez
- 
-   Description: 
-    Checks if there is a link between two spaces.
- 
-   Input: 
-    Game *game: the game where the link and spaces are.
-    Space *space1: one of the spaces you want to know if is linked.
-    Space *space2: the other space you want to know if is linked.
-   Output: 
-    BOOL: TRUE if the spaces are linked and FALSE in other cases. 
-   -------------------------------------------------------------------- */
+/**
+@date 11-11-2016 
+@author Alejandro Sanchez
+
+@brief game_spaces_are_linked
+Checks if there is a link between two spaces.
+
+@param Game *game: the game where the link and spaces are.
+@param Space *space1: one of the spaces you want to know if is linked.
+@param Space *space2: the other space you want to know if is linked.
+@return BOOL: TRUE if the spaces are linked and FALSE in other cases. 
+*/
 BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2){
   Id aux1, aux2, id_space1, id_space2;
   int i = 0, flag = 0;
@@ -1078,21 +1025,18 @@ BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2){
   return TRUE;
 }
 
-/* --------------------------------------------------------------------
-   Function: game_is_link_open
-   Date: 13-11-2016 
-   Author: Alejandro Sanchez
-  
-   Description: 
-    Checks if a link of the game is open or not.
-  
-   Input: 
-    Game *game: the game where the link is.
-    Id link: the identifier of the link to check.
-                 
-   Output: 
-    BOOL: TRUE is the link is open or FALSE if not.
-   -------------------------------------------------------------------- */
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
+
+@brief game_is_link_open
+Checks if a link of the game is open or not.
+
+@param Game *game: the game where the link is.
+@param Id link: the identifier of the link to check.
+             
+@return BOOL: TRUE is the link is open or FALSE if not.
+*/
 BOOL game_is_link_open(Game *game, Id link){
   Link *lnk = NULL;
 
@@ -1109,41 +1053,36 @@ BOOL game_is_link_open(Game *game, Id link){
 
 
 
-/*** Callbacks implementation for each action ***/
-/* --------------------------------------------------------------------
-   Function: callback_UNKNOWN
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/*!< Callbacks implementation for each action */
 
-   Description: 
-    No actions. It is used when the command is UNKOWN.
+/**
+@date 04-11-2016 
+@author Alejandro Sanchez
 
-   Input: 
-    Game *game: the game.
+@brief callback_UNKNOWN
+No actions. It is used when the command is UNKOWN.
 
-   Output: 
-    STATUS: ERROR, because this command can't be typed.
-   -------------------------------------------------------------------- */
+@param Game *game: the game.
+
+@return STATUS: ERROR, because this command can't be typed.
+*/
 STATUS callback_UNKNOWN(Game *game){
   return ERROR;
 }
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_QUIT
-   Date: 04-11-2016 
-   Author: Alejandro Sanchez
+/** 
+@date 04-11-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    No actions. It is used when the command is QUIT.
+@brief callback_QUIT
+No actions. It is used when the command is QUIT.
 
-   Input: 
-    Game *game: the game.
+@param Game *game: the game.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_QUIT(Game *game){
   if(!game){
     return ERROR;
@@ -1154,21 +1093,18 @@ STATUS callback_QUIT(Game *game){
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_CATCH
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Catches an object from a space. It is used when the command is CATCH.
+@brief callback_CATCH
+Catches an object from a space. It is used when the command is CATCH.
 
-   Input: 
-    Game *game: the game.
-    char *arg: the name of the object to catch.
+@param Game *game: the game.
+@param char *arg: the name of the object to catch.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_CATCH(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
   int aux = NO_ID, i = 0, flag = 0, count;
@@ -1239,21 +1175,18 @@ STATUS callback_CATCH(Game *game, char *arg){
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_LEAVE
-   Date: 30-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Leaves an object on a space. It is used when the command is LEAVE.
+@brief callback_LEAVE
+Leaves an object on a space. It is used when the command is LEAVE.
 
-   Input: 
-    Game *game: the game.
-    char *arg: the name of the object to leave.
+@param Game *game: the game.
+@param char *arg: the name of the object to leave.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_LEAVE(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
   int aux = NO_ID, i = 0, flag = 0, count;
@@ -1324,22 +1257,19 @@ STATUS callback_LEAVE(Game *game, char *arg){
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_GO
-   Date: 05-11-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 05-11-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Moves the player to a new space. It is used when the command 
-    is GO.
+@brief callback_GO
+Moves the player to a new space. It is used when the command 
+is GO.
 
-   Input: 
-    Game *game: the game.
-    char *arg: the direction you want to move the player.
+@param Game *game: the game.
+@param char *arg: the direction you want to move the player.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_GO(Game *game, char *arg){
   /* Initialize the auxiliary variable, the counter and the flag */
   int aux = NO_ID, auxl = NO_ID, i = 0, flag = 0;
@@ -1418,20 +1348,17 @@ STATUS callback_GO(Game *game, char *arg){
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_ROLL
-   Date: 04-11-2016 
-   Author: Guillermo Rodriguez
+/**
+@date 04-11-2016 
+@author Guillermo Rodriguez
 
-   Description: 
-    Rolls a die of the game. It is used when the command is ROLL.
+@brief callback_ROLL
+Rolls a die of the game. It is used when the command is ROLL.
 
-   Input: 
-    Game *game: the game.
+@param Game *game: the game.
 
-   Output: 
-	  STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_ROLL(Game *game){
   /* Check that the input is not empty and the die exists */
   if(!game || !die(game)){  
@@ -1446,20 +1373,17 @@ STATUS callback_ROLL(Game *game){
 
 
 
-/* --------------------------------------------------------------------
-   Function: callback_INSPECT
-   Date: 04-11-2016 
-   Author: Ricardo Riol
+/**
+@date 04-11-2016 
+@author Ricardo Riol
 
-   Description: 
-    This function tells the space's or object's information
+@brief callback_INSPECT
+This function tells the space's or object's information
 
-   Input: 
-    Game *game: the game.
+@param Game *game: the game.
 
-   Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
-   -------------------------------------------------------------------- */
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_INSPECT(Game *game, char *arg){
   Space *space = NULL;
   Id id_space = NO_ID;
@@ -1493,10 +1417,3 @@ STATUS callback_INSPECT(Game *game, char *arg){
   }
   return OK;
 }
-
-
-
-
-
-
-

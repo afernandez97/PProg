@@ -27,7 +27,7 @@ Nov. 26, 2016 Version 5.0
 #include "game.h"
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @date 30-09-2016 
