@@ -1,8 +1,8 @@
 /**
 File: game_reader.h
 @version 5.0
-@date 11-11-2016
-@authors Guillermo Rodriguez and Alejandro Sanchez
+@date 26-11-2016
+@author Adrian Fernandez, Ricardo Riol, Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
 It defines the game reader.
