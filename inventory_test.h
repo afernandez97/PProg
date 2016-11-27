@@ -1,11 +1,11 @@
 /**
 	@file inventory_test.h
 	@version 1.0
-	@date Nov. 4, 2016
+	@date 11-11-2016
 	@author Ricardo Riol 
 	@brief
 	Tests inventory's functions
-	@version Nov. 4, 2016: Version 1.0 (initial release)
+	@version Nov. 11, 2016: Version 1.0 (initial release)
 */
 
 
@@ -15,9 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "inventory.h"
-#include "set.h"    
-/* Constant values description */
+#include "set.h"   
 
+#pragma GCC diagnostic ignored "-Wpedantic"
+
+/* Constant values description */
 #define MAX_TEST_INVENTORY 25
 
 #define FUNCTION_IS_CORRECT(x)\
@@ -27,9 +29,6 @@
               (fprintf(stdout,"%s %d %s ERROR\n", __FILE__, __LINE__, __FUNCTION__));\
           }
     
-
-/*** Data structures definition ***/
-
 
 /* Public functions description */
 
