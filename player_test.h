@@ -21,6 +21,9 @@
 #include <stdlib.h>
 #include "player.h"
 
+#pragma GCC diagnostic ignored "-Wpedantic"
+
+/* Constant values description */
 #define MAX_TEST 27
 
 #define FUNCTION_IS_CORRECT(x)\
@@ -30,7 +33,7 @@
 							(fprintf(stdout,"%s %d %s ERROR\n", __FILE__, __LINE__, __FUNCTION__));\
 					}
 
-/*** Public functions description ***/
+/*!< Public functions description */
 /** 
    @date 05-10-2016 
    @author Guillermo Rodriguez
