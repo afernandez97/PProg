@@ -5,7 +5,7 @@
 	@author Ricardo Riol 
 	@brief
 	Tests inventory's functions
-	@revision Nov. 4, 2016: Version 1.0 (initial release)
+	@version Nov. 4, 2016: Version 1.0 (initial release)
 */
 
 #include <stdio.h>

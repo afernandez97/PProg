@@ -8,7 +8,7 @@
     Tests player's functions
 
    
-   @revision Nov. 5, 2016  Version 1.0 (initial release)
+   @version Nov. 5, 2016  Version 1.0 (initial release)
    */
 
 

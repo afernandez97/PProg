@@ -7,7 +7,7 @@
    
     @brief It implements a set.
  
-   @date
+   @version
     Oct. 18, 2016 Version 1.0 (initial release)
 */
  

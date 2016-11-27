@@ -8,7 +8,7 @@
     It tests the operation of "player.c".
 
    
-   @revision Nov. 5, 2016  Version 1.0 (initial release)
+   @version Nov. 5, 2016  Version 1.0 (initial release)
    */
 
 
