@@ -1,5 +1,5 @@
 /**
-File: game_reader.h
+@file game_reader.h
 @version 5.0
 @date 26-11-2016
 @author Adrian Fernandez, Ricardo Riol, Guillermo Rodriguez and Alejandro Sanchez

@@ -1,5 +1,5 @@
 /**
-@file: command.c
+@file command.c
 @version 4.0
 @date 05-11-2016 
 @author Guillermo Rodriguez and Alejandro Sanchez
@@ -77,7 +77,7 @@ Input must be typed:
 Command * get_user_input();
 
 /**
-@brief: command_create
+@brief command_create
 Creates a command.
 
 @date 30-10-2016 
@@ -89,7 +89,7 @@ Creates a command.
 Command * command_create();
 
 /**
-@brief: command_destroy
+@brief command_destroy
 Destroys a command.
 
 @date 30-10-2016 
@@ -101,7 +101,7 @@ Destroys a command.
 STATUS command_destroy(Command *command);
 
 /**
-@brief: command_get_cmd
+@brief command_get_cmd
 Returns the type of the command.
 
 @date 30-10-2016 
@@ -113,7 +113,7 @@ Returns the type of the command.
 T_Command command_get_cmd(Command *command);
 
 /**
-@brief: command_get_arg
+@brief command_get_arg
 Gives the information of the argument of the command.
 
 @date 30-10-2016 
