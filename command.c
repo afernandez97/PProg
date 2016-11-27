@@ -93,7 +93,7 @@ Command * get_user_input(){
       cmd(command) = UNKNOWN;
       return command;
     }
-    if(!strcmp(cmd, "c") || !strcmp(cmd, "catch") !strcmp(cmd, "grab")){
+    if(!strcmp(cmd, "c") || !strcmp(cmd, "catch") || !strcmp(cmd, "grab")){
       cmd(command) = CATCH; /* "Catch" case */;
       strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
