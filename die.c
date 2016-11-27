@@ -8,8 +8,8 @@
     It implements a die.
 
    
-   @revision Oct. 15, 2016  Version 1.0 (initial release)
-	 @revision Nov. 24, 2016  Version 2.0 
+   @version Oct. 15, 2016  Version 1.0 (initial release)
+	 @version Nov. 24, 2016  Version 2.0 
 			Included <time.h> to use srand() in "die_create".
    */
 

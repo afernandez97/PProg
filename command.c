@@ -1,9 +1,11 @@
 /**
+@file: command.c
+@version 4.0
+@date 05-11-2016 
+@author Guillermo Rodriguez and Alejandro Sanchez
+
 @brief
 It implements the command interpreter.
-
-@File: command.c
-@Version 4.0
 @version Sept. 23, 2016  Version 2.0 
 	Commented the file.
 @version Oct. 08, 2016 Version 2.1
@@ -19,8 +21,6 @@ It implements the command interpreter.
 	Modified "get_user_input".
 @version Nov. 05, 2016 Version 4.0
 	Added command GO and removed commands NEXT, BACK and JUMP.
-@date 05-11-2016 
-@author Guillermo Rodriguez and Alejandro Sanchez
 */
 
 #include <stdio.h>
