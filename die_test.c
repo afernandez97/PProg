@@ -1,15 +1,13 @@
-/* ===================================================================
-   File: die_test.c
-   Version: 1.0
-   Date: 18-10-2016 
-   Author: Guillermo Rodriguez and Alejandro Sanchez
+/**
+   @file die_test.c
+   @version 1.0
+   @date 18-10-2016 
+   @author Guillermo Rodriguez and Alejandro Sanchez
 
-   Description: 
-    It tests the operation of "die.c".
+   @brief It tests the operation of "die.c".
 
-   Revision history:
-    Oct. 18, 2016  Version 1.0 (initial release)
-   =================================================================== */
+   @version Oct. 18, 2016  Version 1.0 (initial release)
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
