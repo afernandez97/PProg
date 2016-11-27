@@ -119,23 +119,23 @@ int main(int argc, char *argv[]){
           break;
         case CATCH:
           if(status == OK){
-            fprintf(f, "CATCH: OK\n");
+            fprintf(f, "CATCH %s: OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "CATCH: ERROR\n");
+              fprintf(f, "CATCH %s: ERROR\n", command_get_arg(command));
           }
           break;
         case LEAVE:
           if(status == OK){
-            fprintf(f, "LEAVE: OK\n");
+            fprintf(f, "LEAVE %s: OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "LEAVE: ERROR\n");
+              fprintf(f, "LEAVE %s: ERROR\n", command_get_arg(command));
           }
           break;
         case GO:
           if(status == OK){
-            fprintf(f, "GO: OK\n");
+            fprintf(f, "GO %s: OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "GO: ERROR\n");
+              fprintf(f, "GO %s: ERROR\n", command_get_arg(command));
           }
           break;
         case ROLL:
@@ -147,9 +147,9 @@ int main(int argc, char *argv[]){
           break;
         case INSPECT:
           if(status == OK){
-            fprintf(f, "INSPECT: OK\n");
+            fprintf(f, "INSPECT %s: OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "INSPECT: ERROR\n");
+              fprintf(f, "INSPECT %s: ERROR\n", command_get_arg(command));
           }
         case NO_CMD:
           break;

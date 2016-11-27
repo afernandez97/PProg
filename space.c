@@ -103,8 +103,8 @@ Space * space_create(Id id){
     return NULL;
 	}
 
-  desc(space)[0] = '\0';
-  gdesc(space)[0] = '\0';
+  strcpy(desc(space), "");
+  strcpy(gdesc(space), "       |       |       |");
  
   return space;
 }

@@ -101,13 +101,14 @@ STATUS game_load_spaces(Game *game, char *filename){
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Space *space = NULL;
   STATUS status = OK;
+  int flag = 0;
   
   if(!game || !filename){ /* Check that the inputs are not empty */
     return ERROR;
   }
   
   strcpy(f, filename);
-  strcat(f,"_spaces.dat");
+  strcat(f,"_spc.dat");
   
   file = fopen(f, "r");   /* Open the file where the spaces are */
   if(!file){
@@ -138,6 +139,8 @@ STATUS game_load_spaces(Game *game, char *filename){
       toks = strtok(NULL, "\r");
       if(toks != NULL){
         strncpy(gdesc, toks, strlen(toks)-1);        
+      } else {
+        flag = 1;
       }
 
 #ifdef DEBUG 
@@ -155,7 +158,7 @@ STATUS game_load_spaces(Game *game, char *filename){
         space_set_west(space, west);
 
         /* Set the graphic description to the space */ 
-				space_set_gdesc(space, gdesc);
+				if (flag == 0) space_set_gdesc(space, gdesc);
         
 				/* Set the description to the space */ 
 				space_set_desc(space, desc);
@@ -243,7 +246,7 @@ STATUS game_load_objects(Game *game, char *filename){
   }
   
   strcpy(f, filename);
-  strcat(f,"_objects.dat");
+  strcat(f,"_obj.dat");
   
   file = fopen(f, "r");   /* Open the file where the objects are */
   if(!file){
@@ -374,7 +377,7 @@ STATUS game_load_links(Game *game, char *filename){
 	}
 
   strcpy(f, filename);
-  strcat(f,"_links.dat");
+  strcat(f,"_lnk.dat");
 	
   file = fopen(f, "r");	/* Open the file where the links are */
 	if(!file){				
