@@ -1,5 +1,5 @@
 /**
-@File link.h
+@file link.h
 @brief It implements a link.
 @version 1.0
 @date 04-11-2016
