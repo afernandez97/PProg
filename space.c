@@ -103,7 +103,8 @@ Space * space_create(Id id){
     return NULL;
 	}
 
-  gdesc(space)[0] = '\0';
+  strcpy(desc(space), "");
+  strcpy(gdesc(space), "       |       |       |");
  
   return space;
 }
@@ -634,7 +635,7 @@ STATUS space_print_gdesc(Space *space){
   /* "Tokenize" the graphic description and print it */
 	toks = strtok(gdesc, "|");
   while(toks != NULL){
-		fprintf(stdout, " | %s   |\n", toks);
+		fprintf(stdout, "     | %s   |\n", toks);
 		toks = strtok(NULL, "|");
   }
 
@@ -663,8 +664,8 @@ STATUS space_print(Space *space){
   }
  
   /* Print each field of the Space structure, checking if it is empty */
-  fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", 
-    id(space), name(space));
+  fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s)\n", 
+    id(space), name(space), desc(space));
      
   idaux = space_get_north(space);
   if(NO_ID != idaux){
@@ -697,8 +698,7 @@ STATUS space_print(Space *space){
 
   if(set_is_empty(objects(space)) == TRUE){
     fprintf(stdout, "---> No objects.\n");
-  }   
-  if(set_print(objects(space)) == ERROR){
+  } else if(set_print(objects(space)) == ERROR){
     return ERROR;
   }
 

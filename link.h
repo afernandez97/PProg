@@ -1,9 +1,9 @@
 /**
-@File link.h
+@file link.h
 @brief It implements a link.
 @version 1.0
 @date 04-11-2016
-@Author Adrian Fernández, Ricardo Riol
+@author Adrian Fernández, Ricardo Riol
 @version Nov. 4, 2016: Version 1.0 (initial release)
 */
 

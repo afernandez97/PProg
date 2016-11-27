@@ -1,26 +1,27 @@
 /**
+@file command.h
+@version 4.0
+@date 05-11-2016 
+@author Guillermo Rodriguez and Alejandro Sanchez
+
 @brief
 It implements the command interpreter.
 
-@File: command.c
-@Version 4.0
-Sept. 23, 2016  Version 2.0 
-Commented the file.
-Oct. 08, 2016 Version 2.1
-Added commands CATCH and LEAVE.	
-Oct. 14, 2016 Version 2.2
-Added command JUMP.
-Oct. 28, 2016 Version 3.0
-Created structure "Command".
-Added command ROLL.
-Oct. 30, 2016 Version 3.1
-Created functions for ADT Command.
-Nov. 04, 2016 Version 3.2
-Modified "get_user_input".
-Nov. 05, 2016 Version 4.0
-Added command GO and removed commands NEXT, BACK and JUMP.
-@Date 05-11-2016 
-@Author Guillermo Rodriguez and Alejandro Sanchez
+@version Sept. 23, 2016  Version 2.0 
+  Commented the file.
+@version Oct. 08, 2016 Version 2.1
+  Added commands CATCH and LEAVE.	
+@version Oct. 14, 2016 Version 2.2
+  Added command JUMP.
+@version Oct. 28, 2016 Version 3.0
+  Created structure "Command".
+  Added command ROLL.
+@version Oct. 30, 2016 Version 3.1
+  Created functions for ADT Command.
+@version Nov. 04, 2016 Version 3.2
+  Modified "get_user_input".
+@version Nov. 05, 2016 Version 4.0
+  Added command GO and removed commands NEXT, BACK and JUMP.
 */
 
 
@@ -58,7 +59,7 @@ The Command structure stores information of the different commands that can be u
 typedef struct _Command Command;
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @brief get_user_input
@@ -76,7 +77,7 @@ Input must be typed:
 Command * get_user_input();
 
 /**
-@brief: command_create
+@brief command_create
 Creates a command.
 
 @date 30-10-2016 
@@ -88,7 +89,7 @@ Creates a command.
 Command * command_create();
 
 /**
-@brief: command_destroy
+@brief command_destroy
 Destroys a command.
 
 @date 30-10-2016 
@@ -100,7 +101,7 @@ Destroys a command.
 STATUS command_destroy(Command *command);
 
 /**
-@brief: command_get_cmd
+@brief command_get_cmd
 Returns the type of the command.
 
 @date 30-10-2016 
@@ -112,7 +113,7 @@ Returns the type of the command.
 T_Command command_get_cmd(Command *command);
 
 /**
-@brief: command_get_arg
+@brief command_get_arg
 Gives the information of the argument of the command.
 
 @date 30-10-2016 

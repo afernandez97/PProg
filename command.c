@@ -1,9 +1,11 @@
 /**
+@file command.c
+@version 4.0
+@date 05-11-2016 
+@author Guillermo Rodriguez and Alejandro Sanchez
+
 @brief
 It implements the command interpreter.
-
-@File: command.c
-@Version 4.0
 @version Sept. 23, 2016  Version 2.0 
 	Commented the file.
 @version Oct. 08, 2016 Version 2.1
@@ -19,8 +21,6 @@ It implements the command interpreter.
 	Modified "get_user_input".
 @version Nov. 05, 2016 Version 4.0
 	Added command GO and removed commands NEXT, BACK and JUMP.
-@date 05-11-2016 
-@author Guillermo Rodriguez and Alejandro Sanchez
 */
 
 #include <stdio.h>
@@ -89,22 +89,22 @@ Command * get_user_input(){
   /* Check if user entered an argument or not */
   if(arg != NULL){   /* There is an argument */
     /* Check if user entered more things after the argument */
-    if(strtok(NULL, "^") != NULL){
+    if(strtok(NULL, "\0") != NULL){
       cmd(command) = UNKNOWN;
       return command;
     }
-    if(!strcmp(cmd, "c") || !strcmp(cmd, "catch")){
+    if(!strcmp(cmd, "c") || !strcmp(cmd, "catch") || !strcmp(cmd, "grab")){
       cmd(command) = CATCH; /* "Catch" case */;
       strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
 		} else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
-        cmd(command) = LEAVE; /* "Leave" case */
+        cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
-				cmd(command) = GO;    /* Go case*/
-        strcpy(arg(command) ,arg);
+				cmd(command) = GO;    /* "Go" case*/
+        strcpy(arg(command), arg);
 		} else{                           
         cmd(command) = UNKNOWN; /* Wrong input */
     }
@@ -124,7 +124,7 @@ Command * get_user_input(){
 
 
 /**
-@brief: command_create
+@brief command_create
 Creates a command.
 
 @date 30-10-2016 
@@ -151,7 +151,7 @@ Command * command_create(){
 
 
 /**
-@brief: command_destroy
+@brief command_destroy
 Destroys a command.
 
 @date 30-10-2016 
@@ -172,7 +172,7 @@ STATUS command_destroy(Command *command){
 
 
 /**
-@brief: command_get_cmd
+@brief command_get_cmd
 Returns the type of the command.
 
 @date 30-10-2016 
@@ -191,7 +191,7 @@ T_Command command_get_cmd(Command *command){
 
 
 /**
-@brief: command_get_arg
+@brief command_get_arg
 Gives the information of the argument of the command.
 
 @date 30-10-2016 

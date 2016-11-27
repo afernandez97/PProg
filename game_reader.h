@@ -1,8 +1,8 @@
 /**
-File: game_reader.h
+@file game_reader.h
 @version 5.0
-@date 11-11-2016
-@authors Guillermo Rodriguez and Alejandro Sanchez
+@date 26-11-2016
+@author Adrian Fernandez, Ricardo Riol, Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
 It defines the game reader.
@@ -11,10 +11,10 @@ It defines the game reader.
 Sept. 30, 2016 Version 1.0 (initial release)
 @version
 Sept. 30, 2016  Version 2.0 
-	Commented the file.
+  Commented the file.
 @version
-Oct.	27,	2016	Version 3.0
-	Created functions "game_load_objects" and "game_add_object".
+Oct.  27, 2016  Version 3.0
+  Created functions "game_load_objects" and "game_add_object".
 @version
 Nov. 11, 2016   Version 4.0
   Created functions "game_load_links" and "game_add_link".

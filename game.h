@@ -124,21 +124,18 @@ STATUS game_update(Game *game, Command *cmd);
 
 
 
-/* --------------------------------------------------------------------
-   Function: game_get_space
-   Date: 04-10-2016 
-   Author: Alejandro Sanchez
+/**
+@date 04-10-2016 
+@author Alejandro Sanchez
 
-   Description: 
-    Gives a specific space.
+@brief game_get_space
+Gives a specific space.
 
-   Input: 
-    Game *game: the game where the space is.
-    Id id: the id of the space you want.
+@param Game *game: the game where the space is.
+@param Id id: the id of the space you want.
 
-   Output: 
-    Space *: the space you want or NULL on error.
-   -------------------------------------------------------------------- */
+@return Space *: the space you want or NULL on error.
+*/
 Space * game_get_space(Game *game, Id id);
 
 

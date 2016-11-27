@@ -8,14 +8,14 @@
 It implements a player.
 
 
-@revision Oct. 03, 2016  Version 1.0 (initial release)
-@revision Oct. 25, 2016  Version 2.0
+@version Oct. 03, 2016  Version 1.0 (initial release)
+@version Oct. 25, 2016  Version 2.0
   Changed "objects" field to Set *.
   Modified the functions that were affected by this field.
-@revision Oct. 28, 2016  Version 2.1
+@version Oct. 28, 2016  Version 2.1
   Changed "player_set_object" to "player_add_object".
   Created function "player_del_object".
-@revision Nov. 05, 2016 Version 3.0
+@version Nov. 05, 2016 Version 3.0
   Changed "objects" field to Inventory *inv.
   Modified the functions that were affected by this field.
   Created function "player_has_object" and "player_set_object".

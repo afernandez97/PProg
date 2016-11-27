@@ -1,10 +1,10 @@
 # Author: Guillermo Rodriguez and Alejandro Sanchez
 
-all: ocabas die_test set_test player_test inventory_test space_test link_test
+all: JuegoOcaPlus die_test set_test player_test inventory_test space_test link_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
-ocabas: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
+JuegoOcaPlus: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
 	gcc -o $@ $^ 
 
 die_test: die_test.o die.o
@@ -77,7 +77,7 @@ link.o: link.c link.h
 	gcc $(CCFLAGS) link.c
 
 clean: 
-	rm -rf *.o *.tgz *.log ocabas *_test
+	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test
 
 dist: 
-	tar -cvzf s2-cod_OcaBasicaIni-2.tgz *c *h Makefile *dat 
+	tar -cvzf s3-cod_OcaBasicaIni-2.tgz *c *h Makefile *dat 

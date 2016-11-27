@@ -19,7 +19,10 @@ implemented in space.c.
 #include <stdlib.h>
 #include "space.h"
 
-#define MAX_TEST_SPACE 56
+#pragma GCC diagnostic ignored "-Wpedantic"
+
+/* Constant values description */
+#define MAX_TEST_SPACE 52
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
@@ -29,11 +32,11 @@ implemented in space.c.
     }
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_create
 
@@ -46,7 +49,7 @@ void test1_space_create();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_create
 
@@ -60,7 +63,7 @@ void test2_space_create();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_destroy
 
@@ -73,7 +76,7 @@ void test1_space_destroy();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_destroy
 
@@ -86,7 +89,7 @@ void test2_space_destroy();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_id
 
@@ -99,7 +102,7 @@ void test1_space_get_id();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_id
 
@@ -112,7 +115,7 @@ void test2_space_get_id();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_name
 
@@ -125,7 +128,7 @@ void test1_space_set_name();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_name
 
@@ -138,7 +141,7 @@ void test2_space_set_name();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_set_name
 
@@ -152,7 +155,7 @@ void test3_space_set_name();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_name
 
@@ -165,7 +168,7 @@ void test1_space_get_name();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_name
 
@@ -178,7 +181,7 @@ void test2_space_get_name();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_north
 
@@ -191,7 +194,7 @@ void test1_space_set_north();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_north
 
@@ -204,21 +207,7 @@ void test2_space_set_north();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_north
-
-Tests if you can set the north of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_north();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_north
 
@@ -231,7 +220,7 @@ void test1_space_get_north();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_north
 
@@ -244,7 +233,7 @@ void test2_space_get_north();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_south
 
@@ -257,7 +246,7 @@ void test1_space_set_south();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_south
 
@@ -270,21 +259,7 @@ void test2_space_set_south();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_south
-
-Tests if you can set the south of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_south();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_south
 
@@ -297,7 +272,7 @@ void test1_space_get_south();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_south
 
@@ -310,7 +285,7 @@ void test2_space_get_south();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_east
 
@@ -323,7 +298,7 @@ void test1_space_set_east();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_east
 
@@ -336,21 +311,7 @@ void test2_space_set_east();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_east
-
-Tests if you can set the east of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_east();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_east
 
@@ -363,7 +324,7 @@ void test1_space_get_east();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_east
 
@@ -376,7 +337,7 @@ void test2_space_get_east();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_west
 
@@ -389,7 +350,7 @@ void test1_space_set_west();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_west
 
@@ -402,21 +363,7 @@ void test2_space_set_west();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_west
-
-Tests if you can set the west of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_west();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_west
 
@@ -429,7 +376,7 @@ void test1_space_get_west();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_west
 
@@ -442,7 +389,7 @@ void test2_space_get_west();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_add_object
 
@@ -455,7 +402,7 @@ void test1_space_add_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_add_object
 
@@ -469,7 +416,7 @@ void test2_space_add_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_add_object
 
@@ -482,7 +429,7 @@ void test3_space_add_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_del_object
 
@@ -495,7 +442,7 @@ void test1_space_del_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_del_object
 
@@ -509,7 +456,7 @@ void test2_space_del_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_del_object
 
@@ -522,7 +469,7 @@ void test3_space_del_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_object
 
@@ -535,7 +482,7 @@ void test1_space_get_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_object
 
@@ -548,7 +495,7 @@ void test2_space_get_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_is_object
 
@@ -561,7 +508,7 @@ void test1_space_is_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_is_object
 
@@ -575,7 +522,7 @@ void test2_space_is_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_is_object
 
@@ -588,7 +535,7 @@ void test3_space_is_object();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_desc
 
@@ -601,7 +548,7 @@ void test1_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_desc
 
@@ -615,7 +562,7 @@ void test2_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_set_desc
 
@@ -628,7 +575,7 @@ void test3_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_desc
 
@@ -641,7 +588,7 @@ void test1_space_get_desc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_desc
 
@@ -654,7 +601,7 @@ void test2_space_get_desc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_set_gdesc
 
@@ -667,7 +614,7 @@ void test1_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_set_gdesc
 
@@ -681,7 +628,7 @@ void test2_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test3_space_set_gdesc
 
@@ -694,7 +641,7 @@ void test3_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_gdesc
 
@@ -707,7 +654,7 @@ void test1_space_get_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_gdesc
 
@@ -720,7 +667,7 @@ void test2_space_get_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_print_gdesc
 
@@ -733,7 +680,7 @@ void test1_space_print_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_print_gdesc
 
@@ -746,7 +693,7 @@ void test2_space_print_gdesc();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_print
 
@@ -759,7 +706,7 @@ void test1_space_print();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_print
 

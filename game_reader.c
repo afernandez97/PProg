@@ -26,6 +26,7 @@ Nov. 11, 2016   Version 4.1
 Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,9 +53,9 @@ Add a space to a game.
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS game_add_space(Game *game, Space *space){
-  int i = 0;  /*!< Initialize the counter */
+  int i = 0;  /* Initialize the counter */
 
-  if(!game || !space){  /*!< Check that the inputs are not empty */
+  if(!game || !space){  /* Check that the inputs are not empty */
     return ERROR;
   }
 
@@ -91,6 +92,7 @@ Loads a space from a file.
 */
 STATUS game_load_spaces(Game *game, char *filename){
   FILE *file = NULL;
+  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char gdesc[WORD_SIZE] = "";
@@ -99,14 +101,16 @@ STATUS game_load_spaces(Game *game, char *filename){
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Space *space = NULL;
   STATUS status = OK;
+  int flag = 0;
   
   if(!game || !filename){ /* Check that the inputs are not empty */
     return ERROR;
   }
   
-  strcat(filename,"_spaces.dat");
+  strcpy(f, filename);
+  strcat(f,"_spc.dat");
   
-  file = fopen(filename, "r");   /* Open the file where the spaces are */
+  file = fopen(f, "r");   /* Open the file where the spaces are */
   if(!file){
     return ERROR;
   }
@@ -117,7 +121,9 @@ STATUS game_load_spaces(Game *game, char *filename){
       toks = strtok(line + 3, "|");
       id = atol(toks);
       toks = strtok(NULL, "|");
-      strcpy(name, toks);
+      if(toks != NULL){
+        strcpy(name, toks);
+      }
       toks = strtok(NULL, "|");
       north = atol(toks);
       toks = strtok(NULL, "|");      
@@ -130,9 +136,11 @@ STATUS game_load_spaces(Game *game, char *filename){
 			if(toks != NULL){
       	strcpy(desc, toks);
 			}
-      toks = strtok(NULL, "\n");
+      toks = strtok(NULL, "\r");
       if(toks != NULL){
-        strcpy(gdesc, toks);        
+        strncpy(gdesc, toks, strlen(toks)-1);        
+      } else {
+        flag = 1;
       }
 
 #ifdef DEBUG 
@@ -150,7 +158,7 @@ STATUS game_load_spaces(Game *game, char *filename){
         space_set_west(space, west);
 
         /* Set the graphic description to the space */ 
-				space_set_gdesc(space, gdesc);
+				if (flag == 0) space_set_gdesc(space, gdesc);
         
 				/* Set the description to the space */ 
 				space_set_desc(space, desc);
@@ -223,6 +231,7 @@ Loads the objects from a file.
 */
 STATUS game_load_objects(Game *game, char *filename){
   FILE *file = NULL;
+  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char desc[WORD_SIZE] = "";
@@ -236,9 +245,10 @@ STATUS game_load_objects(Game *game, char *filename){
     return ERROR;
   }
   
-  strcat(filename,"_objects.dat");
+  strcpy(f, filename);
+  strcat(f,"_obj.dat");
   
-  file = fopen(filename, "r");   /* Open the file where the objects are */
+  file = fopen(f, "r");   /* Open the file where the objects are */
   if(!file){
     return ERROR;
   }
@@ -249,7 +259,9 @@ STATUS game_load_objects(Game *game, char *filename){
       toks = strtok(line + 3, "|");
       id = atol(toks);
       toks = strtok(NULL, "|");
-      strcpy(name, toks);
+      if(toks != NULL){
+        strcpy(name, toks);
+      }
       toks = strtok(NULL, "|");
       location = atol(toks);
 			toks = strtok(NULL, "|");
@@ -348,6 +360,7 @@ Loads the links from a file.
 */
 STATUS game_load_links(Game *game, char *filename){
 	FILE *file = NULL;
+  char f[WORD_SIZE]="";
 	char line[WORD_SIZE] = "";
 	char name[WORD_SIZE] = "";
   char *toks = NULL;
@@ -362,9 +375,11 @@ STATUS game_load_links(Game *game, char *filename){
 	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
-        strcat(filename,"_links.dat");
+
+  strcpy(f, filename);
+  strcat(f,"_lnk.dat");
 	
-        file = fopen(filename, "r");	/* Open the file where the links are */
+  file = fopen(f, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}
