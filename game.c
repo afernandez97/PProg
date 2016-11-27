@@ -108,6 +108,7 @@ STATUS callback_INSPECT(Game *game, char *arg);
 Id game_get_space_id_at(Game *game, int position);
 
 Object * game_get_object(Game *game, Id id);
+Link * game_get_link(Game *game, Id id);
 
 STATUS game_set_player_location(Game *game, Id id);
 Id game_get_player_location(Game *game);
@@ -187,11 +188,15 @@ Initializes a game from two files which contain the spaces and objects.
 */
 Game * game_init_from_file(char *filename1,Id player, Id die){
   Game *game = NULL;
+  char obj[WORD_SIZE] = "", spc[WORD_SIZE] = "";
 
   /* Check that the inputs are not empty */ 
-  if(!filename1 || player == NO_ID || !objects(game) || die == NO_ID){  
+  if(!filename1 || player == NO_ID || die == NO_ID){  
     return NULL;
   }
+
+  strcpy(obj, filename1);
+  strcpy(spc, filename1);
 
   /* Initialize the elements of the game and check if it has worked */
   game = game_init(player, die);
@@ -200,27 +205,28 @@ Game * game_init_from_file(char *filename1,Id player, Id die){
     return NULL; 
   }
 
+  /* Load the links from the file and check if it has worked */
+  if(game_load_links(game, filename1) == ERROR){
+    game_destroy(game); /* Destroy the game if it has been an error */
+    return NULL;
+  } 
+
   /* Load the spaces from the file and check if it has worked */
-  if(game_load_spaces(game, filename1) == ERROR){ 
+  if(game_load_spaces(game, spc) == ERROR){ 
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   }
 
-  if(game_load_objects(game, filename1) == ERROR){
+  if(game_load_objects(game, obj) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
-  }	
-  if(game_load_links(game, filename1) == ERROR){
-    game_destroy(game); /* Destroy the game if it has been an error */
-    return NULL;
-  }	
+  } 
 
   /* Set the player on the first space */
   game_set_player_location(game, game_get_space_id_at(game, 0)); 
   
   return game;
 }
-
 
 
 /**
@@ -257,7 +263,7 @@ STATUS game_destroy(Game *game){
   }
   /* Destroy the links*/ 
   for(i=0; i < MAX_LINKS; i++){
-     link_destroy(links(game)[i]);
+    link_destroy(links(game)[i]);
   }
 
   free(game);   /* Eliminate the memory of the game */ 
@@ -556,12 +562,19 @@ void game_print_data(Game *game){
   for(i=0; i < MAX_OBJECTS && objects(game)[i] != NULL; i++){
     object_print(objects(game)[i]);
   }
+  
+  /* Print the linka */
+  printf("=> Links: \n");
+  for(i=0; i < MAX_LINKS && links(game)[i] != NULL; i++){
+    link_print(links(game)[i]);
+  }
 
   /* Print the die information */  
   die_print(die(game));
 
   /* Print the player location */
   printf("=> Player location: %d\n", (int)game_get_player_location(game));
+  
   /* Print the objects location */
   for(i=0; i < MAX_OBJECTS && objects(game)[i] != NULL; i++){
      object_print(objects(game)[i]);
@@ -591,7 +604,7 @@ void game_print_objects(Game *game, Space *space){
   Object *object = NULL;
 
   /* Start printing the row of the space */
-  fprintf(stdout, " |");
+  fprintf(stdout, "     |");
   /* Get the set of objects on the space and how many are there */
   set = space_get_object(space);
   count = set_get_count(set);
@@ -648,8 +661,9 @@ Prints the screen of the game.
 */
 void game_print_screen(Game *game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID;
-  Id id_west = NO_ID, id_obj = NO_ID;
+  Id id_west = NO_ID, id_obj = NO_ID, id_spc_back = NO_ID, id_spc_next = NO_ID;
   Space *space_act = NULL, *space_back = NULL, *space_next = NULL;
+  Link *link_back = NULL, *link_next = NULL;
   char *name = NULL;
   Object *object = NULL;
   int i, count;
@@ -670,15 +684,21 @@ void game_print_screen(Game *game){
 
   /* Get the previous space */
   id_back = space_get_north(space_act);
-  space_back = game_get_space(game, id_back); 
+  if(id_back != NO_ID){
+    link_back = game_get_link(game, id_back);
+    id_spc_back = link_get_space2(link_back);
+    space_back = game_get_space(game, id_spc_back);
+  }
+ 
 
   /* Get the next space */
   id_next = space_get_south(space_act);
-  space_next = game_get_space(game, id_next); 
+  if(id_next != NO_ID){
+    link_next = game_get_link(game, id_next);
+    id_spc_next = link_get_space2(link_next);
+    space_next = game_get_space(game, id_spc_next); 
+  }
   
-  /* Get the locations of the eastern and western spaces */
-  id_east = space_get_east(space_act);
-  id_west = space_get_west(space_act);
    
   if(system(CLEAR)){
     return; 
@@ -686,81 +706,98 @@ void game_print_screen(Game *game){
 
   /* Print the previous space if it is different from NO_ID */
   if(id_back != NO_ID){
-   	if(space_get_east(space_back) != NO_ID){
-        printf(" |         %2d|>\n", (int)id_back);
-      	space_print_gdesc(space_back);
-      	printf(" |           |\n");
-      	game_print_objects(game, space_back);
-		  	printf(" +-----------+\n");
-    		printf("       ^\n");
-		} else if(space_get_west(space_back) != NO_ID){
-        printf("<|         %2d|\n", (int)id_back);
-				space_print_gdesc(space_back);
-				printf(" |           |\n");
-        game_print_objects(game, space_back);
-        printf(" +-----------+\n");
-    		printf("       ^\n");		
+    id_east = space_get_east(space_back);
+    id_west = space_get_west(space_back);
+    if(id_east != NO_ID && id_west != NO_ID){
+      link_back = game_get_link(game, id_east);
+      link_next = game_get_link(game, id_west);
+      printf("   %2d|         %2d|%2d\n", (int)id_west, (int)id_spc_back, 
+        (int)id_east);
+      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_next), 
+        (int)link_get_space2(link_back));
+      space_print_gdesc(space_back);
+    } else if(id_east != NO_ID && id_west == NO_ID){
+     	  link_back = game_get_link(game, id_east);
+        printf("     |         %2d|%2d\n", (int)id_spc_back, (int)id_east);
+        printf("     |           |-->%2d\n", (int)link_get_space2(link_back));
+        space_print_gdesc(space_back);
+		} else if(id_west != NO_ID){
+		    link_back = game_get_link(game, id_west);
+        printf("   %2d|         %2d|\n", (int)id_west, (int)id_back);
+				printf("%2d<--|           |\n", (int)link_get_space2(link_back));
+        space_print_gdesc(space_back);
 		} else{
-        printf(" |         %2d|\n", (int) id_back);
+        printf("     |         %2d|\n", (int) id_back);
+				printf("     |           |\n");
 				space_print_gdesc(space_back);
-				printf(" |           |\n");
-        game_print_objects(game, space_back);
-				printf(" +-----------+\n");
-				printf("       ^\n");
 		}
+		game_print_objects(game, space_back);
+		printf("     +-----------+\n");
+		printf("            ^ %2d\n", (int)id_back);
   }
   
   /* Print the actual space if it is different from NO_ID */
   if(id_act != NO_ID){
-  	if(id_east != NO_ID){
-  			printf(" +-----------+\n");
-		  	printf(" | >8D     %2d|>\n", (int)id_act);
-		  	space_print_gdesc(space_act);
-		  	printf(" |           |\n");
-        game_print_objects(game, space_act);	
-		  	printf(" +-----------+\n");
+    printf("     +-----------+\n");
+    id_east = space_get_east(space_act);
+    id_west = space_get_west(space_act);
+    if(id_east != NO_ID && id_west != NO_ID){
+      link_back = game_get_link(game, id_east);
+      link_next = game_get_link(game, id_west);
+      printf("   %2d| >8D     %2d|%2d\n", (int)id_west, (int)id_act, 
+        (int)id_east);
+      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_next), 
+        (int)link_get_space2(link_back));
+      space_print_gdesc(space_act);
+    } else if(id_east != NO_ID && id_west == NO_ID){
+     	  link_back = game_get_link(game, id_east);
+        printf("     | >8D     %2d|%2d\n", (int)id_act, (int)id_east);
+        printf("     |           |-->%2d\n", (int)link_get_space2(link_back));
+        space_print_gdesc(space_act);
 		} else if(id_west != NO_ID){
-				printf(" +-----------+\n");
-				printf("<| >8D     %2d|\n", (int)id_act);
-				space_print_gdesc(space_act);
-				printf(" |           |\n");
-        game_print_objects(game, space_act);	
-				printf(" +-----------+\n");			
+		    link_back = game_get_link(game, id_west);
+        printf("   %2d| >8D     %2d|\n", (int)id_west, (int)id_act);
+				printf("%2d<--|           |\n", (int)link_get_space2(link_back));
+        space_print_gdesc(space_act);
 		} else{
-				printf(" +-----------+\n");
-				printf(" | >8D     %2d|\n", (int)id_act);
-				space_print_gdesc(space_act);
-				printf(" |           |\n");
-        game_print_objects(game, space_act);
-				printf(" +-----------+\n");
+        printf("     | >8D     %2d|\n", (int) id_act);
+				printf("     |           |\n");
+        space_print_gdesc(space_act);
 		}
-  }
+		game_print_objects(game, space_act);
+		printf("     +-----------+\n");
+  }  
     
   /* Print the next space if it is different from NO_ID */ 
   if(id_next != NO_ID){
-   	if(space_get_east(space_next) != NO_ID){
-				printf("       v\n");
-				printf(" +-----------+\n");
-				printf(" |         %2d|>\n", (int)id_next);
-				space_print_gdesc(space_next);
-				printf(" |           |\n");
-        game_print_objects(game, space_next);
-        
-		} else if(space_get_west(space_next) != NO_ID){
-				printf("       v\n");
-				printf(" +-----------+\n");
-				printf("<|         %2d|\n", (int)id_next);
-				space_print_gdesc(space_next);
-				printf(" |           |\n");
-        game_print_objects(game, space_next);
+    printf("            v %2d\n", (int)id_next);
+    printf("     +-----------+\n");
+    id_east = space_get_east(space_next);
+    id_west = space_get_west(space_next);
+    if(id_east != NO_ID && id_west != NO_ID){
+      link_next = game_get_link(game, id_east);
+      link_back = game_get_link(game, id_west);
+      printf("   %2d|         %2d|%2d\n", (int)id_west, (int)id_spc_next, 
+        (int)id_east);
+      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_back), 
+        (int)link_get_space2(link_next));
+      space_print_gdesc(space_next);
+    } else if(id_east != NO_ID && id_west == NO_ID){
+     	  link_next = game_get_link(game, id_east);
+        printf("     |         %2d|%2d\n", (int)id_spc_next, (int)id_east);
+        printf("     |           |-->%2d\n", (int)link_get_space2(link_next));
+        space_print_gdesc(space_next);
+		} else if(id_west != NO_ID){
+		    link_next = game_get_link(game, id_west);
+        printf("   %2d|         %2d|\n", (int)id_west, (int)id_next);
+				printf("%2d<--|           |\n", (int)link_get_space2(link_next));
+        space_print_gdesc(space_next);
 		} else{
-				printf("       v\n");
-				printf(" +-----------+\n");
-				printf(" |         %2d|\n", (int)id_next);
-				space_print_gdesc(space_next);
-				printf(" |           |\n");
-        game_print_objects(game, space_next);
+        printf("     |         %2d|\n", (int) id_spc_next);
+				printf("     |           |\n");
+        space_print_gdesc(space_next);
 		}
+		game_print_objects(game, space_next);
   }
 
   /* Print the objects location */
@@ -787,8 +824,8 @@ void game_print_screen(Game *game){
   /*Print the last die value*/
   printf("\nLast die value: %d", die_get_value(die(game)));
   /* Print the commands the user can type */
-  printf("\n[commands: next or n, back or b, catch <obj_name> or c <obj_name>, ");
-  printf("jump or j, leave <obj_name> or l <obj_name>, quit or q, roll or r]");
+  printf("\n[commands: catch <obj_name> or c <obj_name>, leave <obj_name> or l <obj_name>, ");
+  printf("inspect <spc_name/obj_name> or i <spc_name/obj_name>, quit or q, roll or r]");
   printf("\nprompt:> ");
 }
 
@@ -969,7 +1006,7 @@ Link * game_get_link(Game *game, Id id){
   }
 
   /* Look for the link you want */
-  for(i=0; i < MAX_OBJECTS && links(game)[i] != NULL; i++){
+  for(i=0; i < MAX_LINKS && links(game)[i] != NULL; i++){
     if(id == link_get_id(links(game)[i])){
       return links(game)[i];
     }
@@ -1312,12 +1349,13 @@ STATUS callback_GO(Game *game, char *arg){
   }
 
   /* If there is not link connection */
-  if(link_id == ERROR){
+  if(link_id == NO_ID){
   	return ERROR; 
   }
 
   /* Find the space with the same link*/
   i = 0;
+  flag = 0;
   while(i < MAX_LINKS && flag == 0){
   	if(link_id == link_get_id(links(game)[i])){
       auxl = i;
@@ -1331,11 +1369,7 @@ STATUS callback_GO(Game *game, char *arg){
   	return ERROR;
   }
   
-  if(space_id == link_get_space1(links(game)[auxl])){
-  	space_id2 = link_get_space2(links(game)[auxl]);
-  } else{
-      space_id2 = link_get_space1(links(game)[auxl]);  
-  }
+  space_id2 = link_get_space2(links(game)[auxl]);
 
   /* Check that the link is open */
   if(link_is_open(links(game)[auxl]) == TRUE){
@@ -1386,34 +1420,51 @@ This function tells the space's or object's information
 */
 STATUS callback_INSPECT(Game *game, char *arg){
   Space *space = NULL;
+  Object *obj = NULL;
+  Inventory *inv = NULL;
+  Set *set_inv = NULL, *set_spc = NULL;
   Id id_space = NO_ID;
-  int flag, aux, i;
+  int flag, i;
   char *description = NULL;
 	/* Check that the inputs are not empty */
   if (!game || !arg){
     return ERROR;
   }
+  
+  id_space = game_get_player_location(game);
+  space = game_get_space(game, id_space);
+  set_spc = space_get_object(space);
+
+  inv = player_get_inventory(player(game));
+  set_inv = inventory_get_bag(inv);
 
 	/* Check if you want a space description or an object description */
   if(!strcmp (arg, "s") || !strcmp (arg, "space")){	/* space */
-    id_space = game_get_player_location(game);
-    space = game_get_space(game, id_space);
     description = space_get_desc(space);
-    fprintf(stdout,"%s", description);
+    fprintf(stdout,"%s\n", description);
     return OK;
   } else {	/* object */
-    	for(i=0, flag=0;i < MAX_OBJECTS; i++){
-      	if(strcmp(object_get_name(objects(game)[i]), arg )==0){
-        	aux = i;
+    	for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+        obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+      	if(!strcmp(object_get_name(obj), arg)){
         	flag = 1;
       	}
     	}
-	
-    if (flag == 1){
-      fprintf(stdout, "%s", object_get_desc(objects(game)[i]));
-    } else{
-      fprintf(stdout , "Error, the object has not been found.\n");
-    }
+      if(flag == 0){
+        for(i=0, flag=0;i < set_get_count(set_spc) && flag == 0; i++){
+        obj = game_get_object(game, set_get_object_at_position(set_spc, i));
+        if(!strcmp(object_get_name(obj), arg)){
+            flag = 1;
+          }
+        }
+      }
   }
-  return OK;
+
+  if (flag == 1){
+    fprintf(stdout, "%s\n", object_get_desc(obj));
+    return OK;
+  } 
+    
+  fprintf(stdout, "Error, the object has not been found.\n");
+  return ERROR;
 }

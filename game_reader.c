@@ -26,6 +26,7 @@ Nov. 11, 2016   Version 4.1
 Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,9 +53,9 @@ Add a space to a game.
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS game_add_space(Game *game, Space *space){
-  int i = 0;  /*!< Initialize the counter */
+  int i = 0;  /* Initialize the counter */
 
-  if(!game || !space){  /*!< Check that the inputs are not empty */
+  if(!game || !space){  /* Check that the inputs are not empty */
     return ERROR;
   }
 
@@ -117,7 +118,9 @@ STATUS game_load_spaces(Game *game, char *filename){
       toks = strtok(line + 3, "|");
       id = atol(toks);
       toks = strtok(NULL, "|");
-      strcpy(name, toks);
+      if(toks != NULL){
+        strcpy(name, toks);
+      }
       toks = strtok(NULL, "|");
       north = atol(toks);
       toks = strtok(NULL, "|");      
@@ -130,9 +133,9 @@ STATUS game_load_spaces(Game *game, char *filename){
 			if(toks != NULL){
       	strcpy(desc, toks);
 			}
-      toks = strtok(NULL, "\n");
+      toks = strtok(NULL, "\r");
       if(toks != NULL){
-        strcpy(gdesc, toks);        
+        strncpy(gdesc, toks, strlen(toks)-1);        
       }
 
 #ifdef DEBUG 
@@ -249,7 +252,9 @@ STATUS game_load_objects(Game *game, char *filename){
       toks = strtok(line + 3, "|");
       id = atol(toks);
       toks = strtok(NULL, "|");
-      strcpy(name, toks);
+      if(toks != NULL){
+        strcpy(name, toks);
+      }
       toks = strtok(NULL, "|");
       location = atol(toks);
 			toks = strtok(NULL, "|");
@@ -362,9 +367,9 @@ STATUS game_load_links(Game *game, char *filename){
 	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
-        strcat(filename,"_links.dat");
+  strcat(filename,"_links.dat");
 	
-        file = fopen(filename, "r");	/* Open the file where the links are */
+  file = fopen(filename, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}

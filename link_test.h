@@ -17,6 +17,9 @@ implemented in link.c.
 
 #include "link.h"
 
+#pragma GCC diagnostic ignored "-Wpedantic"
+
+/* Constant values description */
 #define MAX_TEST_LINK 22
 
 #define FUNCTION_IS_CORRECT(x)\
@@ -27,7 +30,7 @@ implemented in link.c.
     }
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @author Adrián Fernández

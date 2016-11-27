@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
   
   /* Check if user enters the name of the file that contains the spaces */	
   if(argc < 2){	
-	  fprintf(stderr, "Use: %s <game_data_file1> <game_data_file2>\n", argv[0]); 
+	  fprintf(stderr, "Use: %s <game_data_file> \n", argv[0]); 
 	  return 1;
 	}
   
@@ -64,16 +64,18 @@ int main(int argc, char *argv[]){
 	}
    
   /* Check if user enters the command to register the results of the execution */
-  if(!strcmp("-nv", argv[2])){
-    flag = 1;
-    arg ++;
-  }
+  if(argc > 2){
+    if(!strcmp("-nv", argv[arg])){
+      flag = 1;
+      arg ++;
+    }
 
-  if(strcmp(argv[arg], "-l") == 0){
-    f = fopen(argv[arg+1], "w");
-    if(!f){   /* Check if the file has been opened correctly */
-      game_destroy(game);
-      return 1;
+    if(strcmp(argv[arg], "-l") == 0){
+      f = fopen(argv[arg+1], "w");
+      if(!f){   /* Check if the file has been opened correctly */
+        game_destroy(game);
+        return 1;
+      }
     }
   }
   
@@ -132,6 +134,12 @@ int main(int argc, char *argv[]){
               fprintf(f, "ROLL: ERROR\n");
           }
           break;
+        case INSPECT:
+          if(status == OK){
+            fprintf(f, "INSPECT: OK\n");
+          } else{
+              fprintf(f, "INSPECT: ERROR\n");
+          }
         case NO_CMD:
           break;
         default: /* We must never arrive here */
@@ -149,6 +157,5 @@ int main(int argc, char *argv[]){
 	game_destroy(game);	/* The game finishes */
   	
   return 0;
-
 }
 

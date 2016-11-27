@@ -40,7 +40,6 @@ This function creates a variable of type Link.
 @return Link *: the link created or NULL on error.
 */
 Link * link_create(Id id){
-
 	Link *link = NULL;
 
 	if(id == NO_ID){  /* Check if the input is empty*/
@@ -70,9 +69,7 @@ This function destroys a variable of type Link.
 @return STATUS: Returns OK if the function has done his job correctly.
 */
 STATUS link_destroy(Link* link){
-	
 	if(link==NULL){     /* Check that the input is not empty */ 
-    return ERROR;
 		return ERROR;
 	}
 
@@ -90,7 +87,6 @@ This function gets the id field of a Link.
 @return Id: The id of the Link.
 */
 Id link_get_id(Link* link){
-	
 	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_ID;
 	}
@@ -108,7 +104,6 @@ This function sets the name field of a Link.
 @return STATUS: Returns OK if the function has done his job correctly.
 */
 STATUS link_set_name(Link* link, char* name){
-
 	if(link==NULL || name==NULL){  /* Check that the input is not empty */ 
 		return ERROR;
 	}
@@ -129,7 +124,6 @@ This function gets the name field of a Link.
 @return char*: The name of the Link.
 */
 char* link_get_name(Link* link){
-
 	if(link==NULL){  /* Check that the input is not empty */ 
 		return NULL;
 	}
@@ -165,7 +159,6 @@ This function gets the Id of a Link's first Space.
 @return Id: The Id of the first Space.
 */
 Id link_get_space1(Link* link){
-
 	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_ID;
 	}
@@ -188,7 +181,7 @@ STATUS link_set_space2(Link *link, Id space2){
 		return ERROR;
 	}
 	
-/* Sets the space conected with the link*/
+	/* Sets the space conected with the link*/
 	space2(link) = space2;
 	
 	return OK;
@@ -204,9 +197,7 @@ This function gets the Id of a Link's second Space.
 @return Id: The Id of the second Space.
 */
 Id link_get_space2(Link* link){
-
 	if(link==NULL){    /* Check that the input is not empty */ 
-
 		return NO_ID;
 	}
 
@@ -223,11 +214,11 @@ This function sets the state field of a Link.
 @return STATUS: Returns OK if the function has done his job correctly.
 */
 STATUS link_set_state(Link* link, STATE state){
-
-	if(link==NULL || state==NO_STATE){   /* Check that the input is not empty */ 
+	if(link==NULL || state == NO_STATE){   /* Check that the input is not empty */ 
 		return ERROR;
 	}
-/*Sets the link's state*/
+
+  /*Sets the link's state*/
 	state(link) = state;
 
 	return OK;
@@ -243,7 +234,6 @@ This function gets the state field of a Link.
 */
 
 STATE link_get_state(Link* link){
-
 	if(link==NULL){    /* Check that the input is not empty */ 
 		return NO_STATE;
 	}
@@ -266,7 +256,7 @@ BOOL link_is_open(Link *link){
 	if(!link){  /* Check that the input is not empty */ 
 		return FALSE;
 	}
-/*Checks if the link is opened*/
+  /*Checks if the link is opened*/
 	if(state(link) == OPEN){
 		return TRUE;
 	}
@@ -286,18 +276,16 @@ This function prints Links.
 */
 
 STATUS link_print(Link* link){
-
 	if (!link){  /* Check that the input is not empty */ 
-
 		return ERROR;
 	}
-/*Prints all link's fields*/
+  /*Prints all link's fields*/
 	if(state(link)==NO_STATE){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, NO_STATE\n", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, NO_STATE", id(link), name(link), space1(link), space2(link));
 	}else if(state(link)==OPEN){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, OPEN\n", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, OPEN", id(link), name(link), space1(link), space2(link));
 	} else if(state(link)==CLOSED){
-		fprintf (stdout, "Link: %ld, %s, %ld, %ld, CLOSED\n", id(link), name(link), space1(link), space2(link));
+		fprintf (stdout, "Link: %ld, %s, %ld, %ld, CLOSED", id(link), name(link), space1(link), space2(link));
 	}
 	return OK;
 }	

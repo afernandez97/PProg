@@ -100,11 +100,11 @@ Command * get_user_input(){
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
 		} else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
-        cmd(command) = LEAVE; /* "Leave" case */
+        cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
-				cmd(command) = GO;    /* Go case*/
-        strcpy(arg(command) ,arg);
+				cmd(command) = GO;    /* "Go" case*/
+        strcpy(arg(command), arg);
 		} else{                           
         cmd(command) = UNKNOWN; /* Wrong input */
     }

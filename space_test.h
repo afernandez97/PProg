@@ -19,7 +19,9 @@ implemented in space.c.
 #include <stdlib.h>
 #include "space.h"
 
-#define MAX_TEST_SPACE 56
+#pragma GCC diagnostic ignored "-Wpedantic"
+
+#define MAX_TEST_SPACE 52
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
@@ -29,7 +31,7 @@ implemented in space.c.
     }
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @author Adrián Fernández
@@ -206,20 +208,6 @@ void test2_space_set_north();
 @author Adrián Fernández
 @date: Nov. 23, 2016
 
-@brief test3_space_set_north
-
-Tests if you can set the north of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_north();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
-
 @brief test1_space_get_north
 
 Tests if you can successfully get the north of a space.
@@ -267,20 +255,6 @@ Tests if you can set the south of an uninitialised space.
 @return
 */
 void test2_space_set_south();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_south
-
-Tests if you can set the south of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_south();
 
 /**
 @author Adrián Fernández
@@ -338,20 +312,6 @@ void test2_space_set_east();
 @author Adrián Fernández
 @date: Nov. 23, 2016
 
-@brief test3_space_set_east
-
-Tests if you can set the east of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_east();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
-
 @brief test1_space_get_east
 
 Tests if you can successfully get the east of a space.
@@ -399,20 +359,6 @@ Tests if you can set the west of an uninitialised space.
 @return
 */
 void test2_space_set_west();
-
-/**
-@author Adrián Fernández
-@date: Nov. 23, 2016
-
-@brief test3_space_set_west
-
-Tests if you can set the west of a space if the id is 
-not valid.
-
-@param
-@return
-*/
-void test3_space_set_west();
 
 /**
 @author Adrián Fernández

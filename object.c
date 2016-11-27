@@ -67,6 +67,7 @@ Object * object_create(Id id){
 	location(object) = NO_ID;
 
   name(object)[0] = '\0';
+  desc(object)[0] = '\0';
 
   return object;
 }
@@ -257,8 +258,9 @@ STATUS object_print(Object *object){
   }
 
   /* Print the object fields */
-  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Location: %ld)\n", id(object), 
-    name(object), location(object));
+  fprintf(stdout, "--> Object (Id: %ld; Name: %s; Location: %ld; \
+    Description: %s)\n", id(object), name(object), location(object),
+    desc(object));
 
   return OK;
 }

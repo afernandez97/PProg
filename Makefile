@@ -1,10 +1,10 @@
 # Author: Guillermo Rodriguez and Alejandro Sanchez
 
-all: ocabas die_test set_test player_test inventory_test space_test link_test
+all: JuegoOcaPlus die_test set_test player_test inventory_test space_test link_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
-ocabas: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
+JuegoOcaPlus: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
 	gcc -o $@ $^ 
 
 die_test: die_test.o die.o
