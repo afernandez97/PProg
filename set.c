@@ -133,7 +133,8 @@ STATUS set_add(Set *set, Id id){
    */
 STATUS set_del(Set *set, Id id){
  	/* Initialize the counter and the flag */
-  int i = 0, flag = 0;
+  int i = 0, flag = 0, pos;
+  Id buff;
 
   /* Check that the input is not empty or the set is empty */
   if(!set || set_is_empty(set) == TRUE){
@@ -144,6 +145,7 @@ STATUS set_del(Set *set, Id id){
   while(flag == 0 && i < count(set)){ 
     if(id == id(set)[i]){
       flag = 1;
+      pos = i;
   	}
     i++;
 	}
@@ -153,10 +155,13 @@ STATUS set_del(Set *set, Id id){
   	return ERROR;
 	}
 
-  /* The order of the objects in the set doesn't matter, so the last
-  object is set in the position of the object to delete (no holes) */
-  id(set)[i-1] = id(set)[count(set)-1];    
-  id(set)[count(set)-1] = NO_ID;
+  /* Rearrange te set */
+  id(set)[pos] = NO_ID;
+  for (i = pos; i < count(set); i++) {
+    buff = id(set)[i];
+    id(set)[i] = id(set)[i + 1];
+    id(set)[i + 1] = buff;
+  }
 
   /* Decrease in 1 the number of objects in the set */
   count(set)--;  

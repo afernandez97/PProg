@@ -186,38 +186,38 @@ Initializes a game from two files which contain the spaces and objects.
 
 @return Game *game: the game initialized.
 */
-Game * game_init_from_file(char *filename1,Id player, Id die){
+Game * game_init_from_file(char *filename,Id player, Id die){
   Game *game = NULL;
-  char obj[WORD_SIZE] = "", spc[WORD_SIZE] = "";
+  char f[WORD_SIZE]="";
 
   /* Check that the inputs are not empty */ 
-  if(!filename1 || player == NO_ID || die == NO_ID){  
+  if(!filename || player == NO_ID || die == NO_ID){  
     return NULL;
   }
 
-  strcpy(obj, filename1);
-  strcpy(spc, filename1);
+  strcpy(f, filename);
 
   /* Initialize the elements of the game and check if it has worked */
   game = game_init(player, die);
   if(!game){
-    game_destroy(game); 
+    game_destroy(game);
     return NULL; 
   }
 
   /* Load the links from the file and check if it has worked */
-  if(game_load_links(game, filename1) == ERROR){
+  if(game_load_links(game, f) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   } 
 
   /* Load the spaces from the file and check if it has worked */
-  if(game_load_spaces(game, spc) == ERROR){ 
+  if(game_load_spaces(game, f) == ERROR){ 
+    printf("%s\n", f);
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   }
 
-  if(game_load_objects(game, obj) == ERROR){
+  if(game_load_objects(game, f) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   } 

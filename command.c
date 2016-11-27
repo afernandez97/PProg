@@ -89,7 +89,7 @@ Command * get_user_input(){
   /* Check if user entered an argument or not */
   if(arg != NULL){   /* There is an argument */
     /* Check if user entered more things after the argument */
-    if(strtok(NULL, "^") != NULL){
+    if(strtok(NULL, "\0") != NULL){
       cmd(command) = UNKNOWN;
       return command;
     }

@@ -92,6 +92,7 @@ Loads a space from a file.
 */
 STATUS game_load_spaces(Game *game, char *filename){
   FILE *file = NULL;
+  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char gdesc[WORD_SIZE] = "";
@@ -105,9 +106,10 @@ STATUS game_load_spaces(Game *game, char *filename){
     return ERROR;
   }
   
-  strcat(filename,"_spaces.dat");
+  strcpy(f, filename);
+  strcat(f,"_spaces.dat");
   
-  file = fopen(filename, "r");   /* Open the file where the spaces are */
+  file = fopen(f, "r");   /* Open the file where the spaces are */
   if(!file){
     return ERROR;
   }
@@ -226,6 +228,7 @@ Loads the objects from a file.
 */
 STATUS game_load_objects(Game *game, char *filename){
   FILE *file = NULL;
+  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char desc[WORD_SIZE] = "";
@@ -239,9 +242,10 @@ STATUS game_load_objects(Game *game, char *filename){
     return ERROR;
   }
   
-  strcat(filename,"_objects.dat");
+  strcpy(f, filename);
+  strcat(f,"_objects.dat");
   
-  file = fopen(filename, "r");   /* Open the file where the objects are */
+  file = fopen(f, "r");   /* Open the file where the objects are */
   if(!file){
     return ERROR;
   }
@@ -353,6 +357,7 @@ Loads the links from a file.
 */
 STATUS game_load_links(Game *game, char *filename){
 	FILE *file = NULL;
+  char f[WORD_SIZE]="";
 	char line[WORD_SIZE] = "";
 	char name[WORD_SIZE] = "";
   char *toks = NULL;
@@ -367,9 +372,11 @@ STATUS game_load_links(Game *game, char *filename){
 	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
-  strcat(filename,"_links.dat");
+
+  strcpy(f, filename);
+  strcat(f,"_links.dat");
 	
-  file = fopen(filename, "r");	/* Open the file where the links are */
+  file = fopen(f, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}

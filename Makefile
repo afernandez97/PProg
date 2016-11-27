@@ -77,7 +77,7 @@ link.o: link.c link.h
 	gcc $(CCFLAGS) link.c
 
 clean: 
-	rm -rf *.o *.tgz *.log ocabas *_test
+	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test
 
 dist: 
 	tar -cvzf s2-cod_OcaBasicaIni-2.tgz *c *h Makefile *dat 
