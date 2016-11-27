@@ -1,8 +1,8 @@
 /**
 @file: command.c
 @version 4.0
-@Date 05-11-2016 
-@Author Guillermo Rodriguez and Alejandro Sanchez
+@date 05-11-2016 
+@author Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
 It implements the command interpreter.
