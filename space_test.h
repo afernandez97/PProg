@@ -21,6 +21,7 @@ implemented in space.c.
 
 #pragma GCC diagnostic ignored "-Wpedantic"
 
+/* Constant values description */
 #define MAX_TEST_SPACE 52
 
 #define FUNCTION_IS_CORRECT(x)\
@@ -35,7 +36,7 @@ implemented in space.c.
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_create
 
@@ -48,7 +49,7 @@ void test1_space_create();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_create
 
@@ -62,7 +63,7 @@ void test2_space_create();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_destroy
 
@@ -75,7 +76,7 @@ void test1_space_destroy();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_destroy
 
@@ -88,7 +89,7 @@ void test2_space_destroy();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test1_space_get_id
 
@@ -101,7 +102,7 @@ void test1_space_get_id();
 
 /**
 @author Adrián Fernández
-@date: Nov. 23, 2016
+@date Nov. 23, 2016
 
 @brief test2_space_get_id
 
