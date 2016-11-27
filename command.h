@@ -1,5 +1,5 @@
 /**
-@file command.c
+@file command.h
 @version 4.0
 @date 05-11-2016 
 @author Guillermo Rodriguez and Alejandro Sanchez
@@ -59,7 +59,7 @@ The Command structure stores information of the different commands that can be u
 typedef struct _Command Command;
 
 
-/*** Public functions description ***/
+/*!< Public functions description */
 
 /**
 @brief get_user_input
