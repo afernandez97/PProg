@@ -824,8 +824,8 @@ void game_print_screen(Game *game){
   /*Print the last die value*/
   printf("\nLast die value: %d", die_get_value(die(game)));
   /* Print the commands the user can type */
-  printf("\n[commands: catch <obj_name> or c <obj_name>, leave <obj_name> or l <obj_name>, ");
-  printf("inspect <spc_name/obj_name> or i <spc_name/obj_name>, quit or q, roll or r]");
+  printf("\n[commands: go <direction> or g <direction>, catch <obj_name> or c <obj_name>, leave ");
+  printf("<obj_name> or l <obj_name>, inspect <spc_name/obj_name> or i <spc_name/obj_name>, quit or q, roll or r]");
   printf("\nprompt:> ");
 }
 
