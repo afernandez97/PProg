@@ -46,7 +46,6 @@
 #define objects(X) (X)->objects
 #define desc(X) (X)->desc
 #define gdesc(X) (X)->gdesc
-#define light(X) (X)->light
 
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
@@ -60,7 +59,6 @@ struct _Space{
   Set *objects; /*!<  Set of the objects,there are in the space */
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
-  Bool light;
 };
  
  
@@ -107,7 +105,6 @@ Space * space_create(Id id){
 
   strcpy(desc(space), "");
   strcpy(gdesc(space), "       |       |       |");
-  light(space) = FALSE;
  
   return space;
 }
@@ -646,49 +643,6 @@ STATUS space_print_gdesc(Space *space){
 }
 
 
-/**
-
-   @date 1-12-2016 
-   @author Guillermo Rodriguez 
- 
-   @brief 
-    Set a light space or remove it.
-
- 
-   @param 
-    Space *space: the space you want to change.
-    Bool light : Choose if the space is light or no
-   @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
-
-   */
-STATUS space_set_light(Space *space,BOOL light){
-	if(!space){
-  	return ERROR;
-  }
-  light(space) = light;
-	return OK;
-}
-
-/**
-   @date 1-12-2016 
-   @author Guillermo Rodriguez 
- 
-   @brief 
-    Get if a space is light or no
- 
-   @param 
-    Space *space: the space you want to know that.
-   @return 
-    BOOL light: the light characteristic of the space or FALSE if the input is NULL
-   */
-BOOL space_get_light(Space *space){
-	if(!space){
-  	return FALSE;
-  }
-	return light(space);
-}
-
 
 /**
    @date 11-11-2016 
@@ -710,8 +664,8 @@ STATUS space_print(Space *space){
   }
  
   /* Print each field of the Space structure, checking if it is empty */
-  fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s;Light %d)\n", 
-    id(space), name(space), desc(space),light(space));
+  fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s)\n", 
+    id(space), name(space), desc(space));
      
   idaux = space_get_north(space);
   if(NO_ID != idaux){
