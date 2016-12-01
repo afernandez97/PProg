@@ -36,6 +36,12 @@ struct _Object{
   char name[WORD_SIZE + 1]; /*!< Name of the object */
 	Id location; /*!< Location of the object */
 	char desc[WORD_SIZE + 1];	/*!< Description of the object */
+	double price; /*!< Price of the object */
+	BOOL sold; /*!< Sold or not */
+	BOOL hidden; /*!< Hidden or not */
+	Id open; /*!< Identifier of the link which can be opened with this object */
+	BOOL light; /*!< Light or not */
+	BOOL on; /*!< On / Off */
 };
 
 

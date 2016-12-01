@@ -1344,6 +1344,10 @@ STATUS callback_GO(Game *game, char *arg){
   	 link_id = space_get_west(spaces(game)[aux]);  
   } else if(!strcmp(arg, "east") || !strcmp(arg, "e")){
   	 link_id = space_get_east(spaces(game)[aux]);  
+  } else if(!strcmp(arg, "up") || !strcmp(arg, "u")){
+  	 link_id = space_get_up(spaces(game)[aux]);  
+  } else if(!strcmp(arg, "down") || !strcmp(arg, "d")){
+  	 link_id = space_get_down(spaces(game)[aux]);  
   } else{
       return ERROR;
   }
