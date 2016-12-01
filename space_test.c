@@ -1134,3 +1134,76 @@ void test2_space_print(){
 	FUNCTION_IS_CORRECT(space_print(space) == ERROR);
 	return;
 }
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 1, 2016
+
+@brief test1_space_set_light
+Tests if you set a light for a unitialized space
+
+@param
+@return
+*/
+void test1_space_set_light(){
+	Space *space = NULL;
+
+	FUNCTION_IS_CORRECT(space_set_light(space,TRUE) == ERROR);
+	return;
+}
+/**
+
+@author Guillermo Rodriguez
+@date Dec. 1, 2016
+
+@brief test2_space_set_light
+Tests if you set a light correctly
+
+@param
+@return
+*/
+void test2_space_set_light(){
+	Space *space = NULL;
+  Id id = 1;
+  space = space_create(id);
+  FUNCTION_IS_CORRECT(space_set_light(space,TRUE) == OK);
+	return;
+}
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 1, 2016
+
+@brief test1_space_get_light
+Tests if can get a light for a unitialized space
+
+@param
+@return
+*/
+void test1_space_get_light(){
+	Space *space = NULL;
+
+	FUNCTION_IS_CORRECT(space_get_light(space) == FALSE);
+	return;
+}
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 1, 2016
+
+@brief test2_space_get_light
+Tests if can get a light from a space
+
+@param
+@return
+*/
+void test2_space_get_light(){
+	Space *space = NULL;
+  Id id = 1;
+  space = space_create(id);
+  space_set_light(space,TRUE);
+  FUNCTION_IS_CORRECT(space_get_light(space) == TRUE);
+	return;
+}
+
+
