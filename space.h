@@ -418,7 +418,20 @@ char * space_get_gdesc(Space *space);
    */
 STATUS space_print_gdesc(Space *space);
 
-
+/**
+   @date 1-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Set a light space or remove it.
+ 
+   @param 
+    Space *space: the space you want to change.
+    Bool light : Choose if the space is light or no
+   @return 
+    STATUS: ERROR if the input is NULL and OK otherwise.
+   */
+STATUS space_set_light(Space *space,BOOL light);
 
 /**
    @date 11-11-2016 
@@ -432,6 +445,21 @@ STATUS space_print_gdesc(Space *space);
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
    */
+
+/**
+   @date 1-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Get if a space is light or no
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    BOOL light: the light characteristic of the space or FALSE if the input is NULL
+   */
+BOOL space_get_light(Space *space);
+
 STATUS space_print(Space *space);
 
 
