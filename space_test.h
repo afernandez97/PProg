@@ -1,7 +1,7 @@
 /**
 @file space_test.h
-@version 1.0
-@date 23-11-2016
+@version 2.0
+@date 01-12-2016
 @author Adrián Fernández
 
 @brief
@@ -10,6 +10,9 @@ implemented in space.c.
 
 @version
 	Nov. 23, 2016  Version 1.0 (initial release)
+@version
+	Dec. 01, 2016  Version 2.0
+		Added tests for new fields "up", "down" and "illuminated".	
 */
 
 #ifndef SPACE_TEST_H
@@ -22,7 +25,7 @@ implemented in space.c.
 #pragma GCC diagnostic ignored "-Wpedantic"
 
 /* Constant values description */
-#define MAX_TEST_SPACE 52
+#define MAX_TEST_SPACE 64
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
@@ -387,6 +390,105 @@ Tests if you can get the west field of an uninitialised space.
 */
 void test2_space_get_west();
 
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test1_space_set_up
+Tests if you can successfully set the up of a space.
+
+@param
+@return
+*/
+void test1_space_set_up();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test2_space_set_up
+Tests if you can set the up of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_up();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test1_space_get_up
+Tests if you can successfully get the up of a space.
+
+@param
+@return
+*/
+void test1_space_get_up();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test2_space_get_up
+Tests if you can get the up field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_up();
+
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test1_space_set_down
+Tests if you can successfully set the down of a space.
+
+@param
+@return
+*/
+void test1_space_set_down();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test2_space_set_down
+Tests if you can set the down of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_down();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test1_space_get_down
+Tests if you can successfully get the down of a space.
+
+@param
+@return
+*/
+void test1_space_get_down();
+
+/**
+@author Alejandro Sanchez
+@date Dec. 01, 2016
+
+@brief test2_space_get_down
+Tests if you can get the down field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_down();
+
+
 /**
 @author Adrián Fernández
 @date Nov. 23, 2016
@@ -690,6 +792,58 @@ Tests if you can print the gdesc field of an uninitialised space.
 @return
 */
 void test2_space_print_gdesc();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 01, 2016
+
+@brief test1_space_set_light
+Tests if you set an illumination for an unitialized space
+
+@param
+@return
+*/
+void test1_space_set_illumination();
+
+
+/**
+
+@author Guillermo Rodriguez
+@date Dec. 01, 2016
+
+@brief test2_space_set_illumination
+Tests if you set an illumination correctly
+
+@param
+@return
+*/
+void test2_space_set_illumination();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 01, 2016
+
+@brief test1_space_is_illuminated
+Tests if can check if an unitialized space is illuminated or not
+
+@param
+@return
+*/
+void test1_space_is_illuminated();
+
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 01, 2016
+
+@brief test2_space_is_illuminated
+Tests if can check if a space is illuminated or not
+
+@param
+@return
+*/
+void test2_space_is_illuminated();
+
 
 /**
 @author Adrián Fernández
