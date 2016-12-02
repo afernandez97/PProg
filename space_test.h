@@ -9,9 +9,9 @@ Contains the headers of the functions used to test the functions
 implemented in space.c.
 
 @version
-	Nov. 23, 2016  Version 1.0 (initial release)
+	Nov. 23, 2016 Version 1.0 (initial release)
 @version
-	Dec. 01, 2016  Version 2.0
+	Dec. 01, 2016 Version 2.0
 		Added tests for new fields "up", "down" and "illuminated".	
 */
 
@@ -39,7 +39,7 @@ implemented in space.c.
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_create
 
@@ -52,7 +52,7 @@ void test1_space_create();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_create
 
@@ -66,7 +66,7 @@ void test2_space_create();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_destroy
 
@@ -79,7 +79,7 @@ void test1_space_destroy();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_destroy
 
@@ -92,7 +92,7 @@ void test2_space_destroy();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_id
 
@@ -105,7 +105,7 @@ void test1_space_get_id();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_id
 
@@ -118,7 +118,7 @@ void test2_space_get_id();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_name
 
@@ -131,7 +131,7 @@ void test1_space_set_name();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_name
 
@@ -144,7 +144,7 @@ void test2_space_set_name();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_set_name
 
@@ -158,7 +158,7 @@ void test3_space_set_name();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_name
 
@@ -171,7 +171,7 @@ void test1_space_get_name();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_name
 
@@ -184,7 +184,7 @@ void test2_space_get_name();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_north
 
@@ -197,7 +197,7 @@ void test1_space_set_north();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_north
 
@@ -210,7 +210,7 @@ void test2_space_set_north();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_north
 
@@ -223,7 +223,7 @@ void test1_space_get_north();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_north
 
@@ -236,7 +236,7 @@ void test2_space_get_north();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_south
 
@@ -249,7 +249,7 @@ void test1_space_set_south();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_south
 
@@ -262,7 +262,7 @@ void test2_space_set_south();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_south
 
@@ -275,7 +275,7 @@ void test1_space_get_south();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_south
 
@@ -288,7 +288,7 @@ void test2_space_get_south();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_east
 
@@ -301,7 +301,7 @@ void test1_space_set_east();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_east
 
@@ -314,7 +314,7 @@ void test2_space_set_east();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_east
 
@@ -327,7 +327,7 @@ void test1_space_get_east();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_east
 
@@ -340,7 +340,7 @@ void test2_space_get_east();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_west
 
@@ -353,7 +353,7 @@ void test1_space_set_west();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_west
 
@@ -366,7 +366,7 @@ void test2_space_set_west();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_west
 
@@ -379,7 +379,7 @@ void test1_space_get_west();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_west
 
@@ -491,7 +491,7 @@ void test2_space_get_down();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_add_object
 
@@ -504,7 +504,7 @@ void test1_space_add_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_add_object
 
@@ -518,7 +518,7 @@ void test2_space_add_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_add_object
 
@@ -531,7 +531,7 @@ void test3_space_add_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_del_object
 
@@ -544,7 +544,7 @@ void test1_space_del_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_del_object
 
@@ -558,7 +558,7 @@ void test2_space_del_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_del_object
 
@@ -571,7 +571,7 @@ void test3_space_del_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_object
 
@@ -584,7 +584,7 @@ void test1_space_get_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_object
 
@@ -597,7 +597,7 @@ void test2_space_get_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_is_object
 
@@ -610,7 +610,7 @@ void test1_space_is_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_is_object
 
@@ -624,7 +624,7 @@ void test2_space_is_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_is_object
 
@@ -637,7 +637,7 @@ void test3_space_is_object();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_desc
 
@@ -650,7 +650,7 @@ void test1_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_desc
 
@@ -664,7 +664,7 @@ void test2_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_set_desc
 
@@ -677,7 +677,7 @@ void test3_space_set_desc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_desc
 
@@ -690,7 +690,7 @@ void test1_space_get_desc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_desc
 
@@ -703,7 +703,7 @@ void test2_space_get_desc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_set_gdesc
 
@@ -716,7 +716,7 @@ void test1_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_set_gdesc
 
@@ -730,7 +730,7 @@ void test2_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test3_space_set_gdesc
 
@@ -743,7 +743,7 @@ void test3_space_set_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_get_gdesc
 
@@ -756,7 +756,7 @@ void test1_space_get_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_get_gdesc
 
@@ -769,7 +769,7 @@ void test2_space_get_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_print_gdesc
 
@@ -782,7 +782,7 @@ void test1_space_print_gdesc();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_print_gdesc
 
@@ -847,7 +847,7 @@ void test2_space_is_illuminated();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test1_space_print
 
@@ -860,7 +860,7 @@ void test1_space_print();
 
 /**
 @author Adrián Fernández
-@date Nov. 23, 2016
+@date 23-11-2016
 
 @brief test2_space_print
 
