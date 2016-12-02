@@ -1425,7 +1425,7 @@ STATUS callback_ROLL(Game *game){
 
 
 /**
-@date 04-11-2016 
+@date 02-12-2016 
 @author Ricardo Riol
 
 @brief callback_INSPECT
@@ -1441,7 +1441,7 @@ STATUS callback_INSPECT(Game *game, char *arg){
   Inventory *inv = NULL;
   Set *set_inv = NULL, *set_spc = NULL;
   Id id_space = NO_ID;
-  int flag, i;
+  int flag, i, illuminated = 0, bought = 0;
   char *description = NULL;
 	/* Check that the inputs are not empty */
   if (!game || !arg){
@@ -1455,21 +1455,30 @@ STATUS callback_INSPECT(Game *game, char *arg){
   inv = player_get_inventory(player(game));
   set_inv = inventory_get_bag(inv);
 
+  if (space_is_illuminated (space) == TRUE){
+      illuminated = 1;
+  } 
+
 	/* Check if you want a space description or an object description */
   if(!strcmp (arg, "s") || !strcmp (arg, "space")){	/* space */
     description = space_get_desc(space);
-    fprintf(stdout,"%s\n", description);
+
+    if (illuminated == 1){
+	fprintf(stdout,"%s. The space is illuminated.\n", description);
+    } else{
+	fprintf (stdout, "%s.\n", description);
+    }
     return OK;
   } else {	/* object */
     	for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
-        obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+            obj = game_get_object(game, set_get_object_at_position(set_inv, i));
       	if(!strcmp(object_get_name(obj), arg)){
         	flag = 1;
       	}
     	}
       if(flag == 0){
         for(i=0, flag=0;i < set_get_count(set_spc) && flag == 0; i++){
-        obj = game_get_object(game, set_get_object_at_position(set_spc, i));
+            obj = game_get_object(game, set_get_object_at_position(set_spc, i));
         if(!strcmp(object_get_name(obj), arg)){
             flag = 1;
           }
@@ -1477,13 +1486,27 @@ STATUS callback_INSPECT(Game *game, char *arg){
       }
   }
 
-  if (flag == 1){
-    fprintf(stdout, "%s\n", object_get_desc(obj));
-    return OK;
+  if (object_is _bought(obj) == TRUE){
+      bought = 1;
+  }
+
+  if (iluminated == 0){
+      fprintf(stdout, "Error, the space is not iluminated.\n");
+      return OK;
+  }
+
+  if (flag == 1 && bought == 1 && iluminated ==1){
+      fprintf(stdout, "%s. The object has been bought.\n", object_get_desc(obj));
+      return OK;
   } 
-    
+
+  if (flag == 1 && bought == 0 && iluminated = 1){
+      fprintf(stdout, "%s.\n", object_get_desc(obj));
+      return OK;
+  }
+
   fprintf(stdout, "Error, the object has not been found.\n");
-  return ERROR;
+      return ERROR;
 }
 
 
