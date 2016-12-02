@@ -47,7 +47,11 @@ typedef enum enum_Command{
   LEAVE, /*!< Command to leave an object on a space */
   GO,	   /*!< Command to go to another space */
   ROLL,	  /*!< Command to roll the die */	
-  INSPECT /*!< Command to get information about an object or space*/ 
+  INSPECT /*!< Command to get information about an object or space*/
+  TURNON  /*!< Command to turn on a object*/
+  TURNOFF /*!< Command to turn off a object*/
+  OPEN 		/*!< Command to open a link with a object*/
+ 
 } T_Command;
 
 /*** Data structures definition ***/
@@ -123,5 +127,18 @@ Gives the information of the argument of the command.
 @return char *: the argument of the command or NULL on error.
 */
 char * command_get_arg(Command *command);
+
+
+/**
+@brief command_get_arg2
+Gives the information of the second argument of the command.
+
+@date 02-12-2016 
+@author Guillermo Rodriguez
+@param Command *command: the command that you want to know the second argument.
+
+@return char *: the  second argument of the command or NULL on error.
+*/
+char * command_get_arg2(Command *command);
 
 #endif

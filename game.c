@@ -103,6 +103,9 @@ STATUS callback_LEAVE(Game *game, char *arg);
 STATUS callback_ROLL(Game *game);
 STATUS callback_GO(Game *game, char *arg);
 STATUS callback_INSPECT(Game *game, char *arg);
+STATUS callback_TURNON(Game * game,char *arg);
+STATUS callback_TURNOFF(Game * game,char *arg);
+STATUS callback_OPEN(Game * game,char *arg,char *arg2);
 
 /*!< Private functions description */
 Id game_get_space_id_at(Game *game, int position);
@@ -319,6 +322,16 @@ STATUS game_update(Game *game, Command *command){
     case ROLL:
       status = callback_ROLL(game);
       break;
+    case TURON:
+      status = callback_TURNON(game ,arg);
+      break;
+    case TUROFF:
+      status = callback_TURNOFF(game,arg);
+      break;
+    case OPEN:
+      status = callback_OPEN(game,arg,arg2);
+      break;
+    
     case NO_CMD:
       break;
     default: /* We must never arrive here */
@@ -1472,3 +1485,158 @@ STATUS callback_INSPECT(Game *game, char *arg){
   fprintf(stdout, "Error, the object has not been found.\n");
   return ERROR;
 }
+
+
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_TURNON
+This function turn on a object
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_TURNON(Game *game, char *arg){
+	Space *space = NULL;
+  Object *obj = NULL;
+  Inventory *inv = NULL;
+  Set *set_inv = NULL, *set_spc = NULL;
+  Id id_space = NO_ID;
+  int flag, i;
+  char *description = NULL;
+	/* Check that the inputs are not empty */
+  if (!game || !arg){
+    return ERROR;
+  }
+  
+  id_space = game_get_player_location(game);
+  space = game_get_space(game, id_space);
+  set_spc = space_get_object(space);
+
+  inv = player_get_inventory(player(game));
+  set_inv = inventory_get_bag(inv);
+  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+  	if(!strcmp(object_get_name(obj), arg)){
+    	flag = 1;
+    }
+  }
+
+  if (flag == 1){
+    if(object_can_illuminate(obj)){
+    	object_set_illumination(obj,TRUE);
+    }
+    return OK;
+  } 
+ 
+  
+    
+  fprintf(stdout, "Error, the object has not been found.\n");
+  return ERROR;
+}
+
+
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_TURNOFF
+This function turn on a object
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_TURNOFF(Game *game, char *arg){
+	Space *space = NULL;
+  Object *obj = NULL;
+  Inventory *inv = NULL;
+  Set *set_inv = NULL, *set_spc = NULL;
+  Id id_space = NO_ID;
+  int flag, i;
+  char *description = NULL;
+	/* Check that the inputs are not empty */
+  if (!game || !arg){
+    return ERROR;
+  }
+  
+  id_space = game_get_player_location(game);
+  space = game_get_space(game, id_space);
+  set_spc = space_get_object(space);
+
+  inv = player_get_inventory(player(game));
+  set_inv = inventory_get_bag(inv);
+  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+  	if(!strcmp(object_get_name(obj), arg)){
+    	flag = 1;
+    }
+  }
+
+  if (flag == 1){
+    if(object_can_illuminate(obj)){
+    	object_set_illumination(obj,FALSE);
+    }
+    return OK;
+  } 
+ 
+  
+    
+  fprintf(stdout, "Error, the object has not been found.\n");
+  return ERROR;
+}
+
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_open
+This function open a link
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_OPEN(Game *game, char *arg){
+	Space *space = NULL;
+  Object *obj = NULL;
+  Inventory *inv = NULL;
+  Set *set_inv = NULL, *set_spc = NULL;
+  Id id_space = NO_ID;
+  int flag, i;
+  char *description = NULL;
+	/* Check that the inputs are not empty */
+  if (!game || !arg || !arg2){
+    return ERROR;
+  }
+  
+  id_space = game_get_player_location(game);
+  space = game_get_space(game, id_space);
+  set_spc = space_get_object(space);
+
+  inv = player_get_inventory(player(game));
+  set_inv = inventory_get_bag(inv);
+  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+  	if(!strcmp(object_get_name(obj), arg2)){
+    	flag = 1;
+    }
+  }
+  
+
+  if (flag == 1 && object_can_open(obj)){
+    
+    return OK;
+  } 
+ 
+  
+    
+  fprintf(stdout, "Error, the object has not been found.\n");
+  return ERROR;
+}
+
+
+  
+  
