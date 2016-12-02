@@ -29,6 +29,11 @@
      @version  Nov. 18, 2016	 Version 4.1
 			Added field "desc" to the structure "Space".
 			Created "space_set_desc" and "space_get_desc".
+     @version  Dec. 01, 2016	 Version 5.0
+			Added fields "illuminated", "up" and "down" to the structure "Space".
+			Created "space_set_up", "space_get_up", "space_set_down", "space_get_down",
+			"space_set_illumination" and "space_is_illuminated" and modified the 
+			functions affected by this changes.
    */
 
 #ifndef SPACE_H
