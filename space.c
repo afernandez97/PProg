@@ -1,7 +1,7 @@
 /**
    @file space.c
-   @version 4.1
-   @date 18-11-2016 
+   @version 5.0
+   @date 01-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -29,6 +29,11 @@
      @version  Nov. 18, 2016	 Version 4.1
 			Added field "desc" to the structure "Space".
 			Created "space_set_desc" and "space_get_desc".
+     @version  Dec. 01, 2016	 Version 5.0
+			Added fields "illuminated", "up" and "down" to the structure "Space".
+			Created "space_set_up", "space_get_up", "space_set_down", "space_get_down",
+			"space_set_illumination" and "space_is_illuminated" and modified the 
+			functions affected by this changes.
   */
  
 #include <stdio.h>
@@ -43,10 +48,12 @@
 #define south(X) (X)->south
 #define east(X) (X)->east
 #define west(X) (X)->west
+#define up(X) (X)->up
+#define down(X) (X)->down
 #define objects(X) (X)->objects
 #define desc(X) (X)->desc
 #define gdesc(X) (X)->gdesc
-#define light(X) (X)->light
+#define illuminated(X) (X)->illuminated
 
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
@@ -57,16 +64,18 @@ struct _Space{
   Id south; /*!< South link of the space */
   Id east;  /*!< East link of the space */
   Id west;  /*!< West link of the space */
+	Id up;	/*!< Up link of the space */
+	Id down;	/*!< Down link of the space */
   Set *objects; /*!<  Set of the objects,there are in the space */
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
-  Bool light;
+  BOOL illuminated; /*!< Illuminated or not */
 };
  
  
 /*** Public functions definition ***/
 /**
-   @date 11-11-2016 
+   @date 01-12-2016 
    @author Alejandro Sanchez
  
    @brief Creates a space. space_create()
@@ -98,6 +107,8 @@ Space * space_create(Id id){
   south(space) = NO_ID;
   east(space) = NO_ID;
   west(space) = NO_ID;
+	up(space) = NO_ID;
+  down(space) = NO_ID;	
 
   objects(space) = set_create();
   if(!objects(space)){  /* Check if memory has been allocated */
@@ -107,7 +118,7 @@ Space * space_create(Id id){
 
   strcpy(desc(space), "");
   strcpy(gdesc(space), "       |       |       |");
-  light(space) = FALSE;
+  illuminated(space) = FALSE;
  
   return space;
 }
@@ -401,8 +412,98 @@ Id space_get_west(Space *space){
   return west(space);
 }
  
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief
+    Set the Up link to a space. space_set_up()
+ 
+   @param Space *space: the space where you want to change the Up link.
+   @param Id id: the new Up link you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_up(Space *space, Id id){
+  if(!space){             /* Check that the inputs are not empty */
+    return ERROR;
+  }
+ 
+  up(space) = id;          /* Set the Up link to the space */
+  return OK;
+}
  
  
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief 
+    Gives the information of the Up link of the space.space_get_up()
+ 
+   @param 
+    Space *space: the space you want to know the Up link.
+ 
+   @return 
+    Id: the Up link of the space or NO_ID on error.
+   */
+Id space_get_up(Space *space){
+  if(!space){                     /* Check that the input is not empty */
+    return NO_ID;
+  }
+ 
+  return up(space);
+}
+ 
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief
+    Set the Down link to a space. space_set_down()
+ 
+   @param Space *space: the space where you want to change the Down link.
+   @param Id id: the new Down link you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_down(Space *space, Id id){
+  if(!space){             /* Check that the inputs are not empty */
+    return ERROR;
+  }
+ 
+  down(space) = id;          /* Set the Down link to the space */
+  return OK;
+}
+ 
+ 
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief 
+    Gives the information of the Down link of the space.space_get_down()
+ 
+   @param 
+    Space *space: the space you want to know the Down link.
+ 
+   @return 
+    Id: the Down link of the space or NO_ID on error.
+   */
+Id space_get_down(Space *space){
+  if(!space){                     /* Check that the input is not empty */
+    return NO_ID;
+  }
+ 
+  return down(space);
+}
+
+
 /**
    @date 25-10-2016 
    @author Alejandro Sanchez
@@ -648,50 +749,49 @@ STATUS space_print_gdesc(Space *space){
 
 /**
 
-   @date 1-12-2016 
+   @date 01-12-2016 
    @author Guillermo Rodriguez 
  
    @brief 
-    Set a light space or remove it.
+    Sets if a space is illuminated or not.space_set_illumination()
 
- 
    @param 
     Space *space: the space you want to change.
-    Bool light : Choose if the space is light or no
+    BOOL illumination : Choose if the space is illuminated or not.
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
 
    */
-STATUS space_set_light(Space *space,BOOL light){
+STATUS space_set_illumination(Space *space, BOOL illumination){
 	if(!space){
   	return ERROR;
   }
-  light(space) = light;
+  illuminated(space) = illumination;
 	return OK;
 }
 
 /**
-   @date 1-12-2016 
+   @date 01-12-2016 
    @author Guillermo Rodriguez 
  
    @brief 
-    Get if a space is light or no
+    Gets if a space is illuminated or not.space_is_illuminated() 
  
    @param 
     Space *space: the space you want to know that.
    @return 
-    BOOL light: the light characteristic of the space or FALSE if the input is NULL
+    BOOL: the illumination of the space or FALSE if the input is NULL.
    */
-BOOL space_get_light(Space *space){
+BOOL space_is_illuminated(Space *space){
 	if(!space){
   	return FALSE;
   }
-	return light(space);
+	return illuminated(space);
 }
 
 
 /**
-   @date 11-11-2016 
+   @date 01-12-2016 
    @author Alejandro Sanchez
  
    @brief 
@@ -710,36 +810,54 @@ STATUS space_print(Space *space){
   }
  
   /* Print each field of the Space structure, checking if it is empty */
-  fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s;Light %d)\n", 
-    id(space), name(space), desc(space),light(space));
+	if(illuminated(space)==FALSE){
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; DARK)\n", 
+    	id(space), name(space), desc(space));
+	} else if(illuminated(space)==TRUE){
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; ILLUMINATED)\n", 
+    	id(space), name(space), desc(space));
+	} 
      
   idaux = space_get_north(space);
   if(NO_ID != idaux){
     fprintf(stdout, "---> North link: %ld.\n", idaux);
   } else{
-      fprintf(stdout, "---> No north link.\n");
+      fprintf(stdout, "---> No North link.\n");
   }
      
   idaux = space_get_south(space);
   if(NO_ID != idaux){
     fprintf(stdout, "---> South link: %ld.\n", idaux);
   } else{
-      fprintf(stdout, "---> No south link.\n");
+      fprintf(stdout, "---> No South link.\n");
   }
      
   idaux = space_get_east(space);
   if(NO_ID != idaux){
     fprintf(stdout, "---> East link: %ld.\n", idaux);
   } else{
-      fprintf(stdout, "---> No east link.\n");
+      fprintf(stdout, "---> No East link.\n");
   }
      
   idaux = space_get_west(space);
   if(NO_ID != idaux){
     fprintf(stdout, "---> West link: %ld.\n", idaux);
   } else{
-      fprintf(stdout, "---> No west link.\n");
-      fprintf(stdout, "---> No west link.\n");
+      fprintf(stdout, "---> No West link.\n");
+  }
+	
+  idaux = space_get_up(space);
+  if(NO_ID != idaux){
+    fprintf(stdout, "---> Up link: %ld.\n", idaux);
+  } else{
+      fprintf(stdout, "---> No Up link.\n");
+  }
+	
+  idaux = space_get_down(space);
+  if(NO_ID != idaux){
+    fprintf(stdout, "---> Down link: %ld.\n", idaux);
+  } else{
+      fprintf(stdout, "---> No Down link.\n");
   }
 
   if(set_is_empty(objects(space)) == TRUE){
