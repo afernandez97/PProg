@@ -31,6 +31,7 @@ It implements the command interpreter.
 /* Constant values description */
 #define cmd(X) (X)->cmd
 #define arg(X) (X)->arg
+#define arg2(X) (X)->arg2
 
 /**
 @brief Command structure
@@ -39,6 +40,7 @@ The Command structure stores information of the different commands that can be u
 struct _Command{
 	T_Command cmd;	/*!< Type of command */
 	char arg[CMD_LENGTH];	/*!< Input argument */
+  char arg2[CMD_LENGHT];/*!< Input argument for command open */
 };
 
 
@@ -60,7 +62,7 @@ Input must be typed:
 Command * get_user_input(){
 	Command *command = NULL;
 	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
-	char *toks = NULL, *cmd = NULL, *arg = NULL;
+	char *toks = NULL, *cmd = NULL,*cm2 = NULL,*arg = NULL,*arg2 = NULL;
 
 
   command = command_create();
@@ -99,12 +101,30 @@ Command * get_user_input(){
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
-		} else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
+		} 
+      else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
         cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);
+ 		}
+      else if(!strcmp(cmd, "turnon")){    
+        cmd(command) = TURNON; /* "Turnon" case */
+        strcpy(arg(command), arg);
+		}
+      else if(!strcmp(cmd, "turnoff")){    
+        cmd(command) = TURNOFF; /* "Turnoff" case */
+        strcpy(arg(command), arg);
+		
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
 				cmd(command) = GO;    /* "Go" case*/
-        strcpy(arg(command), arg);
+        strcpy(arg(command),arg);
+    } else if(!strcmp(cmd, "open")){
+        cmd2 = strtok(aux, " ");
+        if(!strcmp(cmd, "with"){
+        	strcpy(arg(command), arg);
+        	arg2 = strtok(aux, " ");
+        	strcpy(arg2(command), arg2);
+        	cmd(command) = OPEN;  /* "Open" case*/
+        }
 		} else{                           
         cmd(command) = UNKNOWN; /* Wrong input */
     }
@@ -144,7 +164,7 @@ Command * command_create(){
   /* Initialize structure fields */
   cmd(command) = NO_CMD;
   arg(command)[0] = '\0';
-
+  arg2(command)[0] = '\0';
   return command;
 }
 
@@ -207,3 +227,27 @@ char * command_get_arg(Command *command){
 
   return arg(command);
 }
+
+
+/**
+@brief command_get_arg2
+Gives the information of the second argument of the command.
+
+@date 02-12-2016 
+@author Guillermo Rodriguez
+@param Command *command: the command that you want to know the second argument.
+
+@return char *: the  second argument of the command or NULL on error.
+*/
+char * command_get_arg2(Command *command){
+  if(!command){   /* Check that the input is not empty */
+    return NULL;
+  }
+
+  return arg2(command);
+}
+
+
+
+
+
