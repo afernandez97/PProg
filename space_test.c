@@ -12,7 +12,7 @@ functions implemented in space.c.
 	Nov. 23, 2016  Version 1.0 (initial release)
 @version
 	Dec. 01, 2016  Version 2.0
-		Added tests for new fields up, down and illuminated.
+		Added tests for new fields "up", "down" and "illuminated".
 */
 
 #include <stdio.h>
