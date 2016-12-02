@@ -1,7 +1,7 @@
 /**
    @file space.h
-   @version 4.1
-   @date 18-11-2016 
+   @version 5.0
+   @date 01-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -46,7 +46,7 @@ typedef struct _Space Space;
 
 /*** Public functions description ***/
 /**
-   @date 11-11-2016 
+   @date 01-12-2016 
    @author Alejandro Sanchez
  
    @brief Creates a space. space_create()
@@ -261,6 +261,70 @@ STATUS space_set_west(Space *space, Id id);
 Id space_get_west(Space *space);
 
 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief
+    Set the Up link to a space. space_set_up()
+ 
+   @param Space *space: the space where you want to change the Up link.
+   @param Id id: the new Up link you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_up(Space *space, Id id);
+ 
+ 
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief 
+    Gives the information of the Up link of the space.space_get_up()
+ 
+   @param 
+    Space *space: the space you want to know the Up link.
+ 
+   @return 
+    Id: the Up link of the space or NO_ID on error.
+   */
+Id space_get_up(Space *space);
+ 
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief
+    Set the Down link to a space. space_set_down()
+ 
+   @param Space *space: the space where you want to change the Down link.
+   @param Id id: the new Down link you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_down(Space *space, Id id);
+ 
+ 
+ 
+/**
+   @date 01-12-2016 
+   @author Alejandro Sanchez
+ 
+   @brief 
+    Gives the information of the Down link of the space.space_get_down()
+ 
+   @param 
+    Space *space: the space you want to know the Down link.
+ 
+   @return 
+    Id: the Down link of the space or NO_ID on error.
+   */
+Id space_get_down(Space *space);
 
  
 /**
@@ -419,9 +483,41 @@ char * space_get_gdesc(Space *space);
 STATUS space_print_gdesc(Space *space);
 
 
+/**
+
+   @date 01-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Sets if a space is illuminated or not.space_set_illumination()
+
+   @param 
+    Space *space: the space you want to change.
+    BOOL illumination : Choose if the space is illuminated or not.
+   @return 
+    STATUS: ERROR if the input is NULL and OK otherwise.
+
+   */
+STATUS space_set_illumination(Space *space, BOOL illumination);
+
 
 /**
-   @date 11-11-2016 
+   @date 01-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Gets if a space is illuminated or not.space_is_illuminated() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    BOOL: the illumination of the space or FALSE if the input is NULL.
+   */
+BOOL space_is_illuminated(Space *space);
+
+
+/**
+   @date 01-12-2016 
    @author Alejandro Sanchez
  
    @brief 
