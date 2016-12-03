@@ -42,14 +42,18 @@
 #include "types.h"
 #include "set.h"
 
-/*** Data structures definition ***/
-typedef struct _Space Space;
-
-/*** Constant values description ***/
+/**
+@def Constant values description
+*/
 #define MAX_SPACES 100
 
+/*!< Data structures definition */
+typedef struct _Space Space;
 
-/*** Public functions description ***/
+
+
+/*!< Public functions description */
+
 /**
    @date 01-12-2016 
    @author Alejandro Sanchez

@@ -20,17 +20,16 @@
 #include "types.h"
 
 /**
-@brief Object's structure
-Contains the object's fields
+@def Constant values description
 */
-
-typedef struct _Object Object;
-
-/*** Constant values description ***/
 #define MAX_OBJECTS 100
 
+/*!< Data structures definition */
+typedef struct _Object Object;
 
-/*** Public functions description ***/
+
+
+/*!< Public functions description */
 
 /**
 @brief object_create

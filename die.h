@@ -19,12 +19,13 @@
 
 #include "types.h"
 
-
-/*** Data structures definition ***/
+/*!< Data structures definition */
 typedef struct _Die Die;
 
 
-/*** Public functions description ***/
+
+/*!< Public functions description */
+
 /**
    
    @date: 15-10-2016 

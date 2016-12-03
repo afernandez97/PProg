@@ -1,7 +1,7 @@
 /**
 @file game.c
-@version 5.0
-@date 20-11-2016
+@version 6.0
+@date 03-12-2016
 @authors Guillermo Rodriguez, Alejandro Sanchez, Adrian Fernandez and Ricardo Riol
 
 @brief
@@ -61,6 +61,9 @@ Nov. 20, 2016 Version 4.2
 @version
 Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
+@version
+Dec. 3, 2016 Version 6.0
+  Added text field, players now can be loaded from a file.
 */
 
 #include <stdio.h>
@@ -87,11 +90,12 @@ Nov. 26, 2016 Version 5.0
 The Game structure stores information of the game and its elements.
 */
 struct _Game{
-  Player *player;                     /*!< Player of the game */
-  Object *objects[MAX_OBJECTS + 1];   /*!< Objects of the game */
-  Space *spaces[MAX_SPACES + 1];      /*!< Spaces of the game */
+  Player *players[MAX_PLAYERS];                     /*!< Player of the game */
+  Object *objects[MAX_OBJECTS];   /*!< Objects of the game */
+  Space *spaces[MAX_SPACES];      /*!< Spaces of the game */
   Die *die;                           /*!< Die of the game*/ 
-  Link *links[MAX_LINKS + 1];         /*!< Links of the game */
+  Link *links[MAX_LINKS];         /*!< Links of the game */
+  char text[WORD_SIZE];               /*!< Text shown in the screen */
 };
 
 
@@ -112,11 +116,12 @@ Id game_get_space_id_at(Game *game, int position);
 
 Object * game_get_object(Game *game, Id id);
 Link * game_get_link(Game *game, Id id);
+Player * game_get_player(Game *game, Id id);
 
-STATUS game_set_player_location(Game *game, Id id);
-Id game_get_player_location(Game *game);
+STATUS game_set_player_location(Game *game, Id player, Id location);
+Id game_get_player_location(Game *game, Id player);
 
-STATUS game_set_object_location(Game *game, Id object, Id id);
+STATUS game_set_object_location(Game *game, Id object, Id location);
 Id game_get_object_location(Game *game, Id object);
 
 BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
@@ -132,17 +137,16 @@ BOOL game_is_link_open(Game *game, Id link);
 @brief game_init
 Initializes a game.
 
-@param Id player: the identifier of the player of the game.
 @param Id die: the identifier of the die of the game.
 
 @return Game *game: the game initialized.
 */
-Game * game_init(Id player, Id die){
+Game * game_init(Id die){
   int i;
   Game *game=NULL;
 
   /* Check that the inputs are not empty */ 
-  if(player == NO_ID || !objects(game) || die == NO_ID){  
+  if(!objects(game) || die == NO_ID){  
     return NULL;
   }
 
@@ -154,10 +158,8 @@ Game * game_init(Id player, Id die){
     spaces(game)[i] = NULL;   /* Initialize to NULL each space */
   }
     
-  player(game) = player_create(player); /* Create a player */
-  if(!player(game)){	 /* Check if memory has been allocated */
-    free(game);
-    return NULL;
+  for(i=0; i < MAX_PLAYERS; i++){  
+    players(game)[i] = NULL;   /* Initialize to NULL each object */
   }
 
   for(i=0; i < MAX_OBJECTS; i++){  
@@ -166,11 +168,12 @@ Game * game_init(Id player, Id die){
 
   die(game) = die_create(die);  /* Create a die */
   if(!die(game)){   /* Check if memory has been allocated */
-	  player_destroy(player(game));  /* Free the memory that you created */
     free(game);
     return NULL;
-    
   }
+
+  text(game) = "";
+
   return game;
 }
 
@@ -184,49 +187,62 @@ Game * game_init(Id player, Id die){
 Initializes a game from two files which contain the spaces and objects.
 
 @param char *filename1: the file to concatenate the spaces,links and objects
-@param Id player: the identifier of the player of the game.
 @param Id die: the identifier of the die of the game.
 
 @return Game *game: the game initialized.
 */
-Game * game_init_from_file(char *filename,Id player, Id die){
+Game * game_init_from_file(char *filename, Id die){
   Game *game = NULL;
-  char f[WORD_SIZE]="";
+  char f1[WORD_SIZE]="";
+  char f2[WORD_SIZE]="";
+  char f3[WORD_SIZE]="";
+  char f4[WORD_SIZE]="";
 
   /* Check that the inputs are not empty */ 
-  if(!filename || player == NO_ID || die == NO_ID){  
+  if(!filename || die == NO_ID){  
     return NULL;
   }
 
-  strcpy(f, filename);
+  strcpy(f1, filename);
+  strcat(f,"_lnk.dat");
+  strcpy(f2, filename);
+  strcat(f,"_spc.dat");
+  strcpy(f3, filename);
+  strcat(f,"_ply.dat");
+  strcpy(f4, filename);
+  strcat(f,"_obj.dat");
 
   /* Initialize the elements of the game and check if it has worked */
-  game = game_init(player, die);
+  game = game_init(die);
   if(!game){
     game_destroy(game);
     return NULL; 
   }
 
   /* Load the links from the file and check if it has worked */
-  if(game_load_links(game, f) == ERROR){
+  if(game_load_links(game, f1) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   } 
 
   /* Load the spaces from the file and check if it has worked */
-  if(game_load_spaces(game, f) == ERROR){ 
+  if(game_load_spaces(game, f2) == ERROR){ 
     printf("%s\n", f);
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   }
 
-  if(game_load_objects(game, f) == ERROR){
+  /* Load the players from the file and check if it has worked */
+  if(game_load_players(game, f3) == ERROR){
+    game_destroy(game); /* Destroy the game if it has been an error */
+    return NULL;
+  }
+
+  /* Load the objects from the file and check if it has worked */
+  if(game_load_objects(game, f4) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   } 
-
-  /* Set the player on the first space */
-  game_set_player_location(game, game_get_space_id_at(game, 0)); 
   
   return game;
 }
@@ -249,13 +265,14 @@ STATUS game_destroy(Game *game){
   if(!game){  /* Check that the input is not empty */
     return ERROR;
   }
-
-  /* Destroy the player */
-  player_destroy(player(game));
   
   /* Destroy the die */
   die_destroy(die(game));
 
+  /* Destroy the players */
+  for(i=0; i < MAX_PLAYERS; i++){
+    player_destroy(players(game)[i]);
+  }
   /* Destroy the spaces */
   for(i=0; i < MAX_SPACES; i++){
     space_destroy(spaces(game)[i]);
@@ -528,6 +545,57 @@ Link * game_get_link_at_position(Game *game, int position){
 
 
 /**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_set_link_at_position
+Sets a player in a specific position.
+
+@param Game *game: the game where the player is.
+@param Player *player: the player you want to set
+@param int position: the position where you want to set the player.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_player_at_position(Game *game, Player *player, int position){
+  if(!game || !player || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(players(game)[position] != NULL){
+    player_destroy(players(game)[position]);
+  }
+
+  players(game)[position] = player;
+
+  return OK;
+}
+
+
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_get_link_at_position
+Gets the player in a specific position.
+
+@param Game *game: the game where the player is.
+@param int position: the position of the player.
+
+@return Player *player : the player in that position or NULL on error.
+*/
+Player * game_get_player_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return players(game)[position];
+}
+
+
+
+/**
 @date 23-09-2016 
 @author Alejandro Sanchez
 
@@ -576,23 +644,21 @@ void game_print_data(Game *game){
     object_print(objects(game)[i]);
   }
   
-  /* Print the linka */
+  /* Print the links */
   printf("=> Links: \n");
   for(i=0; i < MAX_LINKS && links(game)[i] != NULL; i++){
     link_print(links(game)[i]);
   }
 
+  /* Print the players */
+  printf("=> Players: \n");
+  for(i=0; i < MAX_PLAYERS && players(game)[i] != NULL; i++){
+    player_print(players(game)[i]);
+  }
+
   /* Print the die information */  
   die_print(die(game));
 
-  /* Print the player location */
-  printf("=> Player location: %d\n", (int)game_get_player_location(game));
-  
-  /* Print the objects location */
-  for(i=0; i < MAX_OBJECTS && objects(game)[i] != NULL; i++){
-     object_print(objects(game)[i]);
-  }
-  
   return;
 }
 
@@ -687,7 +753,7 @@ void game_print_screen(Game *game){
   }  
 
   /* Get actual location of the player */
-  id_act = game_get_player_location(game);  
+  id_act = game_get_player_location(game, 1);  
   if(id_act == NO_ID){  /* Check if it has worked */
     return;
   }
@@ -824,7 +890,7 @@ void game_print_screen(Game *game){
   }
 
   /* Print the objects of the game*/  
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   count = inventory_get_count(inv);
   printf("\nPlayer objects: ");
   /* Get the different names of the objects and print them */
@@ -903,44 +969,89 @@ Object * game_get_object(Game *game, Id id){
 
 
 /**
-@date 30-10-2016 
-@author Alejandro Sanchez
+@date 03-12-2016 
+@author Adrián Fernández
 
-@brief game_set_player_location
-Sets a location for a player.
+@brief game_get_player
+Gives a specific player.
 
 @param Game *game: the game where the player is.
-@param Id location: the location you want for the player.
+@param Id id: the id of the player you want.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return Player *: the player you want or NULL on error.
 */
-STATUS game_set_player_location(Game *game, Id location){
-  /* Set location */
-  if(player_set_location(player(game), location) == ERROR){
-    return ERROR;
+Player * game_get_player(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
   }
-  return OK;
+
+  /* Look for the player you want */
+  for(i=0; i < MAX_PLAYERS && players(game)[i] != NULL; i++){
+    if(id == player_get_id(players(game)[i])){
+      return players(game)[i];
+    }
+  }
+    
+  return NULL;
 }
 
 
 
 /**
-@date 30-10-2016 
-@author Alejandro Sanchez
+@date 03-12-2016 
+@author Adrián Fernández
 
-@brief game_get_player_location
-Gives the location of the player.
+@brief game_set_player_location
+Sets a location of a player.
 
 @param Game *game: the game where the player is.
+@param Id player: the id of the player selected.
+@param Id location: the location you want for the player.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_player_location(Game *game, Id player, Id location){
+  Object *ply = NULL;
+
+  if(!game || player == NO_ID || location == NO_ID){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  /* Get the player */
+  ply = game_get_player(game, player);
+  
+  /* Set its location */
+  return player_set_location(ply, location);
+}
+
+
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_get_player_location
+Gives the location of a player.
+
+@param Game *game: the game where the player is.
+@param Id player: the id of the player selected.
 
 @return Id: the location of the player or NO_ID on error.
 */
-Id game_get_player_location(Game *game){
-  if(!game){  /* Check that the input is not empty */
+Id game_get_player_location(Game *game, Id player){
+  Object *ply = NULL;
+
+  if(!game || player == NO_ID){  /* Check that the inputs are not empty */
     return NO_ID;
   }
 
-  return player_get_location(player(game));
+  /* Get the player */
+  ply = game_get_player(game, player);
+
+  /* Get its location */
+  return player_get_location(ply);
 }
  
 
@@ -960,7 +1071,7 @@ Sets a location for an object.
 STATUS game_set_object_location(Game *game, Id object, Id location){
   Object *obj = NULL;
 
-  if(!game || object == NO_ID){  /* Check that the inputs are not empty */
+  if(!game || player == NO_ID || location == NO_ID){  /* Check that the inputs are not empty */
     return ERROR;
   }
 
@@ -1168,7 +1279,7 @@ STATUS callback_CATCH(Game *game, char *arg){
   } 
   
   /* Get player location */
-  space_id = game_get_player_location(game); 
+  space_id = game_get_player_location(game, 1); 
 
   /* Look for the space where the player is */
   while(i < MAX_SPACES && flag == 0){
@@ -1208,7 +1319,7 @@ STATUS callback_CATCH(Game *game, char *arg){
   }
 
   /* Set to the player the object with name "arg" which is on that space */
-  if(player_add_object(player(game), object_id) == ERROR){
+  if(player_add_object(players(game)[0], object_id) == ERROR){
     return ERROR;
   }
 
@@ -1250,13 +1361,13 @@ STATUS callback_LEAVE(Game *game, char *arg){
   } 
 
   /* Get the objects that the player have */
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   if(!inv){ /* Check that the player has at least one object */
     return ERROR;
   }
 
   /* Get player location */
-  space_id = game_get_player_location(game); 
+  space_id = game_get_player_location(game, 1); 
 
   /* Look for the space where the player is */
   while(i < MAX_SPACES && flag == 0){
@@ -1295,7 +1406,7 @@ STATUS callback_LEAVE(Game *game, char *arg){
   }
 
   /* Set that the player does not have that object */
-  if(player_del_object(player(game), object_id) == ERROR){
+  if(player_del_object(players(game)[0], object_id) == ERROR){
     return ERROR;
   }
 
@@ -1331,7 +1442,7 @@ STATUS callback_GO(Game *game, char *arg){
   } 
   
   /* Get player location */
-  space_id = game_get_player_location(game); 
+  space_id = game_get_player_location(game, 1); 
 	if(space_id == NO_ID){  /* Check if it has worked */
     return ERROR;
   }
@@ -1390,7 +1501,7 @@ STATUS callback_GO(Game *game, char *arg){
 
   /* Check that the link is open */
   if(link_is_open(links(game)[auxl]) == TRUE){
-  	game_set_player_location(game, space_id2);
+  	game_set_player_location(game, 1, space_id2);
   	return OK; 
   }
 
@@ -1448,11 +1559,11 @@ STATUS callback_INSPECT(Game *game, char *arg){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game);
+  id_space = game_get_player_location(game, 1);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
 
   if (space_is_illuminated (space) == TRUE){
@@ -1534,11 +1645,11 @@ STATUS callback_TURNON(Game *game, char *arg){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game);
+  id_space = game_get_player_location(game, 1);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
@@ -1585,11 +1696,11 @@ STATUS callback_TURNOFF(Game *game, char *arg){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game);
+  id_space = game_get_player_location(game, 1);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
@@ -1635,11 +1746,11 @@ STATUS callback_OPEN(Game *game, char *arg){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game);
+  id_space = game_get_player_location(game, 1);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(player(game));
+  inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
@@ -1658,8 +1769,4 @@ STATUS callback_OPEN(Game *game, char *arg){
     
   fprintf(stdout, "Error, the object has not been found.\n");
   return ERROR;
-}
-
-
-  
-  
+} 
