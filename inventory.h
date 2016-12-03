@@ -18,17 +18,21 @@
 
 #include "set.h"
 
-/* Constant values description */
+/**
+@def Constant values description
+*/
 #define MAX_BAG 10
 
 #define bag(X) (X)->bag
 #define max(X) (X)->max
 
-/*** Data structures definition ***/
+/*!< Data structures definition */
 typedef struct _Inventory Inventory;
 
 
-/* Public functions description */
+
+/*!< Public functions description */
+
 /**
    @date 03-11-2016
    @author Adrian Fernández

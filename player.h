@@ -26,9 +26,14 @@ It implements a player.
 #include "inventory.h"
 #include "types.h"
 
+/**
+@def Constant values description
+*/
+#define MAX_PLAYERS 12
 
 /*!< Data structures definition */
 typedef struct _Player Player;
+
 
 
 /*!< Public functions description */

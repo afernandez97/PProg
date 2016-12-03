@@ -37,7 +37,7 @@ The Player structure stores information of the different players that play the g
 */
 struct _Player {
 	Id id; /*!< Identifier of the player */
-  char name[WORD_SIZE + 1]; /*!< Name of the player */
+  char name[WORD_SIZE]; /*!< Name of the player */
   Id location;  /*!< Identifier of the space where the player is */
   Inventory *inv;  /*!< Bag of objects that the player carries */
 };

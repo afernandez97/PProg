@@ -1,6 +1,6 @@
 /**
 @file game_reader.h
-@version 5.0
+@version 6.0
 @date 26-11-2016
 @author Adrian Fernandez, Ricardo Riol, Guillermo Rodriguez and Alejandro Sanchez
 
@@ -21,6 +21,9 @@ Nov. 11, 2016   Version 4.0
 @version
 Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
+  @version
+Dec. 3, 2016 Version 6.0
+  Added add_player and game_load_players.
 */
 #ifndef GAME_READER_H
 #define GAME_READER_H
@@ -112,5 +115,31 @@ Loads the links from a file.
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
 STATUS game_load_links(Game *game, char *filename);
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_add_link
+Adds an player to a game.
+
+@param Game *game: the game where you add the player.
+@param Player *player: the player you want to add to the game.  
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_add_player(Game *game, Player *player);
+
+/**
+@date 03-12-2016
+@author Adrián Fernández
+
+@brief game_load_links
+Loads players from a file.
+
+@param Game *game: the game where you want to load the players.
+@param char *filename: the file that contains the players. 
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_load_players(Game *game, char *filename);
 
 #endif

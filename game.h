@@ -1,7 +1,7 @@
 /**
 @file game.h
-@version 5.0
-@date 04-10-2016
+@version 6.0
+@date 03-12-2016
 @authors Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -33,7 +33,10 @@ Nov. 13, 2016 Version 4.1
   after creating ADT Link.  
 @version
 Nov. 26, 2016 Version 5.0
-  Updated headers to use Doxygen.  
+  Updated headers to use Doxygen.
+@version
+Dec. 3, 2016 Version 6.0
+  Added text field, players now can be loaded from a file.
 */
 
 #ifndef GAME_H
@@ -68,12 +71,11 @@ typedef struct _Game Game;
 @brief game_init
 Initializes a game.
 
-@param Id player: the identifier of the player of the game.
 @param Id die: the identifier of the die of the game.
 
 @return Game *game: the game initialized.
 */
-Game* game_init(Id player, Id die);
+Game* game_init(Id die);
 
 
 
@@ -236,6 +238,39 @@ Gets the link in a specific position.
 @return Link *link : the link in that position or NULL on error.
 */
 Link * game_get_link_at_position(Game *game, int position);
+
+
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_set_link_at_position
+Sets a player in a specific position.
+
+@param Game *game: the game where the player is.
+@param Player *player: the player you want to set
+@param int position: the position where you want to set the player.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_player_at_position(Game *game, Player *player, int position);
+
+
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_get_link_at_position
+Gets the player in a specific position.
+
+@param Game *game: the game where the player is.
+@param int position: the position of the player.
+
+@return Player *player : the player in that position or NULL on error.
+*/
+Player * game_get_player_at_position(Game *game, int position);
 
 
 

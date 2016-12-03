@@ -1,6 +1,6 @@
 /**
 @file game_reader.c
-@version 4.0
+@version 6.0
 @date 11-11-2016
 @authors Guillermo Rodriguez and Alejandro Sanchez
 
@@ -25,6 +25,9 @@ Nov. 11, 2016   Version 4.1
 @version
 Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
+@version
+Dec. 3, 2016 Version 6.0
+  Added add_player and game_load_players.
 */
 
 #include <stdio.h>
@@ -92,7 +95,6 @@ Loads a space from a file.
 */
 STATUS game_load_spaces(Game *game, char *filename){
   FILE *file = NULL;
-  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char gdesc[WORD_SIZE] = "";
@@ -107,10 +109,7 @@ STATUS game_load_spaces(Game *game, char *filename){
     return ERROR;
   }
   
-  strcpy(f, filename);
-  strcat(f,"_spc.dat");
-  
-  file = fopen(f, "r");   /* Open the file where the spaces are */
+  file = fopen(filename, "r");   /* Open the file where the spaces are */
   if(!file){
     return ERROR;
   }
@@ -231,7 +230,6 @@ Loads the objects from a file.
 */
 STATUS game_load_objects(Game *game, char *filename){
   FILE *file = NULL;
-  char f[WORD_SIZE]="";
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
 	char desc[WORD_SIZE] = "";
@@ -245,10 +243,7 @@ STATUS game_load_objects(Game *game, char *filename){
     return ERROR;
   }
   
-  strcpy(f, filename);
-  strcat(f,"_obj.dat");
-  
-  file = fopen(f, "r");   /* Open the file where the objects are */
+  file = fopen(filename, "r");   /* Open the file where the objects are */
   if(!file){
     return ERROR;
   }
@@ -360,7 +355,6 @@ Loads the links from a file.
 */
 STATUS game_load_links(Game *game, char *filename){
 	FILE *file = NULL;
-  char f[WORD_SIZE]="";
 	char line[WORD_SIZE] = "";
 	char name[WORD_SIZE] = "";
   char *toks = NULL;
@@ -375,11 +369,8 @@ STATUS game_load_links(Game *game, char *filename){
 	if(!game || !filename){    /* Check that the inputs are not empty */
 		return ERROR;
 	}
-
-  strcpy(f, filename);
-  strcat(f,"_lnk.dat");
 	
-  file = fopen(f, "r");	/* Open the file where the links are */
+  file = fopen(filename, "r");	/* Open the file where the links are */
 	if(!file){				
 		return ERROR;
 	}
@@ -429,4 +420,108 @@ STATUS game_load_links(Game *game, char *filename){
 	fclose(file);
   
 	return status;
+}
+
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_add_link
+Adds an player to a game.
+
+@param Game *game: the game where you add the player.
+@param Player *player: the player you want to add to the game.  
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_add_player(Game *game, Player *player){
+  int i = 0;  /* Initialize the counter */
+
+  if(!game || !player){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  /* Increase the counter until finding an empty player */
+  while(i < MAX_PLAYERS && game_get_space_at_position(game, i) != NULL){
+    i++;
+  }
+
+  /* Check if every player is not empty */
+  if(i >= MAX_PLAYERS){
+    return ERROR;
+  }
+
+  /* Set the new player */
+  if(game_set_player_at_position(game, player, i) == ERROR){
+    return ERROR;
+  }
+
+  return OK;
+}
+
+/**
+@date 03-12-2016
+@author Adrián Fernández
+
+@brief game_load_links
+Loads players from a file.
+
+@param Game *game: the game where you want to load the players.
+@param char *filename: the file that contains the players. 
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_load_players(Game *game, char *filename){
+  FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char name[WORD_SIZE] = "";
+  char *toks = NULL;
+  Id id;
+  Id location;
+  Player* player = NULL;
+  STATUS status = OK;
+
+
+  if(!game || !filename){    /* Check that the inputs are not empty */
+    return ERROR;
+  }
+  
+  file = fopen(filename, "r");  /* Open the file where the links are */
+  if(!file){        
+    return ERROR;
+  }
+
+  /* Read each line of the file and get the id, the name, the spaces and the state of the links */
+  while(fgets(line, WORD_SIZE, file)){
+    if(strncmp("#p:", line, 3) == 0){
+      toks = strtok(line + 3, "|");
+      id = atol(toks);
+      toks = strtok(NULL, "|"); 
+      strcpy(name, toks);
+      toks = strtok(NULL, "|");
+      location = atol(toks);
+
+#ifdef DEBUG 
+  printf("Leido: %ld|%s|%ld\n", id, name, location);
+#endif
+  
+      player = player_create(id); /* Create the player */
+      if(player != NULL){
+        /* Set the name to the player */      
+        player_set_name(player, name);
+
+        /* Set the location of the player */
+        player_set_location(player, location);
+
+        /* Add the player to the game */
+        game_add_player(game, player);  
+      }
+    } /* if(strncmp("#p:", line, 3) == 0) */
+  } /* while */
+  
+  if(ferror(file)){
+    status = ERROR;
+  }
+  
+  fclose(file);
+  
+  return status;
 }

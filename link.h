@@ -13,15 +13,14 @@
 
 #include "space.h"
 
-
 /**
-@brief Link structure
-The Link structure stores information of the liks between spaces.
+@def Constant values description
 */
+#define MAX_LINKS 300
+
+/*!< Data structures definition */
 typedef struct _Link Link;
 
-/*** Constant values description ***/
-#define MAX_LINKS 100
 /**
 @brief Enum to set the link's state.
 Open = 0
@@ -31,6 +30,10 @@ No state = -1
 typedef enum {	
   NO_STATE = -1, OPEN, CLOSED
 } STATE;
+
+
+
+/*!< Public functions description */
 
 /**
 @brief link_create
