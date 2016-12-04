@@ -19,7 +19,9 @@
 
 #pragma GCC diagnostic ignored "-Wpedantic"
 
-/* Constant values description */
+/**
+@def Constant values description 
+*/
 #define MAX_TEST_INVENTORY 25
 
 #define FUNCTION_IS_CORRECT(x)\
@@ -30,7 +32,7 @@
           }
     
 
-/* Public functions description */
+/*!< Public functions description */
 
 /**
    @date 11-11-2011

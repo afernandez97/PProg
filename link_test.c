@@ -26,9 +26,9 @@ int main(int argc, char** argv){
 	} else {
 		test = atoi(argv[1]);
 		all = 0;
-		printf("Testing %d:\t", test);
+		printf("Testing %d:\n", test);
 		if (test < 1 || test > MAX_TEST_LINK) {
-			printf("Unknown test\t");
+			printf("Unknown test\n");
 			return 1; 
 		}
 	}
@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 	return 0;
 }
 
-/*!< Public functions implementation */
+/*!< Public functions definition */
 
 /**
 @author Adrián Fernández
@@ -596,6 +596,7 @@ void test1_link_get_state(){
 	Id id = 1;
 
 	link = link_create(id);
+	link_set_state(link, OPEN);
 	FUNCTION_IS_CORRECT(link_get_state(link) != NO_STATE);
 	link_destroy(link);
 

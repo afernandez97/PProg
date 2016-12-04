@@ -19,13 +19,19 @@
 #include <time.h>
 #include "die.h"
 
-/*** Constant values description ***/
+/**
+@def Constant values description 
+*/
 #define id(X) (X)->id
 #define num(X) (X)->num
 #define min(X) (X)->min
 #define max(X) (X)->max
-/** The Die structure stores information of the identifier of the die,the number of the last roll and the lowest and 
-highest number of the die*/ 
+
+/**
+@brief Die structure 
+Stores information of the identifier of the die, the number of the last roll and the lowest and 
+highest number of the die
+*/
 struct _Die{
   Id id;  /*!< Id of the die */
   int num;  /*!< Number of the last roll */
@@ -34,7 +40,7 @@ struct _Die{
 };
 
 
-/*** Public functions definition ***/
+/*!< Public functions definition */
 /**
    
    @date: 15-10-2016 

@@ -24,7 +24,9 @@ implemented in space.c.
 
 #pragma GCC diagnostic ignored "-Wpedantic"
 
-/* Constant values description */
+/**
+@def Constant values description 
+*/
 #define MAX_TEST_SPACE 64
 
 #define FUNCTION_IS_CORRECT(x)\

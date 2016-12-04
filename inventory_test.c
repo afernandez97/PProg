@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
   } else{
     	test = atoi(argv[1]);
       all = 0;
-      printf("Testing %d:\t", test);
+      printf("Testing %d:\n", test);
       if(test < 1 || test > MAX_TEST_INVENTORY){
-  			printf("Unknown test\t");
+  			printf("Unknown test\n");
         exit(EXIT_SUCCESS);
       }
     }
@@ -58,6 +58,8 @@ int main(int argc, char **argv) {
 
   exit(EXIT_SUCCESS);
 }
+
+/*!< Public functions definition */
 
 /**
    @date 11-11-2011

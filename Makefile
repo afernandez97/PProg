@@ -1,6 +1,8 @@
 # Author: Guillermo Rodriguez and Alejandro Sanchez
 
-all: JuegoOcaPlus die_test set_test player_test inventory_test space_test link_test
+all: JuegoOcaPlus 
+
+test: die_test set_test player_test inventory_test space_test link_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
@@ -77,7 +79,7 @@ link.o: link.c link.h
 	gcc $(CCFLAGS) link.c
 
 clean: 
-	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test
+	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 
 
 dist: 
-	tar -cvzf s3-cod_OcaBasicaIni-2.tgz *c *h Makefile *dat 
+	tar -cvzf I3-cod_JuegoOcaPlus.tgz *c *h Makefile *dat html latex Doxyfile

@@ -29,9 +29,9 @@ int main(int argc, char **argv){
 	} else {
 		test = atoi(argv[1]);
 		all = 0;
-		printf("Testing %d:\t", test);
+		printf("Testing %d:\n", test);
 		if (test < 1 || test > MAX_TEST_SPACE) {
-			printf("Unknown test\t");
+			printf("Unknown test\n");
 			return 1; 
 		}
 	}

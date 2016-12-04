@@ -63,7 +63,7 @@ Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
 @version
 Dec. 3, 2016 Version 6.0
-  Added text field, players now can be loaded from a file.
+  Added field "text", players now can be loaded from a file.
 */
 
 #include <stdio.h>
@@ -78,7 +78,9 @@ Dec. 3, 2016 Version 6.0
 #define CLEAR "clear"
 #endif
 
-/*!< Constant values description */
+/**
+@def Constant values description
+*/
 #define player(X) (X)->player
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
@@ -90,42 +92,280 @@ Dec. 3, 2016 Version 6.0
 The Game structure stores information of the game and its elements.
 */
 struct _Game{
-  Player *players[MAX_PLAYERS];                     /*!< Player of the game */
+  Player *players[MAX_PLAYERS];   /*!< Players of the game */
   Object *objects[MAX_OBJECTS];   /*!< Objects of the game */
   Space *spaces[MAX_SPACES];      /*!< Spaces of the game */
-  Die *die;                           /*!< Die of the game*/ 
+  Die *die;                       /*!< Die of the game*/ 
   Link *links[MAX_LINKS];         /*!< Links of the game */
-  char text[WORD_SIZE];               /*!< Text shown in the screen */
+  char text[WORD_SIZE];           /*!< Text shown in the screen */
 };
 
 
 /*!< List of callbacks for each command in the game */
+/**
+@date 04-11-2016 
+@author Alejandro Sanchez
+
+@brief callback_UNKNOWN
+No actions. It is used when the command is UNKOWN.
+
+@param Game *game: the game.
+
+@return STATUS: ERROR, because this command can't be typed.
+*/
 STATUS callback_UNKNOWN(Game *game);
+/** 
+@date 04-11-2016 
+@author Alejandro Sanchez
+
+@brief callback_QUIT
+No actions. It is used when the command is QUIT.
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_QUIT(Game *game);
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
+
+@brief callback_CATCH
+Catches an object from a space. It is used when the command is CATCH.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to catch.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_CATCH(Game *game, char *arg);
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
+
+@brief callback_LEAVE
+Leaves an object on a space. It is used when the command is LEAVE.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to leave.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_LEAVE(Game *game, char *arg);
-STATUS callback_ROLL(Game *game);
+/**
+@date 05-11-2016 
+@author Guillermo Rodriguez
+
+@brief callback_GO
+Moves the player to a new space. It is used when the command 
+is GO.
+
+@param Game *game: the game.
+@param char *arg: the direction you want to move the player.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_GO(Game *game, char *arg);
+/**
+@date 04-11-2016 
+@author Guillermo Rodriguez
+
+@brief callback_ROLL
+Rolls a die of the game. It is used when the command is ROLL.
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_ROLL(Game *game);
+/**
+@date 02-12-2016 
+@author Ricardo Riol
+
+@brief callback_INSPECT
+Tells the space's or object's information
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS callback_INSPECT(Game *game, char *arg);
-STATUS callback_TURNON(Game * game,char *arg);
-STATUS callback_TURNOFF(Game * game,char *arg);
-STATUS callback_OPEN(Game * game,char *arg,char *arg2);
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_TURNON
+Turns on an object
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_TURNON(Game *game,char *arg);
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_TURNOFF
+Turns on an object
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_TURNOFF(Game *game,char *arg);
+/**
+@date 02-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_open
+Opens a link
+
+@param Game *game: the game.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS callback_OPEN(Game *game, char *arg, char *arg2);
+
+
 
 /*!< Private functions description */
+/**
+@date 04-10-2016 
+@author Alejandro Sanchez
+
+@brief game_get_space_id_at
+Gives the information of the identifier of the space at the position
+you want.
+
+@param Game *game: the game where the space is.
+@param int position: the position of the space you want the id.
+
+@return Id: the identifier of the space you want or NO_ID on error.
+*/
 Id game_get_space_id_at(Game *game, int position);
 
+/**
+@date 27-10-2016 
+@author Alejandro Sanchez
+
+@brief game_get_object
+Gives a specific object.
+
+@param Game *game: the game where the object is.
+@param Id id: the id of the object you want.
+
+@return Object *: the object you want or NULL on error.
+*/
 Object * game_get_object(Game *game, Id id);
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
+
+@brief game_get_link
+Gives a specific link.
+
+@param Game *game: the game where the link is.
+@param Id id: the id of the link you want.
+
+@return Link *: the link you want or NULL on error.
+*/
 Link * game_get_link(Game *game, Id id);
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_get_player
+Gives a specific player.
+
+@param Game *game: the game where the player is.
+@param Id id: the id of the player you want.
+
+@return Player *: the player you want or NULL on error.
+*/
 Player * game_get_player(Game *game, Id id);
 
-STATUS game_set_player_location(Game *game, Id player, Id location);
-Id game_get_player_location(Game *game, Id player);
+/**
+@date 03-12-2016 
+@author Adrián Fernández
 
+@brief game_set_player_location
+Sets a location of a player.
+
+@param Game *game: the game where the player is.
+@param Id player: the id of the player selected.
+@param Id location: the location you want for the player.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_player_location(Game *game, Id player, Id location);
+/**
+@date 03-12-2016 
+@author Adrián Fernández
+
+@brief game_get_player_location
+Gives the location of a player.
+
+@param Game *game: the game where the player is.
+@param Id player: the id of the player selected.
+
+@return Id: the location of the player or NO_ID on error.
+*/
+Id game_get_player_location(Game *game, Id player);
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
+
+@brief game_set_object_location
+Sets a location for an object.
+
+@param Game *game: the game where the object is.
+@param Id id: the location you want for the object.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
 STATUS game_set_object_location(Game *game, Id object, Id location);
+/**
+@date 30-10-2016 
+@author Alejandro Sanchez
+
+@brief game_get_object_location
+Gives the location of the object.
+
+@param Game *game: the game where the object is.
+
+@return Id: the location of the object or NO_ID on error.
+*/
 Id game_get_object_location(Game *game, Id object);
 
+/**
+@date 11-11-2016 
+@author Alejandro Sanchez
+
+@brief game_spaces_are_linked
+Checks if there is a link between two spaces.
+
+@param Game *game: the game where the link and spaces are.
+@param Space *space1: one of the spaces you want to know if is linked.
+@param Space *space2: the other space you want to know if is linked.
+@return BOOL: TRUE if the spaces are linked and FALSE in other cases. 
+*/
+
 BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
+
+@brief game_is_link_open
+Checks if a link of the game is open or not.
+
+@param Game *game: the game where the link is.
+@param Id link: the identifier of the link to check.
+             
+@return BOOL: TRUE is the link is open or FALSE if not.
+*/
 BOOL game_is_link_open(Game *game, Id link);
+
 
 
 /*!< Public functions definition */
@@ -1540,7 +1780,7 @@ STATUS callback_ROLL(Game *game){
 @author Ricardo Riol
 
 @brief callback_INSPECT
-This function tells the space's or object's information
+Tells the space's or object's information
 
 @param Game *game: the game.
 
@@ -1575,49 +1815,50 @@ STATUS callback_INSPECT(Game *game, char *arg){
     description = space_get_desc(space);
 
     if (illuminated == 1){
-	fprintf(stdout,"%s. The space is illuminated.\n", description);
+	    fprintf(stdout,"%s. The space is illuminated.\n", description);
     } else{
-	fprintf (stdout, "%s.\n", description);
+	      fprintf (stdout, "%s.\n", description);
     }
     return OK;
   } else {	/* object */
     	for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
-            obj = game_get_object(game, set_get_object_at_position(set_inv, i));
+        obj = game_get_object(game, set_get_object_at_position(set_inv, i));
       	if(!strcmp(object_get_name(obj), arg)){
         	flag = 1;
       	}
     	}
       if(flag == 0){
         for(i=0, flag=0;i < set_get_count(set_spc) && flag == 0; i++){
-            obj = game_get_object(game, set_get_object_at_position(set_spc, i));
-        if(!strcmp(object_get_name(obj), arg)){
+          obj = game_get_object(game, set_get_object_at_position(set_spc, i));
+          if(!strcmp(object_get_name(obj), arg)){
             flag = 1;
           }
         }
       }
   }
 
-  if (object_is _bought(obj) == TRUE){
-      bought = 1;
+  if (object_is_bought(obj) == TRUE){
+    bought = 1;
   }
 
   if (iluminated == 0){
-      fprintf(stdout, "Error, the space is not iluminated.\n");
-      return OK;
+    fprintf(stdout, "Error, the space is not iluminated.\n");
+    return OK;
   }
 
-  if (flag == 1 && bought == 1 && iluminated ==1){
-      fprintf(stdout, "%s. The object has been bought.\n", object_get_desc(obj));
-      return OK;
+  if (flag == 1 && bought == 1 && illuminated == 1){
+    fprintf(stdout, "%s. The object has been bought.\n", object_get_desc(obj));
+    return OK;
   } 
 
-  if (flag == 1 && bought == 0 && iluminated = 1){
-      fprintf(stdout, "%s.\n", object_get_desc(obj));
-      return OK;
+  if (flag == 1 && bought == 0 && illuminated == 1){
+    fprintf(stdout, "%s.\n", object_get_desc(obj));
+    return OK;
   }
 
   fprintf(stdout, "Error, the object has not been found.\n");
-      return ERROR;
+
+  return ERROR;
 }
 
 
@@ -1626,7 +1867,7 @@ STATUS callback_INSPECT(Game *game, char *arg){
 @author Guillermo Rodriguez
 
 @brief callback_TURNON
-This function turn on a object
+Turns on an object
 
 @param Game *game: the game.
 
@@ -1660,12 +1901,10 @@ STATUS callback_TURNON(Game *game, char *arg){
 
   if (flag == 1){
     if(object_can_illuminate(obj)){
-    	object_set_illumination(obj,TRUE);
+    	object_set_light(obj,TRUE);
     }
     return OK;
   } 
- 
-  
     
   fprintf(stdout, "Error, the object has not been found.\n");
   return ERROR;
@@ -1677,7 +1916,7 @@ STATUS callback_TURNON(Game *game, char *arg){
 @author Guillermo Rodriguez
 
 @brief callback_TURNOFF
-This function turn on a object
+Turns on an object
 
 @param Game *game: the game.
 
@@ -1711,12 +1950,10 @@ STATUS callback_TURNOFF(Game *game, char *arg){
 
   if (flag == 1){
     if(object_can_illuminate(obj)){
-    	object_set_illumination(obj,FALSE);
+    	object_set_light(obj,FALSE);
     }
     return OK;
   } 
- 
-  
     
   fprintf(stdout, "Error, the object has not been found.\n");
   return ERROR;
@@ -1727,7 +1964,7 @@ STATUS callback_TURNOFF(Game *game, char *arg){
 @author Guillermo Rodriguez
 
 @brief callback_open
-This function open a link
+Opens a link
 
 @param Game *game: the game.
 
@@ -1760,13 +1997,12 @@ STATUS callback_OPEN(Game *game, char *arg){
   }
   
 
-  if (flag == 1 && object_can_open(obj)){
+  if (flag == 1 && object_can_open(obj) != NO_ID){
     
     return OK;
   } 
  
   
-    
   fprintf(stdout, "Error, the object has not been found.\n");
   return ERROR;
 } 

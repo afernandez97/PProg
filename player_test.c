@@ -25,9 +25,9 @@ int main(int argc, char **argv){
   } else{
     	test = atoi(argv[1]);
       all = 0;
-      printf("Testing %d:\t", test);
+      printf("Testing %d:\n", test);
       if(test < 1 || test > MAX_TEST){
-  			printf("Unknown test\t");
+  			printf("Unknown test\n");
         exit(EXIT_SUCCESS);
       }
     }
@@ -63,7 +63,7 @@ int main(int argc, char **argv){
   exit(EXIT_SUCCESS);
 }
 
-/*** Public functions description ***/
+/*!< Public functions description */
 /** 
    @date 05-10-2016 
    @author Guillermo Rodriguez
