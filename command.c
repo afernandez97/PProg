@@ -28,23 +28,25 @@ It implements the command interpreter.
 #include <string.h>
 #include "command.h"
 
-/* Constant values description */
+/**
+@def Constant values description 
+*/
 #define cmd(X) (X)->cmd
 #define arg(X) (X)->arg
 #define arg2(X) (X)->arg2
 
 /**
 @brief Command structure
-The Command structure stores information of the different commands that can be used in the game
+Stores information of the different commands that can be used in the game
 */
 struct _Command{
 	T_Command cmd;	/*!< Type of command */
 	char arg[CMD_LENGTH];	/*!< Input argument */
-  char arg2[CMD_LENGHT];/*!< Input argument for command open */
+  char arg2[CMD_LENGHT]; /*!< Input argument for command open */
 };
 
 
-/*** Public functions definition ***/
+/*!< Public functions definition */
 
 /**
 @brief get_user_input

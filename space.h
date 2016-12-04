@@ -184,7 +184,7 @@ STATUS space_set_south(Space *space, Id id);
 
 
 /**
-   @date: 11-11-2016  
+   @date 11-11-2016  
    @author Alejandro Sanchez
  
    @brief

@@ -1,7 +1,7 @@
 /**
    @file object.h
-   @version 3.0
-   @date 18-11-2016 
+   @version 4.0
+   @date 03-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
    @brief It implements an object.
    @version Oct. 02, 2016  Version 1.0 (initial release)
@@ -12,6 +12,11 @@
    @version Nov. 18, 2016  Version 3.0
    Added field "desc" to the structure "Object".
    Created "object_set_desc" and "object_get_desc".
+   @version Dec. 03, 2016  Version 4.0
+   Added fields "price", "bought", "hidden", "open", "light" 
+   and "on" to the structure "Object".
+   Created functions to handle this fields and modified the 
+   functions that were affected by these new fields.  
 */
 
 #ifndef OBJECT_H
@@ -144,7 +149,156 @@ Gives the information of the description of the object.
 @return char *: the description of the object or NULL on error.
 */
 
-char *object_get_desc(Object *object);
+char * object_get_desc(Object *object);
+
+
+/**
+@brief object_set_price
+Sets a price for an object.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set the price.
+@param double price: the new price you want for the object.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+
+STATUS object_set_price(Object *object, double price);
+
+
+/**
+@brief object_get_price
+Returns an object's price.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object which you want the price of.
+@return double: the object's price or -1 on error.
+*/
+
+double object_get_price(Object *object);
+
+
+/**
+@brief object_set_bought
+Sets if an object has been bought or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set its bought's field.
+@param BOOL bought: Choose if the object is bought or not.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+
+STATUS object_set_bought(Object *object, BOOL bought);
+
+
+/**
+@brief object_is_bought
+Gets if an object is bought or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know that.
+@return BOOL: the bought field of the object or FALSE if the input is NULL.
+*/
+
+BOOL object_is_bought(Object *object);
+
+
+/**
+@brief object_set_hidden
+Sets if an object is hidden or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set its hidden's field.
+@param BOOL hidden: Choose if the object is hidden or not.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS object_set_hidden(Object *object, BOOL hidden);
+
+
+/**
+@brief object_is_hidden
+Gets if an object is hidden or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know that.
+@return BOOL: the hidden field of the object or FALSE if the input is NULL.
+*/
+
+BOOL object_is_hidden(Object *object);
+
+
+/**
+@brief object_set_open
+Sets if an object can open a link or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set its open's field.
+@param Id open: the identifier of the link that the object can open.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+
+STATUS object_set_open(Object *object, Id open);
+
+
+/**
+@brief object_can_open
+Gets if an object can open or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know that.
+@return Id: the id of the link that the object can open or NO_ID on error.
+*/
+
+Id object_can_open(Object *object);
+
+
+/**
+@brief object_set_light
+Sets if an object can light or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set its light's field.
+@param BOOL light: Choose if the object can light or not.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+
+STATUS object_set_light(Object *object, BOOL light);
+
+
+/**
+@brief object_can_light
+Gets if an object can light or not.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know that.
+@return BOOL: the light field of the object or FALSE if the input is NULL.
+*/
+
+BOOL object_can_light(Object *object);
+
+
+/**
+@brief object_set_on
+Sets if an object is on or off.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to set its on's field.
+@param BOOL on: Choose if the object is on or off.
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+
+STATUS object_set_on(Object *object, BOOL on);
+
+
+/**
+@brief object_is_on
+Gets if an object is on or off.
+@date 03-12-2016 
+@author Alejandro Sanchez
+@param Object *object: the object you want to know that.
+@return BOOL: the on field of the object or FALSE if the input is NULL.
+*/
+
+BOOL object_is_on(Object *object);
 
 
 /**

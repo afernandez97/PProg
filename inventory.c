@@ -17,20 +17,24 @@
 #include <string.h>
 #include "inventory.h"
 
-/* Constant values description */
+/**
+@def Constant values description 
+*/
 #define bag(X) (X)->bag
 #define max(X) (X)->max
 
-
-/** The Inventory structure stores information of the set of objects
-that contains and the maximum number of objects that can contain */ 
+/**
+@brief Inventory structure
+Stores information of the set of objects
+that contains and the maximum number of objects that can contain
+*/
 struct _Inventory {
-	Set* bag; /*!< Bag of the inventory*/
-	int max;  /*!< Maximum number of objects in the inventory*/ 
+	Set* bag; /*!< Bag of the inventory */
+	int max;  /*!< Maximum number of objects in the inventory */ 
 };
 
 
-/* Public functions definition */
+/*!< Public functions definition */
 /**
    @date 03-11-2016
    @author Adrian Fernández

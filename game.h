@@ -36,7 +36,7 @@ Nov. 26, 2016 Version 5.0
   Updated headers to use Doxygen.
 @version
 Dec. 3, 2016 Version 6.0
-  Added text field, players now can be loaded from a file.
+  Added field "text", players now can be loaded from a file.
 */
 
 #ifndef GAME_H
@@ -50,7 +50,9 @@ Dec. 3, 2016 Version 6.0
 #include "die.h"
 #include "types.h"
 
-/*!< Constant values description */
+/**
+@def Constant values description 
+*/
 #define idplayer 1
 #define id_die 2
 

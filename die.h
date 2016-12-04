@@ -28,7 +28,7 @@ typedef struct _Die Die;
 
 /**
    
-   @date: 15-10-2016 
+   @date 15-10-2016 
    @author Guillermo Rodriguez
  
    @brief die_create()
@@ -46,8 +46,8 @@ Die * die_create(Id id);
 
 /**
  
-   @date: 15-10-2016 
-   @author: Guillermo Rodriguez
+   @date 15-10-2016 
+   @author Guillermo Rodriguez
  
    @brief 
     Destroys a die.die_destroy()
@@ -62,8 +62,8 @@ STATUS die_destroy(Die *die);
 
 /**
    
-   @date: 15-10-2016 
-   @author: Guillermo Rodriguez
+   @date 15-10-2016 
+   @author Guillermo Rodriguez
  
    @brief die_roll()
     Rolls a die.
@@ -97,7 +97,7 @@ int die_get_value(Die*die);
 
 /**
   
-   @date: 15-10-2016 
+   @date 15-10-2016 
    @author Guillermo Rodriguez 
  
    @brief 

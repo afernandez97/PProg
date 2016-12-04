@@ -26,7 +26,9 @@ It implements a player.
 #include <string.h>
 #include "player.h"
 
-/*!< Constant values description */
+/**
+@def Constant values description 
+*/
 #define id(X) (X)->id
 #define name(X) (X)->name
 #define location(X) (X)->location

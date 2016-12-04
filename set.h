@@ -17,11 +17,13 @@
 
 #include "types.h"
 
-/* Constant values description */
+/**
+@def Constant values description 
+*/
 #define MAX_ID  50
 
 
-/*** Data structures definition ***/
+/*!< Data structures definition */
 typedef struct _Set Set;
 
 
@@ -61,7 +63,7 @@ STATUS set_destroy(Set *set);
 /**
    
    @date 18-10-2016 
-   @author: Guillermo Rodriguez
+   @author Guillermo Rodriguez
   
    @brief set_add()
     Adds an object to the set.
@@ -78,8 +80,8 @@ STATUS set_add(Set *set, Id id);
  
 /**
   
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez 
+   @date 18-10-2016 
+   @author Guillermo Rodriguez 
   
    @brief set_del()
     Deletes an object from the set.
@@ -133,8 +135,8 @@ BOOL set_is_empty(Set *set);
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_is_full
     Checks if the set is full or not.
@@ -152,8 +154,8 @@ BOOL set_is_full(Set *set);
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_get_object_at_position
     Returns the id of the object at the position i.
@@ -171,8 +173,8 @@ Id set_get_object_at_position(Set *set, int position);
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez 
+   @date 18-10-2016 
+   @author Guillermo Rodriguez 
   
    @brief set_is_object
     Checks if there is an especific object in the set.
@@ -189,8 +191,8 @@ BOOL set_is_object(Set *set, Id object);
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_print
     Prints a set.

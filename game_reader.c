@@ -36,7 +36,9 @@ Dec. 3, 2016 Version 6.0
 #include "game_reader.h"
 
 
-/*!< Constant values description */
+/**
+@def Constant values description 
+*/
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
 #define links(X) (X)->links

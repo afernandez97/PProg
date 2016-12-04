@@ -30,7 +30,9 @@ It implements the command interpreter.
 
 #include "types.h"
       
-/*** Constant values description ***/
+/**
+@def Constant values description 
+*/
 #define CMD_LENGTH 30
 
 /**
@@ -47,14 +49,14 @@ typedef enum enum_Command{
   LEAVE, /*!< Command to leave an object on a space */
   GO,	   /*!< Command to go to another space */
   ROLL,	  /*!< Command to roll the die */	
-  INSPECT /*!< Command to get information about an object or space*/
-  TURNON  /*!< Command to turn on a object*/
-  TURNOFF /*!< Command to turn off a object*/
-  OPEN 		/*!< Command to open a link with a object*/
+  INSPECT /*!< Command to get information about an object or space */
+  TURNON  /*!< Command to turn on an object */
+  TURNOFF /*!< Command to turn off an object*/
+  OPEN 		/*!< Command to open a link with an object */
  
 } T_Command;
 
-/*** Data structures definition ***/
+/*!< Data structures definition */
 
 /**
 @brief Command structure.

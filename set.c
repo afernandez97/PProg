@@ -16,18 +16,23 @@
 #include <string.h>
 #include "set.h"
 
-/*!< Constant values description */
+/**
+@def Constant values description 
+*/
 #define id(X) (X)->id
 #define count(X) (X)->count
  
-/** The Set structure stores information of the identifiers or the objects
-that contains and the number of them */ 
+/**
+@brief Set structure
+Stores information of the identifiers or the objects
+that contains and the number of them.
+*/
 struct _Set{
   Id id[MAX_ID]; /*!< Array of identifiers */
-  int count;/*!< Number of identifiers in that moment */
+  int count;  /*!< Number of identifiers in that moment */
 };
  
-/*** Public functions definition ***/
+/*!< Public functions definition */
 /**
    @date 18-10-2016 
    @author Guillermo Rodriguez
@@ -84,7 +89,7 @@ STATUS set_destroy(Set *set){
 /**
    
    @date 18-10-2016 
-   @author: Guillermo Rodriguez
+   @author Guillermo Rodriguez
   
    @brief set_add()
     Adds an object to the set.
@@ -119,8 +124,8 @@ STATUS set_add(Set *set, Id id){
  
 /**
   
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez 
+   @date 18-10-2016 
+   @author Guillermo Rodriguez 
   
    @brief set_del()
     Deletes an object from the set.
@@ -222,8 +227,8 @@ BOOL set_is_empty(Set *set){
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_is_full
     Checks if the set is full or not.
@@ -248,8 +253,8 @@ BOOL set_is_full(Set *set){
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_get_object_at_position
     Returns the id of the object at the position i.
@@ -275,8 +280,8 @@ Id set_get_object_at_position(Set *set, int position){
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez 
+   @date 18-10-2016 
+   @author Guillermo Rodriguez 
   
    @brief set_is_object
     Checks if there is an especific object in the set.
@@ -314,8 +319,8 @@ BOOL set_is_object(Set *set, Id object){
 
 /**
    
-   @date: 18-10-2016 
-   @author: Guillermo Rodriguez
+   @date 18-10-2016 
+   @author Guillermo Rodriguez
   
    @brief set_print
     Prints a set.

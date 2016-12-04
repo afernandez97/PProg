@@ -41,7 +41,9 @@
 #include <string.h>
 #include "space.h"
 
-/*** Constant values description ***/
+/**
+@def Constant values description 
+*/
 #define id(X) (X)->id
 #define name(X) (X)->name
 #define north(X) (X)->north
@@ -73,7 +75,7 @@ struct _Space{
 };
  
  
-/*** Public functions definition ***/
+/*!< Public functions definition */
 /**
    @date 01-12-2016 
    @author Alejandro Sanchez
@@ -298,7 +300,7 @@ STATUS space_set_south(Space *space, Id id){
  
  
 /**
-   @date: 11-11-2016  
+   @date 11-11-2016  
    @author Alejandro Sanchez
  
    @brief
@@ -766,7 +768,9 @@ STATUS space_set_illumination(Space *space, BOOL illumination){
 	if(!space){
   	return ERROR;
   }
+
   illuminated(space) = illumination;
+  
 	return OK;
 }
 
@@ -811,10 +815,10 @@ STATUS space_print(Space *space){
  
   /* Print each field of the Space structure, checking if it is empty */
 	if(illuminated(space)==FALSE){
-		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; DARK)\n", 
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: FALSE)\n", 
     	id(space), name(space), desc(space));
 	} else if(illuminated(space)==TRUE){
-		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; ILLUMINATED)\n", 
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: TRUE)\n", 
     	id(space), name(space), desc(space));
 	} 
      
