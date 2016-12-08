@@ -63,64 +63,64 @@ Creates a new screen.
 */
 Screen * screen_create(){
 	Screen *scr = NULL;
-  Window *win = NULL;
+  	Window *win = NULL;
 	int max_y, max_x, begin_y, begin_x, ncols, nrows;
 
 	scr = (Screen *)malloc(sizeof(Screen));
 	if(!scr){
-  	return NULL;
+  		return NULL;
 	}
 
-  initscr();
-  getmaxyx(stdscr, max_y, max_x);
+  	initscr();
+  	getmaxyx(stdscr, max_y, max_x);
 
-  nrows = (int) (max_y * (7.0/8.0));
-  ncols = (int) (max_x * (1.0/2.0));
-  begin_y = 0;
-  begin_x = 0;
-  win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  if (screen_add_window(scr,  win) == ERROR){
-    return NULL;
-  }
+  	nrows = (int) (max_y * (7.0/8.0));
+  	ncols = (int) (max_x * (1.0/2.0));
+  	begin_y = 0;
+  	begin_x = 0;
+  	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+  	if (screen_add_window(scr,  win) == ERROR){
+   		return NULL;
+  	}
 
-  nrows = max_y - (int) (max_y * (7.0/8.0));
-  ncols = (int) (max_x * (1.0/2.0));	
-  begin_y = (int) (max_y * (7.0/8.0));
-  begin_x = 0;
-  win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  if (screen_add_window(scr,  win) == ERROR){
-    return NULL;
-  }
+	nrows = max_y - (int) (max_y * (7.0/8.0));
+	ncols = (int) (max_x * (1.0/2.0));	
+	begin_y = (int) (max_y * (7.0/8.0));
+	begin_x = 0;
+	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	if (screen_add_window(scr,  win) == ERROR){
+		return NULL;
+	}
 
-  nrows = max_y - (int) (max_y * (7.0/8.0));
-  ncols = (int) (max_x * (1.0/4.0));
-  begin_y = 0;
-  begin_x = (int) (max_x * (1.0/2.0)) - (int) (max_x * (1.0/4.0));
-  win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  if (window_set_text(win, "prompt> ") == ERROR){
-    return NULL;
-  }
-  if (screen_add_window(scr,  win) == ERROR){
-    return NULL;
-  }
+	nrows = max_y - (int) (max_y * (7.0/8.0));
+	ncols = (int) (max_x * (1.0/4.0));
+	begin_y = 0;
+	begin_x = (int) (max_x * (1.0/2.0)) - (int) (max_x * (1.0/4.0));
+	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	if (window_set_text(win, "prompt> ") == ERROR){
+		return NULL;
+	}
+	if (screen_add_window(scr,  win) == ERROR){
+		return NULL;
+	}
 
-  nrows = (int) (max_y * (1.0/4.0));
-  ncols = max_x - ((int) (max_x * (1.0/2.0)));
-  begin_y = 0;
-  begin_x = (int) (max_x * (1.0/2.0));
-  win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  if (screen_add_window(scr,  win) == ERROR){
-    return NULL;
-  }
+	nrows = (int) (max_y * (1.0/4.0));
+	ncols = max_x - ((int) (max_x * (1.0/2.0)));
+	begin_y = 0;
+	begin_x = (int) (max_x * (1.0/2.0));
+	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	if (screen_add_window(scr,  win) == ERROR){
+		return NULL;
+	}
 
-  nrows = max_y - (int) (max_y * (1.0/4.0));
-  ncols = max_x - ((int) (max_x * (1.0/2.0)));
-  begin_y = (int) (max_y * (1.0/4.0));
-  begin_x = (int) (max_x * (1.0/2.0));
-  win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  if (screen_add_window(scr,  win) == ERROR){
-    return NULL;
-  }
+	nrows = max_y - (int) (max_y * (1.0/4.0));
+	ncols = max_x - ((int) (max_x * (1.0/2.0)));
+	begin_y = (int) (max_y * (1.0/4.0));
+	begin_x = (int) (max_x * (1.0/2.0));
+	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	if (screen_add_window(scr,  win) == ERROR){
+		return NULL;
+	}
 
 	return scr;
 }
@@ -139,13 +139,13 @@ STATUS screen_destroy(Screen *scr){
 	int i;
 
 	if(!scr){
-  	return ERROR;
+  		return ERROR;
 	}
 
 	for(i=0; i<MAX_WIN; i++){
-  	if(win(scr)[i] != NULL){
+  		if(win(scr)[i] != NULL){
     		window_destroy(win(scr)[i]);
-  	}
+  		}
 	}
 
 	free(scr);
@@ -169,16 +169,16 @@ STATUS screen_refresh(Screen *scr){
 	int i;
 
 	if(!scr){
-  	return ERROR;
+  		return ERROR;
 	}
 
-  refresh();
+  	refresh();
 
 	for(i=0; i<MAX_WIN && win(scr)[i] != NULL; i++){
-  	window_refresh(win(scr)[i]);
+  		window_refresh(win(scr)[i]);
 	}
 	
-  return OK;
+  	return OK;
 }
 
 /**
@@ -192,51 +192,17 @@ Prints a screen.
 @return STATUS: OK if success or ERROR otherwise.
 */
 STATUS screen_print(Screen *scr){
-  int i;
+	int i;
 
-  if(!scr){
-    return ERROR;
-  }
-
-  for(i=0; i<MAX_WIN && win(scr)[i] != NULL; i++){
-    window_print(win(scr)[i]);
-  }
-
-  return OK;
-}
-
-/**
-@author Adrián Fernández
-@date 07-12-2016
-
-@brief screen_getch
-Shows the prompt in a screen.
-
-@param Screen *scr: Pointer to the screen selected.
-@return char *: Input of the user.
-*/
-char * screen_getch(Screen *scr){
-	int buff;
-
-  if(!scr){
-  	return NULL;
+	if(!scr){
+		return ERROR;
 	}
 
-	buff = getch();
+	for(i=0; i<MAX_WIN && win(scr)[i] != NULL; i++){
+		window_print(win(scr)[i]);
+	}
 
-  switch(buff){
-    case KEY_UP:
-      return "go north";
-      break;
-    case KEY_DOWN:
-      return "go south";
-      break;
-    /* --------CONTINUAR-------- */
-    default:
-      return "unknown";
-  }
-
-	return NULL;
+	return OK;
 }
 
 /**
@@ -254,15 +220,15 @@ STATUS screen_add_window(Screen *scr, Window *win){
 	int i = 0;
 
 	if(!scr || !win){
-  	return ERROR;
+  		return ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
-  	i++;
+  		i++;
 	}
 
 	if(i == MAX_WIN){
-  	return ERROR;
+  		return ERROR;
 	}
 
 	win(scr)[i] = win;
@@ -284,15 +250,15 @@ STATUS screen_del_window(Screen *scr){
 	int i = 0;
 
 	if(!scr){
-  	return ERROR;
+  		return ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
-  	i++;
+  		i++;
 	}
 
 	if(i == MAX_WIN){
-  	return ERROR;
+  		return ERROR;
 	}
 
 	window_destroy(win(scr)[i-1]);
@@ -313,7 +279,7 @@ Gets the window in a selected position of a screen.
 */
 Window * screen_get_window(Screen *scr, int n){
 	if(!scr){
-  	return NULL;
+  		return NULL;
 	}	
 
 	return win(scr)[n];
@@ -345,13 +311,13 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 	}
 
 	window(win) = newwin(nrows, ncols, begin_y, begin_x);
-  if(window(win) == NULL){
-    return NULL;
-  }
+  	if(window(win) == NULL){
+    	return NULL;
+  	}
 
 	text(win) = "";
 
-  box(window(win), 0, 0);
+  	box(window(win), 0, 0);
 
 	return win;
 }
@@ -529,4 +495,22 @@ char * window_get_text(Window *win){
 	}
 
 	return text(win);
+}
+
+/**
+@author Adrián Fernández
+@date 07-12-2016
+
+@brief screen_getch
+Gets the input of a user in a window.
+
+@param Window *win: Pointer to the window selected.
+@param char *input: String in which the input is stored.
+@return char *: Input of the user.
+*/
+char * screen_get_input(Window *win, char *input){
+	if(!wgetnstr(win, input, WORD_SIZE)){
+		return NULL;
+	}
+	return input;
 }

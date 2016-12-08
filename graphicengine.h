@@ -14,6 +14,9 @@ Contains the declaration of the functions asociated to the screen data type.
 #ifndef GRAPHICENGINE_H
 #define GRAPHICENGINE_H
 
+#include <ncurses.h>
+#include "types.h"
+
 /**
 @def Constant values description.
 */
@@ -85,19 +88,6 @@ STATUS screen_print(Screen *scr);
 
 /**
 @author Adrián Fernández
-@date 07-12-2016
-
-@brief screen_getch
-Shows the prompt in a screen.
-
-@param Screen *scr: Pointer to the screen selected.
-@return char *: Input of the user.
-*/
-char * screen_getch(Screen *scr);
-
-/**
-@author Adrián Fernández
-@date 07-12-2016
 
 @brief screen_add_window
 Adds a window to a screen.
@@ -261,6 +251,17 @@ Gets the text field of a window.
 */
 char * window_get_text(Window *win);
 
+/**
+@author Adrián Fernández
+@date 07-12-2016
+
+@brief screen_getch
+Gets the input of a user in a window.
+
+@param Window *win: Pointer to the window selected.
+@param char *input: String in which the input is stored.
+@return char *: Input of the user.
+*/
+char * screen_get_input(Window *win, char *input);
 
 #endif
-
