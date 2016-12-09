@@ -1,5 +1,5 @@
 /**
-@file graphicengine.c
+@file graphicengine.h
 @version 1.0
 @date 07-12-2016
 @author Adrián Fernández
@@ -176,7 +176,7 @@ Prints a window.
 @param Window *win: Pointer to the window selected.
 @return STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_print(Window *);
+STATUS window_print(Window * win);
 
 /**
 @author Adrián Fernández
