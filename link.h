@@ -16,7 +16,7 @@
 /**
 @def Constant values description
 */
-#define MAX_LINKS 300
+#define MAX_LINKS 4*MAX_SPACES
 
 /*!< Data structures definition */
 typedef struct _Link Link;
