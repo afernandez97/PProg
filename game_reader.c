@@ -103,6 +103,7 @@ STATUS game_load_spaces(Game *game, char *filename){
 	char desc[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
+  BOOL illumination;
   Space *space = NULL;
   STATUS status = OK;
   int flag = 0;
@@ -134,6 +135,13 @@ STATUS game_load_spaces(Game *game, char *filename){
       toks = strtok(NULL, "|");
       east = atol(toks);
 			toks = strtok(NULL, "|");
+      if(!strcmp(toks,"TRUE")){
+				illumination = TRUE;			
+			}
+			else{
+				illumination = FALSE;
+      }
+      toks = strtok(NULL, "|");
 			if(toks != NULL){
       	strcpy(desc, toks);
 			}
@@ -157,11 +165,11 @@ STATUS game_load_spaces(Game *game, char *filename){
         space_set_east(space, east);
         space_set_south(space, south);
         space_set_west(space, west);
-
+        /* Set if the space is illuminate or no*/
+				space_set_illumination(space,illumination);  
         /* Set the graphic description to the space */ 
 				if (flag == 0) space_set_gdesc(space, gdesc);
-        
-				/* Set the description to the space */ 
+        /* Set the description to the space */ 
 				space_set_desc(space, desc);
         
         /* Add the space to the game */
@@ -236,10 +244,13 @@ STATUS game_load_objects(Game *game, char *filename){
   char name[WORD_SIZE] = "";
 	char desc[WORD_SIZE] = "";
   char *toks = NULL;
-  Id id = NO_ID, location = NO_ID;
+  double price;
+  Id id = NO_ID, location = NO_ID,open = NO_ID;
   Object *object = NULL;
   Space *space = NULL;
   STATUS status = OK;
+	BOOL bought,hidden,light,on;
+	
   
   if(!game || !filename){ /* Check that the inputs are not empty */
     return ERROR;
@@ -261,6 +272,38 @@ STATUS game_load_objects(Game *game, char *filename){
       }
       toks = strtok(NULL, "|");
       location = atol(toks);
+      toks = strtok(NULL, "|");
+      price = atof(toks);
+      toks = strtok(NULL, "|");
+      if(!strcmp(toks,"TRUE")){
+				bought = TRUE;			
+			}
+			else{
+				bought = FALSE;
+			}
+      toks = strtok(NULL, "|");
+      if(!strcmp(toks,"TRUE")){
+				hidden = TRUE;			
+			}
+			else{
+				hidden = FALSE;
+			}
+      toks = strtok(NULL, "|");
+      if(!strcmp(toks,"TRUE")){
+				light = TRUE;			
+			}
+			else{
+				light = FALSE;
+			}
+			toks = strtok(NULL, "|");
+      if(!strcmp(toks,"TRUE")){
+				on = TRUE;			
+			}
+			else{
+				on = FALSE;
+			}
+			toks = strtok(NULL, "|");
+			open = atol(toks);
 			toks = strtok(NULL, "|");
 			if(toks !=NULL){
       	strcpy(desc, toks);
@@ -278,8 +321,26 @@ STATUS game_load_objects(Game *game, char *filename){
 				
 				/* Set the description to the object */ 
 				object_set_desc(object, desc);
-        		
+				
+				/*Sets a price for an object.*/         
+				object_set_price(object,price);
+			
+				/*Sets if an object has been bought or not.*/	
+				object_set_bought(object,bought);
+		    
+        /*Sets if an object is hidden or not.*/
+        object_set_hidden(Object *object, BOOL hidden);
 
+				/*Sets if an object can open a link or not.*/	
+				object_set_open(object,open);
+
+				/*Sets if an object can light or not.*/
+				object_set_light(object,light);
+
+        /*Sets if an object is on or off.*/
+				object_set_on(object,on);
+
+			
         /* Add the object to the game */
         game_add_object(game, object);  
 

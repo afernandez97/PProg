@@ -1906,7 +1906,7 @@ STATUS callback_TURNON(Game *game, char *arg){
     return OK;
   } 
     
-  fprintf(stdout, "Error, the object has not been found.\n");
+  fprintf(stdout, "Error,  when you try to turn on a object.\n");
   return ERROR;
 }
 
@@ -1955,7 +1955,7 @@ STATUS callback_TURNOFF(Game *game, char *arg){
     return OK;
   } 
     
-  fprintf(stdout, "Error, the object has not been found.\n");
+  fprintf(stdout, "Error, when you try to turn off a object.\n");
   return ERROR;
 }
 
@@ -1970,7 +1970,7 @@ Opens a link
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_OPEN(Game *game, char *arg){
+STATUS callback_OPEN(Game *game, char *arg,char *arg2){
 	Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1985,8 +1985,7 @@ STATUS callback_OPEN(Game *game, char *arg){
   
   id_space = game_get_player_location(game, 1);
   space = game_get_space(game, id_space);
-  set_spc = space_get_object(space);
-
+ 
   inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
@@ -1998,11 +1997,18 @@ STATUS callback_OPEN(Game *game, char *arg){
   
 
   if (flag == 1 && object_can_open(obj) != NO_ID){
-    
-    return OK;
-  } 
- 
-  
-  fprintf(stdout, "Error, the object has not been found.\n");
+		for(i=0, flag=0;i < MAX_LINKS && links(game)[i] != NULL; && flag == 0; i++){
+					if(!strcmp(link_get_name(links(game)[i]), arg2)){
+							flag = 1;
+					}
+		}
+   
+  }
+  if(flag ==1){ 
+  	if(OK == link_set_state(link(game)[i],0)){
+			return OK;
+    }
+  }
+  fprintf(stdout, "Error, when you try to open a link.\n");
   return ERROR;
 } 
