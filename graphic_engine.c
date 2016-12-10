@@ -1,5 +1,5 @@
 /**
-@file graphicengine.c
+@file graphic_engine.c
 @version 1.1
 @date 07-12-2016
 @author Adrián Fernández
