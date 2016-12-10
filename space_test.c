@@ -94,12 +94,13 @@ int main(int argc, char **argv){
 	if (all || test == 56) test2_space_get_gdesc();
 	if (all || test == 57) test1_space_print_gdesc();
 	if (all || test == 58) test2_space_print_gdesc();
-	if (all || test == 59) test1_space_set_illumination();
-	if (all || test == 60) test2_space_set_illumination();
-	if (all || test == 61) test1_space_is_illuminated();
-	if (all || test == 62) test2_space_is_illuminated();
-	if (all || test == 63) test1_space_print();
-	if (all || test == 64) test2_space_print();
+	if (all || test == 59) test3_space_print_gdesc();
+	if (all || test == 60) test1_space_set_illumination();
+	if (all || test == 61) test2_space_set_illumination();
+	if (all || test == 62) test1_space_is_illuminated();
+	if (all || test == 63) test2_space_is_illuminated();
+	if (all || test == 64) test1_space_print();
+	if (all || test == 65) test2_space_print();
 
 
 	return 0;
@@ -1245,10 +1246,11 @@ void test1_space_print_gdesc(){
 	Space *space = NULL;
 	Id id = 1;
 	char gdesc[WORD_SIZE] = "       |       |       |";
+	char output[WORD_SIZE] = "";
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gdesc(space) == OK);
+	FUNCTION_IS_CORRECT(space_print_gdesc(space, output) == OK);
 	space_destroy(space);
 	return;
 }
@@ -1267,6 +1269,29 @@ void test2_space_print_gdesc(){
 	Space *space = NULL;
 
 	FUNCTION_IS_CORRECT(space_print_gdesc(space) == ERROR);
+	return;
+}
+
+/**
+@author Adrián Fernández
+@date 23-11-2016
+
+@brief test3_space_print_gdesc
+Tests if you can print the gdesc in an uninitialised string.
+
+@param
+@return
+*/
+void test3_space_print_gdesc(){
+	Space *space = NULL;
+	Id id = 1;
+	char gdesc[WORD_SIZE] = "       |       |       |";
+	char *output = NULL;
+
+	space = space_create(id);
+	space_set_gdesc(space, gdesc);
+	FUNCTION_IS_CORRECT(space_print_gdesc(space, output) == ERROR);
+	space_destroy(space);
 	return;
 }
 
