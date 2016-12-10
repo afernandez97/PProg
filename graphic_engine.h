@@ -1,5 +1,5 @@
 /**
-@file graphicengine.h
+@file graphic_engine.h
 @version 1.0
 @date 07-12-2016
 @author Adrián Fernández
@@ -14,8 +14,8 @@ Dec. 10, 2016 Version 1.1
   Added window_add_text.
 */
 
-#ifndef GRAPHICENGINE_H
-#define GRAPHICENGINE_H
+#ifndef GRAPHIC_ENGINE_H
+#define GRAPHIC_ENGINE_H
 
 #include <ncurses.h>
 #include "game.h"
