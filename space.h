@@ -482,14 +482,15 @@ char * space_get_gdesc(Space *space);
    @author Alejandro Sanchez
 
    @brief 
-   Prints the graphic description of the space.space_print_gdesc()
+   Prints the graphic description of the space in a string. space_print_gdesc()
 
    @param 
     Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc is printed.
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS space_print_gdesc(Space *space);
+STATUS space_print_gdesc(Space *space, char *output);
 
 
 /**

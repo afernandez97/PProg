@@ -27,7 +27,7 @@ implemented in space.c.
 /**
 @def Constant values description 
 */
-#define MAX_TEST_SPACE 64
+#define MAX_TEST_SPACE 65
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
@@ -794,6 +794,18 @@ Tests if you can print the gdesc field of an uninitialised space.
 @return
 */
 void test2_space_print_gdesc();
+
+/**
+@author Adrián Fernández
+@date 23-11-2016
+
+@brief test3_space_print_gdesc
+Tests if you can print the gdesc in an uninitialised string.
+
+@param
+@return
+*/
+void test3_space_print_gdesc();
 
 /**
 @author Guillermo Rodriguez

@@ -718,18 +718,19 @@ char *space_get_gdesc(Space *space){
    @author Alejandro Sanchez
 
    @brief 
-   Prints the graphic description of the space.space_print_gdesc()
+   Prints the graphic description of the space in a string. space_print_gdesc()
 
    @param 
     Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc is printed.
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS space_print_gdesc(Space *space){
-  char gdesc[WORD_SIZE] = "", *toks = NULL;
+STATUS space_print_gdesc(Space *space, char *output){
+  char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL;
  
   /* Check if the input is empty or the graphic description is empty */
-  if(!space || strcmp(gdesc(space), "\0") == 0){
+  if(!space || strcmp(gdesc(space), "\0" || output == NULL) == 0){
   	return ERROR;
   }
 
@@ -738,10 +739,16 @@ STATUS space_print_gdesc(Space *space){
   	return ERROR;
   }
 
+  /* Deletes the content of output */
+  if(!strcpy(output, "")){
+    return ERROR;
+  }
+
   /* "Tokenize" the graphic description and print it */
 	toks = strtok(gdesc, "|");
   while(toks != NULL){
-		fprintf(stdout, "     | %s   |\n", toks);
+		sprintf(aux, "     | %s   |\n", toks);
+    strcat(output, aux);
 		toks = strtok(NULL, "|");
   }
 

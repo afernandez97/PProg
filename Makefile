@@ -2,11 +2,11 @@
 
 all: JuegoOcaPlus 
 
-test: die_test set_test player_test inventory_test space_test link_test
+test: die_test set_test player_test inventory_test space_test link_test graphic_engine_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
-JuegoOcaPlus: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o
+JuegoOcaPlus: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o
 	gcc -o $@ $^ 
 
 die_test: die_test.o die.o
@@ -27,6 +27,9 @@ space_test: space_test.o space.o set.o
 link_test: link_test.o link.o
 	gcc -o $@ $^
 
+graphic_engine_test: graphic_engine_test.o graphic_engine.o
+	gcc -o $@ $^
+
 die_test.o: die_test.c die.c die.h types.h
 	gcc $(CCFLAGS) die_test.c die.c
 
@@ -44,6 +47,9 @@ space_test.o: space_test.c space_test.h types.h
 
 link_test.o: link_test.c link_test.h types.h
 	gcc $(CCFLAGS) link_test.c
+
+graphic_engine_test.o: graphic_engine_test.c graphic_engine_test.h types.h
+	gcc $(CCFLAGS) graphic_engine_test.c
 
 game.o: game.c game.h 
 	gcc $(CCFLAGS) game.c
@@ -77,6 +83,9 @@ inventory.o: inventory.c inventory.h
 
 link.o: link.c link.h
 	gcc $(CCFLAGS) link.c
+
+graphic_engine.o: graphic_engine.c graphic_engine.h
+	gcc $(CCFLAGS) graphic_engine.c
 
 clean: 
 	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 

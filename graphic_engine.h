@@ -8,13 +8,17 @@
 Contains the declaration of the functions asociated to the screen data type.
 
 @version
-  Dec. 7, 2016 Version 1.0 (initial release)
+Dec. 7, 2016 Version 1.0 (initial release)
+@version
+Dec. 10, 2016 Version 1.1
+  Added window_add_text.
 */
 
 #ifndef GRAPHICENGINE_H
 #define GRAPHICENGINE_H
 
 #include <ncurses.h>
+#include "game.h"
 #include "types.h"
 
 /**
@@ -206,13 +210,13 @@ int window_get_y(Window *win);
 @author Adrián Fernández
 @date 07-12-2016
 
-@brief window_get_hight
+@brief window_get_height
 Gets the nrows field of a window.
 
 @param Window *win: Pointer to the window selected.
 @return int: nrows of the window.
 */
-int window_get_hight(Window *win);
+int window_get_height(Window *win);
 
 /**
 @author Adrián Fernández
@@ -241,6 +245,19 @@ STATUS window_set_text(Window *win, char *text);
 
 /**
 @author Adrián Fernández
+@date 10-12-2016
+
+@brief window_add_text
+Adds a string to the text field of a window.
+
+@param Window *win: Pointer to the window selected.
+@param char *: The text we want to add.
+@return STATUS: OK if success or ERROR otherwise.
+*/
+STATUS window_add_text(Window *win, char *text);
+
+/**
+@author Adrián Fernández
 @date 07-12-2016
 
 @brief window_get_text
@@ -255,13 +272,42 @@ char * window_get_text(Window *win);
 @author Adrián Fernández
 @date 07-12-2016
 
-@brief screen_getch
+@brief window_get_input
 Gets the input of a user in a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *input: String in which the input is stored.
 @return char *: Input of the user.
 */
-char * screen_get_input(Window *win, char *input);
+char * window_get_input(Window *win, char *input);
+
+/**
+@date 02-11-2016 
+@author Alejandro Sanchez
+
+@brief game_print_objects
+Stores the objects of the game in a string (output).
+
+@param Game *game: the game to print its objects.
+@param Space *space: the space where you want to print the objects.
+@param char *output: string modified to show the objects.
+
+@return
+*/
+void game_print_objects(Game *game, Space *space, char *output);
+
+/**
+Function: 
+@date 02-11-2016 
+@author Alejandro Sanchez
+
+@brief game_print_screen
+Prints the screen of the game.
+
+@param Game *game: the game to print its screen.
+
+@return
+*/
+void game_print_screen(Game *game);
 
 #endif
