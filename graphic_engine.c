@@ -18,7 +18,7 @@ Dec. 10, 2016 Version 1.1
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
-#include "graphicengine.h"
+#include "graphic_engine.h"
 #include "command.h"
 #include "space.h"
 #include "object.h"
