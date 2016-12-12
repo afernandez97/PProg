@@ -6,7 +6,7 @@ test: die_test set_test player_test inventory_test space_test link_test graphic_
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
-JuegoOcaPlus: game.o game_loop.o space.o command.o game_reader.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o
+JuegoOcaPlus: game.o game_loop.o space.o command.o game_management.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o
 	gcc -o $@ $^ 
 
 die_test: die_test.o die.o
@@ -63,8 +63,8 @@ space.o: space.c space.h types.h
 command.o: command.c command.h types.h
 	gcc $(CCFLAGS) command.c
 
-game_reader.o: game_reader.c game_reader.h
-	gcc $(CCFLAGS) game_reader.c
+game_management.o: game_management.c game_management.h
+	gcc $(CCFLAGS) game_management.c
 
 object.o: object.c object.h types.h
 	gcc $(CCFLAGS) object.c

@@ -205,7 +205,7 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag){
    @return
   	Set *: the bag of the inventory.
 */
-Set *inventory_get_bag(Inventory *inv){
+Set * inventory_get_bag(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return NULL;
 	}

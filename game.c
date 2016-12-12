@@ -86,6 +86,8 @@ Dec. 3, 2016 Version 6.0
 #define objects(X) (X)->objects
 #define die(X) (X)->die
 #define links(X) (X)->links
+#define text(X) (X)->text
+
 
 /**
 @brief
@@ -97,7 +99,7 @@ struct _Game{
   Space *spaces[MAX_SPACES];      /*!< Spaces of the game */
   Die *die;                       /*!< Die of the game*/ 
   Link *links[MAX_LINKS];         /*!< Links of the game */
-  char text[WORD_SIZE];           /*!< Text shown in the screen */
+  char text[WORD_SIZE];           /*!< Text shown on the screen */
 };
 
 
@@ -399,7 +401,7 @@ Game * game_init(Id die){
   }
     
   for(i=0; i < MAX_PLAYERS; i++){  
-    players(game)[i] = NULL;   /* Initialize to NULL each object */
+    players(game)[i] = NULL;   /* Initialize to NULL each player */
   }
 
   for(i=0; i < MAX_OBJECTS; i++){  
@@ -426,31 +428,18 @@ Game * game_init(Id die){
 @brief game_init_from_file
 Initializes a game from two files which contain the spaces and objects.
 
-@param char *filename1: the file to concatenate the spaces,links and objects
+@param char *path: the path of the different files that contain the game.
 @param Id die: the identifier of the die of the game.
 
 @return Game *game: the game initialized.
 */
-Game * game_init_from_file(char *filename, Id die){
+Game * game_init_from_file(char *path, Id die){
   Game *game = NULL;
-  char f1[WORD_SIZE]="";
-  char f2[WORD_SIZE]="";
-  char f3[WORD_SIZE]="";
-  char f4[WORD_SIZE]="";
 
   /* Check that the inputs are not empty */ 
-  if(!filename || die == NO_ID){  
+  if(!path || die == NO_ID){  
     return NULL;
   }
-
-  strcpy(f1, filename);
-  strcat(f,"_lnk.dat");
-  strcpy(f2, filename);
-  strcat(f,"_spc.dat");
-  strcpy(f3, filename);
-  strcat(f,"_ply.dat");
-  strcpy(f4, filename);
-  strcat(f,"_obj.dat");
 
   /* Initialize the elements of the game and check if it has worked */
   game = game_init(die);
@@ -459,27 +448,8 @@ Game * game_init_from_file(char *filename, Id die){
     return NULL; 
   }
 
-  /* Load the links from the file and check if it has worked */
-  if(game_load_links(game, f1) == ERROR){
-    game_destroy(game); /* Destroy the game if it has been an error */
-    return NULL;
-  } 
-
-  /* Load the spaces from the file and check if it has worked */
-  if(game_load_spaces(game, f2) == ERROR){ 
-    printf("%s\n", f);
-    game_destroy(game); /* Destroy the game if it has been an error */
-    return NULL;
-  }
-
-  /* Load the players from the file and check if it has worked */
-  if(game_load_players(game, f3) == ERROR){
-    game_destroy(game); /* Destroy the game if it has been an error */
-    return NULL;
-  }
-
-  /* Load the objects from the file and check if it has worked */
-  if(game_load_objects(game, f4) == ERROR){
+  /* Load the game from the file and check if it has worked */
+  if(game_load(game, path) == ERROR){
     game_destroy(game); /* Destroy the game if it has been an error */
     return NULL;
   } 
@@ -1794,6 +1764,7 @@ STATUS callback_INSPECT(Game *game, char *arg){
   Id id_space = NO_ID;
   int flag, i, illuminated = 0, bought = 0;
   char *description = NULL;
+
 	/* Check that the inputs are not empty */
   if (!game || !arg){
     return ERROR;
@@ -1881,6 +1852,7 @@ STATUS callback_TURNON(Game *game, char *arg){
   Id id_space = NO_ID;
   int flag, i;
   char *description = NULL;
+
 	/* Check that the inputs are not empty */
   if (!game || !arg){
     return ERROR;
@@ -1892,7 +1864,7 @@ STATUS callback_TURNON(Game *game, char *arg){
 
   inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
-  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
   	if(!strcmp(object_get_name(obj), arg)){
     	flag = 1;
@@ -1900,13 +1872,13 @@ STATUS callback_TURNON(Game *game, char *arg){
   }
 
   if (flag == 1){
-    if(object_can_illuminate(obj)){
-    	object_set_light(obj,TRUE);
+    if(object_can_light(obj)){
+    	object_set_on(obj, TRUE);
     }
     return OK;
   } 
     
-  fprintf(stdout, "Error,  when you try to turn on a object.\n");
+  fprintf(stdout, "Error when you try to turn on an object.\n");
   return ERROR;
 }
 
@@ -1930,6 +1902,7 @@ STATUS callback_TURNOFF(Game *game, char *arg){
   Id id_space = NO_ID;
   int flag, i;
   char *description = NULL;
+
 	/* Check that the inputs are not empty */
   if (!game || !arg){
     return ERROR;
@@ -1941,7 +1914,7 @@ STATUS callback_TURNOFF(Game *game, char *arg){
 
   inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
-  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
   	if(!strcmp(object_get_name(obj), arg)){
     	flag = 1;
@@ -1949,13 +1922,13 @@ STATUS callback_TURNOFF(Game *game, char *arg){
   }
 
   if (flag == 1){
-    if(object_can_illuminate(obj)){
-    	object_set_light(obj,FALSE);
+    if(object_can_light(obj)){
+    	object_set_on(obj, FALSE);
     }
     return OK;
   } 
     
-  fprintf(stdout, "Error, when you try to turn off a object.\n");
+  fprintf(stdout, "Error when you try to turn off an object.\n");
   return ERROR;
 }
 
@@ -1970,7 +1943,7 @@ Opens a link
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_OPEN(Game *game, char *arg,char *arg2){
+STATUS callback_OPEN(Game *game, char *arg, char *arg2){
 	Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1978,6 +1951,7 @@ STATUS callback_OPEN(Game *game, char *arg,char *arg2){
   Id id_space = NO_ID;
   int flag, i;
   char *description = NULL;
+
 	/* Check that the inputs are not empty */
   if (!game || !arg || !arg2){
     return ERROR;
@@ -1988,7 +1962,7 @@ STATUS callback_OPEN(Game *game, char *arg,char *arg2){
  
   inv = player_get_inventory(players(game)[0]);
   set_inv = inventory_get_bag(inv);
-  for(i=0, flag=0;i < set_get_count(set_inv) && flag == 0; i++){
+  for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
   	if(!strcmp(object_get_name(obj), arg2)){
     	flag = 1;
@@ -1997,18 +1971,21 @@ STATUS callback_OPEN(Game *game, char *arg,char *arg2){
   
 
   if (flag == 1 && object_can_open(obj) != NO_ID){
-		for(i=0, flag=0;i < MAX_LINKS && links(game)[i] != NULL; && flag == 0; i++){
-					if(!strcmp(link_get_name(links(game)[i]), arg2)){
-							flag = 1;
-					}
+		for(i=0, flag=0; i < MAX_LINKS && links(game)[i] != NULL && flag == 0; i++){
+				if(!strcmp(link_get_name(links(game)[i]), arg2)){
+						flag = 1;
+				}
 		}
-   
   }
-  if(flag ==1){ 
-  	if(OK == link_set_state(link(game)[i],0)){
+
+  if(flag == 1){ 
+  	if(link_set_state(links(game)[i], OPEN) == OK){
 			return OK;
     }
   }
-  fprintf(stdout, "Error, when you try to open a link.\n");
+
+  fprintf(stdout, "Error when you try to open a link.\n");
   return ERROR;
 } 
+
+

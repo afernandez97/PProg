@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
   
   /* Check if user enters the name of the file that contains the spaces */	
   if(argc < 2){	
-	  fprintf(stderr, "Use: %s <game_data_file> \n", argv[0]); 
+	  fprintf(stderr, "Use (in order): %s <game_data_path> (-nv -l <log_file> < <entry_file>)\n", argv[0]); 
 	  return 1;
 	}
   
