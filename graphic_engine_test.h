@@ -1,5 +1,5 @@
 /**
-@file graphicengine_test.h
+@file graphic_engine_test.h
 @version 1.0
 @date 09-12-2016
 @author Adrián Fernández
@@ -14,13 +14,13 @@ Dec. 10, 2016 Version 1.1
   Added tests for window_add_text.
 */
 
-#ifndef GRAPHICENGINE_TEST_H
-#define GRAPHICENGINE_TEST_H
+#ifndef GRAPHIC_ENGINE_TEST_H
+#define GRAPHIC_ENGINE_TEST_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "graphicengine.h"
+#include "graphic_engine.h"
 
 #pragma GCC diagnostic ignored "-Wpedantic"
 

@@ -1,5 +1,5 @@
 /**
-@file graphicengine_test.c
+@file graphic_engine_test.c
 @version 1.0
 @date 09-12-2016
 @author Adrián Fernández
@@ -14,7 +14,7 @@ Dec. 10, 2016 Version 1.1
   Added tests for window_add_text.
 */
 
-#include "graphicengine_test.h"
+#include "graphic_engine_test.h"
 
 int main(int argc, char **argv){
 
