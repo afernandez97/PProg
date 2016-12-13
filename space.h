@@ -41,6 +41,7 @@
 
 #include "types.h"
 #include "set.h"
+#include "game_rules.h"
 
 /**
 @def Constant values description
