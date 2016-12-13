@@ -101,6 +101,10 @@ int main(int argc, char **argv){
 	if (all || test == 63) test2_space_is_illuminated();
 	if (all || test == 64) test1_space_print();
 	if (all || test == 65) test2_space_print();
+	if (all || test == 66) test1_space_set_rule();
+	if (all || test == 67) test2_space_set_rule();
+	if (all || test == 68) test1_space_get_rule();
+	if (all || test == 69) test2_space_get_rule();
 
 
 	return 0;
