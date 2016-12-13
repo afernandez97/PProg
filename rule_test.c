@@ -1,12 +1,12 @@
 /**
-@file rule_test.c
+@file game_rules_test.c
 @version 1.0
 @date 13-12-2016
 @author Guillermo Rodriguez
 
 @brief
 Contains the implementation of the functions used to test the
-functions implemented in rules.c.
+functions implemented in game_rules.c.
 
 @version
 	Dec. 13, 2016 Version 1.0 (initial release)
@@ -15,7 +15,7 @@ functions implemented in rules.c.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "rule_test.h" 
+#include "game_rules_test.h" 
 
 int main(int argc, char **argv){
 
@@ -183,19 +183,19 @@ void test2_rule_get_id(){
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test1_rule_set_ask
-Tests if you can successfully set the ask of a space.
+@brief test1_rule_set_question
+Tests if you can successfully set the question of a space.
 
 @param
 @return
 */
-void test1_rule_set_ask(){
+void test1_rule_set_question(){
 	Rule * rule = NULL;
 	Id id = 1;
-	char ask[WORD_SIZE] = "ask";
+	char question[WORD_SIZE] = "question";
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_ask(rule, ask) == OK);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == OK);
 	rule_destroy(rule);
 	return;
 }
@@ -204,18 +204,18 @@ void test1_rule_set_ask(){
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test2_rule_set_ask
-Tests if you can set the ask of an uninitialised rule.
+@brief test2_rule_set_question
+Tests if you can set the question of an uninitialised rule.
 
 @param
 @return
 */
 
-void test2_rule_set_ask(){
+void test2_rule_set_question(){
 	Rule * rule = NULL;
-	char ask[WORD_SIZE] = "ask";
+	char question[WORD_SIZE] = "question";
 
-	FUNCTION_IS_CORRECT(rule_set_ask(rule, ask) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == ERROR);
 	return;
 }
 
@@ -224,21 +224,21 @@ void test2_rule_set_ask(){
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test3_rule_set_ask
-Tests if you can set the ask of a rule if the string inserted
+@brief test3_rule_set_question
+Tests if you can set the question of a rule if the string inserted
 is unassigned.
 
 @param
 @return
 */
 
-void test3_rule_set_ask(){
+void test3_rule_set_question(){
 	Rule * rule = NULL;
 	Id id = 1;
 	char *noName = NULL;
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_ask(rule, noName) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, noName) == ERROR);
 	rule_destroy(rule);
 	return;
 }
@@ -249,20 +249,20 @@ void test3_rule_set_ask(){
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test1_rule_get_ask
-Tests if you can successfully get the ask of a rule.
+@brief test1_rule_get_question
+Tests if you can successfully get the question of a rule.
 
 @param
 @return
 */
-void test1_rule_get_ask(){
+void test1_rule_get_question(){
 	Rule * rule = NULL;
 	Id id = 1;
-	char ask[WORD_SIZE] = "ask";
+	char question[WORD_SIZE] = "question";
 
 	rule = rule_create(id);
-	rule_set_ask(rule, ask);
-	FUNCTION_IS_CORRECT(rule_get_ask(rule) != NULL);
+	rule_set_question(rule, question);
+	FUNCTION_IS_CORRECT(rule_get_question(rule) != NULL);
 	rule_destroy(rule);
 	return;
 }
@@ -271,18 +271,18 @@ void test1_rule_get_ask(){
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test2_rule_get_ask
-Tests if you can get the ask of an uninitialised rule.
+@brief test2_rule_get_question
+Tests if you can get the question of an uninitialised rule.
 
 @param
 @return
 */
-void test2_rule_get_ask(){
+void test2_rule_get_question(){
 	Rule * rule = NULL;
-	char ask[WORD_SIZE] = "ask";
+	char question[WORD_SIZE] = "question";
 
-	rule_set_ask(rule, ask);
-	FUNCTION_IS_CORRECT(rule_get_ask(rule) == NULL);
+	rule_set_question(rule, question);
+	FUNCTION_IS_CORRECT(rule_get_question(rule) == NULL);
 	return;
 }
 
@@ -291,7 +291,7 @@ void test2_rule_get_ask(){
 @date 12-12-2016
 
 @brief test1_rule_set_choice1
-Tests if you can successfully set the first choice of a space.
+Tests if you can successfully set the first choice of a rule.
 
 @param
 @return
@@ -399,7 +399,7 @@ void test2_rule_get_choice1(){
 @date 12-12-2016
 
 @brief test1_rule_set_choice2
-Tests if you can successfully set the second choice of a space.
+Tests if you can successfully set the second choice of a rule.
 
 @param
 @return
@@ -516,13 +516,13 @@ Tests if you can successfully print a rule.
 void test1_rule_print(){
 	Rule * rule = NULL;
 	Id id = 1;
-	char ask[WORD_SIZE] = "ask";
+	char question[WORD_SIZE] = "question";
 	char choice1[WORD_SIZE] = "choice1";
 	char choice2[WORD_SIZE] = "choice2";
 	
 
 	rule = rule_create(id);
-	rule_set_ask(rule, ask);
+	rule_set_question(rule, question);
 	rule_set_choice1(rule, choice1);
 	FUNCTION_IS_CORRECT(rule_print(rule) == OK);
 	rule_destroy(rule);
