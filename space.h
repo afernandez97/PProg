@@ -335,6 +335,37 @@ STATUS space_set_down(Space *space, Id id);
    */
 Id space_get_down(Space *space);
 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief
+    Set the rule to a space. space_set_rule()
+ 
+   @param Space *space: the space where you want to change the rule.
+   @param Id id: the new rule you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_rule(Space *space, Id id);
+ 
+ 
+ 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+    Gives the information of the rule of the space.space_get_rule()
+ 
+   @param 
+    Space *space: the space you want to know the rule.
+ 
+   @return 
+    Id: the rule of the space or NO_ID on error.
+   */
+Id space_get_rule(Space *space);
  
 /**
    @date 25-10-2016 

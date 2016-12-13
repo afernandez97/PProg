@@ -490,7 +490,54 @@ Tests if you can get the down field of an uninitialised space.
 */
 void test2_space_get_down();
 
+/**
+@author Guillermo Rodriguez
+@date Dec. 12, 2016
 
+@brief test1_space_set_rule
+Tests if you can successfully set the rule of a space.
+
+@param
+@return
+*/
+
+void test1_space_set_rule();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 12, 2016
+
+@brief test2_space_set_rule
+Tests if you can set the rule of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_rule();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 12, 2016
+
+@brief test1_space_get_rule
+Tests if you can successfully get the rule of a space.
+
+@param
+@return
+*/
+void test1_space_get_rule();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 12, 2016
+
+@brief test2_space_get_rule
+Tests if you can get the rule field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_rule();
 /**
 @author Adrián Fernández
 @date 23-11-2016

@@ -34,7 +34,7 @@
 			Created "space_set_up", "space_get_up", "space_set_down", "space_get_down",
 			"space_set_illumination" and "space_is_illuminated" and modified the 
 			functions affected by this changes.
-  */
+	*/
  
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,6 +56,7 @@
 #define desc(X) (X)->desc
 #define gdesc(X) (X)->gdesc
 #define illuminated(X) (X)->illuminated
+#define rule(X) (X)->rule
 
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
@@ -68,6 +69,7 @@ struct _Space{
   Id west;  /*!< West link of the space */
 	Id up;	/*!< Up link of the space */
 	Id down;	/*!< Down link of the space */
+	Id rule     /*!< The rule of the space of the space */
   Set *objects; /*!<  Set of the objects,there are in the space */
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
@@ -110,7 +112,8 @@ Space * space_create(Id id){
   east(space) = NO_ID;
   west(space) = NO_ID;
 	up(space) = NO_ID;
-  down(space) = NO_ID;	
+  down(space) = NO_ID;
+  rule(space) = NO_ID;  
 
   objects(space) = set_create();
   if(!objects(space)){  /* Check if memory has been allocated */
@@ -505,6 +508,50 @@ Id space_get_down(Space *space){
   return down(space);
 }
 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief
+    Set the rule to a space. space_set_rule()
+ 
+   @param Space *space: the space where you want to change the rule.
+   @param Id id: the new rule you want for the space.
+ 
+   @return 
+    STATUS: OK if you do the operation well and ERROR in other cases.
+   */
+STATUS space_set_rule(Space *space, Id id){
+  if(!space){             /* Check that the inputs are not empty */
+    return ERROR;
+  }
+ 
+  rule(space) = id;          /* Set the rule to the space */
+  return OK;
+}
+ 
+ 
+ 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+    Gives the information of the rule of the space.space_get_rule()
+ 
+   @param 
+    Space *space: the space you want to know the rule.
+ 
+   @return 
+    Id: the rule of the space or NO_ID on error.
+   */
+Id space_get_rule(Space *space){
+  if(!space){                     /* Check that the input is not empty */
+    return NO_ID;
+  }
+ 
+  return rule(space);
+}
 
 /**
    @date 25-10-2016 
@@ -869,6 +916,12 @@ STATUS space_print(Space *space){
     fprintf(stdout, "---> Down link: %ld.\n", idaux);
   } else{
       fprintf(stdout, "---> No Down link.\n");
+  }
+  idaux = space_get_rule(space);
+  if(NO_ID != idaux){
+    fprintf(stdout, "---> Rule: %ld.\n", idaux);
+  } else{
+      fprintf(stdout, "---> No rule.\n");
   }
 
   if(set_is_empty(objects(space)) == TRUE){
