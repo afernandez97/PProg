@@ -1,5 +1,5 @@
 /**
-   @file gamerules.c
+   @file game_rules.c
    @version 1.0
    @date 12-12-2016 
    @author Guillermo Rodriguez
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "rule.h"
+#include "game_rules.h"
 
 /**
 @def Constant values description 
@@ -27,12 +27,11 @@
 
  
 /** @brief The Rule structure stores information of the different rules that there are in the game */
-struct _Space{
+struct _Rule{
   Id id; /*!< Identifier of the rule */
-  char ask[WORD_SIZE + 1]  /*!< The ask for the player*/ 
-  char choice1[WORD_SIZE + 1]; /*!< The action if the player choice the first option*/ 
-  char choice2[WORD_SIZE + 1]; /*!< The action if the player choice the second option*/
-  
+  char question[WORD_SIZE + 1];  /*!< The question for the player */ 
+  char choice1[WORD_SIZE + 1]; /*!< The action if the player chooses the first option */ 
+  char choice2[WORD_SIZE + 1]; /*!< The action if the player chooses the second option */
 };
  
  
@@ -64,7 +63,7 @@ Rule * rule_create(Id id){
   /* Initialize structure fields */
   id(rule) = id;
  
-  ask(rule)[0] = '\0';
+  question(rule)[0] = '\0';
   choice1(rule)[0] = '\0';
   choice2(rule)[0] = '\0';
   
@@ -85,7 +84,7 @@ Rule * rule_create(Id id){
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS rule_destroy(Rule * rule){
+STATUS rule_destroy(Rule *rule){
   if(!rule){         /* Check that the input is not empty */
     return ERROR;
   }
@@ -103,21 +102,21 @@ STATUS rule_destroy(Rule * rule){
    @author Guillermo Rodriguez
 
    @brief 
-    Sets the ask for the player. rule_set_ask()
+    Sets the question for the player. rule_set_question()
 
-   @param Rule *rule: the rule you want to change its ask.
-    char *ask: the new ask of the rule.
+   @param Rule *rule: the rule you want to change its question.
+    char *question: the new question of the rule.
   
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS rule_set_ask(Rule *rule, char *ask){
-  if(!rule || !ask){   /* Check if the inputs are not empty */
+STATUS rule_set_question(Rule *rule, char *question){
+  if(!rule || !question){   /* Check if the inputs are not empty */
     return ERROR;
   }
 
   /* Set the ask and check if it has worked */
-  if(!strcpy(ask(rule), ask)){
+  if(!strcpy(question(rule), question)){
     return ERROR;
   }  
   
@@ -133,7 +132,7 @@ STATUS rule_set_ask(Rule *rule, char *ask){
    @brief 
     Sets the first choice for the player. rule_set_choice1()
 
-   @param Rule *rule: the rule you want to change its ask.
+   @param Rule *rule: the rule you want to change its first choice.
     char *choice1: the new first choice of the rule.
   
    @return 
@@ -144,7 +143,7 @@ STATUS rule_set_choice1(Rule *rule, char *choice1){
     return ERROR;
   }
 
-  /* Set the ask and check if it has worked */
+  /* Set the first choice and check if it has worked */
   if(!strcpy(choice1(rule), choice1)){
     return ERROR;
   }  
@@ -160,7 +159,7 @@ STATUS rule_set_choice1(Rule *rule, char *choice1){
    @brief 
     Sets the second choice for the player. rule_set_choice2()
 
-   @param Rule *rule: the rule you want to change its ask.
+   @param Rule *rule: the rule you want to change its second choice.
     char *choice2: the new second choice of the rule.
   
    @return 
@@ -171,7 +170,7 @@ STATUS rule_set_choice2(Rule *rule, char *choice2){
     return ERROR;
   }
 
-  /* Set the ask and check if it has worked */
+  /* Set the second choice and check if it has worked */
   if(!strcpy(choice2(rule), choice2)){
     return ERROR;
   }  
@@ -185,20 +184,20 @@ STATUS rule_set_choice2(Rule *rule, char *choice2){
    @author Guillermo Rodriguez
 
    @brief 
-    Gives the information of the ask of the rule.rule_get_ask()
+    Gives the information of the question of the rule.rule_get_question()
 
    @param
-    Rule * rule: the rule you want to know its ask.
+    Rule *rule: the rule you want to know its question.
 
    @return 
-    char *: the ask of the rule or NULL on error.
+    char *: the question of the rule or NULL on error.
  */
-char *rule_get_ask(Rule *rule){
+char *rule_get_question(Rule *rule){
   if(!rule){  /* Check that the input is not empty */
    return NULL;
   }
 
-  return ask(rule); 
+  return question(rule); 
 }   
 
 
@@ -283,14 +282,13 @@ Id rule_get_id(Rule *rule){
     STATUS: ERROR if the input is NULL and OK otherwise.
    */
 STATUS rule_print(Rule * rule){
-  
   if(!rule){                   /* Check that the input is not empty */
     return ERROR;
   }
  
   /* Print each field of the Rule structure */
-    fprintf(stdout, "--> Rule (Id: %ld; Ask: %s; Choice1: %s; Choice2: %s)\n", 
-      id(rule), ask(rule),choice1(rule),choice2(rule));
+    fprintf(stdout, "--> Rule (Id: %ld; Question: %s; Choice1: %s; Choice2: %s)\n", 
+      id(rule), question(rule), choice1(rule), choice2(rule));
 
   return OK;
 }
