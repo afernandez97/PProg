@@ -1,18 +1,18 @@
 /**
-   @file rule.h
+   @file game_rules.h
    @version 1.0
    @date 12-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
-    It implements a rule.
+    It implements the game rules.
  
    @version
     Dec. 12, 2016  Version 1.0 (initial release)
 */
 
-#ifndef RULE_H
-#define RULE_H
+#ifndef GAME_RULES_H
+#define GAME_RULES_H
 
 #include "types.h"
 
@@ -23,7 +23,7 @@
 #define MAX_RULES 100
 
 /*!< Data structures definition */
-typedef struct _Rules Rules;
+typedef struct _Rule Rule;
 
 
 
@@ -56,7 +56,7 @@ Rule * rule_create(Id id);
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS rule_destroy(Rule * rule);
+STATUS rule_destroy(Rule *rule);
 
 
 
@@ -66,15 +66,15 @@ STATUS rule_destroy(Rule * rule);
    @author Guillermo Rodriguez
 
    @brief 
-    Sets the ask for the player. rule_set_ask()
+    Sets the question for the player. rule_set_question()
 
-   @param Rule *rule: the rule you want to change its ask.
-    char *ask: the new ask of the rule.
+   @param Rule *rule: the rule you want to change its question.
+    char *question: the new question of the rule.
   
    @return 
     STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS rule_set_ask(Rule *rule, char *ask);
+STATUS rule_set_question(Rule *rule, char *question);
 
 
 
@@ -85,7 +85,7 @@ STATUS rule_set_ask(Rule *rule, char *ask);
    @brief 
     Sets the first choice for the player. rule_set_choice1()
 
-   @param Rule *rule: the rule you want to change its ask.
+   @param Rule *rule: the rule you want to change its first choice.
     char *choice1: the new first choice of the rule.
   
    @return 
@@ -101,7 +101,7 @@ STATUS rule_set_choice1(Rule *rule, char *choice1);
    @brief 
     Sets the second choice for the player. rule_set_choice2()
 
-   @param Rule *rule: the rule you want to change its ask.
+   @param Rule *rule: the rule you want to change its second choice.
     char *choice2: the new second choice of the rule.
   
    @return 
@@ -115,15 +115,15 @@ STATUS rule_set_choice2(Rule *rule, char *choice2);
    @author Guillermo Rodriguez
 
    @brief 
-    Gives the information of the ask of the rule.rule_get_ask()
+    Gives the information of the question of the rule.rule_get_question()
 
    @param
-    Rule * rule: the rule you want to know its ask.
+    Rule *rule: the rule you want to know its question.
 
    @return 
-    char *: the ask of the rule or NULL on error.
+    char *: the question of the rule or NULL on error.
  */
-char *rule_get_ask(Rule *rule);  
+char * rule_get_question(Rule *rule);  
 
 
 /**
@@ -134,12 +134,12 @@ char *rule_get_ask(Rule *rule);
     Gives the information of the first choice of the rule.rule_get_choice1()
 
    @param
-    Rule * rule: the rule you want to know its first choice.
+    Rule *rule: the rule you want to know its first choice.
 
    @return 
     char *: the first choice of the rule or NULL on error.
  */
-char *rule_get_choice1(Rule *rule);
+char * rule_get_choice1(Rule *rule);
 
 
 /**
@@ -150,12 +150,12 @@ char *rule_get_choice1(Rule *rule);
     Gives the information of the second choice of the rule.rule_get_choice2()
 
    @param
-    Rule * rule: the rule you want to know its second choice.
+    Rule *rule: the rule you want to know its second choice.
 
    @return 
     char *: the second choice of the rule or NULL on error.
  */
-char *rule_get_choice2(Rule *rule);
+char * rule_get_choice2(Rule *rule);
 
 
 /**
@@ -166,13 +166,15 @@ char *rule_get_choice2(Rule *rule);
     Gives the information of the id of the rule.rule_get_id()
 
    @param
-    Rule * rule: the rule you want to know its id.
+    Rule *rule: the rule you want to know its id.
 
    @return 
     char *: the id of the rule or NO_ID on error.
  */
 
 Id rule_get_id(Rule *rule);
+
+
 /**
    @date 12-12-2016 
    @author Guillermo Rodriguez
@@ -185,7 +187,7 @@ Id rule_get_id(Rule *rule);
    @return 
     STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS rule_print(Rule * rule);
+STATUS rule_print(Rule *rule);
 
 
 
