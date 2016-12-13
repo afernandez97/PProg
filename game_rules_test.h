@@ -1,23 +1,23 @@
 /**
-@file rule_test.h
+@file game_rules_test.h
 @version 1.0
 @date 12-12-2016
 @author Guillermo Rodriguez
 
 @brief
 Contains the headers of the functions used to test the functions
-implemented in rule.c.
+implemented in game_rules.c.
 
 @version
 	Dec. 12, 2016 Version 1.0 (initial release)	
 */
 
-#ifndef RULE_TEST_H
-#define RULE_TEST_H
+#ifndef GAME_RULES_TEST_H
+#define GAME_RULES_TEST_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "rule.h"
+#include "game_rules.h"
 
 #pragma GCC diagnostic ignored "-Wpedantic"
 
@@ -113,41 +113,41 @@ void test2_rule_get_id();
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test1_rule_set_ask
-Tests if you can successfully set the ask of a space.
+@brief test1_rule_set_question
+Tests if you can successfully set the question of a rule.
 
 @param
 @return
 */
-void test1_rule_set_ask();
+void test1_rule_set_question();
 
 /**
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test2_rule_set_ask
-Tests if you can set the ask of an uninitialised rule.
+@brief test2_rule_set_question
+Tests if you can set the question of an uninitialised rule.
 
 @param
 @return
 */
 
-void test2_rule_set_ask();
+void test2_rule_set_question();
 
 
 /**
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test3_rule_set_ask
-Tests if you can set the ask of a rule if the string inserted
+@brief test3_rule_set_question
+Tests if you can set the question of a rule if the string inserted
 is unassigned.
 
 @param
 @return
 */
 
-void test3_rule_set_ask();
+void test3_rule_set_question();
 
 
 
@@ -155,32 +155,32 @@ void test3_rule_set_ask();
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test1_rule_get_ask
-Tests if you can successfully get the ask of a rule.
+@brief test1_rule_get_question
+Tests if you can successfully get the question of a rule.
 
 @param
 @return
 */
-void test1_rule_get_ask();
+void test1_rule_get_question();
 
 /**
 @author Guillermo Rodriguez
 @date 12-12-2016
 
-@brief test2_rule_get_ask
-Tests if you can get the ask of an uninitialised rule.
+@brief test2_rule_get_question
+Tests if you can get the question of an uninitialised rule.
 
 @param
 @return
 */
-void test2_rule_get_ask();
+void test2_rule_get_question();
 
 /**
 @author Guillermo Rodriguez
 @date 12-12-2016
 
 @brief test1_rule_set_choice1
-Tests if you can successfully set the first choice of a space.
+Tests if you can successfully set the first choice of a rule.
 
 @param
 @return
@@ -246,7 +246,7 @@ void test2_rule_get_choice1();
 @date 12-12-2016
 
 @brief test1_rule_set_choice2
-Tests if you can successfully set the second choice of a space.
+Tests if you can successfully set the second choice of a rule.
 
 @param
 @return
