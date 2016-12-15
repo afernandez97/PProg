@@ -81,7 +81,7 @@ Dec. 3, 2016 Version 6.0
 /**
 @def Constant values description
 */
-#define player(X) (X)->player
+#define players(X) (X)->players
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
 #define die(X) (X)->die
@@ -512,10 +512,11 @@ Updates a game.
 
 @param Game *game: the game to update.
 @param Command *cmd: the command typed by the user.
+@param int player: number of the player.
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_update(Game *game, Command *command){
+STATUS game_update(Game *game, Command *command, int player){
   T_Command cmd;
   char arg[CMD_LENGTH] = "";
   STATUS status = ERROR;
@@ -529,34 +530,34 @@ STATUS game_update(Game *game, Command *command){
   /* Call a function depending on the command */
   switch(cmd){
     case UNKNOWN:
-      status = callback_UNKNOWN(game);
+      status = callback_UNKNOWN(game, player);
       break;
     case QUIT:
-      status = callback_QUIT(game);
+      status = callback_QUIT(game, player);
       break;
     case CATCH:
-      status = callback_CATCH(game, arg);
+      status = callback_CATCH(game, arg, player);
       break;
     case LEAVE:
-      status = callback_LEAVE(game, arg);
+      status = callback_LEAVE(game, arg, player);
       break;
     case GO:
-      status = callback_GO(game, arg);
+      status = callback_GO(game, arg, player);
       break;
     case INSPECT:
-      status = callback_INSPECT(game, arg);
+      status = callback_INSPECT(game, arg, player);
       break;  			  
     case ROLL:
-      status = callback_ROLL(game);
+      status = callback_ROLL(game, player);
       break;
     case TURON:
-      status = callback_TURNON(game ,arg);
+      status = callback_TURNON(game ,arg, player);
       break;
     case TUROFF:
-      status = callback_TURNOFF(game,arg);
+      status = callback_TURNOFF(game,arg, player);
       break;
     case OPEN:
-      status = callback_OPEN(game,arg,arg2);
+      status = callback_OPEN(game, arg, arg2, player);
       break;
     
     case NO_CMD:
@@ -874,250 +875,6 @@ void game_print_data(Game *game){
 
 
 
-/**
-@date 02-11-2016 
-@author Alejandro Sanchez
-
-@brief game_print_objects
-Prints the objects of the game (<name>:<location>).
-
-@param Game *game: the game to print its objects.
-@param Space *space: the space where you want to print the objects.
-
-@return
-*/
-void game_print_objects(Game *game, Space *space){
-  int i, count;
-  char *name = NULL;
-  Set *set = NULL;
-  Object *object = NULL;
-
-  /* Start printing the row of the space */
-  fprintf(stdout, "     |");
-  /* Get the set of objects on the space and how many are there */
-  set = space_get_object(space);
-  count = set_get_count(set);
-  /* Get the different names of the objects and print them */
-  for(i=0; i<count; i++){    
-    object = game_get_object(game, set_get_object_at_position(set, i));
-    name = object_get_name(object);
-    /* Maximum three objects per space */   
-    if(i < 3){             
-      fprintf(stdout, "%s ", name);
-    }
-  }
-
-  /* Print the rest of the row. The way depends on the number of objects */
-  switch(i){
-    /* 0 objects */
-    case 0:
-       fprintf(stdout, "           |\n");
-       break;
-    /* 1 object */
-    case 1:
-       fprintf(stdout, "        |\n");
-       break;
-    /* 2 objects */
-    case 2:
-       fprintf(stdout, "     |\n");
-       break;
-    /* 3 objects */
-    case 3:
-       fprintf(stdout, "  |\n");
-       break; 
-    /* More than 3 objects */
-    default:
-       fprintf(stdout, "..|\n");  
-       break;
-  }
-
-  return; 
-}
-
-
-
-/**
-Function: 
-@date 02-11-2016 
-@author Alejandro Sanchez
-
-@brief game_print_screen
-Prints the screen of the game.
-
-@param Game *game: the game to print its screen.
-
-@return
-*/
-void game_print_screen(Game *game){
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID;
-  Id id_west = NO_ID, id_obj = NO_ID, id_spc_back = NO_ID, id_spc_next = NO_ID;
-  Space *space_act = NULL, *space_back = NULL, *space_next = NULL;
-  Link *link_back = NULL, *link_next = NULL;
-  char *name = NULL;
-  Object *object = NULL;
-  int i, count;
-  Inventory *inv = NULL; 
-    
-  if(!game){ /* Check that the input is not empty */
-    return;
-  }  
-
-  /* Get actual location of the player */
-  id_act = game_get_player_location(game, 1);  
-  if(id_act == NO_ID){  /* Check if it has worked */
-    return;
-  }
-  
-  /* Get the space where the player is */  
-  space_act = game_get_space(game, id_act);
-
-  /* Get the previous space */
-  id_back = space_get_north(space_act);
-  if(id_back != NO_ID){
-    link_back = game_get_link(game, id_back);
-    id_spc_back = link_get_space2(link_back);
-    space_back = game_get_space(game, id_spc_back);
-  }
- 
-
-  /* Get the next space */
-  id_next = space_get_south(space_act);
-  if(id_next != NO_ID){
-    link_next = game_get_link(game, id_next);
-    id_spc_next = link_get_space2(link_next);
-    space_next = game_get_space(game, id_spc_next); 
-  }
-  
-   
-  if(system(CLEAR)){
-    return; 
-  }
-
-  /* Print the previous space if it is different from NO_ID */
-  if(id_back != NO_ID){
-    id_east = space_get_east(space_back);
-    id_west = space_get_west(space_back);
-    if(id_east != NO_ID && id_west != NO_ID){
-      link_back = game_get_link(game, id_east);
-      link_next = game_get_link(game, id_west);
-      printf("   %2d|         %2d|%2d\n", (int)id_west, (int)id_spc_back, 
-        (int)id_east);
-      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_next), 
-        (int)link_get_space2(link_back));
-      space_print_gdesc(space_back);
-    } else if(id_east != NO_ID && id_west == NO_ID){
-     	  link_back = game_get_link(game, id_east);
-        printf("     |         %2d|%2d\n", (int)id_spc_back, (int)id_east);
-        printf("     |           |-->%2d\n", (int)link_get_space2(link_back));
-        space_print_gdesc(space_back);
-		} else if(id_west != NO_ID){
-		    link_back = game_get_link(game, id_west);
-        printf("   %2d|         %2d|\n", (int)id_west, (int)id_back);
-				printf("%2d<--|           |\n", (int)link_get_space2(link_back));
-        space_print_gdesc(space_back);
-		} else{
-        printf("     |         %2d|\n", (int) id_back);
-				printf("     |           |\n");
-				space_print_gdesc(space_back);
-		}
-		game_print_objects(game, space_back);
-		printf("     +-----------+\n");
-		printf("            ^ %2d\n", (int)id_back);
-  }
-  
-  /* Print the actual space if it is different from NO_ID */
-  if(id_act != NO_ID){
-    printf("     +-----------+\n");
-    id_east = space_get_east(space_act);
-    id_west = space_get_west(space_act);
-    if(id_east != NO_ID && id_west != NO_ID){
-      link_back = game_get_link(game, id_east);
-      link_next = game_get_link(game, id_west);
-      printf("   %2d| >8D     %2d|%2d\n", (int)id_west, (int)id_act, 
-        (int)id_east);
-      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_next), 
-        (int)link_get_space2(link_back));
-      space_print_gdesc(space_act);
-    } else if(id_east != NO_ID && id_west == NO_ID){
-     	  link_back = game_get_link(game, id_east);
-        printf("     | >8D     %2d|%2d\n", (int)id_act, (int)id_east);
-        printf("     |           |-->%2d\n", (int)link_get_space2(link_back));
-        space_print_gdesc(space_act);
-		} else if(id_west != NO_ID){
-		    link_back = game_get_link(game, id_west);
-        printf("   %2d| >8D     %2d|\n", (int)id_west, (int)id_act);
-				printf("%2d<--|           |\n", (int)link_get_space2(link_back));
-        space_print_gdesc(space_act);
-		} else{
-        printf("     | >8D     %2d|\n", (int) id_act);
-				printf("     |           |\n");
-        space_print_gdesc(space_act);
-		}
-		game_print_objects(game, space_act);
-		printf("     +-----------+\n");
-  }  
-    
-  /* Print the next space if it is different from NO_ID */ 
-  if(id_next != NO_ID){
-    printf("            v %2d\n", (int)id_next);
-    printf("     +-----------+\n");
-    id_east = space_get_east(space_next);
-    id_west = space_get_west(space_next);
-    if(id_east != NO_ID && id_west != NO_ID){
-      link_next = game_get_link(game, id_east);
-      link_back = game_get_link(game, id_west);
-      printf("   %2d|         %2d|%2d\n", (int)id_west, (int)id_spc_next, 
-        (int)id_east);
-      printf("%2d<--|           |-->%2d\n", (int)link_get_space2(link_back), 
-        (int)link_get_space2(link_next));
-      space_print_gdesc(space_next);
-    } else if(id_east != NO_ID && id_west == NO_ID){
-     	  link_next = game_get_link(game, id_east);
-        printf("     |         %2d|%2d\n", (int)id_spc_next, (int)id_east);
-        printf("     |           |-->%2d\n", (int)link_get_space2(link_next));
-        space_print_gdesc(space_next);
-		} else if(id_west != NO_ID){
-		    link_next = game_get_link(game, id_west);
-        printf("   %2d|         %2d|\n", (int)id_west, (int)id_next);
-				printf("%2d<--|           |\n", (int)link_get_space2(link_next));
-        space_print_gdesc(space_next);
-		} else{
-        printf("     |         %2d|\n", (int) id_spc_next);
-				printf("     |           |\n");
-        space_print_gdesc(space_next);
-		}
-		game_print_objects(game, space_next);
-  }
-
-  /* Print the objects location */
-  printf("\nObjects location: ");
-  for(i=0; i<MAX_OBJECTS && objects(game)[i] != NULL; i++){
-    id_obj = object_get_location(objects(game)[i]);
-    name = object_get_name(objects(game)[i]);
-    if(id_obj != NO_ID){
-      printf("%s:%2d ", name, (int)id_obj);
-    }
-  }
-
-  /* Print the objects of the game*/  
-  inv = player_get_inventory(players(game)[0]);
-  count = inventory_get_count(inv);
-  printf("\nPlayer objects: ");
-  /* Get the different names of the objects and print them */
-	for(i=0; i<count; i++){    
-	  object = game_get_object(game, set_get_object_at_position(inventory_get_bag(inv), i));
-    name = object_get_name(object);
-    printf("%s, ",name);
-  }
-
-  /*Print the last die value*/
-  printf("\nLast die value: %d", die_get_value(die(game)));
-  /* Print the commands the user can type */
-  printf("\n[commands: go <direction> or g <direction>, catch <obj_name> or c <obj_name>, leave ");
-  printf("<obj_name> or l <obj_name>, inspect <spc_name/obj_name> or i <spc_name/obj_name>, quit or q, roll or r]");
-  printf("\nprompt:> ");
-}
-
 
 
 
@@ -1246,19 +1003,20 @@ STATUS game_set_player_location(Game *game, Id player, Id location){
 Gives the location of a player.
 
 @param Game *game: the game where the player is.
-@param Id player: the id of the player selected.
+@param int player: number of the player.
 
 @return Id: the location of the player or NO_ID on error.
 */
-Id game_get_player_location(Game *game, Id player){
-  Object *ply = NULL;
+Id game_get_player_location(Game *game, int player){
+  Player *ply = NULL;
 
-  if(!game || player == NO_ID){  /* Check that the inputs are not empty */
+  if(!game || player < 0){  /* Check that the inputs are not empty */
     return NO_ID;
   }
 
+	
   /* Get the player */
-  ply = game_get_player(game, player);
+  ply = game_get_player_at_position(game, player);
 
   /* Get its location */
   return player_get_location(ply);
@@ -1753,10 +1511,11 @@ STATUS callback_ROLL(Game *game){
 Tells the space's or object's information
 
 @param Game *game: the game.
+@param int player: number of the player.
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_INSPECT(Game *game, char *arg){
+STATUS callback_INSPECT(Game *game, char *arg, int player){
   Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1766,15 +1525,15 @@ STATUS callback_INSPECT(Game *game, char *arg){
   char *description = NULL;
 
 	/* Check that the inputs are not empty */
-  if (!game || !arg){
+  if (!game || !arg || player < 0){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game, 1);
+  id_space = game_get_player_location(game, player);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(players(game)[0]);
+  inv = player_get_inventory(players(game)[player]);
   set_inv = inventory_get_bag(inv);
 
   if (space_is_illuminated (space) == TRUE){
@@ -1841,10 +1600,11 @@ STATUS callback_INSPECT(Game *game, char *arg){
 Turns on an object
 
 @param Game *game: the game.
+@param int player: number of the player.
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_TURNON(Game *game, char *arg){
+STATUS callback_TURNON(Game *game, char *arg, int player){
 	Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1854,15 +1614,15 @@ STATUS callback_TURNON(Game *game, char *arg){
   char *description = NULL;
 
 	/* Check that the inputs are not empty */
-  if (!game || !arg){
+  if (!game || !arg || player < 0){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game, 1);
+  id_space = game_get_player_location(game, player);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(players(game)[0]);
+  inv = player_get_inventory(players(game)[player]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
@@ -1891,10 +1651,11 @@ STATUS callback_TURNON(Game *game, char *arg){
 Turns on an object
 
 @param Game *game: the game.
+@param int player: number of the player.
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_TURNOFF(Game *game, char *arg){
+STATUS callback_TURNOFF(Game *game, char *arg, int player){
 	Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1904,15 +1665,15 @@ STATUS callback_TURNOFF(Game *game, char *arg){
   char *description = NULL;
 
 	/* Check that the inputs are not empty */
-  if (!game || !arg){
+  if (!game || !arg || player < 0){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game, 1);
+  id_space = game_get_player_location(game, player);
   space = game_get_space(game, id_space);
   set_spc = space_get_object(space);
 
-  inv = player_get_inventory(players(game)[0]);
+  inv = player_get_inventory(players(game)[player]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
@@ -1940,10 +1701,11 @@ STATUS callback_TURNOFF(Game *game, char *arg){
 Opens a link
 
 @param Game *game: the game.
+@param int player: number of the player.
 
 @return STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS callback_OPEN(Game *game, char *arg, char *arg2){
+STATUS callback_OPEN(Game *game, char *arg, char *arg2, int player){
 	Space *space = NULL;
   Object *obj = NULL;
   Inventory *inv = NULL;
@@ -1953,14 +1715,14 @@ STATUS callback_OPEN(Game *game, char *arg, char *arg2){
   char *description = NULL;
 
 	/* Check that the inputs are not empty */
-  if (!game || !arg || !arg2){
+  if (!game || !arg || !arg2 || player < 0){
     return ERROR;
   }
   
-  id_space = game_get_player_location(game, 1);
+  id_space = game_get_player_location(game, player);
   space = game_get_space(game, id_space);
  
-  inv = player_get_inventory(players(game)[0]);
+  inv = player_get_inventory(players(game)[player]);
   set_inv = inventory_get_bag(inv);
   for(i=0, flag=0; i < set_get_count(set_inv) && flag == 0; i++){
   	obj = game_get_object(game, set_get_object_at_position(set_inv, i));
