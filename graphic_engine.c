@@ -140,9 +140,9 @@ Screen * screen_create(){
 Destroys a screen.
 
 @param Screen *scr: Pointer to the screen we want to destroy.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS screen_destroy(Screen *scr){
+_STATUS screen_destroy(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -170,9 +170,9 @@ STATUS screen_destroy(Screen *scr){
 Refreshes a screen.
 
 @param Screen *scr: Pointer to the screen we want to refresh.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS screen_refresh(Screen *scr){
+_STATUS screen_refresh(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -196,9 +196,9 @@ STATUS screen_refresh(Screen *scr){
 Prints a screen.
 
 @param Screen *scr: Pointer to the screen we want to print.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS screen_print(Screen *scr){
+_STATUS screen_print(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -221,9 +221,9 @@ Adds a window to a screen.
 
 @param Screen *scr: Pointer to the screen selected.
 @param Window *win: Pointer to the window we want to add.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS screen_add_window(Screen *scr, Window *win){
+_STATUS screen_add_window(Screen *scr, Window *win){
 	int i = 0;
 
 	if(!scr || !win){
@@ -251,9 +251,9 @@ STATUS screen_add_window(Screen *scr, Window *win){
 Deletes the last window of a screen.
 
 @param Screen *scr: Pointer to the screen selected.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS screen_del_window(Screen *scr){
+_STATUS screen_del_window(Screen *scr){
 	int i = 0;
 
 	if(!scr){
@@ -341,9 +341,9 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 Destroys a window.
 
 @param Window *win: Pointer to the window selected.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_destroy(Window *win){
+_STATUS window_destroy(Window *win){
 	if(!win){
 		return ERROR;
 	}
@@ -363,9 +363,9 @@ STATUS window_destroy(Window *win){
 Refreshes a window.
 
 @param Window *win: Pointer to the window selected.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_refresh(Window *win){
+_STATUS window_refresh(Window *win){
 	if(!win){
 		return ERROR;
 	}
@@ -383,9 +383,9 @@ STATUS window_refresh(Window *win){
 Prints a window.
 
 @param Window *win: Pointer to the window selected.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_print(Window *win){
+_STATUS window_print(Window *win){
 	if(!win || !window_get_text(win)){
 		return ERROR;
 	}
@@ -476,9 +476,9 @@ Sets the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to set.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_set_text(Window *win, char *text){
+_STATUS window_set_text(Window *win, char *text){
 	if(!win || !text){
 		return ERROR;
 	}
@@ -499,9 +499,9 @@ Adds a string to the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to add.
-@return STATUS: OK if success or ERROR otherwise.
+@return _STATUS: OK if success or ERROR otherwise.
 */
-STATUS window_add_text(Window *win, char *text){
+_STATUS window_add_text(Window *win, char *text){
   if(!win || !text){
     return ERROR;
   }

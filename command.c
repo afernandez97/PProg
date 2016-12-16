@@ -179,10 +179,10 @@ Destroys a command.
 @date 30-10-2016 
 @author Alejandro Sanchez
 @param Command *command: the command to destroy.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: ERROR if the input is NULL and OK otherwise.
 */
 
-STATUS command_destroy(Command *command){
+_STATUS command_destroy(Command *command){
   if(!command){   /* Check that the input is not empty */
     return ERROR;
   }

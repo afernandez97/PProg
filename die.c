@@ -92,9 +92,9 @@ Die * die_create(Id id){
     
    @param Die *die: the die to destroy.
     
-   @return STATUS: ERROR if the input is NULL and OK otherwise.
+   @return _STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS die_destroy(Die *die){
+_STATUS die_destroy(Die *die){
   if(!die){         /* Check that the input is not empty */
     return ERROR;
   }
@@ -117,9 +117,9 @@ STATUS die_destroy(Die *die){
     
    @param Die *die: the die to roll.
     
-   @return STATUS: OK if you do the operation well and ERROR in other cases.
+   @return _STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS die_roll(Die *die){
+_STATUS die_roll(Die *die){
   if(!die){         /* Check that the input is not empty */
      return ERROR;
   }
@@ -167,9 +167,9 @@ int die_get_value(Die*die){
    @param Die *die: the die to print.
 				
     
-   @return STATUS: ERROR if the input is NULL and OK otherwise.
+   @return _STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS die_print(Die *die){
+_STATUS die_print(Die *die){
 	if(!die){  /* Check that the input is not empty */
 		return ERROR;
 	}

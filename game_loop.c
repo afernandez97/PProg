@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
   Game * game = NULL;
   Command *command = NULL;
   Id player = 1, die = 1;
-  STATUS status;
+  _STATUS status;
   FILE *f = NULL;
   T_Command cmd;
   int flag = 0, arg = 1;

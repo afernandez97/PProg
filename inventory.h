@@ -60,9 +60,9 @@ Inventory *inventory_create();
   	Inventory *: the inventory to destroy.
 
    @return
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: ERROR if the input is NULL and OK otherwise.
 */
-STATUS inventory_destroy(Inventory *inv);
+_STATUS inventory_destroy(Inventory *inv);
 
 
 
@@ -78,9 +78,9 @@ STATUS inventory_destroy(Inventory *inv);
    @param Id object: the new object you want for the inventory.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS inventory_add_object(Inventory *inventory, Id object);
+_STATUS inventory_add_object(Inventory *inventory, Id object);
 
 
 
@@ -97,9 +97,9 @@ STATUS inventory_add_object(Inventory *inventory, Id object);
     from the inventory.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS inventory_del_object(Inventory *inventory, Id object);
+_STATUS inventory_del_object(Inventory *inventory, Id object);
 
 
 
@@ -115,9 +115,9 @@ STATUS inventory_del_object(Inventory *inventory, Id object);
    @param  Set *bag: the bag you want to set.
    
    @return
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS inventory_set_bag(Inventory *inv, Set *bag);
+_STATUS inventory_set_bag(Inventory *inv, Set *bag);
 
 
 
@@ -238,9 +238,9 @@ BOOL inventory_is_full(Inventory *inv);
    @param 
 	  Inventory *inv: the inventory you want to print.
    @return 
-	  STATUS: ERROR if the input is NULL and OK otherwise.
+	  _STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS inventory_print(Inventory *inv);
+_STATUS inventory_print(Inventory *inv);
 
 #endif
 

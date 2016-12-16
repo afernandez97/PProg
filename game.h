@@ -106,9 +106,9 @@ Destroys a game.
 
 @param Game *game: the game to destroy.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_destroy(Game *game);
+_STATUS game_destroy(Game *game);
 
 
 
@@ -122,9 +122,9 @@ Updates a game.
 @param Game *game: the game to update.
 @param Command *cmd: the command typed by the user.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_update(Game *game, Command *cmd);
+_STATUS game_update(Game *game, Command *cmd);
 
 
 
@@ -155,9 +155,9 @@ Sets a space in a specific position.
 @param Space *space : the space you want to set
 @param int position: the position where you want to set the space.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_set_space_at_position(Game *game, Space *space, int position);
+_STATUS game_set_space_at_position(Game *game, Space *space, int position);
 
 
 
@@ -188,9 +188,9 @@ Sets an object in a specific position.
 @param Object *object : the object you want to set
 @param int position: the position where you want to set the object.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_set_object_at_position(Game *game, Object *object, int position);
+_STATUS game_set_object_at_position(Game *game, Object *object, int position);
 
 
 
@@ -221,9 +221,9 @@ Sets a link in a specific position.
 @param Link *link : the link you want to set
 @param int position: the position where you want to set the link.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_set_link_at_position(Game *game, Link *link, int position);
+_STATUS game_set_link_at_position(Game *game, Link *link, int position);
 
 
 
@@ -254,9 +254,9 @@ Sets a player in a specific position.
 @param Player *player: the player you want to set
 @param int position: the position where you want to set the player.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS game_set_player_at_position(Game *game, Player *player, int position);
+_STATUS game_set_player_at_position(Game *game, Player *player, int position);
 
 
 

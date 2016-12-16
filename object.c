@@ -50,11 +50,11 @@ struct _Object{
 	Id location; /*!< Location of the object */
 	char desc[WORD_SIZE + 1];	/*!< Description of the object */
 	double price; /*!< Price of the object */
-	BOOL bought; /*!< Bought or not */
-	BOOL hidden; /*!< Hidden or not */
+	__BOOL bought; /*!< Bought or not */
+	__BOOL hidden; /*!< Hidden or not */
 	Id open; /*!< Identifier of the link which can be opened with this object */
-	BOOL light; /*!< Light or not */
-	BOOL on; /*!< On / Off */
+	__BOOL light; /*!< Light or not */
+	__BOOL on; /*!< On / Off */
 };
 
 
@@ -90,10 +90,10 @@ Object * object_create(Id id){
   desc(object)[0] = '\0';
 
   price(object) = 0.00;
-  bought(object) = FALSE;
-  hidden(object) = FALSE;
-  light(object) = FALSE;
-  on(object) = FALSE;
+  bought(object) = __FALSE;
+  hidden(object) = __FALSE;
+  light(object) = __FALSE;
+  on(object) = __FALSE;
 
   return object;
 }
@@ -106,17 +106,17 @@ Destroys an object.
 @date 02-10-2016 
 @author Alejandro Sanchez 
 @param Object *object: the object to destroy.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: __ERROR if the input is NULL and __OK otherwise.
 */
 
-STATUS object_destroy(Object *object){
+_STATUS object_destroy(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return ERROR;
+    return __ERROR;
   }
 
   free(object);    /* Eliminate the memory of the object */
  
-  return OK;
+  return __OK;
 }
 
 
@@ -147,20 +147,20 @@ Sets a name for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to rename.
 @param char *name: the new name you want for the object.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_name(Object *object, char *name){
+_STATUS object_set_name(Object *object, char *name){
   if(!object || !name){			/* Check that the inputs are not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the name and check if it hasworked */
   if(!strcpy(name(object), name)){	
-    return ERROR;
+    return __ERROR;
   }
 
-  return OK;
+  return __OK;
 }
 
 
@@ -191,18 +191,18 @@ Sets a location for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the location.
 @param Id location: the new location you want for the object.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_location(Object *object, Id location){
+_STATUS object_set_location(Object *object, Id location){
   if(!object){			/* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the location */
   location(object) = location;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -233,20 +233,20 @@ Sets the description of the object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to change its description.
 @param char *desc: the new description of the object.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_desc(Object *object, char *desc){
+_STATUS object_set_desc(Object *object, char *desc){
   if(!object || !desc){   /* Check if the inputs are not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the description and check if it has worked */
   if(!strcpy(desc(object), desc)){
-    return ERROR;
+    return __ERROR;
   }  
   
-  return OK;
+  return __OK;
 }
 
 
@@ -276,18 +276,18 @@ Sets a price for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the price.
 @param double price: the new price you want for the object.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_price(Object *object, double price){
+_STATUS object_set_price(Object *object, double price){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the price */
   price(object) = price;
 
-  return OK;
+  return __OK;
 }
 
 /**
@@ -314,19 +314,19 @@ Sets if an object has been bought or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its bought's field.
-@param BOOL bought: Choose if the object is bought or not.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@param __BOOL bought: Choose if the object is bought or not.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_bought(Object *object, BOOL bought){
+_STATUS object_set_bought(Object *object, __BOOL bought){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the bought */
   bought(object) = bought;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -336,12 +336,12 @@ Gets if an object is bought or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return BOOL: the bought field of the object or FALSE if the input is NULL.
+@return __BOOL: the bought field of the object or __FALSE if the input is NULL.
 */
 
-BOOL object_is_bought(Object *object){
+__BOOL object_is_bought(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return FALSE;
+    return __FALSE;
   }
 
   return bought(object);
@@ -354,18 +354,18 @@ Sets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its hidden's field.
-@param BOOL hidden: Choose if the object is hidden or not.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@param __BOOL hidden: Choose if the object is hidden or not.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
-STATUS object_set_hidden(Object *object, BOOL hidden){
+_STATUS object_set_hidden(Object *object, __BOOL hidden){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the hidden */
   hidden(object) = hidden;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -375,12 +375,12 @@ Gets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return BOOL: the hidden field of the object or FALSE if the input is NULL.
+@return __BOOL: the hidden field of the object or __FALSE if the input is NULL.
 */
 
-BOOL object_is_hidden(Object *object){
+__BOOL object_is_hidden(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return FALSE;
+    return __FALSE;
   }
 
   return hidden(object);
@@ -395,18 +395,18 @@ Sets if an object can open a link or not.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its open's field.
 @param Id open: the identifier of the link that the object can open.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_open(Object *object, Id open){
+_STATUS object_set_open(Object *object, Id open){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the open */
   open(object) = open;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -434,19 +434,19 @@ Sets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its light's field.
-@param BOOL light: Choose if the object can light or not.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@param __BOOL light: Choose if the object can light or not.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_light(Object *object, BOOL light){
+_STATUS object_set_light(Object *object, __BOOL light){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the light */
   light(object) = light;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -456,12 +456,12 @@ Gets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return BOOL: the light field of the object or FALSE if the input is NULL.
+@return __BOOL: the light field of the object or __FALSE if the input is NULL.
 */
 
-BOOL object_can_light(Object *object){
+__BOOL object_can_light(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return FALSE;
+    return __FALSE;
   }
 
   return light(object);
@@ -474,19 +474,19 @@ Sets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its on's field.
-@param BOOL on: Choose if the object is on or off.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@param __BOOL on: Choose if the object is on or off.
+@return _STATUS: __OK if you do the operation well and __ERROR in other cases.
 */
 
-STATUS object_set_on(Object *object, BOOL on){
+_STATUS object_set_on(Object *object, __BOOL on){
   if(!object){      /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Set the on */
   on(object) = on;
 
-  return OK;
+  return __OK;
 }
 
 
@@ -496,12 +496,12 @@ Gets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return BOOL: the on field of the object or FALSE if the input is NULL.
+@return __BOOL: the on field of the object or __FALSE if the input is NULL.
 */
 
-BOOL object_is_on(Object *object){
+__BOOL object_is_on(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return FALSE;
+    return __FALSE;
   }
 
   return on(object);
@@ -515,12 +515,12 @@ Prints the information of the object on the screen.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object the object you want to print.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: __ERROR if the input is NULL and __OK otherwise.
 */
 
-STATUS object_print(Object *object){
+_STATUS object_print(Object *object){
   if(!object){        /* Check that the input is not empty */
-    return ERROR;
+    return __ERROR;
   }
 
   /* Print the object fields */
@@ -528,31 +528,31 @@ STATUS object_print(Object *object){
     Description: %s; Price: %lf; Open: %ld", id(object), name(object), location(object),
     desc(object), price(object), open(object));
 
-  if(bought(object) == TRUE){
-    fprintf(stdout, "bought: TRUE;");
+  if(bought(object) == __TRUE){
+    fprintf(stdout, "bought: __TRUE;");
   } else{
-    fprintf(stdout, "bought: FALSE;");
+    fprintf(stdout, "bought: __FALSE;");
   }
 
-  if(hidden(object) == TRUE){
-    fprintf(stdout, "hidden: TRUE;");
+  if(hidden(object) == __TRUE){
+    fprintf(stdout, "hidden: __TRUE;");
   } else{
-    fprintf(stdout, "hidden: FALSE;");
+    fprintf(stdout, "hidden: __FALSE;");
   }
 
-  if(light(object) == TRUE){
-    fprintf(stdout, "light: TRUE;");
+  if(light(object) == __TRUE){
+    fprintf(stdout, "light: __TRUE;");
   } else{
-    fprintf(stdout, "light: FALSE;");
+    fprintf(stdout, "light: __FALSE;");
   }
 
-  if(on(object) == TRUE){
-    fprintf(stdout, "on: TRUE)\n");
+  if(on(object) == __TRUE){
+    fprintf(stdout, "on: __TRUE)\n");
   } else{
-    fprintf(stdout, "on: FALSE)\n");
+    fprintf(stdout, "on: __FALSE)\n");
   }
 
-  return OK;
+  return __OK;
 }
 
 

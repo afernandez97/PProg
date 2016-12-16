@@ -80,9 +80,9 @@ Inventory *inventory_create(){
   	Inventory *: the inventory to destroy.
 
    @return
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: ERROR if the input is NULL and OK otherwise.
 */
-STATUS inventory_destroy(Inventory *inv){
+_STATUS inventory_destroy(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
 		return ERROR;
 	}
@@ -110,9 +110,9 @@ STATUS inventory_destroy(Inventory *inv){
    @param Id object: the new object you want for the inventory.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS inventory_add_object(Inventory *inv, Id object){
+_STATUS inventory_add_object(Inventory *inv, Id object){
 	/* Check that the inputs are not empty */
   if(!inv || object == NO_ID || inventory_is_full(inv)){  
   	return ERROR;
@@ -140,9 +140,9 @@ STATUS inventory_add_object(Inventory *inv, Id object){
     from the inventory.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
    */
-STATUS inventory_del_object(Inventory *inv, Id object){
+_STATUS inventory_del_object(Inventory *inv, Id object){
   if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE)){  /* Check that the inputs are not empty */
     return ERROR;
   }
@@ -169,9 +169,9 @@ STATUS inventory_del_object(Inventory *inv, Id object){
    @param  Set *bag: the bag you want to set.
    
    @return
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: OK if you do the operation well and ERROR in other cases.
 */
-STATUS inventory_set_bag(Inventory *inv, Set *bag){
+_STATUS inventory_set_bag(Inventory *inv, Set *bag){
   /* Check that the inputs are not empty or the bag contains more 
   objects than the maximum of the inventory */
 	if(!inv || !bag || set_get_count(bag) > max(inv)){
@@ -345,9 +345,9 @@ BOOL inventory_is_full(Inventory *inv){
    @param 
 	  Inventory *inv: the inventory you want to print.
    @return 
-	  STATUS: ERROR if the input is NULL and OK otherwise.
+	  _STATUS: ERROR if the input is NULL and OK otherwise.
    */
-STATUS inventory_print(Inventory *inv){
+_STATUS inventory_print(Inventory *inv){
   if(!inv){      /* Check that the input is not empty */
     return ERROR;
   }

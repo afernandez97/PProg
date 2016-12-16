@@ -79,7 +79,7 @@ int main(int argc, char **argv){
    */
 void test1_player_destroy(){
   Player *player = NULL;
-	FUNCTION_IS_CORRECT(player_destroy(player) == ERROR);
+	FUNCTION_IS_CORRECT(player_destroy(player) == _ERROR);
   return;
 }
 
@@ -119,7 +119,7 @@ void test1_player_get_id(){
 void test1_player_set_name(){
 	Player *player = NULL;
   char name[WORD_SIZE] = "Adri";
-  FUNCTION_IS_CORRECT(player_set_name(player, name) == ERROR);
+  FUNCTION_IS_CORRECT(player_set_name(player, name) == _ERROR);
   return;
 
 }
@@ -161,7 +161,7 @@ void test1_player_get_name(){
 void test1_player_set_location(){
 	Player *player = NULL;
   Id idlocation = 345;
-  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == ERROR);
+  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == _ERROR);
   return;
 }
 
@@ -202,7 +202,7 @@ void test1_player_get_location(){
 void test1_player_add_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
-  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == _ERROR);
   return;
 }
 
@@ -222,7 +222,7 @@ void test1_player_add_object(){
 void test1_player_del_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
-  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == _ERROR);
   return;
 }
 
@@ -242,7 +242,7 @@ void test1_player_del_object(){
 void test1_player_has_object(){
 	Player *player = NULL;
   Id idobj1 = 1;
-  FUNCTION_IS_CORRECT(player_has_object(player, idobj1) == FALSE);
+  FUNCTION_IS_CORRECT(player_has_object(player, idobj1) == _FALSE);
   return;
 }
 
@@ -261,7 +261,7 @@ void test1_player_has_object(){
    */
 void test1_player_print(){
 	Player *player = NULL;
-  FUNCTION_IS_CORRECT(player_print(player) == ERROR);
+  FUNCTION_IS_CORRECT(player_print(player) == _ERROR);
   return;
 }
 
@@ -303,7 +303,7 @@ void test2_player_destroy(){
   Player *player = NULL;
   Id idplayer = 3;
   player = player_create(idplayer);
-	FUNCTION_IS_CORRECT(player_destroy(player) == OK);
+	FUNCTION_IS_CORRECT(player_destroy(player) == _OK);
   return;
 }
 
@@ -350,7 +350,7 @@ void test2_player_set_name(){
   char name[WORD_SIZE] = "Adri";
   Id idplayer = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_set_name(player, name) == OK);
+  FUNCTION_IS_CORRECT(player_set_name(player, name) == _OK);
   player_destroy(player);
   return;
 
@@ -400,7 +400,7 @@ void test2_player_set_location(){
   Id idlocation = 345;
   Id idplayer = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == OK);
+  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == _OK);
   player_destroy(player);
   return;
 }
@@ -425,7 +425,7 @@ void test3_player_set_location(){
   Id idlocation = NO_ID;
   Id idplayer = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == ERROR);
+  FUNCTION_IS_CORRECT(player_set_location(player, idlocation) == _ERROR);
   player_destroy(player);
   return;
 }
@@ -472,7 +472,7 @@ void test2_player_add_object(){
   Id idobj1 = 1;
   Id idplayer = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == OK);
+  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == _OK);
   player_destroy(player);
   return;
 }
@@ -497,7 +497,7 @@ void test3_player_add_object(){
   Id idobj1 = NO_ID;
   Id idplayer = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == _ERROR);
   player_destroy(player);
   return;
 }
@@ -522,7 +522,7 @@ void test2_player_del_object(){
   Id idplayer = 3;
   player = player_create(idplayer);
   player_add_object(player, idobj1);
-  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == OK);
+  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == _OK);
   player_destroy(player);
   return;
 }
@@ -548,7 +548,7 @@ void test3_player_del_object(){
   Id idplayer = NO_ID;
   player = player_create(idplayer);
   player_add_object(player, idobj1);
-  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == _ERROR);
   player_destroy(player);
   return;
 }
@@ -574,7 +574,7 @@ void test4_player_del_object(){
   player = player_create(idplayer);
   player_add_object(player, idobj1);
   player_del_object(player, idobj1);
-  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_del_object(player, idobj1) == _ERROR);
   player_destroy(player);
   return;
 }
@@ -598,7 +598,7 @@ void test4_player_add_object(){
   Id idplayer = 3;
   player = player_create(idplayer);
   player_add_object(player, idobj1);
-  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == ERROR);
+  FUNCTION_IS_CORRECT(player_add_object(player, idobj1) == _ERROR);
   player_destroy(player);
   return;
 }
@@ -624,7 +624,7 @@ void test2_player_print(){
   player = player_create(idplayer);
   player_add_object(player, idobj1);
   player_add_object(player, idobj2);
-  FUNCTION_IS_CORRECT(player_print(player) == OK);
+  FUNCTION_IS_CORRECT(player_print(player) == _OK);
   player_destroy(player);
   return;
 }
@@ -649,7 +649,7 @@ void test2_player_has_object(){
   Id idplayer = 3;
   player = player_create(idplayer);
   player_add_object(player, idobj1);
-  FUNCTION_IS_CORRECT(player_has_object(player,idobj1) == TRUE);
+  FUNCTION_IS_CORRECT(player_has_object(player,idobj1) == _TRUE);
   player_destroy(player);
   return;
 }
@@ -673,7 +673,7 @@ void test3_player_has_object(){
   Id idplayer = 3;
   Id idobj1 = 3;
   player = player_create(idplayer);
-  FUNCTION_IS_CORRECT(player_has_object(player,idobj1) == FALSE);
+  FUNCTION_IS_CORRECT(player_has_object(player,idobj1) == _FALSE);
   player_destroy(player);
   return;
 }
