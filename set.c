@@ -212,7 +212,7 @@ int set_get_count(Set *set){
    @param Set *set: the set to check.
                  
     
-   @return _BOOL: _TRUE is the set is empty or __FALSE if not.
+   @return _BOOL: _TRUE is the set is empty or _FALSE if not.
    */
 _BOOL set_is_empty(Set *set){
   /* Check if the input is empty or the number of objects is 0 */
@@ -220,7 +220,7 @@ _BOOL set_is_empty(Set *set){
 	  return _TRUE;
   } 
 
-  return __FALSE;
+  return _FALSE;
 }
 
 
@@ -237,13 +237,13 @@ _BOOL set_is_empty(Set *set){
    @param Set *set: the set to check.
                  
     
-   @return _BOOL: _TRUE is the set is full or __FALSE if not.
+   @return _BOOL: _TRUE is the set is full or _FALSE if not.
    */
 _BOOL set_is_full(Set *set){
   /* Check if the input is empty or the number of objects is lower 
   than the maximum number of objects that can contain the set */
   if(!set || count(set) < MAX_ID){
-    return __FALSE;
+    return _FALSE;
   } 
 
   return _TRUE;
@@ -290,14 +290,14 @@ Id set_get_object_at_position(Set *set, int position){
    @param Set *set: the set where you want to find the object.
    @param Id object: the id of the object you want to know if it is in the set.
                   
-    @return _BOOL: _TRUE if the object is in the set and __FALSE in other cases. 
+    @return _BOOL: _TRUE if the object is in the set and _FALSE in other cases. 
    */
 _BOOL set_is_object(Set *set, Id object){
   int i, flag = 0;  /* Initialize the flag */
 
   /* Check that the inputs are not empty or the set is empty */
   if(!set || object == NO_ID || set_is_empty(set) == _TRUE){
-    return __FALSE;
+    return _FALSE;
   }
 
   /* Look for the object in the set */
@@ -312,7 +312,7 @@ _BOOL set_is_object(Set *set, Id object){
     return _TRUE;
   }  
   
-  return __FALSE;
+  return _FALSE;
 }
 
 

@@ -43,6 +43,8 @@ Dec. 3, 2016 Version 6.0
 #define GAME_H
 
 #include "command.h"
+#include "dialogue.h"
+#include "game_rules.h"
 #include "space.h"
 #include "object.h"
 #include "player.h"
@@ -82,19 +84,18 @@ Game* game_init(Id die);
 
 
 /**
-@date 05-11-2016 
-@author Guillermo Rodriguez
+@date 11-12-2016 
+@author Alejandro Sanchez
 
 @brief game_init_from_file
 Initializes a game from two files which contain the spaces and objects.
 
-@param char *filename1: the file to concatenate the spaces,links and objects
-@param Id player: the identifier of the player of the game.
+@param char *path: the path of the different files that contain the game.
 @param Id die: the identifier of the die of the game.
 
 @return Game *game: the game initialized.
 */
-Game * game_init_from_file(char *filename1,Id player, Id die);
+Game * game_init_from_file(char *path, Id die);
 
 
 /**
@@ -106,25 +107,26 @@ Destroys a game.
 
 @param Game *game: the game to destroy.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_destroy(Game *game);
 
 
 
 /**
-@date 05-11-2016 
-@author Ricardo Riol
+@date 16-12-2016 
+@author Alejandro Sanchez
 
 @brief game_update
 Updates a game.
 
 @param Game *game: the game to update.
 @param Command *cmd: the command typed by the user.
+@param int player: number of the player.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-_STATUS game_update(Game *game, Command *cmd);
+_STATUS game_update(Game *game, Command *command, int player);
 
 
 
@@ -155,7 +157,7 @@ Sets a space in a specific position.
 @param Space *space : the space you want to set
 @param int position: the position where you want to set the space.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_space_at_position(Game *game, Space *space, int position);
 
@@ -188,7 +190,7 @@ Sets an object in a specific position.
 @param Object *object : the object you want to set
 @param int position: the position where you want to set the object.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_object_at_position(Game *game, Object *object, int position);
 
@@ -221,7 +223,7 @@ Sets a link in a specific position.
 @param Link *link : the link you want to set
 @param int position: the position where you want to set the link.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_link_at_position(Game *game, Link *link, int position);
 
@@ -254,7 +256,7 @@ Sets a player in a specific position.
 @param Player *player: the player you want to set
 @param int position: the position where you want to set the player.
 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_player_at_position(Game *game, Player *player, int position);
 
@@ -285,9 +287,9 @@ Ends the game.
 
 @param Game *game: the game to end.
 
-@return BOOL: FALSE.
+@return _BOOL: _FALSE.
 */
-BOOL game_is_over(Game *game);
+_BOOL game_is_over(Game *game);
 
 
 
@@ -303,38 +305,6 @@ Prints the data of the game.
 @return
 */
 void game_print_data(Game *game);
-
-
-
-/**
-@date 02-11-2016 
-@author Alejandro Sanchez
-
-@brief game_print_objects
-Prints the objects of the game (<name>:<location>).
-
-@param Game *game: the game to print its objects.
-@param Space *space: the space where you want to print the objects.
-
-@return
-*/
-void game_print_objects(Game *game, Space *space);
-
-
-
-/**
-Function: 
-@date 02-11-2016 
-@author Alejandro Sanchez
-
-@brief game_print_screen
-Prints the screen of the game.
-
-@param Game *game: the game to print its screen.
-
-@return
-*/
-void game_print_screen(Game *game);
 
 
 

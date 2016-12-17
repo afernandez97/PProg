@@ -47,7 +47,7 @@ Saves the status of a game.
 
 @param Game *game: the game you want to save its status.
 @param char *path: the path of the different files that will contain the status of the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_save(Game *game, char *path){
   char f1[WORD_SIZE]="";
@@ -57,7 +57,7 @@ _STATUS game_save(Game *game, char *path){
 
   /* Check that the inputs are not empty */ 
   if(!game || !path){  
-    return ERROR;
+    return _ERROR;
   }
 
   /* Concatenate the rest of the name of each file */
@@ -71,26 +71,26 @@ _STATUS game_save(Game *game, char *path){
   strcat(f4,"_ply.dat");
 
   /* Save the links from the file and check if it has worked */
-  if(game_save_links(game, f1) == ERROR){
-    return ERROR;
+  if(game_save_links(game, f1) == _ERROR){
+    return _ERROR;
   } 
 
   /* Save the spaces from the file and check if it has worked */
-  if(game_save_spaces(game, f2) == ERROR){ 
-    return ERROR;
+  if(game_save_spaces(game, f2) == _ERROR){ 
+    return _ERROR;
   }
 
   /* Save the objects from the file and check if it has worked */
-  if(game_save_objects(game, f3) == ERROR){
-    return ERROR;
+  if(game_save_objects(game, f3) == _ERROR){
+    return _ERROR;
   } 
 
   /* Save the players from the file and check if it has worked */
-  if(game_save_players(game, f4) == ERROR){
-    return ERROR;
+  if(game_save_players(game, f4) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -103,7 +103,7 @@ Saves the links of a game.
 
 @param Game *game: the game you want to save its links.
 @param char *filename: the filename that will contain the links of the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_save_links(Game *game, char *filename){
   FILE *f_lnk = NULL;
@@ -112,15 +112,15 @@ _STATUS game_save_links(Game *game, char *filename){
   STATE state;
   Link *link = NULL;
   int i = 0, flag = 0;
-  _STATUS status = OK;
+  _STATUS status = _OK;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
   
   f_lnk = fopen(filename, "w");
   if(!f_lnk){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print each line of the file until finding an empty link */
@@ -151,7 +151,7 @@ _STATUS game_save_links(Game *game, char *filename){
   }
 
   if(ferror(f_lnk)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(f_lnk);
@@ -169,7 +169,7 @@ Saves the spaces of a game.
 
 @param Game *game: the game you want to save its spaces.
 @param char *filename: the filename that will contain the spaces of the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_save_spaces(Game *game, char *filename){
   FILE *f_spc = NULL;
@@ -177,18 +177,18 @@ _STATUS game_save_spaces(Game *game, char *filename){
   char gdesc[WORD_SIZE] = "";
   char desc[WORD_SIZE] = "";
   Id id, north, east, south, west, up, down;
-  BOOL illumination;
+  _BOOL illumination;
   Space *space = NULL;
   int i = 0, flag = 0;
-  _STATUS status = OK;
+  _STATUS status = _OK;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   f_spc = fopen(filename, "w");
   if(!f_spc){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print each line of the file until finding an empty space */
@@ -229,7 +229,7 @@ _STATUS game_save_spaces(Game *game, char *filename){
   }
 
   if(ferror(f_spc)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(f_spc);
@@ -247,7 +247,7 @@ Saves the objects of a game.
 
 @param Game *game: the game you want to save its objects.
 @param char *filename: the filename that will contain the objects of the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_save_objects(Game *game, char *filename){
   FILE *f_obj = NULL;
@@ -255,18 +255,18 @@ _STATUS game_save_objects(Game *game, char *filename){
   char desc[WORD_SIZE] = "";
   Id id, location, open;
   double price;
-  BOOL bought, hidden, light, on;
+  _BOOL bought, hidden, light, on;
   Object *object = NULL;
   int i = 0, flag = 0;
-  _STATUS status = OK;
+  _STATUS status = _OK;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   f_obj = fopen(filename, "w");
   if(!f_obj){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print each line of the file until finding an empty object */
@@ -314,7 +314,7 @@ _STATUS game_save_objects(Game *game, char *filename){
   }
 
   if(ferror(f_obj)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(f_obj);
@@ -332,7 +332,7 @@ Saves the players of a game.
 
 @param Game *game: the game you want to save its players.
 @param char *filename: the filename that will contain the players of the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_save_players(Game *game, char *filename){
   FILE *f_ply = NULL;
@@ -341,15 +341,15 @@ _STATUS game_save_players(Game *game, char *filename){
   Player *player = NULL;
   int i = 0, flag = 0, j, count;
   char objects[WORD_SIZE] = "";
-  _STATUS status = OK;
+  _STATUS status = _OK;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   f_ply = fopen(filename, "w");
   if(!f_ply){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print each line of the file until finding an empty player */
@@ -385,7 +385,7 @@ _STATUS game_save_players(Game *game, char *filename){
   }
 
   if(ferror(f_ply)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(f_ply);
@@ -407,7 +407,7 @@ Loads a previous save of a game.
 
 @param Game *game: the game where you want to load the previous save of it.
 @param char *path: the path of the different files that contain the game.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load(Game *game, char *path){
   char f1[WORD_SIZE]="";
@@ -417,7 +417,7 @@ _STATUS game_load(Game *game, char *path){
 
   /* Check that the inputs are not empty */ 
   if(!game || !path){  
-    return ERROR;
+    return _ERROR;
   }
 
   /* Concatenate the rest of the name of each file */
@@ -431,26 +431,26 @@ _STATUS game_load(Game *game, char *path){
   strcat(f4,"_ply.dat");
 
   /* Load the links from the file and check if it has worked */
-  if(game_load_links(game, f1) == ERROR){
-    return ERROR;
+  if(game_load_links(game, f1) == _ERROR){
+    return _ERROR;
   } 
 
   /* Load the spaces from the file and check if it has worked */
-  if(game_load_spaces(game, f2) == ERROR){ 
-    return ERROR;
+  if(game_load_spaces(game, f2) == _ERROR){ 
+    return _ERROR;
   }
 
   /* Load the objects from the file and check if it has worked */
-  if(game_load_objects(game, f3) == ERROR){
-    return ERROR;
+  if(game_load_objects(game, f3) == _ERROR){
+    return _ERROR;
   } 
 
   /* Load the players from the file and check if it has worked */
-  if(game_load_players(game, f4) == ERROR){
-    return ERROR;
+  if(game_load_players(game, f4) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -463,13 +463,13 @@ Adds an link to a game.
 
 @param Game *game: the game where you add the link.
 @param Link *link: the link you want to add to the game.  
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_add_link(Game *game, Link *link){
   int i = 0;  /* Initialize the counter */
 
   if(!game || !link){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Increase the counter until finding an empty link */
@@ -479,15 +479,15 @@ _STATUS game_add_link(Game *game, Link *link){
 
   /* Check if every link is not empty */
   if(i >= MAX_LINKS){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the new link */
-  if(game_set_link_at_position(game, link, i) == ERROR){
-    return ERROR;
+  if(game_set_link_at_position(game, link, i) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -501,7 +501,7 @@ Loads the links from a file.
 
 @param Game *game: the game where you want to load the links.
 @param char *filename: the file that contains the links. 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load_links(Game *game, char *filename){
   FILE *file = NULL;
@@ -513,16 +513,16 @@ _STATUS game_load_links(Game *game, char *filename){
   Id space_id2 = NO_ID;
   STATE link_state = NO_STATE;
   Link *link = NULL;
-  _STATUS status = OK;
+  _STATUS status = _OK;
 
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
   
   file = fopen(filename, "r");  /* Open the file where the links are */
   if(!file){        
-    return ERROR;
+    return _ERROR;
   }
 
   /* Read each line of the file and get the id, the name, the spaces and the state of the links */
@@ -564,7 +564,7 @@ _STATUS game_load_links(Game *game, char *filename){
   } /* while */
   
   if(ferror(file)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(file);
@@ -582,13 +582,13 @@ Add a space to a game.
 
 @param Game *game: the game where you add the space.
 @param Space *space: the space you want to add to the game.  
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_add_space(Game *game, Space *space){
   int i = 0;  /* Initialize the counter */
 
   if(!game || !space){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Increase the counter until finding an empty space */
@@ -598,15 +598,15 @@ _STATUS game_add_space(Game *game, Space *space){
 
   /* Check if every space is not empty */
   if(i >= MAX_SPACES){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the new space */
-  if(game_set_space_at_position(game, space, i) == ERROR){
-    return ERROR;
+  if(game_set_space_at_position(game, space, i) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -620,7 +620,7 @@ Loads the spaces from a file.
 
 @param Game *game: the game where you want to load the spaces.
 @param char *filename: the file that contains the spaces.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load_spaces(Game *game, char *filename){
   FILE *file = NULL;
@@ -631,18 +631,18 @@ _STATUS game_load_spaces(Game *game, char *filename){
   char *toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Id up = NO_ID, down = NO_ID;
-  BOOL illumination = FALSE;
+  _BOOL illumination = _FALSE;
   Space *space = NULL;
-  _STATUS status = OK;
+  _STATUS status = _OK;
   int flag = 0;
   
   if(!game || !filename){ /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
   
   file = fopen(filename, "r");   /* Open the file where the spaces are */
   if(!file){
-    return ERROR;
+    return _ERROR;
   }
   
   /* Read each line of the file and get the id and the links of each space */
@@ -713,7 +713,7 @@ _STATUS game_load_spaces(Game *game, char *filename){
   } /* while */
   
   if(ferror(file)){ /* Test the error indicator for the file */ 
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(file); /* Close the file */
@@ -732,13 +732,13 @@ Adds an object to a game.
 
 @param Game *game: the game where you add the object.
 @param Object *object: the object you want to add to the game.  
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_add_object(Game *game, Object *object){
   int i = 0;  /* Initialize the counter */
 
   if(!game || !object){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Increase the counter until finding an empty object */
@@ -748,15 +748,15 @@ _STATUS game_add_object(Game *game, Object *object){
 
   /* Check if every object is not empty */
   if(i >= MAX_OBJECTS){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the new object */
-  if(game_set_object_at_position(game, object, i) == ERROR){
-    return ERROR;
+  if(game_set_object_at_position(game, object, i) == _ERROR){
+    return _ERROR;
 	}
 
-  return OK;
+  return _OK;
 }
 
 
@@ -770,7 +770,7 @@ Loads the objects from a file.
 
 @param Game *game: the game where you want to load the objects.
 @param char *filename: the file that contains the spaces.   
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load_objects(Game *game, char *filename){
   FILE *file = NULL;
@@ -782,17 +782,17 @@ _STATUS game_load_objects(Game *game, char *filename){
   Id id = NO_ID, location = NO_ID, open = NO_ID;
   Object *object = NULL;
   Space *space = NULL;
-  _STATUS status = OK;
-	BOOL bought = FALSE, hidden = FALSE, light = FALSE, on = FALSE;
+  _STATUS status = _OK;
+	_BOOL bought = _FALSE, hidden = _FALSE, light = _FALSE, on = _FALSE;
 	
   
   if(!game || !filename){ /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
   
   file = fopen(filename, "r");   /* Open the file where the objects are */
   if(!file){
-    return ERROR;
+    return _ERROR;
   }
   
   /* Read each line of the file and get the id, the name and the location of the objects */
@@ -869,7 +869,7 @@ _STATUS game_load_objects(Game *game, char *filename){
   } /* while */
   
   if(ferror(file)){ /* Test the error indicator for the file */ 
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(file); /* Close the file */
@@ -888,13 +888,13 @@ Adds an player to a game.
 
 @param Game *game: the game where you add the player.
 @param Player *player: the player you want to add to the game.  
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_add_player(Game *game, Player *player){
   int i = 0;  /* Initialize the counter */
 
   if(!game || !player){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Increase the counter until finding an empty player */
@@ -904,15 +904,15 @@ _STATUS game_add_player(Game *game, Player *player){
 
   /* Check if every player is not empty */
   if(i >= MAX_PLAYERS){
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the new player */
-  if(game_set_player_at_position(game, player, i) == ERROR){
-    return ERROR;
+  if(game_set_player_at_position(game, player, i) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -925,7 +925,7 @@ Loads players from a file.
 
 @param Game *game: the game where you want to load the players.
 @param char *filename: the file that contains the players. 
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load_players(Game *game, char *filename){
   FILE *file = NULL;
@@ -935,12 +935,12 @@ _STATUS game_load_players(Game *game, char *filename){
   char obj[WORD_SIZE] = "";
   Id id = NO_ID, location = NO_ID, objects[MAX_BAG];
   Player *player = NULL;
-  _STATUS status = OK;
+  _STATUS status = _OK;
   int i;
 
 
   if(!game || !filename){    /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   for(i=0; i<MAX_BAG; i++){
@@ -949,7 +949,7 @@ _STATUS game_load_players(Game *game, char *filename){
   
   file = fopen(filename, "r");  /* Open the file where the links are */
   if(!file){        
-    return ERROR;
+    return _ERROR;
   }
 
   /* Read each line of the file and get the id, the name, the spaces and the state of the links */
@@ -995,7 +995,7 @@ _STATUS game_load_players(Game *game, char *filename){
   } /* while */
   
   if(ferror(file)){
-    status = ERROR;
+    status = _ERROR;
   }
   
   fclose(file);

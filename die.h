@@ -55,7 +55,7 @@ Die * die_create(Id id);
     
    @param Die *die: the die to destroy.
     
-   @return _STATUS: ERROR if the input is NULL and OK otherwise.
+   @return _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
 _STATUS die_destroy(Die *die);
 
@@ -71,7 +71,7 @@ _STATUS die_destroy(Die *die);
     
    @param Die *die: the die to roll.
     
-   @return _STATUS: OK if you do the operation well and ERROR in other cases.
+   @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS die_roll(Die *die);
 
@@ -107,7 +107,7 @@ int die_get_value(Die*die);
    @param Die *die: the die to print.
 				
     
-   @return _STATUS: ERROR if the input is NULL and OK otherwise.
+   @return _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
 _STATUS die_print(Die*die);
 

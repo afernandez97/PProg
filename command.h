@@ -53,8 +53,8 @@ typedef enum enum_Command{
   TURNON,  /*!< Command to turn on an object */
   TURNOFF, /*!< Command to turn off an object*/
   OPENL, 		/*!< Command to open a link with an object */
-	LOAD,	/*!< Command to load a save of a previous game */
-	SAVE /*!< Command to save a game */
+  LOAD, /*!< Command to load a save of a previous game */
+  SAVE /*!< Command to save a game */
 } T_Command;
 
 /*!< Data structures definition */
@@ -102,10 +102,10 @@ Destroys a command.
 @date 30-10-2016 
 @author Alejandro Sanchez
 @param Command *command: the command to destroy.
-@return __STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
 
-__STATUS command_destroy(Command *command);
+_STATUS command_destroy(Command *command);
 
 /**
 @brief command_get_cmd

@@ -88,7 +88,7 @@ graphic_engine.o: graphic_engine.c graphic_engine.h
 	gcc $(CCFLAGS) graphic_engine.c
 
 clean: 
-	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 
+	rm -rf *.o *.tar.gz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 
 
 dist: 
-	tar -cvzf I3-cod_JuegoOcaPlus.tgz *c *h Makefile *dat html latex Doxyfile
+	tar -cvzf I3-cod_JuegoOcaPlus.tar.gz *c *h Makefile *dat #html latex Doxyfile

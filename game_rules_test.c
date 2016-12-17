@@ -120,7 +120,7 @@ void test1_rule_destroy(){
 	Id id = 1;
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_destroy(rule) == OK);
+	FUNCTION_IS_CORRECT(rule_destroy(rule) == _OK);
 	return;
 }
 
@@ -138,7 +138,7 @@ Tests if you can destroy an uninitialised rule.
 void test2_rule_destroy(){
 	Rule * rule = NULL;
 
-	FUNCTION_IS_CORRECT(rule_destroy(rule) == ERROR);
+	FUNCTION_IS_CORRECT(rule_destroy(rule) == _ERROR);
 	return;
 }
 
@@ -195,7 +195,7 @@ void test1_rule_set_question(){
 	char question[WORD_SIZE] = "question";
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == OK);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == _OK);
 	rule_destroy(rule);
 	return;
 }
@@ -215,7 +215,7 @@ void test2_rule_set_question(){
 	Rule * rule = NULL;
 	char question[WORD_SIZE] = "question";
 
-	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, question) == _ERROR);
 	return;
 }
 
@@ -238,7 +238,7 @@ void test3_rule_set_question(){
 	char *noName = NULL;
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_question(rule, noName) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_question(rule, noName) == _ERROR);
 	rule_destroy(rule);
 	return;
 }
@@ -302,7 +302,7 @@ void test1_rule_set_choice1(){
 	char choice1[WORD_SIZE] = "choice1";
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_choice1(rule, choice1) == OK);
+	FUNCTION_IS_CORRECT(rule_set_choice1(rule, choice1) == _OK);
 	rule_destroy(rule);
 	return;
 }
@@ -322,7 +322,7 @@ void test2_rule_set_choice1(){
 	Rule * rule = NULL;
 	char choice1[WORD_SIZE] = "choice1";
 
-	FUNCTION_IS_CORRECT(rule_set_choice1(rule, choice1) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_choice1(rule, choice1) == _ERROR);
 	return;
 }
 
@@ -345,7 +345,7 @@ void test3_rule_set_choice1(){
 	char *noName = NULL;
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_choice1(rule, noName) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_choice1(rule, noName) == _ERROR);
 	rule_destroy(rule);
 	return;
 }
@@ -410,7 +410,7 @@ void test1_rule_set_choice2(){
 	char choice2[WORD_SIZE] = "choice2";
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_choice2(rule, choice2) == OK);
+	FUNCTION_IS_CORRECT(rule_set_choice2(rule, choice2) == _OK);
 	rule_destroy(rule);
 	return;
 }
@@ -430,7 +430,7 @@ void test2_rule_set_choice2(){
 	Rule * rule = NULL;
 	char choice2[WORD_SIZE] = "choice2";
 
-	FUNCTION_IS_CORRECT(rule_set_choice2(rule, choice2) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_choice2(rule, choice2) == _ERROR);
 	return;
 }
 
@@ -453,7 +453,7 @@ void test3_rule_set_choice1(){
 	char *noName = NULL;
 
 	rule = rule_create(id);
-	FUNCTION_IS_CORRECT(rule_set_choice2(rule, noName) == ERROR);
+	FUNCTION_IS_CORRECT(rule_set_choice2(rule, noName) == _ERROR);
 	rule_destroy(rule);
 	return;
 }
@@ -524,7 +524,7 @@ void test1_rule_print(){
 	rule = rule_create(id);
 	rule_set_question(rule, question);
 	rule_set_choice1(rule, choice1);
-	FUNCTION_IS_CORRECT(rule_print(rule) == OK);
+	FUNCTION_IS_CORRECT(rule_print(rule) == _OK);
 	rule_destroy(rule);
 	return;
 }
@@ -542,7 +542,7 @@ Tests if you can print an uninitialised rule.
 void test2_rule_print(){
 	Rule * rule = NULL;
 
-	FUNCTION_IS_CORRECT(rule_print(rule) == ERROR);
+	FUNCTION_IS_CORRECT(rule_print(rule) == _ERROR);
 	return;
 }
 

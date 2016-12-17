@@ -66,16 +66,16 @@ This function destroys a variable of type Link.
 @date 04-11-2016
 @author Adrián Fernández
 @param Link* link: Pointer to the variable that is going to destroy.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 _STATUS link_destroy(Link* link){
 	if(link==NULL){     /* Check that the input is not empty */ 
-		return ERROR;
+		return _ERROR;
 	}
 
 	free(link);  /*Destroy the link's memory*/
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -101,18 +101,18 @@ This function sets the name field of a Link.
 @author Adrián Fernández
 @param Link* link: Pointer to the Link whose name we want to set.
 @param char* name: The name we want to set.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 _STATUS link_set_name(Link* link, char* name){
 	if(link==NULL || name==NULL){  /* Check that the input is not empty */ 
-		return ERROR;
+		return _ERROR;
 	}
      /* Copies the input to the field name*/
 	if(strcpy(name(link), name)==NULL){
-		return ERROR;
+		return _ERROR;
 	}
 	
-	return OK;
+	return _OK;
 }
 
 /**
@@ -138,16 +138,16 @@ Sets the Id of a Link's first Space.
 @author Alejandro Sanchez
 @param Link *link: the link whose first space you want to set.
 @param Id space1: the id of the space you want to be link's first space.
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS link_set_space1(Link *link, Id space1){
 	if(!link || space1 == NO_ID){  
-		return ERROR;      /* Check that the input is not empty */ 
+		return _ERROR;      /* Check that the input is not empty */ 
 	}
 /* Sets the space conected with the link*/	
 	space1(link) = space1;
 	
-	return OK;
+	return _OK;
 }
 
 /**
@@ -174,17 +174,17 @@ Sets the Id of a Link's second Space.
 @author Alejandro Sanchez
 @param Link *link: the link whose second space you want to set.
 @param Id space2: the id of the space you want to be link's second space.
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS link_set_space2(Link *link, Id space2){
 	if(!link || space2 == NO_ID){  /* Check that the input is not empty */ 
-		return ERROR;
+		return _ERROR;
 	}
 	
 	/* Sets the space conected with the link*/
 	space2(link) = space2;
 	
-	return OK;
+	return _OK;
 }
 
 
@@ -211,17 +211,17 @@ This function sets the state field of a Link.
 @author Adrián Fernández
 @param Link* link: Pointer to the Link whose state we want to set.
 @param STATE state: The state we want to set.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 _STATUS link_set_state(Link* link, STATE state){
 	if(link==NULL || state == NO_STATE){   /* Check that the input is not empty */ 
-		return ERROR;
+		return _ERROR;
 	}
 
   /*Sets the link's state*/
 	state(link) = state;
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -249,19 +249,19 @@ Checks if the link is open or not.
 @date 13-11-2016 
 @author Alejandro Sanchez
 @param Link *link: the link to check.
-@return BOOL: TRUE is the link is open or FALSE if not.
+@return _BOOL: _TRUE is the link is open or _FALSE if not.
 */
 
-BOOL link_is_open(Link *link){
+_BOOL link_is_open(Link *link){
 	if(!link){  /* Check that the input is not empty */ 
-		return FALSE;
+		return _FALSE;
 	}
   /*Checks if the link is opened*/
 	if(state(link) == OPEN){
-		return TRUE;
+		return _TRUE;
 	}
 
-	return FALSE;
+	return _FALSE;
 }
 
 
@@ -277,7 +277,7 @@ This function prints Links.
 
 _STATUS link_print(Link* link){
 	if (!link){  /* Check that the input is not empty */ 
-		return ERROR;
+		return _ERROR;
 	}
   /*Prints all link's fields*/
 	if(state(link)==NO_STATE){
@@ -287,5 +287,5 @@ _STATUS link_print(Link* link){
 	} else if(state(link)==CLOSED){
 		fprintf (stdout, "Link: %ld, %s, %ld, %ld, CLOSED", id(link), name(link), space1(link), space2(link));
 	}
-	return OK;
+	return _OK;
 }	

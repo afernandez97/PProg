@@ -63,7 +63,7 @@ Player * player_create(Id id);
    @param 
 	  Player *player: the player to destroy.
    @return 
-	  _STATUS: __ERROR if the input is NULL and _OK otherwise.
+	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
 _STATUS player_destroy(Player *player);
 
@@ -97,7 +97,7 @@ Id player_get_id(Player *player);
    @param char *name: the new name you want for the player.
   
    @return 
-    _STATUS: _OK if you do the operation well and __ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS player_set_name(Player *player, char *name);
 
@@ -133,7 +133,7 @@ const char * player_get_name(Player *player);
    @param Id location: the new location you want for the player.
   
    @return 
-    Status: _OK if you do the operation well and __ERROR in other cases.
+    Status: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS player_set_location(Player *player, Id location);
 
@@ -168,7 +168,7 @@ Id player_get_location(Player *player);
    @param Inventory *inv: the inventory you want to set.
    
    @return
-    _STATUS: _OK if you do the operation well and __ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
  */
 _STATUS player_set_inventory(Player *player, Inventory *inv);
 
@@ -186,7 +186,7 @@ _STATUS player_set_inventory(Player *player, Inventory *inv);
   @param  Id object: the new object you want for the player.
   
   @return 
-    _STATUS: _OK if you do the operation well and __ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS player_add_object(Player *player, Id object);
 
@@ -205,7 +205,7 @@ _STATUS player_add_object(Player *player, Id object);
     from the player.
    
    @return 
-    _STATUS: _OK if you do the operation well and __ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS player_del_object(Player *player, Id object);
 
@@ -258,7 +258,7 @@ _BOOL player_has_object(Player *player, Id object);
    @param 
 	  Player *player: the player you want to print.
    @return 
-	  _STATUS: __ERROR if the input is NULL and _OK otherwise.
+	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
 _STATUS player_print(Player *player);
 

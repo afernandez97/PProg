@@ -43,20 +43,20 @@ Nov. 26, 2016 Version 4.0
 int main(int argc, char *argv[]){						
   Game * game = NULL;
   Command *command = NULL;
-  Id player = 1, die = 1;
+  Id die = 1;
   _STATUS status;
   FILE *f = NULL;
   T_Command cmd;
-  int flag = 0, arg = 1;
+  int flag = 0, arg = 1, player = 0;
   
   /* Check if user enters the name of the file that contains the spaces */	
   if(argc < 2){	
-	  fprintf(stderr, "Use (in order): %s <game_data_path> (-nv -l <log_file> < <entry_file>)\n", argv[0]); 
+	  fprintf(stderr, "Use (in this order): %s <game_data_path> (-nv -l <log_file> < <entry_file>)\n", argv[0]); 
 	  return 1;
 	}
   
 
-  game = game_init_from_file(argv[arg], player, die);
+  game = game_init_from_file(argv[arg], die);
   /* Check if game initializes correctly */
   if(game == NULL){	
 	  fprintf(stderr, "Error while initializing game.\n"); 
@@ -94,62 +94,62 @@ int main(int argc, char *argv[]){
   /* Game loop */
   while((command_get_cmd(command) != QUIT) && !game_is_over(game)){	
     if(flag == 0){ 
-      game_print_screen(game);
+      game_print_screen(game, player);
     } 
     command_destroy(command); /* Destroy the previous command */
     command = get_user_input(); 
-    status = game_update(game, command); 
+    status = game_update(game, command, player); 
     /* If the file is open, print there the status of the last command */
     if(f != NULL){ 
       cmd = command_get_cmd(command);
       switch(cmd){
         case UNKNOWN:
-          if(status == OK){
-            fprintf(f, "UNKNOWN: OK\n");
+          if(status == _OK){
+            fprintf(f, "UNKNOWN: _OK\n");
           } else{
-              fprintf(f, "UNKNOWN: ERROR\n");
+              fprintf(f, "UNKNOWN: _ERROR\n");
           }
           break;
         case QUIT:
-          if(status == OK){
-            fprintf(f, "QUIT: OK\n");
+          if(status == _OK){
+            fprintf(f, "QUIT: _OK\n");
           } else{
-              fprintf(f, "QUIT: ERROR\n");
+              fprintf(f, "QUIT: _ERROR\n");
           }
           break;
         case CATCH:
-          if(status == OK){
-            fprintf(f, "CATCH %s: OK\n", command_get_arg(command));
+          if(status == _OK){
+            fprintf(f, "CATCH %s: _OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "CATCH %s: ERROR\n", command_get_arg(command));
+              fprintf(f, "CATCH %s: _ERROR\n", command_get_arg(command));
           }
           break;
         case LEAVE:
-          if(status == OK){
-            fprintf(f, "LEAVE %s: OK\n", command_get_arg(command));
+          if(status == _OK){
+            fprintf(f, "LEAVE %s: _OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "LEAVE %s: ERROR\n", command_get_arg(command));
+              fprintf(f, "LEAVE %s: _ERROR\n", command_get_arg(command));
           }
           break;
         case GO:
-          if(status == OK){
-            fprintf(f, "GO %s: OK\n", command_get_arg(command));
+          if(status == _OK){
+            fprintf(f, "GO %s: _OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "GO %s: ERROR\n", command_get_arg(command));
+              fprintf(f, "GO %s: _ERROR\n", command_get_arg(command));
           }
           break;
         case ROLL:
-          if(status == OK){
-            fprintf(f, "ROLL: OK\n");
+          if(status == _OK){
+            fprintf(f, "ROLL: _OK\n");
           } else{
-              fprintf(f, "ROLL: ERROR\n");
+              fprintf(f, "ROLL: _ERROR\n");
           }
           break;
         case INSPECT:
-          if(status == OK){
-            fprintf(f, "INSPECT %s: OK\n", command_get_arg(command));
+          if(status == _OK){
+            fprintf(f, "INSPECT %s: _OK\n", command_get_arg(command));
           } else{
-              fprintf(f, "INSPECT %s: ERROR\n", command_get_arg(command));
+              fprintf(f, "INSPECT %s: _ERROR\n", command_get_arg(command));
           }
         case NO_CMD:
           break;

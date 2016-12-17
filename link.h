@@ -52,7 +52,7 @@ This function destroys a variable of type Link.
 @date 04-11-2016
 @author Adrián Fernández
 @param Link* link: Pointer to the variable that is going to destroy.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 
 _STATUS link_destroy(Link* link);
@@ -74,7 +74,7 @@ This function sets the name field of a Link.
 @author Adrián Fernández
 @param Link* link: Pointer to the Link whose name we want to set.
 @param char* name: The name we want to set.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 _STATUS link_set_name(Link* link, char* name);
 
@@ -96,7 +96,7 @@ Sets the Id of a Link's first Space.
 @author Alejandro Sanchez
 @param Link *link: the link whose first space you want to set.
 @param Id space1: the id of the space you want to be link's first space.
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 
 _STATUS link_set_space1(Link *link, Id space1);
@@ -119,7 +119,7 @@ Sets the Id of a Link's second Space.
 @author Alejandro Sanchez
 @param Link *link: the link whose second space you want to set.
 @param Id space2: the id of the space you want to be link's second space.
-@return _STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 
 _STATUS link_set_space2(Link *link, Id space2);
@@ -142,7 +142,7 @@ This function sets the state field of a Link.
 @author Adrián Fernández
 @param Link* link: Pointer to the Link whose state we want to set.
 @param STATE state: The state we want to set.
-@return _STATUS: Returns OK if the function has done his job correctly.
+@return _STATUS: Returns _OK if the function has done his job correctly.
 */
 
 _STATUS link_set_state(Link* link, STATE state);
@@ -164,10 +164,10 @@ Checks if the link is open or not.
 @date 13-11-2016 
 @author Alejandro Sanchez
 @param Link *link: the link to check.
-@return BOOL: TRUE is the link is open or FALSE if not.
+@return _BOOL: _TRUE is the link is open or _FALSE if not.
 */
 
-BOOL link_is_open(Link *link);
+_BOOL link_is_open(Link *link);
 
 /**
 @brief link_print

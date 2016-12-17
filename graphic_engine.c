@@ -88,7 +88,7 @@ Screen * screen_create(){
   	begin_y = (int) (max_y * (1.0/8.0));
   	begin_x = 0;
   	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  	if (screen_add_window(scr,  win) == ERROR){
+  	if (screen_add_window(scr,  win) == _ERROR){
    		return NULL;
   	}
 
@@ -97,7 +97,7 @@ Screen * screen_create(){
 	begin_y = (int) (max_y * (7.0/8.0));
 	begin_x = 0;
 	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-	if (screen_add_window(scr,  win) == ERROR){
+	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
@@ -107,7 +107,7 @@ Screen * screen_create(){
 	begin_x = 0;
 	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
 	
-	if (screen_add_window(scr,  win) == ERROR){
+	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
@@ -116,7 +116,7 @@ Screen * screen_create(){
 	begin_y = 0;
 	begin_x = (int) (max_x * (1.0/2.0));
 	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-	if (screen_add_window(scr,  win) == ERROR){
+	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
@@ -125,7 +125,7 @@ Screen * screen_create(){
 	begin_y = (int) (max_y * (1.0/4.0));
 	begin_x = (int) (max_x * (1.0/2.0));
 	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-	if (screen_add_window(scr,  win) == ERROR){
+	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
@@ -140,13 +140,13 @@ Screen * screen_create(){
 Destroys a screen.
 
 @param Screen *scr: Pointer to the screen we want to destroy.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS screen_destroy(Screen *scr){
 	int i;
 
 	if(!scr){
-  		return ERROR;
+  		return _ERROR;
 	}
 
 	for(i=0; i<MAX_WIN; i++){
@@ -159,7 +159,7 @@ _STATUS screen_destroy(Screen *scr){
 
 	endwin();
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -170,13 +170,13 @@ _STATUS screen_destroy(Screen *scr){
 Refreshes a screen.
 
 @param Screen *scr: Pointer to the screen we want to refresh.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS screen_refresh(Screen *scr){
 	int i;
 
 	if(!scr){
-  		return ERROR;
+  		return _ERROR;
 	}
 
   	refresh();
@@ -185,7 +185,7 @@ _STATUS screen_refresh(Screen *scr){
   		window_refresh(win(scr)[i]);
 	}
 	
-  	return OK;
+  	return _OK;
 }
 
 /**
@@ -196,20 +196,20 @@ _STATUS screen_refresh(Screen *scr){
 Prints a screen.
 
 @param Screen *scr: Pointer to the screen we want to print.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS screen_print(Screen *scr){
 	int i;
 
 	if(!scr){
-		return ERROR;
+		return _ERROR;
 	}
 
 	for(i=0; i<MAX_WIN && win(scr)[i] != NULL; i++){
 		window_print(win(scr)[i]);
 	}
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -221,13 +221,13 @@ Adds a window to a screen.
 
 @param Screen *scr: Pointer to the screen selected.
 @param Window *win: Pointer to the window we want to add.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS screen_add_window(Screen *scr, Window *win){
 	int i = 0;
 
 	if(!scr || !win){
-  		return ERROR;
+  		return _ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
@@ -235,12 +235,12 @@ _STATUS screen_add_window(Screen *scr, Window *win){
 	}
 
 	if(i == MAX_WIN){
-  		return ERROR;
+  		return _ERROR;
 	}
 
 	win(scr)[i] = win;
 
-  	return OK;
+  	return _OK;
 }
 
 /**
@@ -251,13 +251,13 @@ _STATUS screen_add_window(Screen *scr, Window *win){
 Deletes the last window of a screen.
 
 @param Screen *scr: Pointer to the screen selected.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS screen_del_window(Screen *scr){
 	int i = 0;
 
 	if(!scr){
-  		return ERROR;
+  		return _ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
@@ -265,12 +265,12 @@ _STATUS screen_del_window(Screen *scr){
 	}
 
 	if(i == MAX_WIN){
-  		return ERROR;
+  		return _ERROR;
 	}
 
 	window_destroy(win(scr)[i-1]);
 
-  return OK;
+  return _OK;
 }
 
 /**
@@ -341,17 +341,17 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 Destroys a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS window_destroy(Window *win){
 	if(!win){
-		return ERROR;
+		return _ERROR;
 	}
 
 	delwin(window(win));
 	free(win);
 
-	return OK;
+	return _OK;
 }
 
 
@@ -363,16 +363,16 @@ _STATUS window_destroy(Window *win){
 Refreshes a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS window_refresh(Window *win){
 	if(!win){
-		return ERROR;
+		return _ERROR;
 	}
 
 	wrefresh(window(win));
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -383,16 +383,16 @@ _STATUS window_refresh(Window *win){
 Prints a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS window_print(Window *win){
 	if(!win || !window_get_text(win)){
-		return ERROR;
+		return _ERROR;
 	}
 
 	wprintw(window(win), "%s", text(win));
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -476,18 +476,18 @@ Sets the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to set.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS window_set_text(Window *win, char *text){
 	if(!win || !text){
-		return ERROR;
+		return _ERROR;
 	}
 
 	if(!strcpy(text(win), text)){
-		return ERROR;
+		return _ERROR;
 	}
 
-	return OK;
+	return _OK;
 }
 
 /**
@@ -499,18 +499,18 @@ Adds a string to the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to add.
-@return _STATUS: OK if success or ERROR otherwise.
+@return _STATUS: _OK if success or _ERROR otherwise.
 */
 _STATUS window_add_text(Window *win, char *text){
   if(!win || !text){
-    return ERROR;
+    return _ERROR;
   }
 
   if(!strcat(text(win), text)){
-    return ERROR;
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 /**
@@ -547,15 +547,15 @@ char * window_get_input(Window *win, char *input){
     return NULL;
   }
 
-  if(window_set_text(win, "prompt:> ") == ERROR){
+  if(window_set_text(win, "prompt:> ") == _ERROR){
     return NULL;
   }
 
-  if(window_print(win) == ERROR){
+  if(window_print(win) == _ERROR){
     return NULL;
   }
 
-  if(window_refresh(win) == ERROR){
+  if(window_refresh(win) == _ERROR){
     return NULL;
   }
 

@@ -115,13 +115,12 @@ Command * get_user_input(){
       else if(!strcmp(cmd, "turnoff")){    
         cmd(command) = TURNOFF; /* "Turnoff" case */
         strcpy(arg(command), arg);
-		
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
 				cmd(command) = GO;    /* "Go" case*/
         strcpy(arg(command),arg);
     } else if(!strcmp(cmd, "open")){
         cmd2 = strtok(aux, " ");
-        if(!strcmp(cmd, "with"){
+        if(!strcmp(cmd, "with")){
         	strcpy(arg(command), arg);
         	arg2 = strtok(aux, " ");
         	strcpy(arg2(command), arg2);
@@ -179,17 +178,17 @@ Destroys a command.
 @date 30-10-2016 
 @author Alejandro Sanchez
 @param Command *command: the command to destroy.
-@return _STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
 
 _STATUS command_destroy(Command *command){
   if(!command){   /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   free(command);    /* Eliminate the memory of the command */
 
-  return OK;
+  return _OK;
 }
 
 
