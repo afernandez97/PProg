@@ -1,14 +1,14 @@
 /**
-@file person_test.c
-@version 1.0
-@date 16-12-2016
-@author Guillermo Rodriguez
+	@file person_test.c
+	@version 1.0
+	@date 16-12-2016
+	@author Guillermo Rodriguez
 
-@brief
-Contains the implementation of the functions used to test the
-functions implemented in person.c.
+	@brief
+	Contains the implementation of the functions used to test the
+	functions implemented in person.c.
 
-@version
+	@version
 	Dec. 16, 2016 Version 1.0 (initial release)
 */
 
@@ -39,23 +39,23 @@ int main(int argc, char **argv){
 	if (all || test == 4) test2_person_destroy();
 	if (all || test == 5) test1_person_get_id();
 	if (all || test == 6) test2_person_get_id();
-	if (all || test == 7) test1_person_set_ask();
-	if (all || test == 8) test2_person_set_ask();
-	if (all || test == 9) test3_person_set_ask();
-	if (all || test == 10) test1_person_get_ask();
-	if (all || test == 11) test2_person_get_ask();
-	if (all || test == 12) test1_person_set_choice1();
-	if (all || test == 13) test2_person_set_choice1();
-	if (all || test == 14) test3_person_set_choice1();
-	if (all || test == 15) test1_person_get_choice1();
-	if (all || test == 16) test2_person_get_choice1();
-	if (all || test == 17) test1_person_set_choice2();
-	if (all || test == 18) test2_person_set_choice2();
-	if (all || test == 19) test3_person_set_choice2();
-	if (all || test == 20) test1_person_get_choice2();
-	if (all || test == 21) test2_person_get_choice2();
+	if (all || test == 7) test1_person_set_name();
+	if (all || test == 8) test2_person_set_name();
+	if (all || test == 9) test3_person_set_name();
+	if (all || test == 10) test1_person_get_name();
+	if (all || test == 11) test2_person_get_name();
+	if (all || test == 12) test1_person_set_location();
+	if (all || test == 13) test2_person_set_location();
+	if (all || test == 14) test3_person_set_location();
+	if (all || test == 15) test1_person_get_location();
+	if (all || test == 16) test2_person_get_location();
+	if (all || test == 17) test1_person_set_rule();
+	if (all || test == 18) test2_person_set_rule();
+	if (all || test == 19) test3_person_set_rule();
+	if (all || test == 20) test1_person_get_rule();
+	if (all || test == 21) test2_person_get_rule();
 	if (all || test == 22) test1_person_print();
-	if (all || test == 23)  test2_person_print();
+	if (all || test == 23) test2_person_print();
 
 
 	return 0;
@@ -65,14 +65,14 @@ int main(int argc, char **argv){
 /*!< Public functions implementation */
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test1_person_create
-Tests if you can successfully create a person.
+	@brief test1_person_create
+	Tests if you can successfully create a person.
 
-@param
-@return
+	@param
+	@return
 */
 void test1_person_create(){
 	Person * person = NULL;
@@ -85,12 +85,12 @@ void test1_person_create(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test2_person_create
-Tests if you can create a person if the id
-is not valid.
+	@brief test2_person_create
+	Tests if you can create a person if the id
+	is not valid.
 
 @param
 @return
@@ -106,14 +106,14 @@ void test2_person_create(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test1_person_destroy
-Tests if you can successfully destroy a person.
+	@brief test1_person_destroy
+	Tests if you can successfully destroy a person.
 
-@param
-@return
+	@param
+	@return
 */
 void test1_person_destroy(){
 	Person * person = NULL;
@@ -126,14 +126,14 @@ void test1_person_destroy(){
 
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test2_person_destroy
-Tests if you can destroy an uninitialised person.
+	@brief test2_person_destroy
+	Tests if you can destroy an uninitialised person.
 
-@param
-@return
+	@param
+	@return
 */
 void test2_person_destroy(){
 	Person * person = NULL;
@@ -143,14 +143,14 @@ void test2_person_destroy(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test1_person_get_id
-Tests if you can successfully get the id of a person.
+	@brief test1_person_get_id
+	Tests if you can successfully get the id of a person.
 
-@param
-@return
+	@param
+	@return
 */
 void test1_person_get_id(){
 	Person * person = NULL;
@@ -163,14 +163,14 @@ void test1_person_get_id(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test2_person_get_id
-Tests if you can get the id of a uninitialised person.
+	@brief test2_person_get_id
+	Tests if you can get the id of an uninitialised person.
 
-@param
-@return
+	@param
+	@return
 */
 void test2_person_get_id(){
 	person * person = NULL;
@@ -180,14 +180,14 @@ void test2_person_get_id(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test1_person_set_name
-Tests if you can successfully set the name of a person.
+	@brief test1_person_set_name
+	Tests if you can successfully set the name of a person.
 
-@param
-@return
+	@param
+	@return
 */
 void test1_person_set_name(){
 	Person * person = NULL;
@@ -201,14 +201,14 @@ void test1_person_set_name(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test2_person_set_name
-Tests if you can set the name of an uninitialised person.
+	@brief test2_person_set_name
+	Tests if you can set the name of an uninitialised person.
 
-@param
-@return
+	@param
+	@return
 */
 
 void test2_person_set_name(){
@@ -221,15 +221,15 @@ void test2_person_set_name(){
 
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test3_person_set_name
-Tests if you can set the name of a person if the string inserted
-is unassigned.
+	@brief test3_person_set_name
+	Tests if you can set the name of a person if the string inserted
+	is unassigned.
 
-@param
-@return
+	@param
+	@return
 */
 
 void test3_person_set_name(){
@@ -246,14 +246,14 @@ void test3_person_set_name(){
 
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test1_person_get_name
-Tests if you can successfully get the name of a person.
+	@brief test1_person_get_name
+	Tests if you can successfully get the name of a person.
 
-@param
-@return
+	@param
+	@return
 */
 void test1_person_get_name(){
 	Person * person = NULL;
@@ -268,27 +268,27 @@ void test1_person_get_name(){
 }
 
 /**
-@author Guillermo Rodriguez
-@date 16-12-2016
+	@author Guillermo Rodriguez
+	@date 16-12-2016
 
-@brief test2_person_get_name
-Tests if you can get the name of an uninitialised person.
+	@brief test2_person_get_name
+	Tests if you can get the name of an uninitialised person.
 
-@param
-@return
+	@param
+	@return
 */
 void test2_person_get_name(){
 	Person * person = NULL;
 	char name[WORD_SIZE] = "name";
 
-	person_set_question(person, name);
+	person_set_name(person, name);
 	FUNCTION_IS_CORRECT(person_get_name(person) == NULL);
 	return;
 }
 
 
 /**
-   @date 05-10-2016 
+   @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
@@ -309,7 +309,7 @@ void test1_person_set_location(){
 
 
 /**
-   @date 05-10-2016 
+   @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
@@ -327,18 +327,17 @@ void test2_person_set_location(){
   Id idperson = 3;
   person = person_create(idperson);
   FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == OK);
-  person_destroy(player);
+  person_destroy(person);
   return;
 }
 
 /**
-   Function: test3_person_set_location
    @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
    Check if there aren't any errors when you try to set an empty 
-   location for a person
+   location for a person  test3_person_set_location()
    @param 
     
  
@@ -356,7 +355,7 @@ void test3_person_set_location(){
 }
 
 /**
-   @date 05-10-2016 
+   @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
@@ -370,7 +369,144 @@ void test3_person_set_location(){
    */
 void test1_person_get_location(){
 	Person *person = NULL;
-  FUNCTION_IS_CORRECT(person_get_location(player) == NO_ID);
+  FUNCTION_IS_CORRECT(person_get_location(person) == NO_ID);
+  return;
+}
+
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the person's location 
+   from  a person.test2_person_get_location()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_person_get_location(){
+	Person * person = NULL;
+  Id idlocation = 345;
+  Id idperson = 3;
+  person = person_create(idperson);
+  person_set_location(person, idlocation);
+  FUNCTION_IS_CORRECT(person_get_location(person) != NO_ID);
+  person_destroy(person);
+  return;
+}
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set a rule 
+   for an uninitialized person.test1_person_set_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test1_person_set_rule(){
+	Person *person = NULL;
+  Id idrule = 345;
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR);
+  return;
+}
+
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set a rule 
+   for a person.test2_person_set_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_person_set_rule(){
+	Person *person = NULL;
+  Id idrule = 345;
+  Id idperson = 3;
+  person = person_create(idperson);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == OK);
+  person_destroy(person);
+  return;
+}
+
+/**
+   Function: test3_person_set_rule
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief  
+   Check if there aren't any errors when you try to set an empty 
+   rule for a person. test3_person_set_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test3_person_set_rule(){
+	Person *person = NULL;
+  Id idrule = NO_ID;
+  Id idperson = 3;
+  person = person_create(idperson);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR);
+  person_destroy(person);
+  return;
+}
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the person's rule 
+   from an uninitialized person.test1_person_get_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test1_person_get_rule(){
+	Person *person = NULL;
+  FUNCTION_IS_CORRECT(person_get_rule(person) == NO_ID);
+  return;
+}
+
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the person's rule 
+   from  a person.test2_person_get_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_person_get_rule(){
+	Person * person = NULL;
+  Id idrule = 345;
+  Id idperson = 3;
+  person = person_create(idperson);
+  person_set_rule(person, idrule);
+  FUNCTION_IS_CORRECT(person_get_rule(person) != NO_ID);
+  person_destroy(person);
   return;
 }
 
