@@ -82,16 +82,16 @@ Rule * rule_create(Id id){
    @param 
     Rule *rule: the rule to destroy.
    @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
-STATUS rule_destroy(Rule *rule){
+_STATUS rule_destroy(Rule *rule){
   if(!rule){         /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
   
   free(rule);      /* Eliminate the memory of the rule */      
   
-  return OK;
+  return _OK;
 }
 
 
@@ -108,19 +108,19 @@ STATUS rule_destroy(Rule *rule){
     char *question: the new question of the rule.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS rule_set_question(Rule *rule, char *question){
+_STATUS rule_set_question(Rule *rule, char *question){
   if(!rule || !question){   /* Check if the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the ask and check if it has worked */
   if(!strcpy(question(rule), question)){
-    return ERROR;
+    return _ERROR;
   }  
   
-  return OK;
+  return _OK;
 }
 
 
@@ -136,19 +136,19 @@ STATUS rule_set_question(Rule *rule, char *question){
     char *choice1: the new first choice of the rule.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS rule_set_choice1(Rule *rule, char *choice1){
+_STATUS rule_set_choice1(Rule *rule, char *choice1){
   if(!rule || !choice1){   /* Check if the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the first choice and check if it has worked */
   if(!strcpy(choice1(rule), choice1)){
-    return ERROR;
+    return _ERROR;
   }  
   
-  return OK;
+  return _OK;
 }
  
 
@@ -163,19 +163,19 @@ STATUS rule_set_choice1(Rule *rule, char *choice1){
     char *choice2: the new second choice of the rule.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS rule_set_choice2(Rule *rule, char *choice2){
+_STATUS rule_set_choice2(Rule *rule, char *choice2){
   if(!rule || !choice2){   /* Check if the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the second choice and check if it has worked */
   if(!strcpy(choice2(rule), choice2)){
-    return ERROR;
+    return _ERROR;
   }  
   
-  return OK;
+  return _OK;
 }
  
 
@@ -279,17 +279,17 @@ Id rule_get_id(Rule *rule){
    @param 
     Rule *rule: the rule you want to print.
    @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
-STATUS rule_print(Rule * rule){
+_STATUS rule_print(Rule * rule){
   if(!rule){                   /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   /* Print each field of the Rule structure */
     fprintf(stdout, "--> Rule (Id: %ld; Question: %s; Choice1: %s; Choice2: %s)\n", 
       id(rule), question(rule), choice1(rule), choice2(rule));
 
-  return OK;
+  return _OK;
 }
 

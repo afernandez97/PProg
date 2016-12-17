@@ -80,11 +80,11 @@ Inventory *inventory_create(){
   	Inventory *: the inventory to destroy.
 
    @return
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-STATUS inventory_destroy(Inventory *inv){
+_STATUS inventory_destroy(Inventory *inv){
 	if(!inv){    /* Check that the input is not empty */
-		return ERROR;
+		return _ERROR;
 	}
 
   /* Eliminate the memory of the bag of objects if it exists */
@@ -93,7 +93,7 @@ STATUS inventory_destroy(Inventory *inv){
 	}
 	free(inv);   /* Eliminate the memory of the inventory */   
 
-	return OK;
+	return _OK;
 }
 
 
@@ -110,20 +110,20 @@ STATUS inventory_destroy(Inventory *inv){
    @param Id object: the new object you want for the inventory.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS inventory_add_object(Inventory *inv, Id object){
+_STATUS inventory_add_object(Inventory *inv, Id object){
 	/* Check that the inputs are not empty */
   if(!inv || object == NO_ID || inventory_is_full(inv)){  
-  	return ERROR;
+  	return _ERROR;
   }
 
   /* Add the object to the inventory */ 
-  if(set_add(bag(inv), object) == ERROR){
-    return ERROR;
+  if(set_add(bag(inv), object) == _ERROR){
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -140,19 +140,19 @@ STATUS inventory_add_object(Inventory *inv, Id object){
     from the inventory.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS inventory_del_object(Inventory *inv, Id object){
-  if(!inv || object == NO_ID || (inventory_is_empty(inv)==TRUE)){  /* Check that the inputs are not empty */
-    return ERROR;
+_STATUS inventory_del_object(Inventory *inv, Id object){
+  if(!inv || object == NO_ID || (inventory_is_empty(inv)==_TRUE)){  /* Check that the inputs are not empty */
+    return _ERROR;
   }
  
   /* Removes the object from the inventory */
-  if(set_del(bag(inv), object) == ERROR){
-    return ERROR;
+  if(set_del(bag(inv), object) == _ERROR){
+    return _ERROR;
   }      
 
-  return OK;
+  return _OK;
 }
 
 
@@ -169,13 +169,13 @@ STATUS inventory_del_object(Inventory *inv, Id object){
    @param  Set *bag: the bag you want to set.
    
    @return
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS inventory_set_bag(Inventory *inv, Set *bag){
+_STATUS inventory_set_bag(Inventory *inv, Set *bag){
   /* Check that the inputs are not empty or the bag contains more 
   objects than the maximum of the inventory */
 	if(!inv || !bag || set_get_count(bag) > max(inv)){
-		return ERROR;
+		return _ERROR;
 	}
 
 
@@ -187,7 +187,7 @@ STATUS inventory_set_bag(Inventory *inv, Set *bag){
   /* Set the new bag to the inventory */
 	bag(inv) = bag;
 	
-	return OK;
+	return _OK;
 }
 
 
@@ -275,11 +275,11 @@ int inventory_get_max(Inventory *inv){
    @param Id object: the id of the object you want to know if it is in the inventory.
                  
    @return 
-    BOOL: TRUE if the object is in the inventory and FALSE in other cases. 
+    _BOOL: _TRUE if the object is in the inventory and _FALSE in other cases. 
    */
-BOOL inventory_is_object(Inventory *inv, Id object){
+_BOOL inventory_is_object(Inventory *inv, Id object){
 	if(!inv || object == NO_ID){   /* Check that the inputs are not empty */
-    	return FALSE;
+    	return _FALSE;
 	}
   return set_is_object(bag(inv), object);	
 }
@@ -297,15 +297,15 @@ BOOL inventory_is_object(Inventory *inv, Id object){
     Inventory *inv: the inventory to check.
                  
    @return 
-    BOOL: TRUE is the inventory is empty or FALSE if not.
+    _BOOL: _TRUE is the inventory is empty or _FALSE if not.
    */
-BOOL inventory_is_empty(Inventory *inv){
+_BOOL inventory_is_empty(Inventory *inv){
   /* Check if the input is empty or the number of objects is 0 */
-  if(!inv || set_is_empty(bag(inv)) == TRUE){
-	  return TRUE;
+  if(!inv || set_is_empty(bag(inv)) == _TRUE){
+	  return _TRUE;
   } 
 
-  return FALSE;
+  return _FALSE;
 }
 
 
@@ -321,16 +321,16 @@ BOOL inventory_is_empty(Inventory *inv){
     Inventory *inv: the inventory to check.
                  
    @return 
-    BOOL: TRUE is the inventory is full or FALSE if not.
+    _BOOL: _TRUE is the inventory is full or _FALSE if not.
    */
-BOOL inventory_is_full(Inventory *inv){
+_BOOL inventory_is_full(Inventory *inv){
   /* Check if the input is empty or the number of objects is lower 
   than the maximum number of objects that can contain the inv */
   if(!inv || inventory_get_count(inv) < max(inv)){
-    return FALSE;
+    return _FALSE;
   } 
 
-  return TRUE;
+  return _TRUE;
 }
 
 
@@ -345,22 +345,22 @@ BOOL inventory_is_full(Inventory *inv){
    @param 
 	  Inventory *inv: the inventory you want to print.
    @return 
-	  STATUS: ERROR if the input is NULL and OK otherwise.
+	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
-STATUS inventory_print(Inventory *inv){
+_STATUS inventory_print(Inventory *inv){
   if(!inv){      /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print the inventory fields */
   fprintf(stdout, "Inventory -->  Max: %d; ", max(inv));
-  if(set_print(bag(inv)) == ERROR){
-	 return ERROR;
+  if(set_print(bag(inv)) == _ERROR){
+	 return _ERROR;
   }
 
   fprintf(stdout, ")\n");
 
-  return OK;
+  return _OK;
 }
 
 

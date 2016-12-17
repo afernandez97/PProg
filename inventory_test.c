@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 */
 void test1_inventory_destroy(){
 	Inventory *inventory = NULL;
-	FUNCTION_IS_CORRECT(inventory_destroy(inventory) == ERROR);
+	FUNCTION_IS_CORRECT(inventory_destroy(inventory) == _ERROR);
 	return;
 }          
 
@@ -95,7 +95,7 @@ void test1_inventory_destroy(){
 void test1_inventory_add_object(){
 	Inventory *inventory = NULL;
 	Id object = 1;
-	FUNCTION_IS_CORRECT(inventory_add_object(inventory,object) == ERROR);
+	FUNCTION_IS_CORRECT(inventory_add_object(inventory,object) == _ERROR);
 }
 
 /**
@@ -113,7 +113,7 @@ void test1_inventory_add_object(){
 void test1_inventory_del_object(){
 	Inventory *inventory = NULL;
 	Id object = 1;
-	FUNCTION_IS_CORRECT(inventory_del_object(inventory,object) == ERROR);
+	FUNCTION_IS_CORRECT(inventory_del_object(inventory,object) == _ERROR);
 	return;
 }
 
@@ -132,7 +132,7 @@ void test1_inventory_del_object(){
 void test1_inventory_set_bag(){
 	Inventory *inventory = NULL;
 	Set* set = NULL;
-	FUNCTION_IS_CORRECT(inventory_set_bag(inventory, set) == ERROR);
+	FUNCTION_IS_CORRECT(inventory_set_bag(inventory, set) == _ERROR);
 	return;
 }
 
@@ -203,7 +203,7 @@ void test1_inventory_get_max(){
 void test1_inventory_is_object(){
 	Inventory *inventory = NULL;
 	Id object = 1;
-	FUNCTION_IS_CORRECT(inventory_is_object(inventory, object)==FALSE);
+	FUNCTION_IS_CORRECT(inventory_is_object(inventory, object)==_FALSE);
 	return;
 }
 
@@ -221,7 +221,7 @@ void test1_inventory_is_object(){
    */
 void test1_inventory_is_empty(){
 	Inventory *inventory = NULL;
-	FUNCTION_IS_CORRECT(inventory_is_empty(inventory)==TRUE);
+	FUNCTION_IS_CORRECT(inventory_is_empty(inventory)==_TRUE);
 	return;
 }
 
@@ -239,7 +239,7 @@ void test1_inventory_is_empty(){
    */
 void test1_inventory_is_full(){
 	Inventory *inventory = NULL;
-	FUNCTION_IS_CORRECT(inventory_is_full(inventory)==FALSE);
+	FUNCTION_IS_CORRECT(inventory_is_full(inventory)==_FALSE);
 	return;
 }
 
@@ -257,7 +257,7 @@ void test1_inventory_is_full(){
    */
 void test1_inventory_print(){
 	Inventory *inventory = NULL;
-	FUNCTION_IS_CORRECT(inventory_print(inventory)==ERROR);
+	FUNCTION_IS_CORRECT(inventory_print(inventory)==_ERROR);
 	return;
 }
 
@@ -299,7 +299,7 @@ void test2_inventory_destroy(){
 	if (!inv){
 		return;
 	}
-	FUNCTION_IS_CORRECT(inventory_destroy(inv)==OK);
+	FUNCTION_IS_CORRECT(inventory_destroy(inv)==_OK);
 	return;
 }
 
@@ -320,7 +320,7 @@ void test2_inventory_add_object(){
 	Inventory *inv = NULL;
 	Id idobject = NO_ID;
 	inv = inventory_create();
-	FUNCTION_IS_CORRECT(inventory_add_object(inv, idobject)==ERROR);
+	FUNCTION_IS_CORRECT(inventory_add_object(inv, idobject)==_ERROR);
 	inventory_destroy (inv);
 	return;
 }
@@ -342,7 +342,7 @@ void test3_inventory_add_object(){
 	Inventory *inv = NULL;
 	Id idobject = 1;
 	inv = inventory_create();
-	FUNCTION_IS_CORRECT(inventory_add_object(inv, idobject)==OK);
+	FUNCTION_IS_CORRECT(inventory_add_object(inv, idobject)==_OK);
 	inventory_destroy(inv);
 	return;
 }
@@ -365,7 +365,7 @@ void test2_inventory_del_object(){
 	Id idobject = NO_ID;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT(inventory_del_object(inv, idobject)==ERROR);
+	FUNCTION_IS_CORRECT(inventory_del_object(inv, idobject)==_ERROR);
 	inventory_destroy(inv);
 	return;
 }
@@ -388,7 +388,7 @@ void test3_inventory_del_object(){
 	Id idobject = 1;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT(inventory_del_object(inv, idobject)==OK);
+	FUNCTION_IS_CORRECT(inventory_del_object(inv, idobject)==_OK);
 	inventory_destroy(inv);
 	return;
 }
@@ -410,7 +410,7 @@ void test2_inventory_set_bag(){
 	Inventory *inv = NULL;
 	Set *bag = NULL;
 	inv = inventory_create();
-	FUNCTION_IS_CORRECT(inventory_set_bag(inv,bag)==ERROR);
+	FUNCTION_IS_CORRECT(inventory_set_bag(inv,bag)==_ERROR);
 	inventory_destroy(inv);
 	return;
 }
@@ -433,7 +433,7 @@ void test3_inventory_set_bag(){
 	Set *bag = NULL;
 	inv = inventory_create();
 	bag = set_create();
-	FUNCTION_IS_CORRECT(inventory_set_bag(inv,bag)==OK);
+	FUNCTION_IS_CORRECT(inventory_set_bag(inv,bag)==_OK);
 	inventory_destroy(inv);
 	return;
 }
@@ -515,7 +515,7 @@ void test2_inventory_is_object(){
 	Id idobject = 1;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT(inventory_is_object(inv, idobject)==TRUE);
+	FUNCTION_IS_CORRECT(inventory_is_object(inv, idobject)==_TRUE);
 	inventory_destroy(inv);
 	return;
 }
@@ -535,7 +535,7 @@ void test2_inventory_is_object(){
 void test2_inventory_is_empty(){
 	Inventory *inv = NULL;
 	inv = inventory_create();
-	FUNCTION_IS_CORRECT (inventory_is_empty(inv)==TRUE);
+	FUNCTION_IS_CORRECT (inventory_is_empty(inv)==_TRUE);
 	inventory_destroy(inv);
 }
 
@@ -556,7 +556,7 @@ void test3_inventory_is_empty(){
 	Id idobject = 1;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT (inventory_is_empty(inv)==FALSE);
+	FUNCTION_IS_CORRECT (inventory_is_empty(inv)==_FALSE);
 	inventory_destroy(inv);
 }
 /**
@@ -576,7 +576,7 @@ void test2_inventory_is_full(){
 	Id idobject = 1;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT (inventory_is_full(inv)==FALSE);
+	FUNCTION_IS_CORRECT (inventory_is_full(inv)==_FALSE);
 	inventory_destroy(inv);
 }
 
@@ -597,7 +597,7 @@ void test2_inventory_print(){
 	Id idobject = 1;
 	inv = inventory_create();
 	inventory_add_object (inv, idobject);
-	FUNCTION_IS_CORRECT(inventory_print(inv)==OK);
+	FUNCTION_IS_CORRECT(inventory_print(inv)==_OK);
 	inventory_destroy(inv);
 }
 

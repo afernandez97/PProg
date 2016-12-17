@@ -73,7 +73,7 @@ struct _Space{
   Set *objects; /*!<  Set of the objects,there are in the space */
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
-  BOOL illuminated; /*!< Illuminated or not */
+  _BOOL illuminated; /*!< Illuminated or not */
 };
  
  
@@ -123,7 +123,7 @@ Space * space_create(Id id){
 
   strcpy(desc(space), "");
   strcpy(gdesc(space), "       |       |       |");
-  illuminated(space) = FALSE;
+  illuminated(space) = _FALSE;
  
   return space;
 }
@@ -140,11 +140,11 @@ Space * space_create(Id id){
    @param 
     Space *space: the space to destroy.
    @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
-STATUS space_destroy(Space *space){
+_STATUS space_destroy(Space *space){
   if(!space){         /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
 	if(objects(space) != NULL){
@@ -153,7 +153,7 @@ STATUS space_destroy(Space *space){
 
 	free(space);      /* Eliminate the memory of the space */      
   
-  return OK;
+  return _OK;
 }
  
  
@@ -191,19 +191,19 @@ Id space_get_id(Space *space){
    @param char *name: the new name you want for the space.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_name(Space *space, char *name){
+_STATUS space_set_name(Space *space, char *name){
   if(!space || !name){          /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   /* Set the name and check if it has worked */
   if(!strcpy(name(space), name)){   
-    return ERROR;
+    return _ERROR;
   }
  
-  return OK;
+  return _OK;
 }
  
  
@@ -242,15 +242,15 @@ const char * space_get_name(Space *space){
    @param Id id: the new North link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_north(Space *space, Id id){
+_STATUS space_set_north(Space *space, Id id){
   if(!space){       /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   north(space) = id;          /* Set the North link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -289,15 +289,15 @@ Id space_get_north(Space *space){
    @param Id id: the new South link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_south(Space *space, Id id){
+_STATUS space_set_south(Space *space, Id id){
   if(!space){     /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   south(space) = id;        /* Set the South link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -336,15 +336,15 @@ Id space_get_south(Space *space){
    @param Id id: the new East link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_east(Space *space, Id id){
+_STATUS space_set_east(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   east(space) = id;          /* Set the East link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -383,15 +383,15 @@ Id space_get_east(Space *space){
    @param Id id: the new West link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_west(Space *space, Id id){
+_STATUS space_set_west(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   west(space) = id;          /* Set the West link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -428,15 +428,15 @@ Id space_get_west(Space *space){
    @param Id id: the new Up link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_up(Space *space, Id id){
+_STATUS space_set_up(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   up(space) = id;          /* Set the Up link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -474,15 +474,15 @@ Id space_get_up(Space *space){
    @param Id id: the new Down link you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_down(Space *space, Id id){
+_STATUS space_set_down(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   down(space) = id;          /* Set the Down link to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -519,15 +519,15 @@ Id space_get_down(Space *space){
    @param Id id: the new rule you want for the space.
  
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_rule(Space *space, Id id){
+_STATUS space_set_rule(Space *space, Id id){
   if(!space){             /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   rule(space) = id;          /* Set the rule to the space */
-  return OK;
+  return _OK;
 }
  
  
@@ -565,19 +565,19 @@ Id space_get_rule(Space *space){
       into the space.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_add_object(Space *space, Id object){
+_STATUS space_add_object(Space *space, Id object){
   if(!space || object == NO_ID){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   /* Add the object into the space */ 
-  if(set_add(objects(space), object) == ERROR){
-	  return ERROR;
+  if(set_add(objects(space), object) == _ERROR){
+	  return _ERROR;
   }      
 
-  return OK;
+  return _OK;
 }
  
 
@@ -595,19 +595,19 @@ STATUS space_add_object(Space *space, Id object){
       from the space.
    
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_del_object(Space *space, Id object){
+_STATUS space_del_object(Space *space, Id object){
   if(!space || object == NO_ID){  /* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   /* Removes the object from the space */
-  if(set_del(objects(space), object) == ERROR){
-    return ERROR;
+  if(set_del(objects(space), object) == _ERROR){
+    return _ERROR;
   }      
 
-  return OK;
+  return _OK;
 }
 
  
@@ -648,11 +648,11 @@ Set * space_get_object(Space *space){
     Id object: the id of the object you want to know if it is in the space.
                  
    @return 
-    BOOL: TRUE if the object is in the space and FALSE in other cases. 
+    _BOOL: _TRUE if the object is in the space and _FALSE in other cases. 
    */
-BOOL space_is_object(Space *space, Id object){
+_BOOL space_is_object(Space *space, Id object){
 	if(!space || object == NO_ID){
-    	return FALSE;
+    	return _FALSE;
 	}
   return set_is_object(objects(space), object);	
 }
@@ -669,19 +669,19 @@ BOOL space_is_object(Space *space, Id object){
    @param char *desc: the new description of the space.
 
    Output: 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_desc(Space *space, char *desc){
+_STATUS space_set_desc(Space *space, char *desc){
   if(!space || !desc){   /* Check if the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the description and check if it has worked */
   if(!strcpy(desc(space), desc)){
-    return ERROR;
+    return _ERROR;
   }  
   
-  return OK;
+  return _OK;
 }
 
 
@@ -720,19 +720,19 @@ char *space_get_desc(Space *space){
     char *gdesc: the new graphic description of the space.
   
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_set_gdesc(Space *space, char *gdesc){
+_STATUS space_set_gdesc(Space *space, char *gdesc){
   if(!space || !gdesc){   /* Check if the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the graphic description and check if it has worked */
   if(!strcpy(gdesc(space), gdesc)){
-    return ERROR;
+    return _ERROR;
   }  
   
-  return OK;
+  return _OK;
 }
 
 
@@ -771,24 +771,24 @@ char *space_get_gdesc(Space *space){
     Space *space: the space you want to print its graphic description.
     char *output: string in which the gdesc is printed.
    @return 
-    STATUS: OK if you do the operation well and ERROR in other cases.
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-STATUS space_print_gdesc(Space *space, char *output){
+_STATUS space_print_gdesc(Space *space, char *output){
   char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL;
  
   /* Check if the input is empty or the graphic description is empty */
   if(!space || strcmp(gdesc(space), "\0" || output == NULL) == 0){
-  	return ERROR;
+  	return _ERROR;
   }
 
   /* Copy the graphic description in an auxiliar array */
   if(!strcpy(gdesc, gdesc(space))){
-  	return ERROR;
+  	return _ERROR;
   }
 
   /* Deletes the content of output */
   if(!strcpy(output, "")){
-    return ERROR;
+    return _ERROR;
   }
 
   /* "Tokenize" the graphic description and print it */
@@ -799,7 +799,7 @@ STATUS space_print_gdesc(Space *space, char *output){
 		toks = strtok(NULL, "|");
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -813,19 +813,19 @@ STATUS space_print_gdesc(Space *space, char *output){
 
    @param 
     Space *space: the space you want to change.
-    BOOL illumination : Choose if the space is illuminated or not.
+    _BOOL illumination : Choose if the space is illuminated or not.
    @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
 
    */
-STATUS space_set_illumination(Space *space, BOOL illumination){
+_STATUS space_set_illumination(Space *space, _BOOL illumination){
 	if(!space){
-  	return ERROR;
+  	return _ERROR;
   }
 
   illuminated(space) = illumination;
   
-	return OK;
+	return _OK;
 }
 
 /**
@@ -838,11 +838,11 @@ STATUS space_set_illumination(Space *space, BOOL illumination){
    @param 
     Space *space: the space you want to know that.
    @return 
-    BOOL: the illumination of the space or FALSE if the input is NULL.
+    _BOOL: the illumination of the space or _FALSE if the input is NULL.
    */
-BOOL space_is_illuminated(Space *space){
+_BOOL space_is_illuminated(Space *space){
 	if(!space){
-  	return FALSE;
+  	return _FALSE;
   }
 	return illuminated(space);
 }
@@ -858,21 +858,21 @@ BOOL space_is_illuminated(Space *space){
    @param 
     Space *space: the space you want to print.
    @return 
-    STATUS: ERROR if the input is NULL and OK otherwise.
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
    */
-STATUS space_print(Space *space){
+_STATUS space_print(Space *space){
   Id idaux = NO_ID;
    
   if(!space){                   /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
  
   /* Print each field of the Space structure, checking if it is empty */
-	if(illuminated(space)==FALSE){
-		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: FALSE)\n", 
+	if(illuminated(space)==_FALSE){
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: _FALSE)\n", 
     	id(space), name(space), desc(space));
-	} else if(illuminated(space)==TRUE){
-		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: TRUE)\n", 
+	} else if(illuminated(space)==_TRUE){
+		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: _TRUE)\n", 
     	id(space), name(space), desc(space));
 	} 
      
@@ -924,16 +924,16 @@ STATUS space_print(Space *space){
       fprintf(stdout, "---> No rule.\n");
   }
 
-  if(set_is_empty(objects(space)) == TRUE){
+  if(set_is_empty(objects(space)) == _TRUE){
     fprintf(stdout, "---> No objects.\n");
-  } else if(set_print(objects(space)) == ERROR){
-    return ERROR;
+  } else if(set_print(objects(space)) == _ERROR){
+    return _ERROR;
   }
 
-  if(space_print_gdesc(space) == ERROR){
-    return ERROR;
+  if(space_print_gdesc(space) == _ERROR){
+    return _ERROR;
   }
  
-  return OK;
+  return _OK;
 }
 

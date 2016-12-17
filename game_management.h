@@ -41,9 +41,9 @@ Saves the status of a game.
 
 @param Game *game: the game you want to save its status.
 @param char *path: the path of the different files that will contain the status of the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_save(Game *game, char *path); 
+_STATUS game_save(Game *game, char *path); 
 
 
 /**
@@ -55,9 +55,9 @@ Saves the links of a game.
 
 @param Game *game: the game you want to save its links.
 @param char *filename: the filename that will contain the links of the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_save_links(Game *game, char *filename);
+_STATUS game_save_links(Game *game, char *filename);
 
 
 /**
@@ -69,9 +69,9 @@ Saves the spaces of a game.
 
 @param Game *game: the game you want to save its spaces.
 @param char *filename: the filename that will contain the spaces of the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_save_spaces(Game *game, char *filename);
+_STATUS game_save_spaces(Game *game, char *filename);
 
 
 /**
@@ -83,9 +83,9 @@ Saves the objects of a game.
 
 @param Game *game: the game you want to save its objects.
 @param char *filename: the filename that will contain the objects of the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_save_objects(Game *game, char *filename);
+_STATUS game_save_objects(Game *game, char *filename);
 
 
 /**
@@ -97,9 +97,9 @@ Saves the players of a game.
 
 @param Game *game: the game you want to save its players.
 @param char *filename: the filename that will contain the players of the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_save_players(Game *game, char *filename);
+_STATUS game_save_players(Game *game, char *filename);
 
 
 /**
@@ -111,9 +111,9 @@ Loads a previous save of a game.
 
 @param Game *game: the game where you want to load the previous save of it.
 @param char *path: the path of the different files that contain the game.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_load(Game *game, char *path); 
+_STATUS game_load(Game *game, char *path); 
 
 
 /**
@@ -125,9 +125,9 @@ Adds an link to a game.
 
 @param Game *game: the game where you add the link.
 @param Link *link: the link you want to add to the game.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_add_link(Game *game, Link *link);
+_STATUS game_add_link(Game *game, Link *link);
 
 /**
 @date 10-11-2016
@@ -138,9 +138,9 @@ Loads the links from a file.
 
 @param Game *game: the game where you want to load the links.
 @param char *filename: the file that contains the links. 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_load_links(Game *game, char *filename);
+_STATUS game_load_links(Game *game, char *filename);
 
 
 /**
@@ -152,9 +152,9 @@ Add a space to a game.
 
 @param Game *game: the game where you add the space.
 @param Space *space: the space you want to add to the game.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_add_space(Game *game, Space *space);
+_STATUS game_add_space(Game *game, Space *space);
 
 
 
@@ -167,9 +167,9 @@ Loads a space from a file.
 
 @param Game *game: the game where you want to load the spaces.
 @param char *filename: the file that contains the spaces.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_load_spaces(Game *game, char *filename); 
+_STATUS game_load_spaces(Game *game, char *filename); 
 
 
 
@@ -182,9 +182,9 @@ Adds an object to a game.
 
 @param Game *game: the game where you add the object.
 @param Object *object: the object you want to add to the game.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_add_object(Game *game, Object *object);
+_STATUS game_add_object(Game *game, Object *object);
 
 
 
@@ -197,9 +197,9 @@ Loads the objects from a file.
 
 @param Game *game: the game where you want to load the objects.
 @param char *filename: the file that contains the spaces.   
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_load_objects(Game *game, char *filename);
+_STATUS game_load_objects(Game *game, char *filename);
 
 
 /**
@@ -211,9 +211,9 @@ Adds an player to a game.
 
 @param Game *game: the game where you add the player.
 @param Player *player: the player you want to add to the game.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_add_player(Game *game, Player *player);
+_STATUS game_add_player(Game *game, Player *player);
 
 /**
 @date 03-12-2016
@@ -224,8 +224,8 @@ Loads players from a file.
 
 @param Game *game: the game where you want to load the players.
 @param char *filename: the file that contains the players. 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_load_players(Game *game, char *filename);
+_STATUS game_load_players(Game *game, char *filename);
 
 #endif

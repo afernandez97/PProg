@@ -28,12 +28,12 @@ Implementation of the data types used.
 typedef long Id;
 
 typedef enum {
-  FALSE, TRUE
-} BOOL;
+  _FALSE, _TRUE
+} _BOOL;
 
 typedef enum {
-  ERROR, OK
-} STATUS;
+  _ERROR, _OK
+} _STATUS;
 
 typedef enum {
   N, S, E, W
