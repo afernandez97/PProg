@@ -105,6 +105,10 @@ int main(int argc, char **argv){
 	if (all || test == 67) test2_space_set_rule();
 	if (all || test == 68) test1_space_get_rule();
 	if (all || test == 69) test2_space_get_rule();
+  if (all || test == 70) test1_space_set_shop();
+	if (all || test == 71) test2_space_set_shop();
+	if (all || test == 72) test1_space_is_shop();
+	if (all || test == 73) test2_space_is_shop();
 
 
 	return 0;
@@ -1449,6 +1453,80 @@ void test2_space_is_illuminated(){
   FUNCTION_IS_CORRECT(space_is_illuminated(space) == _TRUE);
 	return;
 }
+
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test1_space_set_shop
+Tests if you set a shop characteristic for an unitialized space
+
+@param
+@return
+*/
+void test1_space_set_shop(){
+	Space *space = NULL;
+
+	FUNCTION_IS_CORRECT(space_set_shop(space,_TRUE) == _ERROR);
+	return;
+}
+/**
+
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test2_space_set_shop
+Tests if you set a shop characteristic correctly
+
+@param
+@return
+*/
+void test2_space_set_shop(){
+	Space *space = NULL;
+  Id id = 1;
+  space = space_create(id);
+  FUNCTION_IS_CORRECT(space_set_space(space,_TRUE) == _OK);
+	return;
+}
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test1_space_is_shop
+Tests if can check if an unitialized space is a shop or not
+
+@param
+@return
+*/
+void test1_space_is_shop(){
+	Space *space = NULL;
+
+	FUNCTION_IS_CORRECT(space_is_shop(space) == _FALSE);
+	return;
+}
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test2_space_is_shop
+Tests if can check if a space is a shop or not
+
+@param
+@return
+*/
+void test2_space_is_shop(){
+	Space *space = NULL;
+  Id id = 1;
+  space = space_create(id);
+  space_set_shop(space,_TRUE);
+  FUNCTION_IS_CORRECT(space_is_shop(space) == _TRUE);
+	return;
+}
+
+
 
 
 /**

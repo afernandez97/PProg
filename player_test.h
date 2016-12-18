@@ -462,4 +462,70 @@ void test2_player_has_object();
 
 void test3_player_has_object();
 
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set a money 
+   from an uninitialized player.test1_player_set_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test1_player_set_money();
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set money 
+   for  a player.test2_player_set_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_player_set_money();
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the player's money 
+   from an uninitialized player.test1_player_get_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+
+void test1_player_get_money();
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the player's money 
+   from  a player.test2_player_get_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_player_get_money();
+
+
 #endif

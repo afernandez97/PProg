@@ -21,7 +21,12 @@ It implements the command interpreter.
 	Modified "get_user_input".
 @version Nov. 05, 2016 Version 4.0
 	Added command GO and removed commands NEXT, BACK and JUMP.
+@version Dec. 8, 2016 Version 5.0
+	Added command TURNOFF ,TURNON ,OPENL,SAVE,LOAD.
+@version Dec. 18, 2016 Version 6.0
+	Added command BUY SELL ANSWER.
 */
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,7 +66,7 @@ Input must be typed:
 @return Command *: interpretation of user's input or NULL on error.
 */
 
-Command * get_user_input(){
+Command * get_user_input(int flag,char* answer){
 	Command *command = NULL;
 	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
 	char *toks = NULL, *cmd = NULL,*cm2 = NULL,*arg = NULL,*arg2 = NULL;
@@ -71,18 +76,32 @@ Command * get_user_input(){
   if(!command){   /* Check if memory has been allocated */
     return NULL;
   }
-
+  
+  
   /* Receive user's input from keyboard */
-	fgets(input, CMD_LENGTH, stdin);
+  if (flag == 0){
+		fgets(input, CMD_LENGTH, stdin);
+  }
+ 
+  /* Receive the answer of the question */
+  if (flag == 1){
+  	strcpy(input,answer);
+  }
   /* Check that the user has entered at least 1 character */		
-  if(strcmp(input, "\n") == 0){
+  if(strcmp(input, "\n") == 0 || strcmp(input, "") ){
     cmd(command) = NO_CMD;
     return command;
   }
   
   /* "Tokenize" input */
-  /* Delete \n because it's always read at the end of the line */
-  toks = strtok(input, "\n");
+  /* Delete \n because it's always read at the end of the line */ 
+  if(flag == 0){
+  	toks = strtok(input, "\n");
+  }
+  else{
+  	strcpy(toks,input); 
+  }
+  
   /* Copy toks to an auxiliar string to break it and not toks */
   strcpy(aux, toks);
   /* Save the type of command in cmd. This can't be NULL */
@@ -103,7 +122,19 @@ Command * get_user_input(){
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
+      else if(!strcmp(cmd, "b") || !strcmp(cmd, "buy")){
+      cmd(command) = BUY; /* "Buy" case */;
+      strcpy(arg(command), arg);
 		} 
+      else if(!strcmp(cmd, "s") || !strcmp(cmd, "sell")){
+      cmd(command) = SELL; /* "Sell" case */;
+      strcpy(arg(command), arg);
+    } 
+      else if(!strcmp(cmd, "a") || !strcmp(cmd, "answer")){
+      cmd(command) = ANSWER ; /* "Sell" case */;
+      strcpy(arg(command), arg);
+    } 
+      
       else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
         cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);

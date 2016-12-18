@@ -907,6 +907,57 @@ void test2_space_is_illuminated();
 
 
 /**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test1_space_set_shop
+Tests if you set a shop characteristic for an unitialized space
+
+@param
+@return
+*/
+void test1_space_set_shop();
+/**
+
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test2_space_set_shop
+Tests if you set a shop characteristic correctly
+
+@param
+@return
+*/
+void test2_space_set_shop();
+
+/**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test1_space_is_shop
+Tests if can check if an unitialized space is a shop or not
+
+@param
+@return
+*/
+void test1_space_is_shop();
+/**
+@author Guillermo Rodriguez
+@date Dec. 18, 2016
+
+@brief test2_space_is_shop
+Tests if can check if a space is a shop or not
+
+@param
+@return
+*/
+void test2_space_is_shop();
+
+
+
+
+
+/**
 @author Adrián Fernández
 @date 23-11-2016
 

@@ -246,6 +246,38 @@ Inventory * player_get_inventory(Player *player);
 _BOOL player_has_object(Player *player, Id object);
 
 
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+
+   @brief 
+	  Sets money for a player.player_set_money()
+
+   @param Player *player: the player you want to change.
+   @param double money: the money you want to add or quit for a player.
+  
+   @return 
+    Status: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS player_set_money(Player *player, double money);
+
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+
+   @brief 
+    Gives the money of the player.player_get_money()
+
+   @param 
+    Player *player: the player that you want to know the money.
+
+   @return 
+    double money: the money of the player or NO_ID on error.
+   */
+double player_get_money(Player *player);
+
 
 
 /**

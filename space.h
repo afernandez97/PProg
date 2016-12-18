@@ -588,6 +588,36 @@ _STATUS space_set_illumination(Space *space, _BOOL illumination);
    */
 _BOOL space_is_illuminated(Space *space);
 
+/**
+
+   @date 16-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Sets if a space is a shop or not.space_set_shop()
+
+   @param 
+    Space *space: the space you want to change.
+    _BOOL shop : Choose if the space is a shop or not.
+   @return 
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+
+   */
+_STATUS space_set_shop(Space *space, _BOOL shop);
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez 
+ 
+   @brief 
+    Gets if a space is a shop or not.space_is_shop() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space is a shop or _FALSE if the input is NULL.
+   */
+_BOOL space_is_shop(Space *space);
 
 /**
    @date 01-12-2016 

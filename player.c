@@ -33,7 +33,7 @@ It implements a player.
 #define name(X) (X)->name
 #define location(X) (X)->location
 #define inv(X) (X)->inv
-
+#define money(X) (X)->money 
 /** @brief
 The Player structure stores information of the different players that play the game.
 */
@@ -42,6 +42,7 @@ struct _Player {
   char name[WORD_SIZE]; /*!< Name of the player */
   Id location;  /*!< Identifier of the space where the player is */
   Inventory *inv;  /*!< Bag of objects that the player carries */
+  double money;  /*!< The money that the player has */
 };
 
 
@@ -77,6 +78,7 @@ Player * player_create(Id id){
   name(player)[0] = '\0';
     
   location(player) = NO_ID;
+  money(player) = 0;
 
   inv(player) = inventory_create();
   if(!inv(player)){   /* Check if memory has been allocated */
@@ -372,6 +374,55 @@ _BOOL player_has_object(Player *player, Id object){
 
   return inventory_is_object(inv(player), object);
 }
+
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+
+   @brief 
+	  Sets money for a player.player_set_money()
+
+   @param Player *player: the player you want to change.
+   @param double money: the money you want to add or quit for a player.
+  
+   @return 
+    Status: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS player_set_money(Player *player, double money){
+  if(!player){      /* Check that the inputs are not empty */
+  	return _ERROR;
+  }
+
+  money(player) += money;  /* Set the money */
+
+  return _OK;
+}
+
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+
+   @brief 
+    Gives the money of the player.player_get_money()
+
+   @param 
+    Player *player: the player that you want to know the money.
+
+   @return 
+    double money: the money of the player or NO_ID on error.
+   */
+double player_get_money(Player *player){
+  if(!player){      /* Check that the input is not empty */
+    return -1;
+  }
+
+  return money(player); 
+}
+
 
 
 

@@ -58,7 +58,7 @@
 #define illuminated(X) (X)->illuminated
 #define rule(X) (X)->rule
 #define person(X) (X)->person
-
+#define shop(X) (X)->shop 
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
 struct _Space{
@@ -76,6 +76,7 @@ struct _Space{
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
   _BOOL illuminated; /*!< Illuminated or not */
+  _BOOL shop /*!<If you can buy and sell objects in this space*/
 };
  
  
@@ -127,6 +128,7 @@ Space * space_create(Id id){
   strcpy(desc(space), "");
   strcpy(gdesc(space), "       |       |       |");
   illuminated(space) = _FALSE;
+  shop(space) =_FALSE;
  
   return space;
 }
@@ -898,6 +900,56 @@ _BOOL space_is_illuminated(Space *space){
 
 
 /**
+
+   @date 16-12-2016 
+   @author Guillermo Rodriguez 
+ 
+
+   @brief 
+    Sets if a space is a shop or not.space_set_shop()
+
+   @param 
+    Space *space: the space you want to change.
+    _BOOL shop : Choose if the space is a shop or not.
+
+   @return 
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+
+   */
+_STATUS space_set_shop(Space *space, _BOOL shop){
+	if(!space){
+  	return _ERROR;
+  }
+
+  shop(space) = shop;
+  
+	return _OK;
+}
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez 
+
+ 
+   @brief 
+    Gets if a space is a shop or not.space_is_shop() 
+ 
+   @param 
+
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space is a shop or _FALSE if the input is NULL.
+   */
+_BOOL space_is_shop(Space *space){
+	if(!space){
+  	return _FALSE;
+  }
+	return shop(space);
+}
+
+
+
+/**
    @date 01-12-2016 
    @author Alejandro Sanchez
  
@@ -924,7 +976,13 @@ _STATUS space_print(Space *space){
 		fprintf(stdout, "--> Space (Id: %ld; Name: %s; Description: %s; Illuminated: _TRUE)\n", 
     	id(space), name(space), desc(space));
 	} 
-     
+  
+  if(shop(space) == _TRUE){
+    fprintf(stdout, "shop: _TRUE;");
+  } else{
+    fprintf(stdout, "shop: _FALSE;");
+  }
+   
   idaux = space_get_north(space);
   if(NO_ID != idaux){
     fprintf(stdout, "---> North link: %ld.\n", idaux);

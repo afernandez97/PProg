@@ -54,7 +54,10 @@ typedef enum enum_Command{
   TURNOFF, /*!< Command to turn off an object*/
   OPENL, 		/*!< Command to open a link with an object */
   LOAD, /*!< Command to load a save of a previous game */
-  SAVE /*!< Command to save a game */
+  SAVE, /*!< Command to save a game */
+  BUY,  /*!< Command to buy a object from a shop */
+  SELL,  /*!< Command to sell a object from a shop */
+  ANSWER /*!< Command to answer a question */
 } T_Command;
 
 /*!< Data structures definition */

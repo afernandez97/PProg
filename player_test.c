@@ -59,6 +59,10 @@ int main(int argc, char **argv){
   if (all || test == 25) test2_player_print();
   if (all || test == 26) test2_player_has_object();
   if (all || test == 27) test3_player_has_object();
+  if (all || test == 16) test1_player_set_money();
+  if (all || test == 17) test2_player_set_money();
+  if (all || test == 18) test1_player_get_money();
+  if (all || test == 18) test2_player_get_money();
 
   exit(EXIT_SUCCESS);
 }
@@ -166,6 +170,48 @@ void test1_player_set_location(){
 }
 
 
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set a money 
+   from an uninitialized player.test1_player_set_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test1_player_set_money(){
+	Player *player = NULL;
+  double money = 345;
+  FUNCTION_IS_CORRECT(player_set_money(player,money) == _ERROR);
+  return;
+}
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the player's money 
+   from an uninitialized player.test1_player_get_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test1_player_get_money(){
+	Player *player = NULL;
+  FUNCTION_IS_CORRECT(player_get_money(player) == -1);
+  return;
+}
+
+
 /**
    @date 05-10-2016 
    @author Guillermo Rodriguez
@@ -181,7 +227,7 @@ void test1_player_set_location(){
    */
 void test1_player_get_location(){
 	Player *player = NULL;
-  FUNCTION_IS_CORRECT(player_get_location(player) == NO_ID);
+  FUNCTION_IS_CORRECT(player_get_money(player) == NO_ID);
   return;
 }
 
@@ -430,6 +476,32 @@ void test3_player_set_location(){
   return;
 }
 
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to set money 
+   for  a player.test2_player_set_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_player_set_money(){
+	Player *player = NULL;
+  double money = 345;
+  Id idplayer = 3;
+  player = player_create(idplayer);
+  FUNCTION_IS_CORRECT(player_set_money(player, money) == _OK);
+  player_destroy(player);
+  return;
+}
+
+
+
 /**
    @date 05-10-2016 
    @author Guillermo Rodriguez
@@ -450,6 +522,32 @@ void test2_player_get_location(){
   player = player_create(idplayer);
   player_set_location(player, idlocation);
   FUNCTION_IS_CORRECT(player_get_location(player) != NO_ID);
+  player_destroy(player);
+  return;
+}
+
+
+
+/**
+   @date 18-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the player's money 
+   from  a player.test2_player_get_money()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_player_get_money(){
+	Player *player = NULL;
+  double money =  5;
+  Id idplayer = 3;
+  player = player_create(idplayer);
+  player_set_money(player,money);
+  FUNCTION_IS_CORRECT(player_get_money(player) == money);
   player_destroy(player);
   return;
 }
