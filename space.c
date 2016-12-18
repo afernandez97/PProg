@@ -57,6 +57,7 @@
 #define gdesc(X) (X)->gdesc
 #define illuminated(X) (X)->illuminated
 #define rule(X) (X)->rule
+#define person(X) (X)->person
 
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
@@ -69,7 +70,8 @@ struct _Space{
   Id west;  /*!< West link of the space */
 	Id up;	/*!< Up link of the space */
 	Id down;	/*!< Down link of the space */
-	Id rule     /*!< The rule of the space of the space */
+	Id rule;     /*!< The rule of the space */
+  Id person;     /*!< The person on the space */
   Set *objects; /*!<  Set of the objects,there are in the space */
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
@@ -114,6 +116,7 @@ Space * space_create(Id id){
 	up(space) = NO_ID;
   down(space) = NO_ID;
   rule(space) = NO_ID;  
+  person(space) = NO_ID;
 
   objects(space) = set_create();
   if(!objects(space)){  /* Check if memory has been allocated */
@@ -553,6 +556,52 @@ Id space_get_rule(Space *space){
   return rule(space);
 }
 
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief
+    Set the person to a space. space_set_person()
+ 
+   @param Space *space: the space where you want to change the person.
+   @param Id id: the new person you want for the space.
+ 
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_set_person(Space *space, Id id){
+  if(!space){             /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+ 
+  person(space) = id;          /* Set the rule to the space */
+  return _OK;
+}
+ 
+ 
+ 
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+    Gives the information of the person of the space.space_get_person()
+ 
+   @param 
+    Space *space: the space you want to know the person.
+ 
+   @return 
+    Id: the person of the space or NO_ID on error.
+   */
+Id space_get_person(Space *space){
+  if(!space){                     /* Check that the input is not empty */
+    return NO_ID;
+  }
+ 
+  return person(space);
+}
+
 /**
    @date 25-10-2016 
    @author Alejandro Sanchez
@@ -922,6 +971,13 @@ _STATUS space_print(Space *space){
     fprintf(stdout, "---> Rule: %ld.\n", idaux);
   } else{
       fprintf(stdout, "---> No rule.\n");
+  }
+
+  idaux = space_get_person(space);
+  if(NO_ID != idaux){
+    fprintf(stdout, "---> Person: %ld.\n", idaux);
+  } else{
+      fprintf(stdout, "---> No person.\n");
   }
 
   if(set_is_empty(objects(space)) == _TRUE){

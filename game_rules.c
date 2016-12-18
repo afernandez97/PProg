@@ -94,7 +94,26 @@ _STATUS rule_destroy(Rule *rule){
   return _OK;
 }
 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
 
+   @brief 
+    Gives the information of the id of the rule.rule_get_id()
+
+   @param
+    Rule * rule: the rule you want to know its id.
+
+   @return 
+    char *: the id of the rule or NO_ID on error.
+ */
+Id rule_get_id(Rule *rule){
+  if(!rule){       /* Check that the input is not empty */
+    return NO_ID;
+  }
+ 
+  return id(rule);
+}
 
 
 /**
@@ -245,29 +264,6 @@ char *rule_get_choice2(Rule *rule){
   return choice2(rule); 
 }   
 
-
-
-/**
-   @date 12-12-2016 
-   @author Guillermo Rodriguez
-
-   @brief 
-    Gives the information of the id of the rule.rule_get_id()
-
-   @param
-    Rule * rule: the rule you want to know its id.
-
-   @return 
-    char *: the id of the rule or NO_ID on error.
- */
-
-Id rule_get_id(Rule *rule){
-  if(!rule){       /* Check that the input is not empty */
-    return NO_ID;
-  }
- 
-  return id(rule);
-}
 
 /**
    @date 12-12-2016 

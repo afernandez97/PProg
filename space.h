@@ -41,7 +41,6 @@
 
 #include "types.h"
 #include "set.h"
-#include "game_rules.h"
 
 /**
 @def Constant values description
@@ -368,6 +367,38 @@ _STATUS space_set_rule(Space *space, Id id);
    */
 Id space_get_rule(Space *space);
  
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief
+    Set the person to a space. space_set_person()
+ 
+   @param Space *space: the space where you want to change the person.
+   @param Id id: the new person you want for the space.
+ 
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_set_person(Space *space, Id id);
+ 
+  
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+    Gives the information of the person of the space.space_get_person()
+ 
+   @param 
+    Space *space: the space you want to know the person.
+ 
+   @return 
+    Id: the person of the space or NO_ID on error.
+   */
+Id space_get_person(Space *space);
+
+
 /**
    @date 25-10-2016 
    @author Alejandro Sanchez

@@ -59,7 +59,21 @@ Rule * rule_create(Id id);
 _STATUS rule_destroy(Rule *rule);
 
 
+/**
+   @date 12-12-2016 
+   @author Guillermo Rodriguez
 
+   @brief 
+    Gives the information of the id of the rule.rule_get_id()
+
+   @param
+    Rule *rule: the rule you want to know its id.
+
+   @return 
+    char *: the id of the rule or NO_ID on error.
+ */
+
+Id rule_get_id(Rule *rule);
 
 /**
    @date 12-12-2016 
@@ -157,22 +171,6 @@ char * rule_get_choice1(Rule *rule);
  */
 char * rule_get_choice2(Rule *rule);
 
-
-/**
-   @date 12-12-2016 
-   @author Guillermo Rodriguez
-
-   @brief 
-    Gives the information of the id of the rule.rule_get_id()
-
-   @param
-    Rule *rule: the rule you want to know its id.
-
-   @return 
-    char *: the id of the rule or NO_ID on error.
- */
-
-Id rule_get_id(Rule *rule);
 
 
 /**

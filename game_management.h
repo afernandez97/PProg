@@ -103,6 +103,33 @@ _STATUS game_save_players(Game *game, char *filename);
 
 
 /**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_save_rules
+Saves the rules of a game.
+
+@param Game *game: the game you want to save its rules.
+@param char *filename: the filename that will contain the rules of the game.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_save_rules(Game *game, char *filename);
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_save_people
+Saves the people of a game.
+
+@param Game *game: the game you want to save its people.
+@param char *filename: the filename that will contain the people of the game.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_save_people(Game *game, char *filename);
+
+
+/**
 @date 11-12-2016 
 @author Alejandro Sanchez
 
@@ -227,5 +254,67 @@ Loads players from a file.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_load_players(Game *game, char *filename);
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_add_rule
+Adds a rule to a game.
+
+@param Game *game: the game where you add the rule.
+@param Rule *rule: the rule you want to add to the game.  
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_add_rule(Game *game, Rule *rule);
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_load_rules
+Loads the rules from a file.
+
+@param Game *game: the game where you want to load the rules .
+@param char *filename: the file that contains the rules.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+
+_STATUS game_load_rules(Game *game, char *filename);
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_add_person
+Adds an person to a game.
+
+@param Game *game: the game where you add the person.
+@param Person *person: the person you want to add to the game.  
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_add_person(Game *person, Person *person);
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_load_people
+Loads the people from a file.
+
+@param Game *game: the game where you want to load the people.
+@param char *filename: the file that contains the people.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+
+_STATUS game_load_people(Game *game, char *filename);
+
+
+
 
 #endif

@@ -24,7 +24,7 @@ implemented in game_rules.c.
 /**
 @def Constant values description 
 */
-#define MAX_TEST_RULE 65
+#define MAX_TEST_RULE 23
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\

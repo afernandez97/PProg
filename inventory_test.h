@@ -26,7 +26,7 @@
 
 #define FUNCTION_IS_CORRECT(x)\
           if(x){\
-            fprintf(stdout,"%s %d %s CORRECT\n", __FILE__, __LINE__, __FUNCTION__);\
+            fprintf(stdout,"%s %d %s _OK\n", __FILE__, __LINE__, __FUNCTION__);\
           } else{\
               (fprintf(stdout,"%s %d %s _ERROR\n", __FILE__, __LINE__, __FUNCTION__));\
           }

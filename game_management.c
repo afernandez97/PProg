@@ -54,6 +54,8 @@ _STATUS game_save(Game *game, char *path){
   char f2[WORD_SIZE]="";
   char f3[WORD_SIZE]="";
   char f4[WORD_SIZE]="";
+  char f5[WORD_SIZE]="";
+  char f6[WORD_SIZE]="";
 
   /* Check that the inputs are not empty */ 
   if(!game || !path){  
@@ -69,6 +71,10 @@ _STATUS game_save(Game *game, char *path){
   strcat(f3,"_obj.dat");
   strcpy(f4, path);
   strcat(f4,"_ply.dat");
+  strcpy(f5, path);
+  strcat(f5,"_rul.dat");
+  strcpy(f6, path);
+  strcat(f6,"_per.dat");
 
   /* Save the links from the file and check if it has worked */
   if(game_save_links(game, f1) == _ERROR){
@@ -87,6 +93,16 @@ _STATUS game_save(Game *game, char *path){
 
   /* Save the players from the file and check if it has worked */
   if(game_save_players(game, f4) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Save the rules from the file and check if it has worked */
+  if(game_save_rules(game, f5) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Save the people from the file and check if it has worked */
+  if(game_save_people(game, f6) == _ERROR){
     return _ERROR;
   }
 
@@ -176,7 +192,7 @@ _STATUS game_save_spaces(Game *game, char *filename){
   char name[WORD_SIZE] = "";
   char gdesc[WORD_SIZE] = "";
   char desc[WORD_SIZE] = "";
-  Id id, north, east, south, west, up, down;
+  Id id, north, east, south, west, up, down, rule, person;
   _BOOL illumination;
   Space *space = NULL;
   int i = 0, flag = 0;
@@ -210,6 +226,12 @@ _STATUS game_save_spaces(Game *game, char *filename){
       up = space_get_up(space);
       down = space_get_down(space);
 
+      /* Get the rule of the space */  
+      rule = space_get_rule(space);
+
+      /* Get the person of the space */  
+      person = space_get_person(space);
+
       /* Get if the space is illuminated or not */
       illumination = space_is_illuminated(space); 
 
@@ -219,8 +241,8 @@ _STATUS game_save_spaces(Game *game, char *filename){
       /* Get the description of the space */ 
       strcpy(desc, space_get_desc(space));
 
-      fprintf(f_spc, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
-        id, name, north, east, south, west, up, down, illumination, desc, gdesc);
+      fprintf(f_spc, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
+        id, name, north, east, south, west, up, down, rule, person, illumination, desc, gdesc);
     } else{
       flag = 1;
     } 
@@ -393,8 +415,126 @@ _STATUS game_save_players(Game *game, char *filename){
   return status;
 }
 
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_save_rules
+Saves the rules of a game.
+
+@param Game *game: the game you want to save its rules.
+@param char *filename: the filename that will contain the rules of the game.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_save_rules(Game *game, char *filename){
+  FILE *f_rul = NULL;
+  Rule *rule = NULL;
+  char question[WORD_SIZE] = "",choice1[WORD_SIZE] = "",choice2[WORD_SIZE] = "";
+  Id id;
+
+  if(!game || !filename){    /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+
+  f_rul = fopen(filename, "w");
+  if(!f_rul){
+    return _ERROR;
+  }
+
+  /* Print each line of the file until finding an empty rule */
+  while(i < MAX_RULE && flag == 0){
+    /* Get each rule of the game */
+    rule = game_get_rule_at_position(game, i);  
+    if(rule != NULL) {
+      /* Get the id of the rule */  
+      id = rule_get_id(rule);
+
+      /* Get the question of the rule */
+      strcpy(question, rule_get_question(rule));
+      /* Get the choice1 of the rule */
+      strcpy(choice1, rule_get_choice1(rule));
+      /* Get the choice2 of the rule */
+      strcpy(choice2, rule_get_choice2(rule));
+      
+      fprintf(f_rul, "#r:%ld|%s|%s|%s\n", 
+        id, question, choice1, choice2);
+    } else{
+      flag = 1;
+    } 
+
+    i++;
+  }
+
+  if(ferror(f_rul)){
+    status = _ERROR;
+  }
+  
+  fclose(f_rul);
+
+  return status;
+}
 
 
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_save_people
+Saves the people of a game.
+
+@param Game *game: the game you want to save its people.
+@param char *filename: the filename that will contain the people of the game.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_save_people(Game *game, char *filename){
+  FILE *f_per = NULL;
+  Person *person = NULL;
+  char name[WORD_SIZE] = "";
+  Id id, location, rule;
+
+  if(!game || !filename){    /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+
+  f_per = fopen(filename, "w");
+  if(!f_per){
+    return _ERROR;
+  }
+
+  /* Print each line of the file until finding an empty person */
+  while(i < MAX_PEOPLE && flag == 0){
+    /* Get each person of the game */
+    person = game_get_person_at_position(game, i);  
+    if(person != NULL) {
+      /* Get the id of the person */  
+      id = person_get_id(person);
+
+      /* Get the name of the person */
+      strcpy(name, person_get_name(person));
+
+      /* Get the location of the person */  
+      location = person_get_location(person);
+
+      /* Get the rule of the  */  
+      rule = person_get_rule(person);
+      
+      fprintf(f_per, "#p:%ld|%s|%ld|%ld\n", 
+        id, name, location, rule);
+    } else{
+      flag = 1;
+    } 
+
+    i++;
+  }
+
+  if(ferror(f_per)){
+    status = _ERROR;
+  }
+  
+  fclose(f_per);
+
+  return status;
+}
 
 
 
@@ -414,6 +554,8 @@ _STATUS game_load(Game *game, char *path){
   char f2[WORD_SIZE]="";
   char f3[WORD_SIZE]="";
   char f4[WORD_SIZE]="";
+  char f5[WORD_SIZE]="";
+  char f6[WORD_SIZE]="";
 
   /* Check that the inputs are not empty */ 
   if(!game || !path){  
@@ -429,6 +571,10 @@ _STATUS game_load(Game *game, char *path){
   strcat(f3,"_obj.dat");
   strcpy(f4, path);
   strcat(f4,"_ply.dat");
+  strcpy(f5, path);
+  strcat(f5,"_rul.dat");
+  strcpy(f6, path);
+  strcat(f6,"_per.dat");
 
   /* Load the links from the file and check if it has worked */
   if(game_load_links(game, f1) == _ERROR){
@@ -447,6 +593,16 @@ _STATUS game_load(Game *game, char *path){
 
   /* Load the players from the file and check if it has worked */
   if(game_load_players(game, f4) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Load the rules from the file and check if it has worked */
+  if(game_load_rules(game, f5) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Load the people from the file and check if it has worked */
+  if(game_load_people(game, f6) == _ERROR){
     return _ERROR;
   }
 
@@ -630,7 +786,7 @@ _STATUS game_load_spaces(Game *game, char *filename){
 	char desc[WORD_SIZE] = "";
   char *toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
-  Id up = NO_ID, down = NO_ID;
+  Id up = NO_ID, down = NO_ID, rule = NO_ID, person = NO_ID;
   _BOOL illumination = _FALSE;
   Space *space = NULL;
   _STATUS status = _OK;
@@ -666,6 +822,10 @@ _STATUS game_load_spaces(Game *game, char *filename){
       up = atol(toks);
       toks = strtok(NULL, "|");
       down = atol(toks);
+      toks = strtok(NULL, "|");
+      rule = atol(toks);
+      toks = strtok(NULL, "|");
+      person = atol(toks);
 			toks = strtok(NULL, "|");
       illumination = atoi(toks);
       toks = strtok(NULL, "|");
@@ -680,8 +840,8 @@ _STATUS game_load_spaces(Game *game, char *filename){
       }
 
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
-        id, name, north, east, south, west, up, down, illumination, desc, gdesc);
+      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
+        id, name, north, east, south, west, up, down, rule, person, illumination, desc, gdesc);
 #endif
       space = space_create(id); /* Create the space */
       if(space != NULL){
@@ -696,6 +856,12 @@ _STATUS game_load_spaces(Game *game, char *filename){
         space_set_up(space, up);
         space_set_down(space, down);
 
+        /* Set the rule to the space */
+        space_set_rule(space, rule);
+
+        /* Set the person to the space */
+        space_set_person(space, person);
+        
         /* Set if the space is illuminated or not */
 				space_set_illumination(space, illumination); 
 
@@ -1002,3 +1168,236 @@ _STATUS game_load_players(Game *game, char *filename){
   
   return status;
 }
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_add_rule
+Adds a rule to a game.
+
+@param Game *game: the game where you add the rule.
+@param Rule *rule: the rule you want to add to the game.  
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_add_rule(Game *game, Rule *rule){
+  int i = 0;  /* Initialize the counter */
+
+  if(!game || !rule){  /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+
+  /* Increase the counter until finding an empty rule */
+  while(i < MAX_RULE && game_get_rule_at_position(game, i) != NULL){
+    i++;
+  }
+
+  /* Check if every rule is not empty */
+  if(i >= MAX_RULE){
+    return _ERROR;
+  }
+
+  /* Set the new rule */
+  if(game_set_rule_at_position(game,rule, i) == _ERROR){
+    return _ERROR;
+  }
+
+  return _OK;
+}
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_load_rules
+Loads the rules from a file.
+
+@param Game *game: the game where you want to load the rules .
+@param char *filename: the file that contains the rules.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+
+_STATUS game_load_rules(Game *game, char *filename){
+  FILE *file = NULL;
+  char question[WORD_SIZE] = "", choice1[WORD_SIZE] = "", choice2[WORD_SIZE] = "";
+  Id id = NO_ID;
+  Rule * rule = NULL; 
+  
+  if(!game || !filename){ /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+  
+  file = fopen(filename, "r");   /* Open the file where the rules are */
+  if(!file){
+    return _ERROR;
+  }
+  
+  /* Read each line of the file and get the id, the question and choices of the rule */
+  while(fgets(line, WORD_SIZE, file)){
+    if(strncmp("#r:", line, 3) == 0){
+      toks = strtok(line + 3, "|");
+      id = atol(toks);
+      toks = strtok(NULL, "|");
+      if(toks != NULL){
+        strcpy(question, toks);
+      }
+      toks = strtok(NULL, "|");
+      if(toks != NULL){
+        strcpy(choice1, toks);
+      }
+      toks = strtok(NULL, "|");
+      if(toks != NULL){
+        strcpy(choice2, toks);
+      }
+#ifdef DEBUG 
+      printf("Leido: %ld|%s|%s|%s\n", id, question, choice1, choice2);
+#endif
+      rule = rule_create(id); /* Create the rule */
+      if(rule != NULL){
+        /* Set the question to the rule */  
+        rule_set_question(rule, question);
+        
+        /* Set the choice1 to the rule */  
+        rule_set_choice1(rule, choice1);
+        
+        /* Set the choice2 to the rule */  
+        rule_set_choice2(rule, choice2);
+        
+        /* Add the rule to the game */
+        game_add_rule(game,rule);  
+      } 
+    } 
+  }
+  if(ferror(file)){ /* Test the error indicator for the file */ 
+    status = _ERROR;
+  }
+  
+  fclose(file); /* Close the file */
+  
+  return status;
+}
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_add_person
+Adds an person to a game.
+
+@param Game *game: the game where you add the person.
+@param Person *person: the person you want to add to the game.  
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_add_person(Game *person, Person *person){
+  int i = 0;  /* Initialize the counter */
+
+  if(!game || !person){  /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+
+  /* Increase the counter until finding an empty person */
+  while(i < MAX_PEOPLE && game_get_person_at_position(game, i) != NULL){
+    i++;
+  }
+
+  /* Check if every person is not empty */
+  if(i >= MAX_PEOPLE){
+    return _ERROR;
+  }
+
+  /* Set the new person */
+  if(game_set_person_at_position(game,person, i) == _ERROR){
+    return _ERROR;
+  }
+
+  return _OK;
+}
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_load_people
+Loads the people from a file.
+
+@param Game *game: the game where you want to load the people.
+@param char *filename: the file that contains the people.   
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+
+_STATUS game_load_people(Game *game, char *filename){
+  FILE *file = NULL;
+  char name[WORD_SIZE] = "";
+  Id id = NO_ID, location = NO_ID, rule = NO_ID;
+  Person * person = NULL;
+  Space *space = NULL;
+  _STATUS status = _OK; 
+  
+  if(!game || !filename){ /* Check that the inputs are not empty */
+    return _ERROR;
+  }
+  
+  file = fopen(filename, "r");   /* Open the file where the people are */
+  if(!file){
+    return _ERROR;
+  }
+  
+  /* Read each line of the file and get the id, the name and the location of the people */
+  while(fgets(line, WORD_SIZE, file)){
+    if(strncmp("#p:", line, 3) == 0){
+      toks = strtok(line + 3, "|");
+      id = atol(toks);
+      toks = strtok(NULL, "|");
+      if(toks != NULL){
+        strcpy(name, toks);
+      }
+      toks = strtok(NULL, "|");
+      location = atol(toks);
+      toks = strtok(NULL, "|");
+      rule = atol(toks);
+      
+#ifdef DEBUG 
+      printf("Leido: %ld|%s|%ld|%ld\n", id, name, location, rule);
+#endif
+      person = person_create(id); /* Create the person */
+      if(person != NULL){
+        /* Set the name to the person */  
+        person_set_name(person, name);
+
+        /* Set the location to the person */  
+        person_set_location(person, location);
+        
+        /* Set the rule to the person */  
+        person_set_rule(person, location);
+        
+
+  
+        /* Add the person to the game */
+        game_add_person(game, person);  
+
+
+        /* Set the person to a space */
+        space = game_get_space(game, location);
+        if(space != NULL){
+          space_set_person(space, id);
+        } 
+      }
+    } 
+  }
+  if(ferror(file)){ /* Test the error indicator for the file */ 
+    status = _ERROR;
+  }
+  
+  fclose(file); /* Close the file */
+  
+  return status;
+}
+
+
+
+

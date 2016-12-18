@@ -27,7 +27,7 @@ int main(int argc, char **argv){
 		test = atoi(argv[1]);
 		all = 0;
 		printf("Testing %d:\n", test);
-		if (test < 1 || test > MAX_TEST_person) {
+		if (test < 1 || test > MAX_TEST_PERSON) {
 			printf("Unknown test\n");
 			return 1; 
 		}
@@ -120,7 +120,7 @@ void test1_person_destroy(){
 	Id id = 1;
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_destroy(person) == OK);
+	FUNCTION_IS_CORRECT(person_destroy(person) == _OK);
 	return;
 }
 
@@ -138,7 +138,7 @@ void test1_person_destroy(){
 void test2_person_destroy(){
 	Person * person = NULL;
 
-	FUNCTION_IS_CORRECT(person_destroy(person) == ERROR);
+	FUNCTION_IS_CORRECT(person_destroy(person) == _ERROR);
 	return;
 }
 
@@ -195,7 +195,7 @@ void test1_person_set_name(){
 	char name[WORD_SIZE] = "name";
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_set_name(person,name) == OK);
+	FUNCTION_IS_CORRECT(person_set_name(person,name) == _OK);
 	person_destroy(person);
 	return;
 }
@@ -215,7 +215,7 @@ void test2_person_set_name(){
 	Person * person = NULL;
 	char name[WORD_SIZE] = "name";
 
-	FUNCTION_IS_CORRECT(person_set_name(person, name) == ERROR);
+	FUNCTION_IS_CORRECT(person_set_name(person, name) == _ERROR);
 	return;
 }
 
@@ -238,7 +238,7 @@ void test3_person_set_name(){
 	char *noName = NULL;
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_set_name(person, noName) == ERROR);
+	FUNCTION_IS_CORRECT(person_set_name(person, noName) == _ERROR);
 	person_destroy(person);
 	return;
 }
@@ -303,7 +303,7 @@ void test2_person_get_name(){
 void test1_person_set_location(){
 	Person *person = NULL;
   Id idlocation = 345;
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == ERROR);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _ERROR);
   return;
 }
 
@@ -326,7 +326,7 @@ void test2_person_set_location(){
   Id idlocation = 345;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == OK);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _OK);
   person_destroy(person);
   return;
 }
@@ -349,7 +349,7 @@ void test3_person_set_location(){
   Id idlocation = NO_ID;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == ERROR);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _ERROR);
   person_destroy(person);
   return;
 }
@@ -414,7 +414,7 @@ void test2_person_get_location(){
 void test1_person_set_rule(){
 	Person *person = NULL;
   Id idrule = 345;
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _ERROR);
   return;
 }
 
@@ -437,7 +437,7 @@ void test2_person_set_rule(){
   Id idrule = 345;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == OK);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _OK);
   person_destroy(person);
   return;
 }
@@ -461,7 +461,7 @@ void test3_person_set_rule(){
   Id idrule = NO_ID;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _ERROR);
   person_destroy(person);
   return;
 }
@@ -533,7 +533,7 @@ void test1_person_print(){
 	person_set_name(person, name);
   person_set_rule(person,rule);
 	person_set_location(person,location);
-	FUNCTION_IS_CORRECT(person_print(person) == OK);
+	FUNCTION_IS_CORRECT(person_print(person) == _OK);
 	person_destroy(person);
 	return;
 }
@@ -551,7 +551,7 @@ Tests if you can print an uninitialised person.
 void test2_person_print(){
 	Person * person = NULL;
 
-	FUNCTION_IS_CORRECT(person_print(person) == ERROR);
+	FUNCTION_IS_CORRECT(person_print(person) == _ERROR);
 	return;
 }
 
