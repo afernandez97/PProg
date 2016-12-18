@@ -26,7 +26,6 @@
 @brief Person's structure
 Contains the person's fields
 */
-
 struct _Person{
 	Id id; /*!< Identifier of the person */
   char name[WORD_SIZE + 1]; /*!< Name of the person */
@@ -53,7 +52,7 @@ Person * person_create(Id id){
     return NULL;
   }
 
-  person = (Person*)malloc(sizeof(Person));
+  person = (Person *)malloc(sizeof(Person));
   if(!person){	    /* Check if memory has been allocated */
     return NULL;
   }
@@ -76,17 +75,17 @@ Destroys a person.
 @date 16-12-2016 
 @author Guillermo Rodriguez 
 @param Person *person: the person to destroy.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
 
-STATUS person_destroy(Person * person){
+_STATUS person_destroy(Person * person){
   if(!person){      /* Check that the input is not empty */ 
-    return ERROR;
+    return _ERROR;
   }
 
   free(person);    /* Eliminate the memory of the person */
  
-  return OK;
+  return _OK;
 }
 
 
@@ -117,20 +116,20 @@ Sets a name for a person.
 @author Guillermo Rodriguez
 @param person *person: the person you want to rename.
 @param char *name: the new name you want for the person.  
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 
-STATUS person_set_name(Person *person, char *name){
+_STATUS person_set_name(Person *person, char *name){
   if(!person || !name){			/* Check that the inputs are not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the name and check if it hasworked */
   if(!strcpy(name(person), name)){	
-    return ERROR;
+    return _ERROR;
   }
 
-  return OK;
+  return _OK;
 }
 
 
@@ -161,18 +160,18 @@ Sets a location for a person.
 @author Guillermo Rodriguez
 @param Person *person: the person you want to set the location.
 @param Id location: the new location you want for the person.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 
-STATUS person_set_location(Person *person, Id location){
+_STATUS person_set_location(Person *person, Id location){
   if(!person){			/* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the location */
   location(person) = location;
 
-  return OK;
+  return _OK;
 }
 
 /**
@@ -199,18 +198,17 @@ Sets a rule for a person.
 @author Guillermo Rodriguez
 @param Person *person: the person you want to set the rule.
 @param Id rule: the new rule you want for the person.
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-
-STATUS person_set_rule(Person *person, Id rule){
+_STATUS person_set_rule(Person *person, Id rule){
   if(!person){			/* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Set the location */
-  rulle(person) = rule;
+  rule(person) = rule;
 
-  return OK;
+  return _OK;
 }
 
 
@@ -223,7 +221,6 @@ Returns a person's rule.
 @param person *person: the person which you want the rule of.
 @return Id: the person's rule or NO_ID on error.
 */
-
 Id person_get_rule(Person *person){
   if(!person){      /* Check that the input is not empty */ 
     return NO_ID;
@@ -241,19 +238,18 @@ Prints the information of the person on the screen.
 @date 03-12-2016 
 @author Guillermo Rodriguez
 @param Person *person the person you want to print.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-
-STATUS person_print(Person *person){
+_STATUS person_print(Person *person){
   if(!person){        /* Check that the input is not empty */
-    return ERROR;
+    return _ERROR;
   }
 
   /* Print the person fields */
-  fprintf(stdout, "--> person (Id: %ld; Name: %s; Location: %ld;Rule: %s; Price: %lf; Open: %ld", id(person), name(person), location(person),rule(person));
+  fprintf(stdout, "--> Person (Id: %ld; Name: %s; Location: %ld; Rule: %ld)", id(person), name(person), location(person),rule(person));
 
 
-  return OK;
+  return _OK;
 }
 
 

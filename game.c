@@ -82,6 +82,8 @@ Dec. 3, 2016 Version 6.0
 @def Constant values description
 */
 #define players(X) (X)->players
+#define people(X) (X)->people
+#define rules(X) (X)->rules
 #define spaces(X) (X)->spaces
 #define objects(X) (X)->objects
 #define die(X) (X)->die
@@ -95,6 +97,8 @@ The Game structure stores information of the game and its elements.
 */
 struct _Game{
   Player *players[MAX_PLAYERS];   /*!< Players of the game */
+  Person *people[MAX_PEOPLE];     /*!< People of the game */
+  Rule *rules[MAX_RULES];         /*!< Rules of the game */
   Object *objects[MAX_OBJECTS];   /*!< Objects of the game */
   Space *spaces[MAX_SPACES];      /*!< Spaces of the game */
   Die *die;                       /*!< Die of the game*/ 
@@ -222,6 +226,7 @@ Turns on an object
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_TURNOFF(Game *game, char *arg, int player);
+
 /**
 @date 02-12-2016 
 @author Guillermo Rodriguez
@@ -235,6 +240,31 @@ Opens a link
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_OPEN(Game *game, char *arg, char *arg2, int player);
+
+/**
+@date 16-12-2016 
+@author Alejandro Sanchez
+@brief callback_SAVE
+Makes a save of the game. It is used when the command is SAVE.
+@param Game *game: the game.
+@param char *path: the path of the file to make the save of the game.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_SAVE(Game *game, char *path);
+
+
+/**
+@date 16-12-2016 
+@author Alejandro Sanchez
+@brief callback_LOAD
+Loads a save of the game. It is used when the command is LOAD.
+@param Game *game: the game.
+@param char *path: the path of the file to load the save of the game.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_LOAD(Game *game, char *path);
 
 
 
@@ -295,6 +325,34 @@ Gives a specific player.
 Player * game_get_player(Game *game, Id id);
 
 /**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_rule
+Gives a specific rule.
+
+@param Game *game: the game where the rule is.
+@param Id id: the id of the rule you want.
+
+@return Rule *: the rule you want or NULL on error.
+*/
+Rule * game_get_rule(Game *game, Id id);
+
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_person
+Gives a specific person.
+
+@param Game *game: the game where the person is.
+@param Id id: the id of the person you want.
+
+@return Person *: the person you want or NULL on error.
+*/
+Person * game_get_person(Game *game, Id id);
+
+/**
 @date 03-12-2016 
 @author Adrián Fernández
 
@@ -334,6 +392,7 @@ Sets a location for an object.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_object_location(Game *game, Id object, Id location);
+
 /**
 @date 30-10-2016 
 @author Alejandro Sanchez
@@ -346,6 +405,33 @@ Gives the location of the object.
 @return Id: the location of the object or NO_ID on error.
 */
 Id game_get_object_location(Game *game, Id object);
+
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_set_person_location
+Sets a location for an person.
+
+@param Game *game: the game where the person is.
+@param Id id: the location you want for the person.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_person_location(Game *game, Id person, Id location);
+
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_person_location
+Gives the location of the person.
+
+@param Game *game: the game where the person is.
+
+@return Id: the location of the person or NO_ID on error.
+*/
+Id game_get_person_location(Game *game, Id person);
 
 /**
 @date 11-11-2016 
@@ -361,6 +447,7 @@ Checks if there is a link between two spaces.
 */
 
 _BOOL game_spaces_are_linked(Game *game, Space *space1, Space *space2);
+
 /**
 @date 13-11-2016 
 @author Alejandro Sanchez
@@ -790,7 +877,6 @@ _STATUS game_set_player_at_position(Game *game, Player *player, int position){
 }
 
 
-
 /**
 @date 03-12-2016 
 @author Adrián Fernández
@@ -812,6 +898,104 @@ Player * game_get_player_at_position(Game *game, int position){
 }
 
 
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_set_person_at_position
+Sets a person in a specific position.
+
+@param Game *game: the game where the person is.
+@param Person * person : the person you want to set
+@param int position: the position where you want to set the person.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_person_at_position(Game *game, Person *person, int position){
+  if(!game || !person || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(person(game)[position] != NULL){
+    person_destroy(person(game)[position]);
+  }
+
+  person(game)[position] = person;
+
+  return OK;
+}
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_get_person_at_position
+Gets the person in a specific position.
+
+@param Game *game: the game where the person is.
+@param int position: the position of the person
+
+@return Person *person : the person in that position or NULL on error.
+*/
+Person * game_get_person_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return person(game)[position];
+}
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_set_rule_at_position
+Sets a rule in a specific position.
+
+@param Game *game: the game where the rule is.
+@param Rule * rule : the rule you want to set
+@param int position: the position where you want to set the rule.
+
+@return STATUS: OK if you do the operation well and ERROR in other cases.
+*/
+STATUS game_set_rule_at_position(Game *game, Rule *rule, int position){
+  if(!game || !rule || position < 0){  /* Check that the inputs are not empty */
+    return ERROR;
+  }
+
+  if(rule(game)[position] != NULL){
+    rule_destroy(rule(game)[position]);
+  }
+
+  rule(game)[position] = rule;
+
+  return OK;
+}
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_get_rule_at_position
+Gets the rule in a specific position.
+
+@param Game *game: the game where the rule is.
+@param int position: the position of the rule
+
+@return Rule *rule : the rule in that position or NULL on error.
+*/
+Rule * game_get_rule_at_position(Game *game, int position){
+  if(!game || position < 0){
+    return NULL;  
+  }
+  
+  return rule(game)[position];
+}
 
 /**
 @date 23-09-2016 
@@ -941,6 +1125,34 @@ Object * game_get_object(Game *game, Id id){
 }
 
 
+/**
+@date 13-11-2016 
+@author Alejandro Sanchez
+
+@brief game_get_link
+Gives a specific link.
+
+@param Game *game: the game where the link is.
+@param Id id: the id of the link you want.
+
+@return Link *: the link you want or NULL on error.
+*/
+Link * game_get_link(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
+  }
+
+  /* Look for the link you want */
+  for(i=0; i < MAX_LINKS && links(game)[i] != NULL; i++){
+    if(id == link_get_id(links(game)[i])){
+      return links(game)[i];
+    }
+  }
+    
+  return NULL;
+}
 
 /**
 @date 03-12-2016 
@@ -971,7 +1183,63 @@ Player * game_get_player(Game *game, Id id){
   return NULL;
 }
 
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
 
+@brief game_get_rule
+Gives a specific rule.
+
+@param Game *game: the game where the rule is.
+@param Id id: the id of the rule you want.
+
+@return Rule *: the rule you want or NULL on error.
+*/
+Rule * game_get_rule(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
+  }
+
+  /* Look for the rule you want */
+  for(i=0; i < MAX_RULES && rules(game)[i] != NULL; i++){
+    if(id == rule_get_id(rules(game)[i])){
+      return rules(game)[i];
+    }
+  }
+    
+  return NULL;
+}
+
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_person
+Gives a specific person.
+
+@param Game *game: the game where the person is.
+@param Id id: the id of the person you want.
+
+@return Person *: the person you want or NULL on error.
+*/
+Person * game_get_person(Game *game, Id id){
+  int i;
+
+  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
+    return NULL;
+  }
+
+  /* Look for the person you want */
+  for(i=0; i < MAX_PEOPLE && people(game)[i] != NULL; i++){
+    if(id == person_get_id(people(game)[i])){
+      return people(game)[i];
+    }
+  }
+    
+  return NULL;
+}
 
 /**
 @date 03-12-2016 
@@ -1046,7 +1314,7 @@ Sets a location for an object.
 _STATUS game_set_object_location(Game *game, Id object, Id location){
   Object *obj = NULL;
 
-  if(!game || player == NO_ID || location == NO_ID){  /* Check that the inputs are not empty */
+  if(!game || object == NO_ID || location == NO_ID){  /* Check that the inputs are not empty */
     return _ERROR;
   }
 
@@ -1084,34 +1352,55 @@ Id game_get_object_location(Game *game, Id object){
   return object_get_location(obj);
 }
 
-
 /**
-@date 13-11-2016 
+@date 18-12-2016 
 @author Alejandro Sanchez
 
-@brief game_get_link
-Gives a specific link.
+@brief game_set_person_location
+Sets a location for an person.
 
-@param Game *game: the game where the link is.
-@param Id id: the id of the link you want.
+@param Game *game: the game where the person is.
+@param Id id: the location you want for the person.
 
-@return Link *: the link you want or NULL on error.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-Link * game_get_link(Game *game, Id id){
-  int i;
+_STATUS game_set_person_location(Game *game, Id person, Id location){
+  Person *per = NULL;
 
-  if(!game || id == NO_ID){ /* Check that the inputs are not empty */
-    return NULL;
+  if(!game || person == NO_ID || location == NO_ID){  /* Check that the inputs are not empty */
+    return _ERROR;
   }
 
-  /* Look for the link you want */
-  for(i=0; i < MAX_LINKS && links(game)[i] != NULL; i++){
-    if(id == link_get_id(links(game)[i])){
-      return links(game)[i];
-    }
+  /* Get the person */
+  per = game_get_person(game, person);
+  
+  /* Set its location */
+  return person_set_location(per, location);
+}
+
+/**
+@date 18-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_person_location
+Gives the location of the person.
+
+@param Game *game: the game where the person is.
+
+@return Id: the location of the person or NO_ID on error.
+*/
+Id game_get_person_location(Game *game, Id person){
+  Person *per = NULL;
+
+  if(!game || person == NO_ID){  /* Check that the inputs are not empty */
+    return NO_ID;
   }
-    
-  return NULL;
+
+  /* Get the person */
+  per = game_get_person(game, person);
+
+  /* Get its location */
+  return person_get_location(per);
 }
 
 

@@ -43,6 +43,7 @@ Dec. 3, 2016 Version 6.0
 #define GAME_H
 
 #include "command.h"
+#include "person.h"
 #include "dialogue.h"
 #include "game_rules.h"
 #include "space.h"
@@ -277,6 +278,67 @@ Gets the player in a specific position.
 Player * game_get_player_at_position(Game *game, int position);
 
 
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_set_person_at_position
+Sets a person in a specific position.
+
+@param Game *game: the game where the person is.
+@param Person * person : the person you want to set
+@param int position: the position where you want to set the person.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_person_at_position(Game *game, Person *person, int position);
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_get_person_at_position
+Gets the person in a specific position.
+
+@param Game *game: the game where the person is.
+@param int position: the position of the person
+
+@return Person *person : the person in that position or NULL on error.
+*/
+Person * game_get_person_at_position(Game *game, int position);
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_set_rule_at_position
+Sets a rule in a specific position.
+
+@param Game *game: the game where the rule is.
+@param Rule * rule : the rule you want to set
+@param int position: the position where you want to set the rule.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_rule_at_position(Game *game, Rule *rule, int position);
+
+
+
+/**
+@date 16-12-2016 
+@author Guillermo Rodriguez
+
+@brief game_get_rule_at_position
+Gets the rule in a specific position.
+
+@param Game *game: the game where the rule is.
+@param int position: the position of the rule
+
+@return Rule *rule : the rule in that position or NULL on error.
+*/
+Rule * game_get_rule_at_position(Game *game, int position);
 
 /**
 @date 23-09-2016 
