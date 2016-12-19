@@ -1,7 +1,7 @@
 /**
 @file space_test.c
-@version 2.0
-@date 01-12-2016
+@version 2.1
+@date 19-12-2016
 @author Adrián Fernández
 
 @brief
@@ -13,6 +13,9 @@ functions implemented in space.c.
 @version
 	Dec. 01, 2016 Version 2.0
 		Added tests for new fields "up", "down" and "illuminated".
+@version
+	Dec. 19, 2016 Version 2.1
+		Added tests for new fields "rule", "person" and "shop".
 */
 
 #include <stdio.h>
@@ -109,7 +112,10 @@ int main(int argc, char **argv){
 	if (all || test == 71) test2_space_set_shop();
 	if (all || test == 72) test1_space_is_shop();
 	if (all || test == 73) test2_space_is_shop();
-
+	if (all || test == 74) test1_space_set_person();
+	if (all || test == 75) test2_space_set_person();
+	if (all || test == 76) test1_space_get_person();
+	if (all || test == 77) test2_space_get_person();
 
 	return 0;
 }
@@ -885,6 +891,85 @@ void test2_space_get_rule(){
 
 	space_set_rule(space, id);
 	FUNCTION_IS_CORRECT(space_get_rule(space) == NO_ID);
+	return;
+}
+
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test1_space_set_person
+Tests if you can successfully set the person of a space.
+
+@param
+@return
+*/
+void test1_space_set_person(){
+	Space *space = NULL;
+	Id id = 1;
+
+	space = space_create(id);
+	FUNCTION_IS_CORRECT(space_set_person(space, id) == _OK);
+	space_destroy(space);
+	return;
+}
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test2_space_set_person
+Tests if you can set the person of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_person(){
+	Space *space = NULL;
+	Id id = 1;
+
+	FUNCTION_IS_CORRECT(space_set_person(space, id) == _ERROR);
+	return;
+}
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test1_space_get_person
+Tests if you can successfully get the person of a space.
+
+@param
+@return
+*/
+void test1_space_get_person(){
+	Space *space = NULL;
+	Id id = 1;
+
+	space = space_create(id);
+	space_set_person(space, id);
+	FUNCTION_IS_CORRECT(space_get_person(space) != NO_ID);
+	space_destroy(space);
+	return;
+}
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test2_space_get_person
+Tests if you can get the person field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_person(){
+	Space *space = NULL;
+	Id id = 1;
+
+	space_set_person(space, id);
+	FUNCTION_IS_CORRECT(space_get_person(space) == NO_ID);
 	return;
 }
 

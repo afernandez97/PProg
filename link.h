@@ -1,10 +1,12 @@
 /**
 @file link.h
 @brief It implements a link.
-@version 1.0
-@date 04-11-2016
+@version 2.0
+@date 10-12-2016
 @author Adrian Fernández, Ricardo Riol
 @version Nov. 4, 2016 Version 1.0 (initial release)
+@version Dec. 10, 2016 Version 2.0
+  Increased MAX_LINKS
 */
 
 
@@ -16,7 +18,7 @@
 /**
 @def Constant values description
 */
-#define MAX_LINKS 4*MAX_SPACES
+#define MAX_LINKS 6*MAX_SPACES
 
 /*!< Data structures definition */
 typedef struct _Link Link;

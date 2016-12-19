@@ -1,7 +1,7 @@
 /**
    @file player_test.c
-   @version 1.0
-   @date 05-11-2016 
+   @version 2.0
+   @date 18-12-2016 
    @author Guillermo Rodriguez 
 
    @brief 
@@ -9,6 +9,8 @@
 
    
    @version Nov. 5, 2016  Version 1.0 (initial release)
+   @version Dec. 18, 2016 Version 2.0
+    Added functions to test the ones about the field "money"
    */
 
 

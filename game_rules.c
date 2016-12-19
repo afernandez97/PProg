@@ -20,7 +20,7 @@
 @def Constant values description 
 */
 #define id(X) (X)->id
-#define ask(X) (X)->ask
+#define question(X) (X)->question
 #define choice1(X) (X)->choice1
 #define choice2(X) (X)->choice2
 

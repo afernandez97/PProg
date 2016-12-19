@@ -1,7 +1,7 @@
 /**
    @file space.h
-   @version 5.0
-   @date 01-12-2016 
+   @version 5.2
+   @date 16-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -34,6 +34,12 @@
 			Created "space_set_up", "space_get_up", "space_set_down", "space_get_down",
 			"space_set_illumination" and "space_is_illuminated" and modified the 
 			functions affected by this changes.
+     @version  Dec. 12, 2016   Version 5.1
+      Added field "rule" to the structure "Space".
+      Created "space_set_rule" and "space_get_rule".
+     @version  Dec. 16, 2016   Version 5.2
+      Added fields "person" and "shop" to the structure "Space".
+      Created "space_set_person", "space_get_person", "space_set_shop", "space_is_shop".
    */
 
 #ifndef SPACE_H

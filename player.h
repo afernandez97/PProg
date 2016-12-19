@@ -1,7 +1,7 @@
 /**
 @file player.h
-@version 2.1
-@Date 28-10-2016 
+@version 4.0
+@Date 16-12-2016 
 @author Guillermo Rodriguez and Alejandro Sanchez
 
 @brief 
@@ -19,6 +19,9 @@ It implements a player.
   Changed "objects" field to Inventory *inv.
   Modified the functions that were affected by this field.
   Created function "player_has_object" and "player_set_object".
+@version Dec. 16, 2016 Version 4.0
+  Added field "money".
+  Created functions "player_set_money" and "player_get_money".
 */
 #ifndef PLAYER_H
 #define PLAYER_H
