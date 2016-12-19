@@ -1,7 +1,7 @@
 /**
    @file space.c
-   @version 5.0
-   @date 01-12-2016 
+   @version 5.2
+   @date 16-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -34,6 +34,12 @@
 			Created "space_set_up", "space_get_up", "space_set_down", "space_get_down",
 			"space_set_illumination" and "space_is_illuminated" and modified the 
 			functions affected by this changes.
+     @version  Dec. 12, 2016   Version 5.1
+      Added field "rule" to the structure "Space".
+      Created "space_set_rule" and "space_get_rule".
+     @version  Dec. 16, 2016   Version 5.2
+      Added fields "person" and "shop" to the structure "Space".
+      Created "space_set_person", "space_get_person", "space_set_shop", "space_is_shop".
 	*/
  
 #include <stdio.h>
@@ -250,7 +256,7 @@ const char * space_get_name(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_north(Space *space, Id id){
-  if(!space){       /* Check that the inputs are not empty */
+  if(!space){       /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -297,7 +303,7 @@ Id space_get_north(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_south(Space *space, Id id){
-  if(!space){     /* Check that the inputs are not empty */
+  if(!space){     /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -344,7 +350,7 @@ Id space_get_south(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_east(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -391,7 +397,7 @@ Id space_get_east(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_west(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -436,7 +442,7 @@ Id space_get_west(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_up(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -482,7 +488,7 @@ Id space_get_up(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_down(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -527,7 +533,7 @@ Id space_get_down(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_rule(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  
@@ -573,7 +579,7 @@ Id space_get_rule(Space *space){
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
 _STATUS space_set_person(Space *space, Id id){
-  if(!space){             /* Check that the inputs are not empty */
+  if(!space){             /* Check that the input is not empty */
     return _ERROR;
   }
  

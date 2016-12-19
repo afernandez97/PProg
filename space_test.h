@@ -27,7 +27,7 @@ implemented in space.c.
 /**
 @def Constant values description 
 */
-#define MAX_TEST_SPACE 73
+#define MAX_TEST_SPACE 77
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\
@@ -538,6 +538,55 @@ Tests if you can get the rule field of an uninitialised space.
 @return
 */
 void test2_space_get_rule();
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test1_space_set_person
+Tests if you can successfully set the person of a space.
+
+@param
+@return
+*/
+void test1_space_set_person();
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test2_space_set_person
+Tests if you can set the person of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_set_person();
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test1_space_get_person
+Tests if you can successfully get the person of a space.
+
+@param
+@return
+*/
+void test1_space_get_person();
+
+/**
+@author Alejandro Sanchez
+@date 19-12-2016
+
+@brief test2_space_get_person
+Tests if you can get the person field of an uninitialised space.
+
+@param
+@return
+*/
+void test2_space_get_person();
+
 /**
 @author Adrián Fernández
 @date 23-11-2016
@@ -952,9 +1001,6 @@ Tests if can check if a space is a shop or not
 @return
 */
 void test2_space_is_shop();
-
-
-
 
 
 /**

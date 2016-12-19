@@ -6,17 +6,17 @@
    @brief It implements an object.
    @version Oct. 02, 2016  Version 1.0 (initial release)
 	 @version Oct. 27, 2016	 Version 2.0
-	 Added field "location" to the structure "Object".
-   Modified the functions that are affected by this field.
-	 Created "object_set_location" and "object_get_location".
+  	 Added field "location" to the structure "Object".
+     Modified the functions that are affected by this field.
+  	 Created "object_set_location" and "object_get_location".
 	 @version Nov. 18, 2016	 Version 3.0
-	 Added field "desc" to the structure "Object".
-	 Created "object_set_desc" and "object_get_desc".
+  	 Added field "desc" to the structure "Object".
+  	 Created "object_set_desc" and "object_get_desc".
    @version Dec. 03, 2016  Version 4.0
-   Added fields "price", "bought", "hidden", "open", "light" 
-   and "on" to the structure "Object".
-   Created functions to handle this fields and modified the 
-   functions that were affected by these new fields.   
+     Added fields "price", "hidden", "open", "light" 
+     and "on" to the structure "Object".
+     Created functions to handle this fields and modified the 
+     functions that were affected by these new fields.   
 */
 
 #include <stdio.h>
