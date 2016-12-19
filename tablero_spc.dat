@@ -1,6 +1,6 @@
-#s:1|Casilla 1|-1|-1|1|-1|-1|-1|1|Normal space|       |       |       |
-#s:2|Casilla 2|25|-1|2|-1|Normal space|       |       |       |
-#s:3|Casilla 3|26|-1|3|-1|Normal space|       |       |       |
+#s:1|Renfe|-1|-1|1|-1|-1|-1|1|Renfe's space.For you safety do not cross the tracks.Please, use the crossing points|       | ____  |/____\>|
+#s:2|Salida Renfe|25|-1|2|-1|You just have got out renfe.Continue straight if you want to go to EPS|       |       |       |
+#s:3|Camino EPS (Philosophy)|26|-1|3|-1|Continue straight to EPS (do not enter philosophy faculty, it is dangerous)|       | philo |       |
 #s:4|Casilla 4|27|-1|4|-1|Normal space|       |       |       |
 #s:5|Casilla 5 (Oca)|28|-1|5|49|Goose space|       |<O)__/ | \_-/  |
 #s:6|Casilla 6|29|-1|6|-1|Normal space|       |       |       |
