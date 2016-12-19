@@ -17,8 +17,17 @@ Dec. 10, 2016 Version 1.1
 #ifndef GRAPHIC_ENGINE_H
 #define GRAPHIC_ENGINE_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <ncurses.h>
 #include "game.h"
+#include "command.h"
+#include "space.h"
+#include "object.h"
+#include "player.h"
+#include "link.h"
+#include "die.h"
 #include "types.h"
 
 /**
@@ -62,9 +71,9 @@ Screen * screen_create();
 Destroys a screen.
 
 @param Screen *scr: Pointer to the screen we want to destroy.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_destroy(Screen *scr);
+STATUS screen_destroy(Screen *scr);
 
 /**
 @author Adrián Fernández
@@ -74,9 +83,9 @@ _STATUS screen_destroy(Screen *scr);
 Refreshes a screen.
 
 @param Screen *scr: Pointer to the screen we want to refresh.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_refresh(Screen *scr);
+STATUS screen_refresh(Screen *scr);
 
 /**
 @author Adrián Fernández
@@ -86,9 +95,9 @@ _STATUS screen_refresh(Screen *scr);
 Prints a screen.
 
 @param Screen *scr: Pointer to the screen we want to print.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_print(Screen *scr);
+STATUS screen_print(Screen *scr);
 
 /**
 @author Adrián Fernández
@@ -98,9 +107,9 @@ Adds a window to a screen.
 
 @param Screen *scr: Pointer to the screen selected.
 @param Window *win: Pointer to the window we want to add.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_add_window(Screen *scr, Window *win);
+STATUS screen_add_window(Screen *scr, Window *win);
 
 /**
 @author Adrián Fernández
@@ -110,9 +119,9 @@ _STATUS screen_add_window(Screen *scr, Window *win);
 Deletes the last window of a screen.
 
 @param Screen *scr: Pointer to the screen selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_del_window(Screen *scr);
+STATUS screen_del_window(Screen *scr);
 
 /**
 @author Adrián Fernández
@@ -154,9 +163,9 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x);
 Destroys a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_destroy(Window *win);
+STATUS window_destroy(Window *win);
 
 /**
 @author Adrián Fernández
@@ -166,9 +175,9 @@ _STATUS window_destroy(Window *win);
 Refreshes a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_refresh(Window *win);
+STATUS window_refresh(Window *win);
 
 /**
 @author Adrián Fernández
@@ -178,9 +187,9 @@ _STATUS window_refresh(Window *win);
 Prints a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_print(Window * win);
+STATUS window_print(Window * win);
 
 /**
 @author Adrián Fernández
@@ -239,9 +248,9 @@ Sets the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to set.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_set_text(Window *win, char *text);
+STATUS window_set_text(Window *win, char *text);
 
 /**
 @author Adrián Fernández
@@ -252,9 +261,9 @@ Adds a string to the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to add.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_add_text(Window *win, char *text);
+STATUS window_add_text(Window *win, char *text);
 
 /**
 @author Adrián Fernández
@@ -277,9 +286,9 @@ Gets the input of a user in a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *input: String in which the input is stored.
-@return char *: Input of the user.
+@return STATUS: OK if success and ERROR otherwise.
 */
-char * window_get_input(Window *win, char *input);
+STATUS window_get_input(Window *win, char *input);
 
 /**
 @date 02-11-2016 
@@ -302,12 +311,13 @@ Function:
 @author Alejandro Sanchez
 
 @brief game_print_screen
-Prints the screen of the game.
+Prints the screen of the game and gets an input.
 
 @param Game *game: the game to print its screen.
+@param char *input: string containing the input.
 
 @return
 */
-void game_print_screen(Game *game);
+void game_print_screen(Game *game, char *input);
 
 #endif

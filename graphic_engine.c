@@ -14,17 +14,7 @@ Dec. 10, 2016 Version 1.1
   Added window_add_text.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ncurses.h>
 #include "graphic_engine.h"
-#include "command.h"
-#include "space.h"
-#include "object.h"
-#include "player.h"
-#include "link.h"
-#include "die.h"
 
 /**
 @def Constant values description.
@@ -81,50 +71,56 @@ Screen * screen_create(){
 	}
 
   	initscr();
-  	getmaxyx(stdscr, &max_y, &max_x);
+	start_color();
+  	getmaxyx(stdscr, max_y, max_x);
 
-  	nrows = (int) (max_y * (6.0/8.0));
-  	ncols = (int) (max_x * (1.0/2.0));
-  	begin_y = (int) (max_y * (1.0/8.0));
-  	begin_x = 0;
-  	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-  	if (screen_add_window(scr,  win) == _ERROR){
-   		return NULL;
-  	}
-
-	nrows = max_y - (int) (max_y * (7.0/8.0));
-	ncols = (int) (max_x * (1.0/2.0));	
-	begin_y = (int) (max_y * (7.0/8.0));
-	begin_x = 0;
-	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
-	if (screen_add_window(scr,  win) == _ERROR){
-		return NULL;
-	}
-
-	nrows = max_y - (int) (max_y * (7.0/8.0));
+	/*Window 0*/
+	nrows = (int) (max_y * (1.0/8.0));
 	ncols = (int) (max_x * (1.0/2.0));
 	begin_y = 0;
 	begin_x = 0;
-	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	win = window_create(nrows, ncols, begin_y, begin_x);
 	
 	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
-	nrows = (int) (max_y * (1.0/4.0));
-	ncols = max_x - ((int) (max_x * (1.0/2.0)));
-	begin_y = 0;
-	begin_x = (int) (max_x * (1.0/2.0));
-	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	/*Window 1*/
+  	nrows = (int) (max_y * (6.0/8.0));
+  	ncols = (int) (max_x * (1.0/2.0));
+  	begin_y = (int) (max_y * (1.0/8.0));
+  	begin_x = 0;
+  	win = window_create(nrows, ncols, begin_y, begin_x);
+  	if (screen_add_window(scr,  win) == _ERROR){
+   		return NULL;
+  	}
+
+	/*Window 2*/
+	nrows = (int) (max_y * (1.0/8.0));
+	ncols = (int) (max_x * (1.0/2.0));	
+	begin_y = (int) (max_y * (7.0/8.0));
+	begin_x = 0;
+	win = window_create(nrows, ncols, begin_y, begin_x);
 	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
 
-	nrows = max_y - (int) (max_y * (1.0/4.0));
-	ncols = max_x - ((int) (max_x * (1.0/2.0)));
+	/*Window 3*/
+	nrows = (int) (max_y * (1.0/4.0));
+	ncols = (int) (max_x * (1.0/2.0));
+	begin_y = 0;
+	begin_x = (int) (max_x * (1.0/2.0));
+	win = window_create(nrows, ncols, begin_y, begin_x);
+	if (screen_add_window(scr,  win) == _ERROR){
+		return NULL;
+	}
+
+	/*Window 4*/
+	nrows = (int) (max_y * (3.0/4.0));
+	ncols = (int) (max_x * (1.0/2.0));
 	begin_y = (int) (max_y * (1.0/4.0));
 	begin_x = (int) (max_x * (1.0/2.0));
-	win = window_create(int nrows, int ncols, int begin_y, int begin_x);
+	win = window_create(nrows, ncols, begin_y, begin_x);
 	if (screen_add_window(scr,  win) == _ERROR){
 		return NULL;
 	}
@@ -140,9 +136,9 @@ Screen * screen_create(){
 Destroys a screen.
 
 @param Screen *scr: Pointer to the screen we want to destroy.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_destroy(Screen *scr){
+STATUS screen_destroy(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -170,9 +166,9 @@ _STATUS screen_destroy(Screen *scr){
 Refreshes a screen.
 
 @param Screen *scr: Pointer to the screen we want to refresh.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_refresh(Screen *scr){
+STATUS screen_refresh(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -196,9 +192,9 @@ _STATUS screen_refresh(Screen *scr){
 Prints a screen.
 
 @param Screen *scr: Pointer to the screen we want to print.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_print(Screen *scr){
+STATUS screen_print(Screen *scr){
 	int i;
 
 	if(!scr){
@@ -221,9 +217,9 @@ Adds a window to a screen.
 
 @param Screen *scr: Pointer to the screen selected.
 @param Window *win: Pointer to the window we want to add.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_add_window(Screen *scr, Window *win){
+STATUS screen_add_window(Screen *scr, Window *win){
 	int i = 0;
 
 	if(!scr || !win){
@@ -251,9 +247,9 @@ _STATUS screen_add_window(Screen *scr, Window *win){
 Deletes the last window of a screen.
 
 @param Screen *scr: Pointer to the screen selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS screen_del_window(Screen *scr){
+STATUS screen_del_window(Screen *scr){
 	int i = 0;
 
 	if(!scr){
@@ -312,9 +308,9 @@ Creates a window.
 Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 	Window *win = NULL;
 
-  if(nrows < 0 || ncols < 0 || begin_y < 0 || begin_x < 0){
-    return NULL;
-  }
+  	if(nrows < 0 || ncols < 0 || begin_y < 0 || begin_x < 0){
+    	return NULL;
+  	}
 
 	win = (Window *)malloc(sizeof(Window));
 	if(win == NULL){
@@ -323,12 +319,16 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 
 	window(win) = newwin(nrows, ncols, begin_y, begin_x);
   	if(window(win) == NULL){
+		free(win);
     	return NULL;
   	}
 
-	text(win) = "";
+	strcpy(text(win), "");
 
+	/*Defining colors and shape of the window*/
   	box(window(win), 0, 0);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	wbkgd(window(win), COLOR_PAIR(1));
 
 	return win;
 }
@@ -341,9 +341,9 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 Destroys a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_destroy(Window *win){
+STATUS window_destroy(Window *win){
 	if(!win){
 		return _ERROR;
 	}
@@ -363,12 +363,14 @@ _STATUS window_destroy(Window *win){
 Refreshes a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_refresh(Window *win){
+STATUS window_refresh(Window *win){
 	if(!win){
 		return _ERROR;
 	}
+
+	box(window(win), 0, 0);
 
 	wrefresh(window(win));
 
@@ -383,14 +385,16 @@ _STATUS window_refresh(Window *win){
 Prints a window.
 
 @param Window *win: Pointer to the window selected.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_print(Window *win){
+STATUS window_print(Window *win){
 	if(!win || !window_get_text(win)){
 		return _ERROR;
 	}
 
-	wprintw(window(win), "%s", text(win));
+	wclear(window(win));
+	
+	mvwprintw(window(win), 1, 1, "%s", text(win));
 
 	return _OK;
 }
@@ -476,9 +480,9 @@ Sets the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to set.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_set_text(Window *win, char *text){
+STATUS window_set_text(Window *win, char *text){
 	if(!win || !text){
 		return _ERROR;
 	}
@@ -499,18 +503,18 @@ Adds a string to the text field of a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *: The text we want to add.
-@return _STATUS: _OK if success or _ERROR otherwise.
+@return STATUS: OK if success or ERROR otherwise.
 */
-_STATUS window_add_text(Window *win, char *text){
+STATUS window_add_text(Window *win, char *text){
   if(!win || !text){
-    return _ERROR;
+    return ERROR;
   }
 
   if(!strcat(text(win), text)){
-    return _ERROR;
+    return ERROR;
   }
 
-  return _OK;
+  return OK;
 }
 
 /**
@@ -540,30 +544,30 @@ Gets the input of a user in a window.
 
 @param Window *win: Pointer to the window selected.
 @param char *input: String in which the input is stored.
-@return char *: Input of the user.
+@return STATUS: OK if success and ERROR otherwise.
 */
-char * window_get_input(Window *win, char *input){
-	if(win == NULL || input == NULL){
-    return NULL;
+STATUS window_get_input(Window *win, char *input){
+  if(win == NULL || input == NULL){
+    return _ERROR;
   }
 
   if(window_set_text(win, "prompt:> ") == _ERROR){
-    return NULL;
+    return _ERROR;
   }
 
   if(window_print(win) == _ERROR){
-    return NULL;
+    return _ERROR;
   }
 
   if(window_refresh(win) == _ERROR){
-    return NULL;
+    return _ERROR;
   }
 
-  if(!wgetnstr(win, input, WORD_SIZE)){
-		return NULL;
-	}
+  if(!wgetnstr(window(win), input, WORD_SIZE)){
+	return _ERROR;
+  }
 
-	return input;
+	return _OK;
 }
 
 /**
@@ -650,13 +654,14 @@ Function:
 @author Alejandro Sanchez
 
 @brief game_print_screen
-Prints the screen of the game.
+Prints the screen of the game and gets an input.
 
 @param Game *game: the game to print its screen.
+@param char *input: string containing the input.
 
 @return
 */
-void game_print_screen(Game *game){
+void game_print_screen(Game *game, char *input){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID;
   Id id_west = NO_ID, id_obj = NO_ID, id_spc_back = NO_ID, id_spc_next = NO_ID;
 
@@ -703,15 +708,17 @@ void game_print_screen(Game *game){
     id_spc_next = link_get_space2(link_next);
     space_next = game_get_space(game, id_spc_next); 
   }
-  
-  /* 
-  if(system(CLEAR)){
-    return; 
-  }
-  */
 
-  scr = game_get_screen(game);
+
+  
+  /*Window 0*/
   win = screen_get_window(scr, 0);
+  /*Print the last die value*/
+  sprintf(aux, "Last die value: %d\t", die_get_value(die(game)));
+  window_set_text(win, aux);
+
+  /*Window 1*/
+  win = screen_get_window(scr, 1);
 
   /* Print the previous space if it is different from NO_ID */
   if(id_back != NO_ID){
@@ -845,25 +852,19 @@ void game_print_screen(Game *game){
     window_add_text(win, aux);
   }
 
-  /*
-  printf("\nObjects location: ");
-  for(i=0; i<MAX_OBJECTS && objects(game)[i] != NULL; i++){
-    id_obj = object_get_location(objects(game)[i]);
-    name = object_get_name(objects(game)[i]);
-    if(id_obj != NO_ID){
-      printf("%s:%2d ", name, (int)id_obj);
-    }
-  }
-  */
+  
+  /*Window 2*/
+  win = screen_get_window(scr, 2);
+  window_set_text(win, "prompt:> ");
+  scr = game_get_screen(game);
 
+  /*Window 3*/
   win = screen_get_window(scr, 3);
-
   /* Print the objects of the game*/  
   inv = player_get_inventory(players(game)[0]);
   count = inventory_get_count(inv);
   sprintf(aux, "Player objects: ");
   window_add_text(win, aux);
-
   /* Get the different names of the objects and print them */
 	for(i=0; i<count; i++){    
 	  object = game_get_object(game, set_get_object_at_position(inventory_get_bag(inv), i));
@@ -872,21 +873,23 @@ void game_print_screen(Game *game){
     window_add_text(win, aux);
   }
 
+  /*Window 4*/
   win = screen_get_window(scr, 4);
-
   /*Print the text*/
-  window_set_text(win, gmae_get_text(game));
+  window_set_text(win, game_get_text(game));
+
   
-  win = screen_get_window(scr, 1);
 
-  /* Print the commands the user can type */
-  window_set_text(win, "prompt:> ");
-
+  /*Prints all the windows*/
   for(i = 0; i < MAX_WIN; i++){
     win = screen_get_window(scr, i);
     window_print(win);
   }
   screen_refresh(scr);
+
+  /*Gets the input of the player in the window number 1*/
+  win = screen_get_window(scr, 1);
+  input = window_get_input(win);
 
   return;
 }
