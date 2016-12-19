@@ -2,7 +2,7 @@
 
 all: JuegoOcaPlus 
 
-test: die_test set_test player_test inventory_test space_test link_test graphic_engine_test
+test: die_test set_test player_test inventory_test space_test link_test object_test graphic_engine_test game_rules_test dialogue_test person_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 
@@ -23,6 +23,9 @@ set_test: set_test.o set.o
 
 space_test: space_test.o space.o set.o
 	gcc -o $@ $^ 
+
+object_test: object_test.o object.o
+	gcc -o $@ $^
 
 link_test: link_test.o link.o
 	gcc -o $@ $^
@@ -51,11 +54,25 @@ link_test.o: link_test.c link_test.h types.h
 graphic_engine_test.o: graphic_engine_test.c graphic_engine_test.h types.h
 	gcc $(CCFLAGS) graphic_engine_test.c
 
+game_rules_test.o: game_rules_test.c game_rules_test.h types.h
+	gcc $(CCFLAGS) game_rules_test.c
+
+dialogue_test.o: dialogue_test.c dialogue_test.h types.h
+	gcc $(CCFLAGS) dialogue_test.c
+
+
+#Tests
+person_test.o: person_test.c person_test.h types.h
+	gcc $(CCFLAGS) person_test.c
+
 game.o: game.c game.h 
 	gcc $(CCFLAGS) game.c
 
 game_loop.o: game_loop.c game.h
 	gcc $(CCFLAGS) game_loop.c
+
+game_rules.o: game_rules.c game_rules.h
+	gcc $(CCFLAGS) game_rules.c
 
 space.o: space.c space.h types.h
 	gcc $(CCFLAGS) space.c
@@ -87,8 +104,15 @@ link.o: link.c link.h
 graphic_engine.o: graphic_engine.c graphic_engine.h
 	gcc $(CCFLAGS) graphic_engine.c
 
+dialogue.o: dialogue.c dialogue.h
+	gcc $(CCFLAGS) dialogue.c
+
+person.o: person.c person.h
+	gcc $(CCFLAGS) person.c
+
+#clean and dist
 clean: 
 	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 
 
 dist: 
-	tar -cvzf I3-cod_JuegoOcaPlus.tgz *c *h Makefile *dat #html latex Doxyfile
+	tar -cvzf I4-cod_JuegoOcaPlus.tgz *c *h Makefile *dat #html latex Doxyfile
