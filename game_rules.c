@@ -20,7 +20,7 @@
 @def Constant values description 
 */
 #define id(X) (X)->id
-#define ask(X) (X)->ask
+#define question(X) (X)->question
 #define choice1(X) (X)->choice1
 #define choice2(X) (X)->choice2
 
@@ -29,9 +29,9 @@
 /** @brief The Rule structure stores information of the different rules that there are in the game */
 struct _Rule{
   Id id; /*!< Identifier of the rule */
-  char question[WORD_SIZE + 1];  /*!< The question for the player */ 
-  char choice1[WORD_SIZE + 1]; /*!< The action if the player chooses the first option */ 
-  char choice2[WORD_SIZE + 1]; /*!< The action if the player chooses the second option */
+  char question[WORD_SIZE];  /*!< The question for the player */ 
+  char choice1[WORD_SIZE]; /*!< The action if the player chooses the first option */ 
+  char choice2[WORD_SIZE]; /*!< The action if the player chooses the second option */
 };
  
  

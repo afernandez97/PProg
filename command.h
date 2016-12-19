@@ -83,12 +83,11 @@ Input must be typed:
 
 @date 05-11-2016 
 @author Ricardo Riol
-@param 
-
+@param Game * game: the game.
 @return Command *: interpretation of user's input or NULL on error.
 */
 
-Command * get_user_input();
+Command * get_user_input(Game * game);
 
 /**
 @brief command_create
