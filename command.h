@@ -1,7 +1,7 @@
 /**
 @file command.h
-@version 4.0
-@date 05-11-2016 
+@version 5.1
+@date 18-12-2016 
 @author Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -22,6 +22,10 @@ It implements the command interpreter.
   Modified "get_user_input".
 @version Nov. 05, 2016 Version 4.0
   Added command GO and removed commands NEXT, BACK and JUMP.
+@version Dec. 8, 2016 Version 5.0
+  Added commands TURNOFF, TURNON, OPENL, SAVE, LOAD.
+@version Dec. 18, 2016 Version 5.1
+  Added commands BUY, SELL, ANSWER.
 */
 
 
@@ -33,7 +37,7 @@ It implements the command interpreter.
 /**
 @def Constant values description 
 */
-#define CMD_LENGTH 30
+#define CMD_LENGTH 100
 
 /**
 @brief Command enum
@@ -55,8 +59,8 @@ typedef enum enum_Command{
   OPENL, 		/*!< Command to open a link with an object */
   LOAD, /*!< Command to load a save of a previous game */
   SAVE, /*!< Command to save a game */
-  BUY,  /*!< Command to buy a object from a shop */
-  SELL,  /*!< Command to sell a object from a shop */
+  BUY,  /*!< Command to buy an object from a shop */
+  SELL,  /*!< Command to sell an object to a shop */
   ANSWER /*!< Command to answer a question */
 } T_Command;
 

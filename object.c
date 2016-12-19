@@ -32,7 +32,6 @@
 #define location(X) (X)->location
 #define desc(X) (X)->desc
 #define price(X) (X)->price
-#define bought(X) (X)->bought
 #define hidden(X) (X)->hidden
 #define open(X) (X)->open
 #define light(X) (X)->light
@@ -50,7 +49,6 @@ struct _Object{
 	Id location; /*!< Location of the object */
 	char desc[WORD_SIZE + 1];	/*!< Description of the object */
 	double price; /*!< Price of the object */
-	_BOOL bought; /*!< Bought or not */
 	_BOOL hidden; /*!< Hidden or not */
 	Id open; /*!< Identifier of the link which can be opened with this object */
 	_BOOL light; /*!< Light or not */
@@ -90,7 +88,6 @@ Object * object_create(Id id){
   desc(object)[0] = '\0';
 
   price(object) = 0.00;
-  bought(object) = _FALSE;
   hidden(object) = _FALSE;
   light(object) = _FALSE;
   on(object) = _FALSE;
@@ -308,45 +305,6 @@ double object_get_price(Object *object){
 }
 
 
-/**
-@brief object_set_bought
-Sets if an object has been bought or not.
-@date 03-12-2016 
-@author Alejandro Sanchez
-@param Object *object: the object you want to set its bought's field.
-@param _BOOL bought: Choose if the object is bought or not.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
-*/
-
-_STATUS object_set_bought(Object *object, _BOOL bought){
-  if(!object){      /* Check that the input is not empty */
-    return _ERROR;
-  }
-
-  /* Set the bought */
-  bought(object) = bought;
-
-  return _OK;
-}
-
-
-/**
-@brief object_is_bought
-Gets if an object is bought or not.
-@date 03-12-2016 
-@author Alejandro Sanchez
-@param Object *object: the object you want to know that.
-@return _BOOL: the bought field of the object or _FALSE if the input is NULL.
-*/
-
-_BOOL object_is_bought(Object *object){
-  if(!object){      /* Check that the input is not empty */ 
-    return _FALSE;
-  }
-
-  return bought(object);
-}
-
 
 /**
 @brief object_set_hidden
@@ -528,11 +486,6 @@ _STATUS object_print(Object *object){
     Description: %s; Price: %lf; Open: %ld", id(object), name(object), location(object),
     desc(object), price(object), open(object));
 
-  if(bought(object) == _TRUE){
-    fprintf(stdout, "bought: _TRUE;");
-  } else{
-    fprintf(stdout, "bought: _FALSE;");
-  }
 
   if(hidden(object) == _TRUE){
     fprintf(stdout, "hidden: _TRUE;");

@@ -226,7 +226,6 @@ Turns on an object
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_TURNOFF(Game *game, char *arg, int player);
-
 /**
 @date 02-12-2016 
 @author Guillermo Rodriguez
@@ -240,7 +239,6 @@ Opens a link
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_OPEN(Game *game, char *arg, char *arg2, int player);
-
 /**
 @date 16-12-2016 
 @author Alejandro Sanchez
@@ -252,8 +250,6 @@ Makes a save of the game. It is used when the command is SAVE.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_SAVE(Game *game, char *path);
-
-
 /**
 @date 16-12-2016 
 @author Alejandro Sanchez
@@ -265,6 +261,48 @@ Loads a save of the game. It is used when the command is LOAD.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_LOAD(Game *game, char *path);
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_BUY
+Buy an object from a shop. It is used when the command is BUY.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to buy.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_BUY(Game *game, char *arg, int player);
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_SELL
+Sells an object to a shop . It is used when the command is SELL.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to sell.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_SELL(Game *game, char *arg, int player);
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_ANSWER
+Answer to a question . It is used when the command is ANSWER.
+
+@param Game *game: the game.
+@param char *arg: the answer of a question.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_ANSWER(Game *game, char *arg, int player);
 
 
 
@@ -1540,7 +1578,7 @@ _STATUS callback_CATCH(Game *game, char *arg, int player){
   
   /* Check that the inputs are not empty */
   if(!game || !arg || player < 0){ 
-  	return _ERROR;
+    return _ERROR;
   } 
   
   /* Get player location */
@@ -1548,14 +1586,18 @@ _STATUS callback_CATCH(Game *game, char *arg, int player){
 
   /* Look for the space where the player is */
   while(i < MAX_SPACES && flag == 0){
-  	if(space_id == space_get_id(spaces(game)[i])){
+    if(space_id == space_get_id(spaces(game)[i])){
       aux = i;
-    	flag = 1;
+      flag = 1;
     }
     i++;
   }
 
   if(aux == NO_ID){ /* Check that the space was found */
+    return _ERROR;
+  }
+
+  if(space_is_shop(space(game)[aux]) == _TRUE){
     return _ERROR;
   }
 
@@ -1578,6 +1620,8 @@ _STATUS callback_CATCH(Game *game, char *arg, int player){
     }
     i++;
   }
+  
+
 
   if(flag == 1){  /* Check that the object was found */
     return _ERROR;
@@ -1597,8 +1641,7 @@ _STATUS callback_CATCH(Game *game, char *arg, int player){
   game_set_object_location(game, object_id, NO_ID);
 
   return _OK; 
-}
-
+} 
 
 
 /**
@@ -1645,6 +1688,10 @@ _STATUS callback_LEAVE(Game *game, char *arg, int player){
   }
 
   if(aux == NO_ID){ /* Check that the space was found */
+    return _ERROR;
+  }
+
+  if(space_is_shop(space(game)[aux]) == _TRUE){
     return _ERROR;
   }
 
@@ -2095,4 +2142,335 @@ _STATUS callback_LOAD(Game *game, char *path){
   return _OK;
 }
 
+
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_BUY
+Buy an object from a shop. It is used when the command is BUY.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to buy.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_BUY(Game *game, char *arg, int player){
+  /* Initialize the auxiliary variable, the counter and the flag */
+  int aux = NO_ID, i = 0, flag = 0, count;
+  Id space_id, object_id;
+  Set *set = NULL;
+  Object *object = NULL;
+  double price = 0,money = 0,quit = 0;
+  
+  /* Check that the inputs are not empty */
+  if(!game || !arg || player < 0){ 
+    return _ERROR;
+  } 
+  
+  /* Get player location */
+  space_id = game_get_player_location(game, player); 
+  
+  /* Look for the space where the player is */
+  while(i < MAX_SPACES && flag == 0){
+    if(space_id == space_get_id(spaces(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+
+  if(aux == NO_ID){ /* Check that the space was found */
+    return _ERROR;
+  }
+
+  if(space_is_shop(space(game)[aux]) == _FALSE){
+    return _ERROR;
+  }
+
+  /* Get the set of objects from that space */
+  set = space_get_object(spaces(game)[aux]);
+  if(!set){ /* Check that there is at least one object on that space */
+    return _ERROR;
+  }
+  
+  /* Get the number of objects on that space */
+  count = set_get_count(set);
+
+  /* Look for the object to buy */
+  i = 0;
+  while(i < count && flag == 1){
+    object_id = set_get_object_at_position(set, i);
+    object = game_get_object(game, object_id);
+    if(strcmp(arg, object_get_name(object)) == 0){
+      flag = 0;
+    }
+    i++;
+  }
+
+  if(flag == 1){  /* Check that the object was found */
+    return _ERROR;
+  }
+
+  /* Get the price of the object */
+  price = object_get_price(objects(game)[i-1]);
+
+  /* Get the money of the player */
+  money = player_get_money(players(game)[player]);
+  /* Check if the player has enough money to buy the object */
+  if(money < price){ 
+    return _ERROR;
+  }
+  
+  /* Remove the price of the object from the money of the player who buys the object */
+  quit -= price;
+  if(player_set_money(players(game)[player],quit) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Set to the player the object with name "arg" which is on that space */
+  if(player_add_object(players(game)[player], object_id) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Delete that object from that space */
+  if(space_del_object(spaces(game)[aux], object_id) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Set that the object is held by a player */
+  game_set_object_location(game, object_id, NO_ID);
+
+  return _OK; 
+} 
+
+
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_SELL
+Sells an object to a shop . It is used when the command is SELL.
+
+@param Game *game: the game.
+@param char *arg: the name of the object to sell.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_SELL(Game *game, char *arg, int player){
+  /* Initialize the auxiliary variable, the counter and the flag */
+  int aux = NO_ID, i = 0, flag = 0, count;
+  Id space_id, object_id;
+  double price = 0,money = 0;
+  Inventory *inv = NULL;
+  Object *object = NULL;
+ 
+  /* Check that the inputs are not empty */
+  if(!game || !arg || player < 0){ 
+    return _ERROR;
+  } 
+
+  /* Get the objects that the player have */
+  inv = player_get_inventory(players(game)[player]);
+  if(!inv){ /* Check that the player has at least one object */
+    return _ERROR;
+  }
+
+  /* Get player location */
+  space_id = game_get_player_location(game, player); 
+
+  /* Look for the space where the player is */
+  while(i < MAX_SPACES && flag == 0){
+    if(space_id == space_get_id(spaces(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+
+  if(aux == NO_ID){ /* Check that the space was found */
+    return _ERROR;
+  }
+
+  if(space_is_shop(space(game)[aux]) == _FALSE){
+    return _ERROR;
+  }
+
+  /* Get the number of objects of the player */
+  count = inventory_get_count(inv);
+
+  /* Look for the object to sell */
+  i = 0;
+  while(i < count && flag == 1){
+    object_id = set_get_object_at_position(inventory_get_bag(inv), i);
+    object = game_get_object(game, object_id);
+    if(strcmp(arg, object_get_name(object)) == 0){
+      flag = 0;
+    }
+    i++;
+  }
+
+  if(flag == 1){  /* Check that the object was found */
+    return _ERROR;
+  }
+
+  /* Get the price of the object */
+  price = object_get_price(objects(game)[i-1]);
+   
+  /* Set the money to the player who sells the object */
+  if(player_set_money(players(game)[player],price) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Set the object to the space */
+  if(space_add_object(spaces(game)[aux], object_id) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Set that the player does not have that object */
+  if(player_del_object(players(game)[player], object_id) == _ERROR){
+    return _ERROR;
+  }
+
+  /* Set that the object is on that space */
+  game_set_object_location(game, object_id, space_id);
+
+  return _OK;
+}
+
+
+
+/**
+@date 18-12-2016 
+@author Guillermo Rodriguez
+
+@brief callback_ANSWER
+Answer to a question . It is used when the command is ANSWER.
+
+@param Game *game: the game.
+@param char *arg: the answer of a question.
+@param int player: number of the player.
+
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS callback_ANSWER(Game *game, char *arg, int player){
+  /* Initialize the auxiliary variable, the counter and the flag */
+  int aux = NO_ID, i = 0, flag = 0, count,choicef=-1;
+  Id space_id,rule_id,person_id;
+  char *choice;
+  
+ 
+  /* Check that the inputs are not empty */
+  if(!game || !arg){
+    return _ERROR;
+  } 
+
+  if(strcmp(arg,"yes") == 0 || strcmp(arg,"y") == 0){
+    choicef = 0; 
+  }
+  
+  if(strcmp(arg,"no") == 0 || strcmp(arg,"n") == 0){
+    choicef = 1;
+  }
+  
+  /* Check if the argument is right */
+  if(choicef ==-1){
+    return _ERROR;
+  }
+   
+   
+  /* Get player location */
+  space_id = game_get_player_location(game, player); 
+
+  /* Look for the space where the player is */
+  while(i < MAX_SPACES && flag == 0){
+    if(space_id == space_get_id(spaces(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+
+  if(aux == NO_ID){ /* Check that the space was found */
+    return _ERROR;
+  }
+  
+  /*Check if the space has a rule*/
+  rule_id = space_get_rule(spaces(game)[aux]);
+  person_id = space_get_person(spaces(game)[aux]);
+  aux = NO_ID;
+  i = 0;
+  flag = 0;
+  while(i < MAX_RULES && flag == 0){
+    if(rule_id == rule_get_id(rules(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+  
+  /* If the space has a rule*/
+  if(aux != NO_ID){
+    if(choicef == 0){
+      choice = rule_get_choice1(rules(game)[aux]);
+      return get_user_input(1,choice);    
+    } else if(choicef == 1){
+        choice = rule_get_choice2(rules(game)[aux]);
+        return get_user_input(1,choice);    
+    }
+  }
+  
+
+  /* If the space has not a rule, check if the person in the space has a rule */
+  if(NO_ID == person_id){
+    return _ERROR
+  }
+
+  aux = NO_ID;
+  i = 0;
+  flag = 0;
+  while(i < MAX_PEOPLE && flag == 0){
+    if(person_id == person_get_id(person(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+
+  if(aux == NO_ID){ /* Check that the person was found */
+    return _ERROR;
+  }
+
+  
+  rule_id = person_get_rule(persons(game)[aux]);
+  if(rule_id == NO_ID){
+    return _ERROR;
+  }
+
+  /* Find the rule of the person*/
+  aux = NO_ID;
+  i = 0;
+  flag = 0;
+  while(i < MAX_RULES && flag == 0){
+    if(rule_id == rule_get_id(rules(game)[i])){
+      aux = i;
+      flag = 1;
+    }
+    i++;
+  }
+
+  if(aux != NO_ID){
+    if(choicef == 0){
+      choice = rule_get_choice1(rules(game)[aux]);
+      return get_user_input(1,choice);    
+    } else if(choicef == 1){
+        choice = rule_get_choice2(rules(game)[aux]);
+        return get_user_input(1,choice);    
+    }
+  }
+
+  return _ERROR;
+}
 
