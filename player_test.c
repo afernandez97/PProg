@@ -59,10 +59,10 @@ int main(int argc, char **argv){
   if (all || test == 25) test2_player_print();
   if (all || test == 26) test2_player_has_object();
   if (all || test == 27) test3_player_has_object();
-  if (all || test == 16) test1_player_set_money();
-  if (all || test == 17) test2_player_set_money();
-  if (all || test == 18) test1_player_get_money();
-  if (all || test == 18) test2_player_get_money();
+  if (all || test == 28) test1_player_set_money();
+  if (all || test == 29) test2_player_set_money();
+  if (all || test == 30) test1_player_get_money();
+  if (all || test == 31) test2_player_get_money();
 
   exit(EXIT_SUCCESS);
 }

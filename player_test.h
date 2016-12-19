@@ -26,7 +26,7 @@
 /**
 @def Constant values description
 */
-#define MAX_TEST 27
+#define MAX_TEST 31
 
 #define FUNCTION_IS_CORRECT(x)\
   				if(x){\
@@ -508,7 +508,6 @@ void test2_player_set_money();
    @return 
     
    */
-
 void test1_player_get_money();
 
 

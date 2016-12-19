@@ -105,7 +105,7 @@ int main(int argc, char **argv){
 	if (all || test == 67) test2_space_set_rule();
 	if (all || test == 68) test1_space_get_rule();
 	if (all || test == 69) test2_space_get_rule();
-  if (all || test == 70) test1_space_set_shop();
+  	if (all || test == 70) test1_space_set_shop();
 	if (all || test == 71) test2_space_set_shop();
 	if (all || test == 72) test1_space_is_shop();
 	if (all || test == 73) test2_space_is_shop();

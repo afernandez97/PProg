@@ -1,7 +1,7 @@
 /**
 @file game_management.c
-@version 6.0
-@date 11-11-2016
+@version 6.2
+@date 16-12-2016
 @authors Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -28,6 +28,13 @@ Nov. 26, 2016 Version 5.0
 @version
 Dec. 3, 2016 Version 6.0
   Added add_player and game_load_players.
+@version
+Dec. 11, 2016 Version 6.1
+  Changed name of the file to game_management.c
+  Created functions "game_load" and "game_save" (and game_save_X)
+@version
+Dec. 16, 2016 Version 6.2
+  Added functions to load and save rules and people.
 */
 
 #include <stdio.h>
@@ -277,7 +284,7 @@ _STATUS game_save_objects(Game *game, char *filename){
   char desc[WORD_SIZE] = "";
   Id id, location, open;
   double price;
-  _BOOL bought, hidden, light, on;
+  _BOOL hidden, light, on;
   Object *object = NULL;
   int i = 0, flag = 0;
   _STATUS status = _OK;
@@ -308,9 +315,6 @@ _STATUS game_save_objects(Game *game, char *filename){
       /* Get the price of the object */  
       price = object_get_price(object);
 
-      /* Get if the object is bought or not */
-      bought = object_is_bought(object); 
-
       /* Get if the object is hidden or not */
       hidden = object_is_hidden(object); 
 
@@ -326,8 +330,8 @@ _STATUS game_save_objects(Game *game, char *filename){
       /* Get the description of the object */ 
       strcpy(desc, object_get_desc(object));
 
-      fprintf(f_obj, "#o:%ld|%s|%ld|%lf|%d|%d|%d|%d|%ld|%s\n", 
-        id, name, location, price, bought, hidden, light, on, open, desc);
+      fprintf(f_obj, "#o:%ld|%s|%ld|%lf|%d|%d|%d|%ld|%s\n", 
+        id, name, location, price, hidden, light, on, open, desc);
     } else{
       flag = 1;
     } 
@@ -949,7 +953,7 @@ _STATUS game_load_objects(Game *game, char *filename){
   Object *object = NULL;
   Space *space = NULL;
   _STATUS status = _OK;
-	_BOOL bought = _FALSE, hidden = _FALSE, light = _FALSE, on = _FALSE;
+	_BOOL hidden = _FALSE, light = _FALSE, on = _FALSE;
 	
   
   if(!game || !filename){ /* Check that the inputs are not empty */
@@ -975,8 +979,6 @@ _STATUS game_load_objects(Game *game, char *filename){
       toks = strtok(NULL, "|");
       price = atof(toks);
       toks = strtok(NULL, "|");
-      bought = atoi(toks);
-      toks = strtok(NULL, "|");
       hidden = atoi(toks);
       toks = strtok(NULL, "|");
       light = atoi(toks);
@@ -989,7 +991,7 @@ _STATUS game_load_objects(Game *game, char *filename){
       	strcpy(desc, toks);
 			}
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%lf|%d|%d|%d|%d|%ld|%s\n", id, name, location, price, bought, hidden, light, on, open, desc);
+      printf("Leido: %ld|%s|%ld|%lf|%d|%d|%d|%ld|%s\n", id, name, location, price, hidden, light, on, open, desc);
 #endif
       object = object_create(id); /* Create the object */
       if(object != NULL){
@@ -1004,9 +1006,6 @@ _STATUS game_load_objects(Game *game, char *filename){
 				
 				/* Set the price for an object */         
 				object_set_price(object, price);
-			
-				/* Set if an object has been bought or not */	
-				object_set_bought(object, bought);
 		    
         /* Set if an object is hidden or not */
         object_set_hidden(Object *object, hidden);

@@ -1,7 +1,7 @@
 /**
 @file game_management.h
-@version 6.0
-@date 26-11-2016
+@version 6.2
+@date 16-12-2016
 @author Adrian Fernandez, Ricardo Riol, Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -24,6 +24,13 @@ Nov. 26, 2016 Version 5.0
   @version
 Dec. 3, 2016 Version 6.0
   Added add_player and game_load_players.
+@version
+Dec. 11, 2016 Version 6.1
+  Changed name of the file to game_management.h
+  Created functions "game_load" and "game_save" (and game_save_X)
+@version
+Dec. 16, 2016 Version 6.2
+  Added functions to load and save rules and people.
 */
 #ifndef GAME_MANAGEMENT_H
 #define GAME_MANAGEMENT_H

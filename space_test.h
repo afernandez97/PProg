@@ -27,7 +27,7 @@ implemented in space.c.
 /**
 @def Constant values description 
 */
-#define MAX_TEST_SPACE 65
+#define MAX_TEST_SPACE 73
 
 #define FUNCTION_IS_CORRECT(x)\
     if(x){\

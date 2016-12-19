@@ -1,7 +1,7 @@
 /**
 @file command.c
-@version 4.0
-@date 05-11-2016 
+@version 5.1
+@date 18-12-2016 
 @author Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -22,9 +22,9 @@ It implements the command interpreter.
 @version Nov. 05, 2016 Version 4.0
 	Added command GO and removed commands NEXT, BACK and JUMP.
 @version Dec. 8, 2016 Version 5.0
-	Added command TURNOFF ,TURNON ,OPENL,SAVE,LOAD.
-@version Dec. 18, 2016 Version 6.0
-	Added command BUY SELL ANSWER.
+	Added commands TURNOFF, TURNON, OPENL, SAVE, LOAD.
+@version Dec. 18, 2016 Version 5.1
+	Added commands BUY, SELL, ANSWER.
 */
 
 
@@ -69,7 +69,7 @@ Input must be typed:
 Command * get_user_input(int flag,char* answer){
 	Command *command = NULL;
 	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
-	char *toks = NULL, *cmd = NULL,*cm2 = NULL,*arg = NULL,*arg2 = NULL;
+	char *toks = NULL, *cmd = NULL,*cmd2 = NULL,*arg = NULL,*arg2 = NULL;
 
 
   command = command_create();
@@ -112,29 +112,26 @@ Command * get_user_input(int flag,char* answer){
   /* Check if user entered an argument or not */
   if(arg != NULL){   /* There is an argument */
     /* Check if user entered more things after the argument */
-    if(strtok(NULL, "\0") != NULL){
+    /*if(strtok(NULL, "\0") != NULL){
       cmd(command) = UNKNOWN;
       return command;
-    }
+    }*/
     if(!strcmp(cmd, "c") || !strcmp(cmd, "catch") || !strcmp(cmd, "grab")){
       cmd(command) = CATCH; /* "Catch" case */;
       strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
         cmd(command) = LEAVE; /* "Leave" case */
         strcpy(arg(command), arg);
-      else if(!strcmp(cmd, "b") || !strcmp(cmd, "buy")){
-      cmd(command) = BUY; /* "Buy" case */;
-      strcpy(arg(command), arg);
-		} 
-      else if(!strcmp(cmd, "s") || !strcmp(cmd, "sell")){
-      cmd(command) = SELL; /* "Sell" case */;
-      strcpy(arg(command), arg);
+    }  else if(!strcmp(cmd, "b") || !strcmp(cmd, "buy")){
+        cmd(command) = BUY; /* "Buy" case */;
+        strcpy(arg(command), arg);
+		} else if(!strcmp(cmd, "s") || !strcmp(cmd, "sell")){
+        cmd(command) = SELL; /* "Sell" case */;
+        strcpy(arg(command), arg);
+    } else if(!strcmp(cmd, "a") || !strcmp(cmd, "answer")){
+        cmd(command) = ANSWER ; /* "Sell" case */;
+        strcpy(arg(command), arg);
     } 
-      else if(!strcmp(cmd, "a") || !strcmp(cmd, "answer")){
-      cmd(command) = ANSWER ; /* "Sell" case */;
-      strcpy(arg(command), arg);
-    } 
-      
       else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
         cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);
@@ -151,11 +148,11 @@ Command * get_user_input(int flag,char* answer){
         strcpy(arg(command),arg);
     } else if(!strcmp(cmd, "open")){
         cmd2 = strtok(aux, " ");
-        if(!strcmp(cmd, "with")){
+        if(!strcmp(cmd2, "with")){
         	strcpy(arg(command), arg);
         	arg2 = strtok(aux, " ");
         	strcpy(arg2(command), arg2);
-        	cmd(command) = OPEN;  /* "Open" case*/
+        	cmd(command) = OPENL;  /* "Openl" case*/
         }
 		} else{                           
         cmd(command) = UNKNOWN; /* Wrong input */
