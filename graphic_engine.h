@@ -1,7 +1,7 @@
 /**
 @file graphic_engine.h
-@version 1.0
-@date 07-12-2016
+@version 1.1
+@date 12-12-2016
 @author Adrián Fernández
 
 @brief

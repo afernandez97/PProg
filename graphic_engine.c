@@ -1,7 +1,7 @@
 /**
 @file graphic_engine.c
 @version 1.1
-@date 07-12-2016
+@date 12-12-2016
 @author Adrián Fernández
 
 @brief
@@ -62,17 +62,17 @@ Creates a new screen.
 */
 Screen * screen_create(){
 	Screen *scr = NULL;
-  	Window *win = NULL;
+  Window *win = NULL;
 	int max_y, max_x, begin_y, begin_x, ncols, nrows;
 
 	scr = (Screen *)malloc(sizeof(Screen));
 	if(!scr){
-  		return NULL;
+  	return NULL;
 	}
 
-  	initscr();
+  initscr();
 	start_color();
-  	getmaxyx(stdscr, max_y, max_x);
+	getmaxyx(stdscr, max_y, max_x);
 
 	/*Window 0*/
 	nrows = (int) (max_y * (1.0/8.0));
@@ -86,14 +86,14 @@ Screen * screen_create(){
 	}
 
 	/*Window 1*/
-  	nrows = (int) (max_y * (6.0/8.0));
-  	ncols = (int) (max_x * (1.0/2.0));
-  	begin_y = (int) (max_y * (1.0/8.0));
-  	begin_x = 0;
-  	win = window_create(nrows, ncols, begin_y, begin_x);
-  	if (screen_add_window(scr,  win) == _ERROR){
-   		return NULL;
-  	}
+  nrows = (int) (max_y * (6.0/8.0));
+  ncols = (int) (max_x * (1.0/2.0));
+  begin_y = (int) (max_y * (1.0/8.0));
+	begin_x = 0;
+  win = window_create(nrows, ncols, begin_y, begin_x);
+  if (screen_add_window(scr,  win) == _ERROR){
+  	return NULL;
+  }
 
 	/*Window 2*/
 	nrows = (int) (max_y * (1.0/8.0));
@@ -142,13 +142,13 @@ STATUS screen_destroy(Screen *scr){
 	int i;
 
 	if(!scr){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
 	for(i=0; i<MAX_WIN; i++){
-  		if(win(scr)[i] != NULL){
-    		window_destroy(win(scr)[i]);
-  		}
+  	if(win(scr)[i] != NULL){
+    	window_destroy(win(scr)[i]);
+  	}
 	}
 
 	free(scr);
@@ -172,16 +172,16 @@ STATUS screen_refresh(Screen *scr){
 	int i;
 
 	if(!scr){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
-  	refresh();
+  refresh();
 
 	for(i=0; i<MAX_WIN && win(scr)[i] != NULL; i++){
-  		window_refresh(win(scr)[i]);
+  	window_refresh(win(scr)[i]);
 	}
 	
-  	return _OK;
+	return _OK;
 }
 
 /**
@@ -223,20 +223,20 @@ STATUS screen_add_window(Screen *scr, Window *win){
 	int i = 0;
 
 	if(!scr || !win){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
-  		i++;
+  	i++;
 	}
 
 	if(i == MAX_WIN){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
 	win(scr)[i] = win;
 
-  	return _OK;
+  return _OK;
 }
 
 /**
@@ -253,15 +253,15 @@ STATUS screen_del_window(Screen *scr){
 	int i = 0;
 
 	if(!scr){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
 	while(i<MAX_WIN && win(scr)[i] != NULL){
-  		i++;
+  	i++;
 	}
 
 	if(i == MAX_WIN){
-  		return _ERROR;
+  	return _ERROR;
 	}
 
 	window_destroy(win(scr)[i-1]);
@@ -282,7 +282,7 @@ Gets the window in a selected position of a screen.
 */
 Window * screen_get_window(Screen *scr, int n){
 	if(!scr){
-  		return NULL;
+  	return NULL;
 	}	
 
 	return win(scr)[n];
@@ -308,9 +308,9 @@ Creates a window.
 Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 	Window *win = NULL;
 
-  	if(nrows < 0 || ncols < 0 || begin_y < 0 || begin_x < 0){
-    	return NULL;
-  	}
+  if(nrows < 0 || ncols < 0 || begin_y < 0 || begin_x < 0){
+  	return NULL;
+  }
 
 	win = (Window *)malloc(sizeof(Window));
 	if(win == NULL){
@@ -318,15 +318,15 @@ Window * window_create(int nrows, int ncols, int begin_y, int begin_x){
 	}
 
 	window(win) = newwin(nrows, ncols, begin_y, begin_x);
-  	if(window(win) == NULL){
-		free(win);
-    	return NULL;
-  	}
+  if(window(win) == NULL){
+    free(win);
+  	return NULL;
+  }
 
 	strcpy(text(win), "");
 
 	/*Defining colors and shape of the window*/
-  	box(window(win), 0, 0);
+  box(window(win), 0, 0);
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	wbkgd(window(win), COLOR_PAIR(1));
 
@@ -572,7 +572,7 @@ STATUS window_get_input(Window *win, char *input){
 
 /**
 @date 02-11-2016 
-@author Alejandro Sanchez
+@author Adrián Fernández
 
 @brief game_print_objects
 Stores the objects of the game in a string (output).
@@ -649,9 +649,8 @@ void game_print_objects(Game *game, Space *space, char *output){
 }
 
 /**
-Function: 
-@date 02-11-2016 
-@author Alejandro Sanchez
+@date 12-12-2016 
+@author Adrian Fernández
 
 @brief game_print_screen
 Prints the screen of the game and gets an input.
