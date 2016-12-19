@@ -1,7 +1,7 @@
 /**
 @file game.h
-@version 6.0
-@date 03-12-2016
+@version 6.1
+@date 19-12-2016
 @authors Guillermo Rodriguez and Alejandro Sanchez
 
 @brief
@@ -37,6 +37,9 @@ Nov. 26, 2016 Version 5.0
 @version
 Dec. 3, 2016 Version 6.0
   Added field "text", players now can be loaded from a file.
+  @version
+Dec. 19, 2016 Version 6.1
+  Modified inspect to write the descriptions on the text field.
 */
 
 #ifndef GAME_H
@@ -353,8 +356,6 @@ Ends the game.
 */
 _BOOL game_is_over(Game *game);
 
-
-
 /**
 @date 20-10-2016 
 @author Alejandro Sanchez
@@ -368,6 +369,62 @@ Prints the data of the game.
 */
 void game_print_data(Game *game);
 
+/**
+@date 19-12-2016 
+@author Adrián Fernández
 
+@brief game_set_keyboard(Game* game, _BOOL keyboard)
+Sets the keyboard field of a game.
+
+@param Game *game: the game whose keyboard field you want to set.
+@param _BOOL keyboard: the value you want to set.
+
+@return 
+_STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_keyboard(Game* game, _BOOL keyboard);
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_get_keyboard(Game* game)
+Gets the keyboard field of a game.
+
+@param Game *game: the game whose keyboard field you want to get.
+
+@return 
+_BOOL: value of the keyboard field
+*/
+_BOOL game_get_keyboard(Game *game);
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_set_answer(Game* game, char * answer)
+Sets the answer field of a game.
+
+@param Game *game: the game whose answer field you want to set.
+@param char * answer: the value you want to set.
+
+@return 
+_STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_answer(Game* game, char * answer);
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_get_answer(Game* game)
+Gets the answer field of a game.
+
+@param Game *game: the game whose answer field you want to get.
+
+@return 
+char *: value of the answer field
+*/
+char * game_get_answer(Game *game);
 
 #endif

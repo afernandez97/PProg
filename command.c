@@ -61,31 +61,39 @@ Input must be typed:
 
 @date 05-11-2016 
 @author Ricardo Riol
-@param 
-
+@param Game *game: the game.
 @return Command *: interpretation of user's input or NULL on error.
 */
 
-Command * get_user_input(int flag,char* answer){
+Command * get_user_input(Game * game){
 	Command *command = NULL;
 	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
-	char *toks = NULL, *cmd = NULL,*cmd2 = NULL,*arg = NULL,*arg2 = NULL;
-
+	char *toks = NULL, *cmd = NULL, *cmd2 = NULL, *arg = NULL, *arg2 = NULL;
+  Window *win = NULL;
+  _BOOL flag;
 
   command = command_create();
   if(!command){   /* Check if memory has been allocated */
     return NULL;
   }
   
-  
+  flag = game_get_keyboard(game);
+
   /* Receive user's input from keyboard */
-  if (flag == 0){
-		fgets(input, CMD_LENGTH, stdin);
+  if (flag == _TRUE){
+    win = game_get_window(game, 2);
+		window_get_input(win, input);
   }
  
   /* Receive the answer of the question */
-  if (flag == 1){
-  	strcpy(input,answer);
+  if (flag == _FALSE){
+    aux = game_get_answer(game);
+    if (aux == NULL){
+      cmd(command) = NO_CMD;
+      return command;
+    }
+  	strcpy(input, aux);
+    game_set_keyboard(game, _TRUE);
   }
   /* Check that the user has entered at least 1 character */		
   if(strcmp(input, "\n") == 0 || strcmp(input, "") ){
@@ -129,18 +137,15 @@ Command * get_user_input(int flag,char* answer){
         cmd(command) = SELL; /* "Sell" case */;
         strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "a") || !strcmp(cmd, "answer")){
-        cmd(command) = ANSWER ; /* "Sell" case */;
+        cmd(command) = ANSWER ; /* "Answer" case */;
         strcpy(arg(command), arg);
-    } 
-      else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
+    } else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
         cmd(command) = INSPECT; /* "Inspect" case */
         strcpy(arg(command), arg);
- 		}
-      else if(!strcmp(cmd, "turnon")){    
+ 		} else if(!strcmp(cmd, "turnon")){    
         cmd(command) = TURNON; /* "Turnon" case */
         strcpy(arg(command), arg);
-		}
-      else if(!strcmp(cmd, "turnoff")){    
+		} else if(!strcmp(cmd, "turnoff")){    
         cmd(command) = TURNOFF; /* "Turnoff" case */
         strcpy(arg(command), arg);
     } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
@@ -161,9 +166,9 @@ Command * get_user_input(int flag,char* answer){
     	if(!strcmp(toks, "q") || !strcmp(toks, "quit")){		 	
     		cmd(command) = QUIT;		/* "Quit" case */
     	} else if(!strcmp(toks, "r") || !strcmp(toks, "roll")){
-    		  cmd(command) = ROLL;		/* "Roll" case */
+    		cmd(command) = ROLL;		/* "Roll" case */
     	} else{ 													
-    		  cmd(command) = UNKNOWN;	/* Wrong input */
+    		cmd(command) = UNKNOWN;	/* Wrong input */
     	}
   }
 
@@ -275,8 +280,3 @@ char * command_get_arg2(Command *command){
 
   return arg2(command);
 }
-
-
-
-
-
