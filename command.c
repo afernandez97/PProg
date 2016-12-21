@@ -33,6 +33,7 @@ It implements the command interpreter.
 #include <string.h>
 #include "command.h"
 
+
 /**
 @def Constant values description 
 */
@@ -47,7 +48,7 @@ Stores information of the different commands that can be used in the game
 struct _Command{
 	T_Command cmd;	/*!< Type of command */
 	char arg[CMD_LENGTH];	/*!< Input argument */
-  char arg2[CMD_LENGHT]; /*!< Input argument for command open */
+  char arg2[CMD_LENGTH]; /*!< Input argument for command open */
 };
 
 
@@ -57,7 +58,8 @@ struct _Command{
 @brief get_user_input
 Interprets the user's input. 
 Input must be typed: 
- <command><blank space><argument> (space and argument only if needed)
+ <command><blank space><arguments between blank spaces> 
+ (space and argument only if needed)
 
 @date 05-11-2016 
 @author Ricardo Riol
@@ -65,7 +67,7 @@ Input must be typed:
 @return Command *: interpretation of user's input or NULL on error.
 */
 
-Command * get_user_input(Game * game){
+Command * get_user_input(Game *game){
 	Command *command = NULL;
 	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
 	char *toks = NULL, *cmd = NULL, *cmd2 = NULL, *arg = NULL, *arg2 = NULL;
@@ -80,15 +82,14 @@ Command * get_user_input(Game * game){
   flag = game_get_keyboard(game);
 
   /* Receive user's input from keyboard */
-  if (flag == _TRUE){
+  if(flag == _TRUE){
     win = game_get_window(game, 2);
 		window_get_input(win, input);
   }
  
   /* Receive the answer of the question */
-  if (flag == _FALSE){
-    aux = game_get_answer(game);
-    if (aux == NULL){
+  if(flag == _FALSE){
+    if(game_get_answer(game) == NULL){
       cmd(command) = NO_CMD;
       return command;
     }

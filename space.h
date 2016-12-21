@@ -1,7 +1,7 @@
 /**
    @file space.h
-   @version 5.2
-   @date 16-12-2016 
+   @version 5.3
+   @date 20-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -40,6 +40,9 @@
      @version  Dec. 16, 2016   Version 5.2
       Added fields "person" and "shop" to the structure "Space".
       Created "space_set_person", "space_get_person", "space_set_shop", "space_is_shop".
+     @version  Dec. 20, 2016   Version 5.3
+      Added field "exam" to the structure "Space".
+      Created "space_set_exam", "space_get_exam".
    */
 
 #ifndef SPACE_H
@@ -547,11 +550,11 @@ char * space_get_gdesc(Space *space);
 
 
 /**
-   @date 29-10-2016 
-   @author Alejandro Sanchez
+   @date 21-12-2016 
+   @author Adrián Fernández
 
    @brief 
-   Prints the graphic description of the space in a string. space_print_gdesc()
+   Prints the graphic description of the space in a string. space_print_gdesc1()
 
    @param 
     Space *space: the space you want to print its graphic description.
@@ -559,7 +562,39 @@ char * space_get_gdesc(Space *space);
    @return 
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-_STATUS space_print_gdesc(Space *space, char *output);
+_STATUS space_print_gdesc1(Space *space, char *output);
+
+
+/**
+   @date 21-12-2016 
+   @author Adrián Fernández
+
+   @brief 
+   Prints the graphic description of the space in a string. space_print_gdesc2()
+
+   @param 
+    Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc is printed.
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_print_gdesc2(Space *space, char *output);
+
+
+/**
+   @date 21-12-2016 
+   @author Adrián Fernández
+
+   @brief 
+   Prints the graphic description of the space in a string. space_print_gdesc3()
+
+   @param 
+    Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc3 is printed.
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_print_gdesc1(Space *space, char *output);
 
 
 /**
@@ -624,6 +659,51 @@ _STATUS space_set_shop(Space *space, _BOOL shop);
     _BOOL: _TRUE if the space is a shop or _FALSE if the input is NULL.
    */
 _BOOL space_is_shop(Space *space);
+
+/**
+
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Sets if a space is where the exam will be done or not.space_set_exam()
+
+   @param 
+    Space *space: the space you want to change.
+    _BOOL exam: Choose if the space is where the exam will be or not.
+   @return 
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+
+   */
+_STATUS space_set_exam(Space *space, _BOOL exam);
+
+/**
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Gets if a space is where the exam will be done or not.space_is_exam() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space will hold the exam or _FALSE if not or if the input is NULL.
+   */
+_BOOL space_is_exam(Space *space);
+
+/**
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Gets if a space is connected by a specific link or not.space_is_linked_by() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space is linked by that link, _FALSE if not or if the input is NULL.
+   */
+_BOOL space_is_linked_by(Space *space, Id link);
 
 /**
    @date 01-12-2016 

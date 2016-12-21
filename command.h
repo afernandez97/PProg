@@ -32,7 +32,9 @@ It implements the command interpreter.
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include "graphic_engine.h"
 #include "types.h"
+#include "game.h"
       
 /**
 @def Constant values description 
@@ -45,7 +47,7 @@ It implements the command interpreter.
 The Command enum contains the different commands that can be used in the game
 */
 
-typedef enum enum_Command{
+typedef enum{
   NO_CMD = -2,  /*!<  No Command */
   UNKNOWN,  /*!< Unknown Command */
   QUIT, /*!< Command to quit from the game */
@@ -87,7 +89,7 @@ Input must be typed:
 @return Command *: interpretation of user's input or NULL on error.
 */
 
-Command * get_user_input(Game * game);
+Command * get_user_input(Game *game);
 
 /**
 @brief command_create

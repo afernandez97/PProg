@@ -869,39 +869,39 @@ void test2_space_get_gdesc();
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test1_space_print_gdesc
+@brief test1_space_print_gdesc1
 
 Tests if you can successfully print the gdesc of a space.
 
 @param
 @return
 */
-void test1_space_print_gdesc();
+void test1_space_print_gdesc1();
 
 /**
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test2_space_print_gdesc
+@brief test2_space_print_gdesc1
 
 Tests if you can print the gdesc field of an uninitialised space.
 
 @param
 @return
 */
-void test2_space_print_gdesc();
+void test2_space_print_gdesc1();
 
 /**
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test3_space_print_gdesc
+@brief test3_space_print_gdesc1
 Tests if you can print the gdesc in an uninitialised string.
 
 @param
 @return
 */
-void test3_space_print_gdesc();
+void test3_space_print_gdesc1();
 
 /**
 @author Guillermo Rodriguez

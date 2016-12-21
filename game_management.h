@@ -303,7 +303,7 @@ Adds an person to a game.
 @param Person *person: the person you want to add to the game.  
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-_STATUS game_add_person(Game *person, Person *person);
+_STATUS game_add_person(Game *game, Person *person);
 
 
 

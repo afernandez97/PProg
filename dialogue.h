@@ -13,6 +13,7 @@ It implements the command's comments.
 #define DIALOGUE_H
 
 #include "types.h"
+#include "command.h"
 
 /**
 @def Constant values description 
@@ -46,9 +47,9 @@ Destroys a dialogue.
 @date 14-12-2016 
 @author Ricardo Riol
 @param Dilogue *dialogue: the dialogue to destroy.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-STATUS dialogue_destroy(Dialogue *dialogue);
+_STATUS dialogue_destroy(Dialogue *dialogue);
 
 /**
 @brief dialogue_get_command_act
@@ -81,9 +82,9 @@ Sets the actual command of the game
 @param Dilogue *dialogue: the dialogue.
 Command* : The command that we want to set in the dialogue.
 Status : Tells us if the command has been done sucessfully.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-STATUS dialogue_set_command_act (Dialogue *dialogue, Command *command, STATUS status);
+_STATUS dialogue_set_command_act (Dialogue *dialogue, Command *command, _STATUS status);
 
 /**
 @brief dialogue_set_command_prev
@@ -93,9 +94,9 @@ Sets teh previously command of the game.
 @param Dilogue *dialogue: the dialogue.
 Command* : The command that we wnat to set in the dialogue.
 Status : Tells us if the command has been done sucessfully.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-STATUS dialogue_set_command_prev (Dialogue *dialogue, Command *command, STATUS status);
+_STATUS dialogue_set_command_prev (Dialogue *dialogue, Command *command, _STATUS status);
 
 /**
 @brief dialogue_get_cadena
@@ -115,9 +116,9 @@ Sets the string of the dialogue
 @date 14-12-2016 
 @author Ricardo Riol
 @param Dilogue *dialogue: the dialogue.
-@return STATUS: ERROR if the input is NULL and OK otherwise.
+@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
 */
-STATUS dialogue_set_cadena (Dialogue *dialogue)
+_STATUS dialogue_set_cadena (Dialogue *dialogue);
  
 
 

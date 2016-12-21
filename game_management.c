@@ -131,7 +131,7 @@ Saves the links of a game.
 _STATUS game_save_links(Game *game, char *filename){
   FILE *f_lnk = NULL;
   char name[WORD_SIZE] = "";
-  Id id, space1, space2, location;
+  Id id, space1, space2;
   STATE state;
   Link *link = NULL;
   int i = 0, flag = 0;
@@ -200,7 +200,7 @@ _STATUS game_save_spaces(Game *game, char *filename){
   char gdesc[WORD_SIZE] = "";
   char desc[WORD_SIZE] = "";
   Id id, north, east, south, west, up, down, rule, person;
-  _BOOL illumination;
+  _BOOL illumination, shop, exam;
   Space *space = NULL;
   int i = 0, flag = 0;
   _STATUS status = _OK;
@@ -242,14 +242,20 @@ _STATUS game_save_spaces(Game *game, char *filename){
       /* Get if the space is illuminated or not */
       illumination = space_is_illuminated(space); 
 
+      /* Get if the space is a shop or not */
+      shop = space_is_shop(space);
+
+      /* Get if the space will hold the exam or not */
+      exam = space_is_exam(space);
+
       /* Get the graphic description of the space */ 
       strcpy(gdesc, space_get_gdesc(space));
 
       /* Get the description of the space */ 
       strcpy(desc, space_get_desc(space));
 
-      fprintf(f_spc, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
-        id, name, north, east, south, west, up, down, rule, person, illumination, desc, gdesc);
+      fprintf(f_spc, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%d|%d|%s|%s\n", 
+        id, name, north, west, south, east, up, down, rule, person, illumination, shop, exam, desc, gdesc);
     } else{
       flag = 1;
     } 
@@ -330,7 +336,7 @@ _STATUS game_save_objects(Game *game, char *filename){
       /* Get the description of the object */ 
       strcpy(desc, object_get_desc(object));
 
-      fprintf(f_obj, "#o:%ld|%s|%ld|%lf|%d|%d|%d|%ld|%s\n", 
+      fprintf(f_obj, "#o:%ld|%s|%ld|%f|%d|%d|%d|%ld|%s\n", 
         id, name, location, price, hidden, light, on, open, desc);
     } else{
       flag = 1;
@@ -365,6 +371,7 @@ _STATUS game_save_players(Game *game, char *filename){
   char name[WORD_SIZE] = "";
   Id id, location;
   Player *player = NULL;
+  Set *bag = NULL;
   int i = 0, flag = 0, j, count;
   char objects[WORD_SIZE] = "";
   _STATUS status = _OK;
@@ -435,6 +442,8 @@ _STATUS game_save_rules(Game *game, char *filename){
   Rule *rule = NULL;
   char question[WORD_SIZE] = "",choice1[WORD_SIZE] = "",choice2[WORD_SIZE] = "";
   Id id;
+  int i = 0, flag = 0;
+  _STATUS status = _OK;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
     return _ERROR;
@@ -446,7 +455,7 @@ _STATUS game_save_rules(Game *game, char *filename){
   }
 
   /* Print each line of the file until finding an empty rule */
-  while(i < MAX_RULE && flag == 0){
+  while(i < MAX_RULES && flag == 0){
     /* Get each rule of the game */
     rule = game_get_rule_at_position(game, i);  
     if(rule != NULL) {
@@ -495,6 +504,8 @@ _STATUS game_save_people(Game *game, char *filename){
   Person *person = NULL;
   char name[WORD_SIZE] = "";
   Id id, location, rule;
+  _STATUS status = _OK;
+  int i = 0, flag = 0;
 
   if(!game || !filename){    /* Check that the inputs are not empty */
     return _ERROR;
@@ -791,7 +802,7 @@ _STATUS game_load_spaces(Game *game, char *filename){
   char *toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Id up = NO_ID, down = NO_ID, rule = NO_ID, person = NO_ID;
-  _BOOL illumination = _FALSE;
+  _BOOL illumination = _FALSE, shop = _FALSE, exam = _FALSE;
   Space *space = NULL;
   _STATUS status = _OK;
   int flag = 0;
@@ -833,6 +844,10 @@ _STATUS game_load_spaces(Game *game, char *filename){
 			toks = strtok(NULL, "|");
       illumination = atoi(toks);
       toks = strtok(NULL, "|");
+      shop = atoi(toks);
+      toks = strtok(NULL, "|");
+      exam = atoi(toks);
+      toks = strtok(NULL, "|");
 			if(toks != NULL){
       	strcpy(desc, toks);
 			}
@@ -844,8 +859,8 @@ _STATUS game_load_spaces(Game *game, char *filename){
       }
 
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s\n", 
-        id, name, north, east, south, west, up, down, rule, person, illumination, desc, gdesc);
+      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%ld|%d|%d|%d|%s|%s\n", 
+        id, name, north, east, south, west, up, down, rule, person, illumination, shop, exam, desc, gdesc);
 #endif
       space = space_create(id); /* Create the space */
       if(space != NULL){
@@ -854,9 +869,9 @@ _STATUS game_load_spaces(Game *game, char *filename){
 
         /* Set the links to the space */  
         space_set_north(space, north);
-        space_set_east(space, east);
-        space_set_south(space, south);
         space_set_west(space, west);
+        space_set_south(space, south);
+        space_set_east(space, east);
         space_set_up(space, up);
         space_set_down(space, down);
 
@@ -868,6 +883,12 @@ _STATUS game_load_spaces(Game *game, char *filename){
         
         /* Set if the space is illuminated or not */
 				space_set_illumination(space, illumination); 
+
+        /* Set if the space is a shop or not */
+        space_set_shop(space, shop); 
+
+        /* Set if the space will hold the exam or not */
+        space_set_exam(space, exam); 
 
         /* Set the graphic description to the space */ 
 				if (flag == 0) {
@@ -991,7 +1012,7 @@ _STATUS game_load_objects(Game *game, char *filename){
       	strcpy(desc, toks);
 			}
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%lf|%d|%d|%d|%ld|%s\n", id, name, location, price, hidden, light, on, open, desc);
+      printf("Leido: %ld|%s|%ld|%f|%d|%d|%d|%ld|%s\n", id, name, location, price, hidden, light, on, open, desc);
 #endif
       object = object_create(id); /* Create the object */
       if(object != NULL){
@@ -1008,7 +1029,7 @@ _STATUS game_load_objects(Game *game, char *filename){
 				object_set_price(object, price);
 		    
         /* Set if an object is hidden or not */
-        object_set_hidden(Object *object, hidden);
+        object_set_hidden(object, hidden);
 
 				/* Set if an object can open a link or not */	
 				object_set_open(object, open);
@@ -1102,6 +1123,7 @@ _STATUS game_load_players(Game *game, char *filename){
   Player *player = NULL;
   _STATUS status = _OK;
   int i;
+  double money = 0;
 
 
   if(!game || !filename){    /* Check that the inputs are not empty */
@@ -1126,6 +1148,8 @@ _STATUS game_load_players(Game *game, char *filename){
       strcpy(name, toks);
       toks = strtok(NULL, "|");
       location = atol(toks);
+      toks = strtok(NULL, "|");
+      money = atol(toks);
       toks = strtok(NULL, "\r");
       if(toks != NULL){
         strncpy(obj, toks, strlen(toks)-1); 
@@ -1137,7 +1161,7 @@ _STATUS game_load_players(Game *game, char *filename){
       } 
 
 #ifdef DEBUG 
-  printf("Leido: %ld|%s|%ld|%s\n", id, name, location, obj);
+  printf("Leido: %ld|%s|%ld|%f|%s\n", id, name, location, money, obj);
 #endif
   
       player = player_create(id); /* Create the player */
@@ -1147,6 +1171,9 @@ _STATUS game_load_players(Game *game, char *filename){
 
         /* Set the location of the player */
         player_set_location(player, location);
+
+        /* Set the money of the player */
+        player_set_money(player, money);
 
         /* Add the objects to the player */
         for(i=0; i<MAX_BAG; i++){
@@ -1188,12 +1215,12 @@ _STATUS game_add_rule(Game *game, Rule *rule){
   }
 
   /* Increase the counter until finding an empty rule */
-  while(i < MAX_RULE && game_get_rule_at_position(game, i) != NULL){
+  while(i < MAX_RULES && game_get_rule_at_position(game, i) != NULL){
     i++;
   }
 
   /* Check if every rule is not empty */
-  if(i >= MAX_RULE){
+  if(i >= MAX_RULES){
     return _ERROR;
   }
 
@@ -1220,9 +1247,12 @@ Loads the rules from a file.
 
 _STATUS game_load_rules(Game *game, char *filename){
   FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char *toks = NULL;
   char question[WORD_SIZE] = "", choice1[WORD_SIZE] = "", choice2[WORD_SIZE] = "";
   Id id = NO_ID;
   Rule * rule = NULL; 
+  _STATUS status = _OK;
   
   if(!game || !filename){ /* Check that the inputs are not empty */
     return _ERROR;
@@ -1290,7 +1320,7 @@ Adds an person to a game.
 @param Person *person: the person you want to add to the game.  
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-_STATUS game_add_person(Game *person, Person *person){
+_STATUS game_add_person(Game *game, Person *person){
   int i = 0;  /* Initialize the counter */
 
   if(!game || !person){  /* Check that the inputs are not empty */
@@ -1331,6 +1361,8 @@ Loads the people from a file.
 
 _STATUS game_load_people(Game *game, char *filename){
   FILE *file = NULL;
+  char line[WORD_SIZE] = "";
+  char *toks = NULL;
   char name[WORD_SIZE] = "";
   Id id = NO_ID, location = NO_ID, rule = NO_ID;
   Person * person = NULL;
@@ -1372,7 +1404,7 @@ _STATUS game_load_people(Game *game, char *filename){
         person_set_location(person, location);
         
         /* Set the rule to the person */  
-        person_set_rule(person, location);
+        person_set_rule(person, rule);
         
 
   

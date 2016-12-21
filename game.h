@@ -49,6 +49,7 @@ Dec. 19, 2016 Version 6.1
 #include "person.h"
 #include "dialogue.h"
 #include "game_rules.h"
+#include "graphic_engine.h"
 #include "space.h"
 #include "object.h"
 #include "player.h"
@@ -59,7 +60,7 @@ Dec. 19, 2016 Version 6.1
 /**
 @def Constant values description 
 */
-#define idplayer 1
+
 #define id_die 2
 
 
@@ -344,32 +345,6 @@ Gets the rule in a specific position.
 Rule * game_get_rule_at_position(Game *game, int position);
 
 /**
-@date 23-09-2016 
-@author Alejandro Sanchez
-
-@brief game_is_over
-Ends the game.
-
-@param Game *game: the game to end.
-
-@return _BOOL: _FALSE.
-*/
-_BOOL game_is_over(Game *game);
-
-/**
-@date 20-10-2016 
-@author Alejandro Sanchez
-
-@brief game_print_data
-Prints the data of the game.
-
-@param Game *game: the game to print its elements.
-
-@return
-*/
-void game_print_data(Game *game);
-
-/**
 @date 19-12-2016 
 @author Adrián Fernández
 
@@ -426,5 +401,48 @@ Gets the answer field of a game.
 char *: value of the answer field
 */
 char * game_get_answer(Game *game);
+
+/**
+@date 20-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_window
+Gets a window of the screen of the game.
+
+@param Game *game: the game whose window you want to get.
+@param int n: the number of the window.
+
+@return 
+Window *: the window you want or NULL on error.
+*/
+Window * game_get_window(Game *game, int n);
+
+/**
+@date 23-09-2016 
+@author Alejandro Sanchez
+
+@brief game_is_over
+Ends the game.
+
+@param Game *game: the game to end.
+
+@return _BOOL: _FALSE.
+*/
+_BOOL game_is_over(Game *game);
+
+/**
+@date 20-10-2016 
+@author Alejandro Sanchez
+
+@brief game_print_data
+Prints the data of the game.
+
+@param Game *game: the game to print its elements.
+
+@return
+*/
+void game_print_data(Game *game);
+
+
 
 #endif

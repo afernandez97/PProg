@@ -5,10 +5,12 @@ all: JuegoOcaPlus
 test: die_test set_test player_test inventory_test space_test link_test object_test graphic_engine_test game_rules_test dialogue_test person_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
+NCURSESFLAG = -lncurses
 
-JuegoOcaPlus: game.o game_loop.o space.o command.o game_management.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o
-	gcc -o $@ $^ 
+JuegoOcaPlus: space.o game_management.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o dialogue.o game_rules.o person.o game.o game_loop.o command.o
+	gcc -o $@ $^ $(NCURSESFLAG)
 
+#Tests
 die_test: die_test.o die.o
 	gcc -o $@ $^ 
 
@@ -31,7 +33,7 @@ link_test: link_test.o link.o
 	gcc -o $@ $^
 
 graphic_engine_test: graphic_engine_test.o graphic_engine.o
-	gcc -o $@ $^
+	gcc -o $@ $^ $(NCURSESFLAG)
 
 die_test.o: die_test.c die.c die.h types.h
 	gcc $(CCFLAGS) die_test.c die.c
@@ -60,13 +62,9 @@ game_rules_test.o: game_rules_test.c game_rules_test.h types.h
 dialogue_test.o: dialogue_test.c dialogue_test.h types.h
 	gcc $(CCFLAGS) dialogue_test.c
 
-
-#Tests
 person_test.o: person_test.c person_test.h types.h
 	gcc $(CCFLAGS) person_test.c
 
-game.o: game.c game.h 
-	gcc $(CCFLAGS) game.c
 
 game_loop.o: game_loop.c game.h
 	gcc $(CCFLAGS) game_loop.c
@@ -109,6 +107,9 @@ dialogue.o: dialogue.c dialogue.h
 
 person.o: person.c person.h
 	gcc $(CCFLAGS) person.c
+
+game.o: game.c game.h command.h dialogue.h graphic_engine.h object.h person.h link.h set.h die.h game_management.h space.h game_rules.h
+	gcc $(CCFLAGS) game.c
 
 #clean and dist
 clean: 

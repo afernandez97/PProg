@@ -1,7 +1,7 @@
 /**
    @file space.c
-   @version 5.2
-   @date 16-12-2016 
+   @version 5.3
+   @date 20-12-2016 
    @author Guillermo Rodriguez and Alejandro Sanchez
  
    @brief 
@@ -40,6 +40,9 @@
      @version  Dec. 16, 2016   Version 5.2
       Added fields "person" and "shop" to the structure "Space".
       Created "space_set_person", "space_get_person", "space_set_shop", "space_is_shop".
+     @version  Dec. 20, 2016   Version 5.3
+      Added field "exam" to the structure "Space".
+      Created "space_set_exam", "space_get_exam".
 	*/
  
 #include <stdio.h>
@@ -65,6 +68,8 @@
 #define rule(X) (X)->rule
 #define person(X) (X)->person
 #define shop(X) (X)->shop 
+#define exam(X) (X)->exam 
+
  
 /** @brief The Space structure stores information of the different spaces that there are in the game */
 struct _Space{
@@ -82,7 +87,8 @@ struct _Space{
 	char desc[WORD_SIZE + 1];	/*!< Description of the space */
   char gdesc[WORD_SIZE +1]; /*!< Graphic description of the space */
   _BOOL illuminated; /*!< Illuminated or not */
-  _BOOL shop /*!<If you can buy and sell objects in this space*/
+  _BOOL shop; /*!<If you can buy and sell objects in this space*/
+  _BOOL exam; /*!< Indicates if the exam is in that space or not */
 };
  
  
@@ -708,7 +714,7 @@ Set * space_get_object(Space *space){
     _BOOL: _TRUE if the object is in the space and _FALSE in other cases. 
    */
 _BOOL space_is_object(Space *space, Id object){
-	if(!space || object == NO_ID){
+	if(!space || object == NO_ID){ /* Check if the inputs are not empty */
     	return _FALSE;
 	}
   return set_is_object(objects(space), object);	
@@ -818,11 +824,11 @@ char *space_get_gdesc(Space *space){
 
 
 /**
-   @date 29-10-2016 
-   @author Alejandro Sanchez
+   @date 21-12-2016 
+   @author Adrián Fernández
 
    @brief 
-   Prints the graphic description of the space in a string. space_print_gdesc()
+   Prints the graphic description of the space in a string. space_print_gdesc1()
 
    @param 
     Space *space: the space you want to print its graphic description.
@@ -830,11 +836,11 @@ char *space_get_gdesc(Space *space){
    @return 
     _STATUS: _OK if you do the operation well and _ERROR in other cases.
    */
-_STATUS space_print_gdesc(Space *space, char *output){
-  char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL;
+_STATUS space_print_gdesc1(Space *space, char *output){
+  char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL, spaces[WORD_SIZE] = "";
  
   /* Check if the input is empty or the graphic description is empty */
-  if(!space || strcmp(gdesc(space), "\0" || output == NULL) == 0){
+  if(!space || !strcmp(gdesc(space), "\0") || !output || n_spaces < 0){
   	return _ERROR;
   }
 
@@ -850,12 +856,95 @@ _STATUS space_print_gdesc(Space *space, char *output){
 
   /* "Tokenize" the graphic description and print it */
 	toks = strtok(gdesc, "|");
-  while(toks != NULL){
-		sprintf(aux, "     | %s   |\n", toks);
-    strcat(output, aux);
-		toks = strtok(NULL, "|");
+
+	sprintf(aux, "%s| %s   |", spaces, toks);
+  strcat(output, aux);
+	
+  return _OK;
+}
+
+
+/**
+   @date 21-12-2016 
+   @author Adrián Fernández
+
+   @brief 
+   Prints the graphic description of the space in a string. space_print_gdesc2()
+
+   @param 
+    Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc is printed.
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_print_gdesc2(Space *space, char *output){
+  char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL, spaces[WORD_SIZE] = "";
+ 
+  /* Check if the input is empty or the graphic description is empty */
+  if(!space || !strcmp(gdesc(space), "\0") || !output || n_spaces < 0){
+    return _ERROR;
   }
 
+  /* Copy the graphic description in an auxiliar array */
+  if(!strcpy(gdesc, gdesc(space))){
+    return _ERROR;
+  }
+
+  /* Deletes the content of output */
+  if(!strcpy(output, "")){
+    return _ERROR;
+  }
+
+  /* "Tokenize" the graphic description and print it */
+  toks = strtok(gdesc, "|");
+  toks = strtok(NULL, "|");
+
+  sprintf(aux, "%s| %s   |", spaces, toks);
+  strcat(output, aux);
+  
+  return _OK;
+}
+
+
+/**
+   @date 21-12-2016 
+   @author Adrián Fernández
+
+   @brief 
+   Prints the graphic description of the space in a string. space_print_gdesc3()
+
+   @param 
+    Space *space: the space you want to print its graphic description.
+    char *output: string in which the gdesc is printed.
+   @return 
+    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   */
+_STATUS space_print_gdesc3(Space *space, char *output){
+  char gdesc[WORD_SIZE] = "", aux[WORD_SIZE] = "", *toks = NULL, spaces[WORD_SIZE] = "";
+ 
+  /* Check if the input is empty or the graphic description is empty */
+  if(!space || !strcmp(gdesc(space), "\0") || !output || n_spaces < 0){
+    return _ERROR;
+  }
+
+  /* Copy the graphic description in an auxiliar array */
+  if(!strcpy(gdesc, gdesc(space))){
+    return _ERROR;
+  }
+
+  /* Deletes the content of output */
+  if(!strcpy(output, "")){
+    return _ERROR;
+  }
+
+  /* "Tokenize" the graphic description and print it */
+  toks = strtok(gdesc, "|");
+  toks = strtok(NULL, "|");
+  toks = strtok(NULL, "|");
+
+  sprintf(aux, "%s| %s   |", spaces, toks);
+  strcat(output, aux);
+  
   return _OK;
 }
 
@@ -954,6 +1043,74 @@ _BOOL space_is_shop(Space *space){
 }
 
 
+/**
+
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Sets if a space is where the exam will be done or not.space_set_exam()
+
+   @param 
+    Space *space: the space you want to change.
+    _BOOL exam: Choose if the space is where the exam will be or not.
+   @return 
+    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+
+   */
+_STATUS space_set_exam(Space *space, _BOOL exam){
+  if(!space){
+    return _ERROR;
+  }
+
+  exam(space) = exam;
+  
+  return _OK;
+}
+
+/**
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Gets if a space is where the exam will be done or not.space_is_exam() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space will held the exam or _FALSE if not or if the input is NULL.
+   */
+_BOOL space_is_exam(Space *space){
+  if(!space){
+    return _FALSE;
+  }
+  return exam(space);
+}
+
+/**
+   @date 20-12-2016 
+   @author Alejandro Sanchez 
+ 
+   @brief 
+    Gets if a space is connected by a specific link or not.space_is_linked_by() 
+ 
+   @param 
+    Space *space: the space you want to know that.
+   @return 
+    _BOOL: _TRUE if the space is linked by that link, _FALSE if not or if the input is NULL.
+   */
+_BOOL space_is_linked_by(Space *space, Id link){
+  if(!space){
+    return _FALSE;
+  }
+
+  if(link == north(space) || link == south(space) || link == east(space) 
+    || link == west(space) || link == up(space) || link == down(space)){
+    return _TRUE;
+  }
+
+  return _FALSE;
+}
 
 /**
    @date 01-12-2016 
@@ -969,6 +1126,7 @@ _BOOL space_is_shop(Space *space){
    */
 _STATUS space_print(Space *space){
   Id idaux = NO_ID;
+  char aux[WORD_SIZE] = "";
    
   if(!space){                   /* Check that the input is not empty */
     return _ERROR;
@@ -1050,7 +1208,7 @@ _STATUS space_print(Space *space){
     return _ERROR;
   }
 
-  if(space_print_gdesc(space) == _ERROR){
+  if(space_print_gdesc(space, aux, 0) == _ERROR){
     return _ERROR;
   }
  
