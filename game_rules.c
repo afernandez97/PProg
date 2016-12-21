@@ -134,7 +134,7 @@ _STATUS rule_set_question(Rule *rule, char *question){
     return _ERROR;
   }
 
-  /* Set the ask and check if it has worked */
+  /* Set the question and check if it has worked */
   if(!strcpy(question(rule), question)){
     return _ERROR;
   }  

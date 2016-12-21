@@ -94,6 +94,8 @@ Dec. 19, 2016 Version 6.1
 #define text(X) (X)->text
 #define keyboard(X) (X)->keyboard
 #define answer(X) (X)->answer
+#define screen(X) (X)->screen
+
 
 
 /**
@@ -111,6 +113,7 @@ struct _Game{
 	char text[WORD_SIZE];				/*!< Text shown on the screen */
 	_BOOL keyboard;						/*!< Indicates if the input comes from the keyboard */ 
 	char answer[WORD_SIZE];				/*!< String that stores a command */
+  Screen *screen;   /* Screen of the game */
 };
 
 
@@ -405,12 +408,12 @@ Person * game_get_person(Game *game, Id id);
 Sets a location of a player.
 
 @param Game *game: the game where the player is.
-@param Id player: the id of the player selected.
+@param int player: the number of the player selected.
 @param Id location: the location you want for the player.
 
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-_STATUS game_set_player_location(Game *game, Id player, Id location);
+_STATUS game_set_player_location(Game *game, int player, Id location);
 /**
 @date 03-12-2016 
 @author Adrián Fernández
@@ -419,11 +422,11 @@ _STATUS game_set_player_location(Game *game, Id player, Id location);
 Gives the location of a player.
 
 @param Game *game: the game where the player is.
-@param Id player: the id of the player selected.
+@param Id player: the number of the player selected.
 
 @return Id: the location of the player or NO_ID on error.
 */
-Id game_get_player_location(Game *game, Id player);
+Id game_get_player_location(Game *game, int player);
 /**
 @date 30-10-2016 
 @author Alejandro Sanchez
@@ -553,8 +556,8 @@ Game * game_init(Id die){
 		return NULL;
 	}
 
-	text(game) = "";
-	answer(game) = "";
+	text(game)[0] = '\0';
+	answer(game)[0] = '\0';
 	keyboard(game) = _TRUE;
 
 	return game;
@@ -660,6 +663,7 @@ Updates a game.
 _STATUS game_update(Game *game, Command *command, int player){
 	T_Command cmd;
 	char arg[CMD_LENGTH] = "";
+  char arg2[CMD_LENGTH] = "";
 	_STATUS status = _ERROR;
 
 	if(!game || !command || player < 0){ /* Check that the inputs are not empty */
@@ -668,6 +672,7 @@ _STATUS game_update(Game *game, Command *command, int player){
 
 	cmd = command_get_cmd(command);
 	strcpy(arg, command_get_arg(command));
+  strcpy(arg2, command_get_arg2(command));
 	/* Call a function depending on the command */
 	switch(cmd){
 		case UNKNOWN:
@@ -691,16 +696,30 @@ _STATUS game_update(Game *game, Command *command, int player){
 		case ROLL:
 			status = callback_ROLL(game);
 			break;
-		case TURON:
+		case TURNON:
 			status = callback_TURNON(game ,arg, player);
 			break;
-		case TUROFF:
+		case TURNOFF:
 			status = callback_TURNOFF(game,arg, player);
 			break;
-		case OPEN:
+		case BUY:
+			status = callback_BUY(game,arg, player);
+			break;
+		case SELL:
+			status = callback_SELL(game,arg, player);
+			break;
+		case ANSWER:
+			status = callback_ANSWER(game,arg, player);
+			break;
+		case LOAD:
+			status = callback_LOAD(game, arg);
+			break;
+		case SAVE:
+			status = callback_SAVE(game, arg);
+			break;
+		case OPENL:
 			status = callback_OPEN(game, arg, arg2, player);
 			break;
-		
 		case NO_CMD:
 			break;
 		default: /* We must never arrive here */
@@ -956,20 +975,20 @@ Sets a person in a specific position.
 @param Person * person : the person you want to set
 @param int position: the position where you want to set the person.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_set_person_at_position(Game *game, Person *person, int position){
+_STATUS game_set_person_at_position(Game *game, Person *person, int position){
 	if(!game || !person || position < 0){	/* Check that the inputs are not empty */
-		return ERROR;
+		return _ERROR;
 	}
 
-	if(person(game)[position] != NULL){
-		person_destroy(person(game)[position]);
+	if(people(game)[position] != NULL){
+		person_destroy(people(game)[position]);
 	}
 
-	person(game)[position] = person;
+	people(game)[position] = person;
 
-	return OK;
+	return _OK;
 }
 
 
@@ -991,7 +1010,7 @@ Person * game_get_person_at_position(Game *game, int position){
 		return NULL;	
 	}
 	
-	return person(game)[position];
+	return people(game)[position];
 }
 
 
@@ -1006,20 +1025,20 @@ Sets a rule in a specific position.
 @param Rule * rule : the rule you want to set
 @param int position: the position where you want to set the rule.
 
-@return STATUS: OK if you do the operation well and ERROR in other cases.
+@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
-STATUS game_set_rule_at_position(Game *game, Rule *rule, int position){
+_STATUS game_set_rule_at_position(Game *game, Rule *rule, int position){
 	if(!game || !rule || position < 0){	/* Check that the inputs are not empty */
-		return ERROR;
+		return _ERROR;
 	}
 
-	if(rule(game)[position] != NULL){
-		rule_destroy(rule(game)[position]);
+	if(rules(game)[position] != NULL){
+		rule_destroy(rules(game)[position]);
 	}
 
-	rule(game)[position] = rule;
+	rules(game)[position] = rule;
 
-	return OK;
+	return _OK;
 }
 
 
@@ -1041,8 +1060,126 @@ Rule * game_get_rule_at_position(Game *game, int position){
 		return NULL;	
 	}
 	
-	return rule(game)[position];
+	return rules(game)[position];
 }
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_set_keyboard(Game* game, _BOOL keyboard)
+Sets the keyboard field of a game.
+
+@param Game *game: the game whose keyboard field you want to set.
+@param _BOOL keyboard: the value you want to set.
+
+@return 
+_STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_keyboard(Game* game, _BOOL keyboard){
+	if (game == NULL){	/* Check if the input is not empty */
+		return _ERROR;
+	}
+
+	keyboard(game) = keyboard;
+	return _OK;
+}
+
+
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_get_keyboard(Game* game)
+Gets the keyboard field of a game.
+
+@param Game *game: the game whose keyboard field you want to get.
+
+@return 
+_BOOL: value of the keyboard field
+*/
+_BOOL game_get_keyboard(Game *game){
+	if (game == NULL){ 	/* Check if the input is not empty */
+		return _ERROR;
+	}
+
+	return keyboard(game);
+}
+
+
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_set_answer(Game* game, char * answer)
+Sets the answer field of a game.
+
+@param Game *game: the game whose answer field you want to set.
+@param char * answer: the value you want to set.
+
+@return 
+_STATUS: _OK if you do the operation well and _ERROR in other cases.
+*/
+_STATUS game_set_answer(Game* game, char * answer){
+	/* Check if the inputs are not empty */
+	if (game == NULL || answer == NULL){ 	
+		return _ERROR;
+	}
+
+  	/* Set the answer and check if it has worked */
+	if(!strcpy(answer(game), answer)){
+		return _ERROR;
+	}
+	return _OK;
+}
+
+
+
+/**
+@date 19-12-2016 
+@author Adrián Fernández
+
+@brief game_get_answer
+Gets the answer field of a game.
+
+@param Game *game: the game whose answer field you want to get.
+
+@return 
+char *: value of the answer field
+*/
+char * game_get_answer(Game *game){
+	/* Check if the input is not empty */
+	if (game == NULL){
+		return _ERROR;
+	}
+
+	return answer(game);
+}
+
+/**
+@date 20-12-2016 
+@author Alejandro Sanchez
+
+@brief game_get_window
+Gets a window of the screen of the game.
+
+@param Game *game: the game whose window you want to get.
+@param int n: the number of the window.
+
+@return 
+Window *: the window you want or NULL on error.
+*/
+Window * game_get_window(Game *game, int n){
+  /* Check if the inputs are not empty */
+  if (game == NULL || n < 0){
+    return NULL;
+  }
+
+  return screen_get_window(screen(game), n);
+}
+
 
 /**
 @date 23-09-2016 
@@ -1056,7 +1193,7 @@ Ends the game.
 @return _BOOL: _FALSE.
 */
 _BOOL game_is_over(Game *game){
-		return _FALSE;
+	return _FALSE;
 }
 
 
@@ -1365,7 +1502,7 @@ Sets a location of a player.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS game_set_player_location(Game *game, int player, Id location){
-	Object *ply = NULL;
+	Player *ply = NULL;
 
 	if(!game || player < 0 || location == NO_ID){	/* Check that the inputs are not empty */
 		return _ERROR;
@@ -1669,7 +1806,7 @@ _STATUS callback_CATCH(Game *game, char *arg, int player){
 		return _ERROR;
 	}
 
-	if(space_is_shop(space(game)[aux]) == _TRUE){
+	if(space_is_shop(spaces(game)[aux]) == _TRUE){
 		return _ERROR;
 	}
 
@@ -1763,7 +1900,7 @@ _STATUS callback_LEAVE(Game *game, char *arg, int player){
 		return _ERROR;
 	}
 
-	if(space_is_shop(space(game)[aux]) == _TRUE){
+	if(space_is_shop(spaces(game)[aux]) == _TRUE){
 		return _ERROR;
 	}
 
@@ -1939,8 +2076,7 @@ _STATUS callback_INSPECT(Game *game, char *arg, int player){
 	Inventory *inv = NULL;
 	Set *set_inv = NULL, *set_spc = NULL;
 	Id id_space = NO_ID;
-
-	int flag, i, illuminated = 0, bought = 0;
+	int flag, i, illuminated = 0;
 	char *description = NULL;
 	char aux[WORD_SIZE] = "";
 
@@ -1970,7 +2106,7 @@ _STATUS callback_INSPECT(Game *game, char *arg, int player){
 			sprintf (aux, "%s. You can't see anything.\n", description);
 		}
 
-		if (!game_set_text(text(game), aux)){
+		if (!game_set_text(game, aux)){
 			return _ERROR;
 		}
 
@@ -1993,36 +2129,26 @@ _STATUS callback_INSPECT(Game *game, char *arg, int player){
 		}
 	}
 
-	if (object_is_bought(obj) == _TRUE){
-		bought = 1;
-	}
 
-	if (iluminated == 0){
+	if (illuminated == 0){
 		sprintf(aux, "Error, the space is not iluminated.\n");
-		if (!game_set_text(text(game), aux)){
+		if (!game_set_text(game, aux)){
 			return _ERROR;
 		}
 		return _OK;
 	}
+ 
 
-	if (flag == 1 && bought == 1 && illuminated == 1){
-		sprintf(aux, "%s. The object has been bought.\n", object_get_desc(obj));
-		if (!game_set_text(text(game), aux)){
-			return _ERROR;
-		}
-		return _OK;
-	} 
-
-	if (flag == 1 && bought == 0 && illuminated == 1){
+	if (flag == 1 && illuminated == 1){
 		sprintf(aux, "%s.\n", object_get_desc(obj));
-		if (!game_set_text(text(game), aux)){
+		if (!game_set_text(game, aux)){
 			return _ERROR;
 		}
 		return _OK;
 	}
 
 	sprintf(aux, "Error, the object has not been found.\n");
-	if (!game_set_text(text(game), aux)){
+	if (!game_set_text(game, aux)){
 		return _ERROR;
 	}
 
@@ -2043,24 +2169,16 @@ Turns on an object. It is used when the command is TURNON.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_TURNON(Game *game, char *arg, int player){
-	Space *space = NULL;
 	Object *obj = NULL;
 	Inventory *inv = NULL;
-	Set *set_inv = NULL, *set_spc = NULL;
-	Id id_space = NO_ID;
-
+	Set *set_inv = NULL;
 	int flag, i;
-	char *description = NULL;
 	char aux[WORD_SIZE] = "";
 
 	/* Check that the inputs are not empty */
 	if (!game || !arg || player < 0){
 		return _ERROR;
-	}
-	
-	id_space = game_get_player_location(game, player);
-	space = game_get_space(game, id_space);
-	set_spc = space_get_object(space);
+  }
 
 	inv = player_get_inventory(players(game)[player]);
 	set_inv = inventory_get_bag(inv);
@@ -2079,7 +2197,7 @@ _STATUS callback_TURNON(Game *game, char *arg, int player){
 	} 
 		
 	sprintf(aux, "Error when you try to turn on an object.\n");
-	if (!game_set_text(text(game), aux)){
+	if (!game_set_text(game, aux)){
 		return _ERROR;
 	}
 	return _ERROR;
@@ -2099,24 +2217,16 @@ Turns on an object. It is used when the command is TURNOFF.
 @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
 */
 _STATUS callback_TURNOFF(Game *game, char *arg, int player){
-	Space *space = NULL;
 	Object *obj = NULL;
 	Inventory *inv = NULL;
-	Set *set_inv = NULL, *set_spc = NULL;
-	Id id_space = NO_ID;
-
+	Set *set_inv = NULL;
 	int flag, i;
-	char *description = NULL;
 	char aux[WORD_SIZE] = "";
 
 	/* Check that the inputs are not empty */
 	if (!game || !arg || player < 0){
 		return _ERROR;
 	}
-	
-	id_space = game_get_player_location(game, player);
-	space = game_get_space(game, id_space);
-	set_spc = space_get_object(space);
 
 	inv = player_get_inventory(players(game)[player]);
 	set_inv = inventory_get_bag(inv);
@@ -2135,7 +2245,7 @@ _STATUS callback_TURNOFF(Game *game, char *arg, int player){
 	} 
 		
 	sprintf(aux, "Error when you try to turn off an object.\n");
-	if (!game_set_text(text(game), aux)){
+	if (!game_set_text(game, aux)){
 		return _ERROR;
 	}
 	return _ERROR;
@@ -2157,11 +2267,9 @@ _STATUS callback_OPENL(Game *game, char *arg, char *arg2, int player){
 	Space *space = NULL;
 	Object *obj = NULL;
 	Inventory *inv = NULL;
-	Set *set_inv = NULL, *set_spc = NULL;
+	Set *set_inv = NULL;
 	Id id_space = NO_ID;
-
 	int flag, i;
-	char *description = NULL;
 	char aux[WORD_SIZE] = "";
 
 	/* Check that the inputs are not empty */
@@ -2184,7 +2292,7 @@ _STATUS callback_OPENL(Game *game, char *arg, char *arg2, int player){
 
 	if (flag == 1 && object_can_open(obj) != NO_ID){
 		for(i=0, flag=0; i < MAX_LINKS && links(game)[i] != NULL && flag == 0; i++){
-				if(!strcmp(link_get_name(links(game)[i]), arg2)){
+				if(!strcmp(link_get_name(links(game)[i]), arg2) && space_is_linked_by(space, link_get_id(links(game)[i]))){
 						flag = 1;
 				}
 		}
@@ -2197,7 +2305,7 @@ _STATUS callback_OPENL(Game *game, char *arg, char *arg2, int player){
 	}
 
 	sprintf(aux, "Error when you try to open a link.\n");
-	if (!game_set_text(text(game), aux)){
+	if (!game_set_text(game, aux)){
 		return _ERROR;
 	}
 	return _ERROR;
@@ -2288,7 +2396,7 @@ _STATUS callback_BUY(Game *game, char *arg, int player){
 		return _ERROR;
 	}
 
-	if(space_is_shop(space(game)[aux]) == _FALSE){
+	if(space_is_shop(spaces(game)[aux]) == _FALSE){
 		return _ERROR;
 	}
 
@@ -2366,7 +2474,7 @@ _STATUS callback_SELL(Game *game, char *arg, int player){
 	/* Initialize the auxiliary variable, the counter and the flag */
 	int aux = NO_ID, i = 0, flag = 0, count;
 	Id space_id, object_id;
-	double price = 0,money = 0;
+	double price = 0;
 	Inventory *inv = NULL;
 	Object *object = NULL;
  
@@ -2397,7 +2505,7 @@ _STATUS callback_SELL(Game *game, char *arg, int player){
 		return _ERROR;
 	}
 
-	if(space_is_shop(space(game)[aux]) == _FALSE){
+	if(space_is_shop(spaces(game)[aux]) == _FALSE){
 		return _ERROR;
 	}
 
@@ -2460,7 +2568,7 @@ Answer to a question . It is used when the command is ANSWER.
 */
 _STATUS callback_ANSWER(Game *game, char *arg, int player){
 	/* Initialize the auxiliary variable, the counter and the flag */
-	int aux = NO_ID, i = 0, flag = 0, count, choicef=-1;
+	int aux = NO_ID, i = 0, flag = 0, choicef=-1;
 	Id space_id,rule_id,person_id;
 	char *choice;
 	
@@ -2528,14 +2636,14 @@ _STATUS callback_ANSWER(Game *game, char *arg, int player){
 
 	/* If the space has not a rule, check if the person in the space has a rule */
 	if(NO_ID == person_id){
-		return _ERROR
+		return _ERROR;
 	}
 
 	aux = NO_ID;
 	i = 0;
 	flag = 0;
 	while(i < MAX_PEOPLE && flag == 0){
-		if(person_id == person_get_id(person(game)[i])){
+		if(person_id == person_get_id(people(game)[i])){
 			aux = i;
 			flag = 1;
 		}
@@ -2547,7 +2655,7 @@ _STATUS callback_ANSWER(Game *game, char *arg, int player){
 	}
 
 	
-	rule_id = person_get_rule(persons(game)[aux]);
+	rule_id = person_get_rule(people(game)[aux]);
 	if(rule_id == NO_ID){
 		return _ERROR;
 	}
@@ -2579,92 +2687,4 @@ _STATUS callback_ANSWER(Game *game, char *arg, int player){
 
 
 
-/**
-@date 19-12-2016 
-@author Adrián Fernández
 
-@brief game_set_keyboard(Game* game, _BOOL keyboard)
-Sets the keyboard field of a game.
-
-@param Game *game: the game whose keyboard field you want to set.
-@param _BOOL keyboard: the value you want to set.
-
-@return 
-_STATUS: _OK if you do the operation well and _ERROR in other cases.
-*/
-_STATUS game_set_keyboard(Game* game, _BOOL keyboard){
-	if (game == NULL){
-		return _ERROR;
-	}
-
-	keyboard(game) = keyboard;
-	return _OK;
-}
-
-
-
-/**
-@date 19-12-2016 
-@author Adrián Fernández
-
-@brief game_get_keyboard(Game* game)
-Gets the keyboard field of a game.
-
-@param Game *game: the game whose keyboard field you want to get.
-
-@return 
-_BOOL: value of the keyboard field
-*/
-_BOOL game_get_keyboard(Game *game){
-	if (game == NULL){
-		return _ERROR;
-	}
-
-	return keyboard(game);
-}
-
-
-
-/**
-@date 19-12-2016 
-@author Adrián Fernández
-
-@brief game_set_answer(Game* game, char * answer)
-Sets the answer field of a game.
-
-@param Game *game: the game whose answer field you want to set.
-@param char * answer: the value you want to set.
-
-@return 
-_STATUS: _OK if you do the operation well and _ERROR in other cases.
-*/
-_STATUS game_set_answer(Game* game, char * answer){
-	if (game == NULL || answer == NULL){
-		return _ERROR;
-	}
-
-	strcpy(answer(game), answer);
-	return _OK;
-}
-
-
-
-/**
-@date 19-12-2016 
-@author Adrián Fernández
-
-@brief game_get_answer(Game* game)
-Gets the answer field of a game.
-
-@param Game *game: the game whose answer field you want to get.
-
-@return 
-char *: value of the answer field
-*/
-char * game_get_answer(Game *game){
-	if (game == NULL){
-		return _ERROR;
-	}
-
-	return answer(game);
-}

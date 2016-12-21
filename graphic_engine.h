@@ -292,7 +292,7 @@ _STATUS window_get_input(Window *win, char *input);
 
 /**
 @date 02-11-2016 
-@author Alejandro Sanchez
+@author Adrián Fernández
 
 @brief game_print_objects
 Stores the objects of the game in a string (output).
@@ -306,18 +306,18 @@ Stores the objects of the game in a string (output).
 void game_print_objects(Game *game, Space *space, char *output);
 
 /**
-Function: 
-@date 02-11-2016 
-@author Alejandro Sanchez
+@date 12-12-2016 
+@author Adrian Fernández
 
 @brief game_print_screen
 Prints the screen of the game and gets an input.
 
 @param Game *game: the game to print its screen.
 @param char *input: string containing the input.
+@param int player: integer that indicates the player.
 
 @return
 */
-void game_print_screen(Game *game, char *input);
+void game_print_screen(Game *game, char *input, int player);
 
 #endif

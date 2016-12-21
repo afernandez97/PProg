@@ -1,4 +1,12 @@
-#o:1|O1|1|10.95|0|0|0|0|-1|Token 1
-#o:2|O2|1|Token 2
-#o:3|O3|1|Token 3
-#o:4|O4|1|Token 4
+#o:1|IN|-1|0.0|0|0|0|57|Instruccions:\ncommands: go <direction> or g <direction>, catch <obj_name> or c <obj_name>, leave <obj_name> or l <obj_name>, inspect <spc_name/obj_name> or i <spc_name/obj_name>, quit or q, roll or r.
+#o:2|o¬|26|500.0|0|0|0|57|Key:\nOpens the canteen door.
+#o:3|[]|29|0.0|0|0|0|41|ID:\nNeeded to enter the exam class.
+#o:4|CÞ|30|1.0|0|1|0|-1|Napolitana:\nEnables infra-red sight when eaten.
+#o:5|† |52|1000.0|1|0|0|-1|Relic:\nVery valuable item.
+#o:6|$$|9|5.0|0|0|0|-1|Money:\nMonopoly money. Try to exchange it at the cafeteria.
+#o:7|:(|11|0.0|1|0|0|-1|You found nothing.
+#o:8|:(|15|0.0|1|0|0|-1|You found nothing.
+#o:9|:(|22|0.0|1|0|0|-1|You found nothing.
+#o:10|:(|36|0.0|1|0|0|-1|You found nothing.
+#o:11|oo|40|20.0|1|0|0|-1|Sunglasses:\nYou look rad with these on.
+#o:12|▇ |32|20.0|1|0|0|-1|Useless die:\nYou get to roll the die again, "sigh".

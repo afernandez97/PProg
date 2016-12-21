@@ -47,6 +47,7 @@ int main(int argc, char *argv[]){
 	_STATUS status;
 	FILE *f = NULL;
 	T_Command cmd;
+	Dialogue *dialogue = NULL;
 
 	int flag = 0, arg = 1, player = 0;
 	char answer[WORD_SIZE];
@@ -57,11 +58,17 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 	
+	dialogue = dialogue_create ();
+	/* Check if dialogue initializes correctly */
+	if (!dialogue){
+		return 1;
+	}
 
 	game = game_init_from_file(argv[arg], die);
 	/* Check if game initializes correctly */
 	if(game == NULL){	
-		fprintf(stderr, "Error while initializing game.\n"); 
+		fprintf(stderr, "Error while initializing game.\n");
+		dialogue_destroy (dialogue); 
 		return 1;
 	}
 
@@ -74,6 +81,7 @@ int main(int argc, char *argv[]){
 			f = fopen(argv[arg], "w");
 			if(!f){	 /* Check if the file has been opened correctly */
 				game_destroy(game);
+				dialogue_destroy (dialogue);
 				return 1;
 			}
 		}
@@ -82,9 +90,12 @@ int main(int argc, char *argv[]){
 	/* Game loop */
 	while((command_get_cmd(command) != QUIT) && !game_is_over(game)){	
 		game_print_screen(game, player);
+		dialogue_set_command_prev(dialogue,command,status);
 		command_destroy(command); /* Destroy the previous command */
-		command = get_user_input(game); 
-		status = game_update(game, command, player); 
+		command = get_user_input(game);
+		status = game_update(game, command, player);
+		dialogue_set_command_act(dialogue, command, status);
+		dialogue_set_cadena(dialogue); 
 		/* If the file is open, print there the status of the last command */
 		if(f != NULL){ 
 			cmd = command_get_cmd(command);
@@ -137,6 +148,67 @@ int main(int argc, char *argv[]){
 					} else{
 						fprintf(f, "INSPECT %s: _ERROR\n", command_get_arg(command));
 					}
+					break;
+				case TURNON:
+					if(status == _OK){
+						fprintf(f, "TURNON %s: _OK\n", command_get_arg(command));
+					} else{
+						fprintf(f, "TURNON %s: _ERROR\n", command_get_arg(command));
+					}
+					break;
+				case TURNOFF:
+					if(status == _OK){
+						fprintf(f, "TURNOFF %s: _OK\n", command_get_arg(command));
+					} else{
+						fprintf(f, "TURNOFF %s: _ERROR\n", command_get_arg(command));
+					}
+					break;
+				case OPENL:
+					if(status == _OK){
+						fprintf(f, "OPENL %s WITH %s: _OK\n", command_get_arg(command), command_get_arg2(command_get_arg2));
+					} else{
+						fprintf(f, "OPENL %s WITH %s: _ERROR\n", command_get_arg(command), command_get_arg2(command));
+					}
+					break;
+
+				case LOAD:
+					if(status == _OK){
+						fprintf(f, "LOAD GAME IN %s: _OK\n", command_get_arg2(command));
+					} else{
+						fprintf(f, "LOAD GAME IN %s: _ERROR\n", command_get_arg2(command));
+					}
+					break;
+				case SAVE:
+					if(status == _OK){
+						fprintf(f, "SAVE GAME IN %s: _OK\n", command_get_arg2(command_get_arg2));
+					} else{
+						fprintf(f, "SAVE GAME IN %s: _ERROR\n", command_get_arg2(command));
+					}
+					break;
+
+				case BUY:
+					if(status == _OK){
+						fprintf(f, "BUY %s: _OK\n", command_get_arg(command));
+					} else{
+						fprintf(f, "BUY %s: _ERROR\n", command_get_arg(command));
+					}
+					break;
+
+				case SELLL:
+					if(status == _OK){
+						fprintf(f, "SELL %s: _OK\n", command_get_arg(command));
+					} else{
+						fprintf(f, "SELL %s: _ERROR\n", command_get_arg(command));
+					}
+					break;
+
+				case ANSWER:
+					if(status == _OK){
+						fprintf(f, "ANSWER  %s: _OK\n", command_get_arg(command));
+					} else{
+						fprintf(f, "INSPECT %s: _ERROR\n", command_get_arg(command));
+					}
+					break;								
 				case NO_CMD:
 					break;
 				default: /* We must never arrive here */
@@ -151,7 +223,8 @@ int main(int argc, char *argv[]){
 	} 
 
 	command_destroy(command); /* Destroy the command */
-	game_destroy(game);	/* The game finishes */
+	game_destroy(game);
+	dialogue_destroy(dialogue);	/* The game finishes */
 		
 	return 0;
 }

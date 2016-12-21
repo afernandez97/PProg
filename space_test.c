@@ -95,9 +95,9 @@ int main(int argc, char **argv){
 	if (all || test == 54) test3_space_set_gdesc();
 	if (all || test == 55) test1_space_get_gdesc();
 	if (all || test == 56) test2_space_get_gdesc();
-	if (all || test == 57) test1_space_print_gdesc();
-	if (all || test == 58) test2_space_print_gdesc();
-	if (all || test == 59) test3_space_print_gdesc();
+	if (all || test == 57) test1_space_print_gdesc1();
+	if (all || test == 58) test2_space_print_gdesc1();
+	if (all || test == 59) test3_space_print_gdesc1();
 	if (all || test == 60) test1_space_set_illumination();
 	if (all || test == 61) test2_space_set_illumination();
 	if (all || test == 62) test1_space_is_illuminated();
@@ -1409,13 +1409,13 @@ void test2_space_get_gdesc(){
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test1_space_print_gdesc
+@brief test1_space_print_gdesc1
 Tests if you can successfully print the gdesc of a space.
 
 @param
 @return
 */
-void test1_space_print_gdesc(){
+void test1_space_print_gdesc1(){
 	Space *space = NULL;
 	Id id = 1;
 	char gdesc[WORD_SIZE] = "       |       |       |";
@@ -1423,7 +1423,7 @@ void test1_space_print_gdesc(){
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gdesc(space, output) == _OK);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == _OK);
 	space_destroy(space);
 	return;
 }
@@ -1432,16 +1432,16 @@ void test1_space_print_gdesc(){
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test2_space_print_gdesc
+@brief test2_space_print_gdesc1
 Tests if you can print the gdesc field of an uninitialised space.
 
 @param
 @return
 */
-void test2_space_print_gdesc(){
+void test2_space_print_gdesc1(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_print_gdesc(space) == _ERROR);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space) == _ERROR);
 	return;
 }
 
@@ -1449,13 +1449,13 @@ void test2_space_print_gdesc(){
 @author Adrián Fernández
 @date 23-11-2016
 
-@brief test3_space_print_gdesc
+@brief test3_space_print_gdesc1
 Tests if you can print the gdesc in an uninitialised string.
 
 @param
 @return
 */
-void test3_space_print_gdesc(){
+void test3_space_print_gdesc1(){
 	Space *space = NULL;
 	Id id = 1;
 	char gdesc[WORD_SIZE] = "       |       |       |";
@@ -1463,7 +1463,7 @@ void test3_space_print_gdesc(){
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gdesc(space, output) == _ERROR);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == _ERROR);
 	space_destroy(space);
 	return;
 }
