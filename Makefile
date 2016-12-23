@@ -1,13 +1,13 @@
 # Author: Guillermo Rodriguez and Alejandro Sanchez
 
-all: JuegoOcaPlus 
+all: CirelSimulator
 
 test: die_test set_test player_test inventory_test space_test link_test object_test graphic_engine_test game_rules_test dialogue_test person_test
 
 CCFLAGS = -g -Wall -pedantic -ansi -c
 NCURSESFLAG = -lncurses
 
-JuegoOcaPlus: space.o game_management.o object.o player.o die.o set.o inventory.o link.o graphic_engine.o dialogue.o game_rules.o person.o game.o game_loop.o command.o
+CirelSimulator: game_rules.o person.o space.o object.o player.o die.o set.o inventory.o link.o window.o screen.o graphic_engine.o game.o dialogue.o game_loop.o command.o game_management.o
 	gcc -o $@ $^ $(NCURSESFLAG)
 
 #Tests
@@ -75,7 +75,7 @@ game_rules.o: game_rules.c game_rules.h
 space.o: space.c space.h types.h
 	gcc $(CCFLAGS) space.c
 
-command.o: command.c command.h types.h
+command.o: command.c command.h types.h game.h
 	gcc $(CCFLAGS) command.c
 
 game_management.o: game_management.c game_management.h
@@ -99,21 +99,30 @@ inventory.o: inventory.c inventory.h
 link.o: link.c link.h
 	gcc $(CCFLAGS) link.c
 
-graphic_engine.o: graphic_engine.c graphic_engine.h
-	gcc $(CCFLAGS) graphic_engine.c
-
-dialogue.o: dialogue.c dialogue.h
+dialogue.o: dialogue.c dialogue.h 
 	gcc $(CCFLAGS) dialogue.c
 
 person.o: person.c person.h
 	gcc $(CCFLAGS) person.c
 
-game.o: game.c game.h command.h dialogue.h graphic_engine.h object.h person.h link.h set.h die.h game_management.h space.h game_rules.h
+game.o: game.c game.h 
 	gcc $(CCFLAGS) game.c
+
+window.o: window.c window.h
+	gcc $(CCFLAGS) window.c
+
+screen.o: screen.c screen.h
+	gcc $(CCFLAGS) screen.c
+
+graphic_engine.o: graphic_engine.c graphic_engine.h 
+	gcc $(CCFLAGS) graphic_engine.c
+
+
+
 
 #clean and dist
 clean: 
-	rm -rf *.o *.tgz *.log JuegoOcaPlus *_test *bak Doxyfile html latex 
+	rm -rf *.o *.tgz *.log CirelSimulator *_test *bak Doxyfile html latex 
 
 dist: 
-	tar -cvzf I4-cod_JuegoOcaPlus.tgz *c *h Makefile *dat #html latex Doxyfile
+	tar -cvzf I4-cod_CirelSimulator.tgz *c *h Makefile *dat #html latex Doxyfile

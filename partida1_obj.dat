@@ -1,0 +1,70 @@
+#o:1|IN|-1|0.000000|0|0|0|5| Instruccions:
+ commands: go <direction> or g <direction>
+ catch <obj_name> or c <obj_name>
+ leave <obj_name> or l <obj_name>
+ inspect <spc_name or obj_name> or i <spc_name or obj_name>
+ quit or q, roll or r
+ buy <obj_name> or b <obj_name>
+ sell <obj_name> or s <obj_name>
+ answer <yes or no> or a <y or n>
+ talk or t, next or n
+ open <link_id> with <obj_name>
+ load <path>, save <path>
+ turnoff <obj_name>, turnon <obj_name>
+
+
+#o:2|o¬|26|500.000000|0|0|0|57| Key:
+ Opens the canteen door.
+
+
+#o:3|ID|29|0.000000|0|0|0|41| ID:
+ Needed to enter the exam class.
+
+
+#o:4|CD|30|1.000000|0|1|0|-1| Napolitana:nEnables infra-red sight when eaten.
+
+
+#o:5|@+|52|1000.000000|1|0|0|-1| Relic:
+ Very valuable item.
+
+
+#o:6|$$|9|5.000000|1|0|0|-1| Money:
+ Monopoly money. Try to exchange it at the cafeteria.
+
+
+#o:7|:(|11|0.000000|1|0|0|-1| You found nothing.
+
+
+#o:8|:(|15|0.000000|1|0|0|-1| You found nothing.
+
+
+#o:9|:(|22|0.000000|1|0|0|-1| You found nothing.
+
+
+#o:10|:(|36|0.000000|1|0|0|-1| You found nothing.
+
+
+#o:11|oo|40|20.000000|1|0|0|-1| Sunglasses:
+ You look rad with these on.
+
+
+#o:12|dd|32|20.000000|1|0|0|-1| Useless die:
+ You get to roll the die again, "sigh".
+
+
+#o:13|<-|18|0.000000|1|0|0|-1| Pen:
+ Does nothing.
+
+
+#o:14|[]|-1|500.000000|0|1|0|-1| Phone:
+ Illuminates the rooms.
+
+
+#o:15|{}|10|1.000000|0|0|0|-1| Bottle of water:
+ Looks like it belongs to a teacher.
+
+
+#o:16|O_|24|10.000000|1|0|0|-1| Cap:
+ SWAG increases.
+
+

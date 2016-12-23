@@ -1,0 +1,37 @@
+go north
+talk
+answer yes
+go east
+go north
+go up
+go up
+inspect space
+catch @+
+go down
+go down
+go east
+go east
+go east
+go east
+sell @+
+go west
+go west
+go south
+go south
+talk
+answer yes
+go north
+go north
+go east
+open south with o-
+go south
+turnon []
+catch ID
+go north
+go west
+go west
+open north with ID
+go north
+talk
+answer yes
+

@@ -31,6 +31,7 @@
 #define name(X) (X)->name
 #define location(X) (X)->location
 #define desc(X) (X)->desc
+#define printdesc(X) (X)->printdesc
 #define price(X) (X)->price
 #define hidden(X) (X)->hidden
 #define open(X) (X)->open
@@ -45,14 +46,15 @@ Contains the object's fields
 
 struct _Object{
 	Id id; /*!< Identifier of the object */
-  char name[WORD_SIZE + 1]; /*!< Name of the object */
+  char name[WORD_SIZE]; /*!< Name of the object */
 	Id location; /*!< Location of the object */
-	char desc[WORD_SIZE + 1];	/*!< Description of the object */
+	char desc[WORD_SIZE];	/*!< Description of the object */
 	double price; /*!< Price of the object */
-	_BOOL hidden; /*!< Hidden or not */
+	BOOL_ hidden; /*!< Hidden or not */
 	Id open; /*!< Identifier of the link which can be opened with this object */
-	_BOOL light; /*!< Light or not */
-	_BOOL on; /*!< On / Off */
+	BOOL_ light; /*!< Light or not */
+	BOOL_ on; /*!< On / Off */
+	char printdesc[WORD_SIZE];
 };
 
 
@@ -88,9 +90,9 @@ Object * object_create(Id id){
   desc(object)[0] = '\0';
 
   price(object) = 0.00;
-  hidden(object) = _FALSE;
-  light(object) = _FALSE;
-  on(object) = _FALSE;
+  hidden(object) = FALSE_;
+  light(object) = FALSE_;
+  on(object) = FALSE_;
 
   return object;
 }
@@ -103,17 +105,17 @@ Destroys an object.
 @date 02-10-2016 
 @author Alejandro Sanchez 
 @param Object *object: the object to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS object_destroy(Object *object){
+STATUS_ object_destroy(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return _ERROR;
+    return ERROR_;
   }
 
   free(object);    /* Eliminate the memory of the object */
  
-  return _OK;
+  return OK_;
 }
 
 
@@ -144,20 +146,20 @@ Sets a name for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to rename.
 @param char *name: the new name you want for the object.  
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_name(Object *object, char *name){
+STATUS_ object_set_name(Object *object, char *name){
   if(!object || !name){			/* Check that the inputs are not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the name and check if it hasworked */
   if(!strcpy(name(object), name)){	
-    return _ERROR;
+    return ERROR_;
   }
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -188,18 +190,18 @@ Sets a location for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the location.
 @param Id location: the new location you want for the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_location(Object *object, Id location){
+STATUS_ object_set_location(Object *object, Id location){
   if(!object){			/* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the location */
   location(object) = location;
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -230,22 +232,35 @@ Sets the description of the object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to change its description.
 @param char *desc: the new description of the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_desc(Object *object, char *desc){
+STATUS_ object_set_desc(Object *object, char *desc){
   if(!object || !desc){   /* Check if the inputs are not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the description and check if it has worked */
   if(!strcpy(desc(object), desc)){
-    return _ERROR;
+    return ERROR_;
   }  
   
-  return _OK;
+  return OK_;
 }
 
+
+STATUS_ object_set_printdesc(Object *object, char *printdesc){
+  if(!object || !printdesc){   /* Check if the inputs are not empty */
+    return ERROR_;
+  }
+
+  /* Set the description and check if it has worked */
+  if(!strcpy(printdesc(object), printdesc)){
+    return ERROR_;
+  }  
+  
+  return OK_;
+}
 
 
 /**
@@ -266,6 +281,15 @@ char * object_get_desc(Object *object){
 } 
 
 
+char * object_get_printdesc(Object *object){
+  if(!object){  /* Check that the input is not empty */
+   return NULL;
+  }
+
+  return printdesc(object); 
+} 
+
+
 /**
 @brief object_set_price
 Sets a price for an object.
@@ -273,18 +297,18 @@ Sets a price for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the price.
 @param double price: the new price you want for the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_price(Object *object, double price){
+STATUS_ object_set_price(Object *object, double price){
   if(!object){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the price */
   price(object) = price;
 
-  return _OK;
+  return OK_;
 }
 
 /**
@@ -312,18 +336,18 @@ Sets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its hidden's field.
-@param _BOOL hidden: Choose if the object is hidden or not.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ hidden: Choose if the object is hidden or not.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
-_STATUS object_set_hidden(Object *object, _BOOL hidden){
+STATUS_ object_set_hidden(Object *object, BOOL_ hidden){
   if(!object){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the hidden */
   hidden(object) = hidden;
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -333,12 +357,12 @@ Gets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the hidden field of the object or _FALSE if the input is NULL.
+@return BOOL_: the hidden field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_is_hidden(Object *object){
+BOOL_ object_is_hidden(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return _FALSE;
+    return FALSE_;
   }
 
   return hidden(object);
@@ -353,18 +377,18 @@ Sets if an object can open a link or not.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its open's field.
 @param Id open: the identifier of the link that the object can open.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_open(Object *object, Id open){
+STATUS_ object_set_open(Object *object, Id open){
   if(!object){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the open */
   open(object) = open;
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -392,19 +416,19 @@ Sets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its light's field.
-@param _BOOL light: Choose if the object can light or not.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ light: Choose if the object can light or not.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_light(Object *object, _BOOL light){
+STATUS_ object_set_light(Object *object, BOOL_ light){
   if(!object){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the light */
   light(object) = light;
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -414,12 +438,12 @@ Gets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the light field of the object or _FALSE if the input is NULL.
+@return BOOL_: the light field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_can_light(Object *object){
+BOOL_ object_can_light(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return _FALSE;
+    return FALSE_;
   }
 
   return light(object);
@@ -432,19 +456,19 @@ Sets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its on's field.
-@param _BOOL on: Choose if the object is on or off.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ on: Choose if the object is on or off.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_on(Object *object, _BOOL on){
+STATUS_ object_set_on(Object *object, BOOL_ on){
   if(!object){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the on */
   on(object) = on;
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -454,12 +478,12 @@ Gets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the on field of the object or _FALSE if the input is NULL.
+@return BOOL_: the on field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_is_on(Object *object){
+BOOL_ object_is_on(Object *object){
   if(!object){      /* Check that the input is not empty */ 
-    return _FALSE;
+    return FALSE_;
   }
 
   return on(object);
@@ -473,39 +497,39 @@ Prints the information of the object on the screen.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object the object you want to print.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS object_print(Object *object){
+STATUS_ object_print(Object *object){
   if(!object){        /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Print the object fields */
   fprintf(stdout, "--> Object (Id: %ld; Name: %s; Location: %ld; \
-    Description: %s; Price: %lf; Open: %ld", id(object), name(object), location(object),
+    Description: %s; Price: %f; Open: %ld", id(object), name(object), location(object),
     desc(object), price(object), open(object));
 
 
-  if(hidden(object) == _TRUE){
-    fprintf(stdout, "hidden: _TRUE;");
+  if(hidden(object) == TRUE_){
+    fprintf(stdout, "hidden: TRUE_;");
   } else{
-    fprintf(stdout, "hidden: _FALSE;");
+    fprintf(stdout, "hidden: FALSE_;");
   }
 
-  if(light(object) == _TRUE){
-    fprintf(stdout, "light: _TRUE;");
+  if(light(object) == TRUE_){
+    fprintf(stdout, "light: TRUE_;");
   } else{
-    fprintf(stdout, "light: _FALSE;");
+    fprintf(stdout, "light: FALSE_;");
   }
 
-  if(on(object) == _TRUE){
-    fprintf(stdout, "on: _TRUE)\n");
+  if(on(object) == TRUE_){
+    fprintf(stdout, "on: TRUE_)\n");
   } else{
-    fprintf(stdout, "on: _FALSE)\n");
+    fprintf(stdout, "on: FALSE_)\n");
   }
 
-  return _OK;
+  return OK_;
 }
 
 

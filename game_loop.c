@@ -37,20 +37,19 @@ Nov. 26, 2016 Version 4.0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "game.h"
+#include "graphic_engine.h"
+#include "dialogue.h"
 
 
 int main(int argc, char *argv[]){						
 	Game * game = NULL;
 	Command *command = NULL;
 	Id die = 1;
-	_STATUS status;
+	STATUS_ status;
 	FILE *f = NULL;
 	T_Command cmd;
 	Dialogue *dialogue = NULL;
-
-	int flag = 0, arg = 1, player = 0;
-	char answer[WORD_SIZE];
+	int arg = 1, player = 0, num;
 	
 	/* Check if user enters the name of the file that contains the spaces */	
 	if(argc < 2){	
@@ -64,7 +63,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	game = game_init_from_file(argv[arg], die);
+	game = game_init_from_file(argv[arg], die, TRUE_);
 	/* Check if game initializes correctly */
 	if(game == NULL){	
 		fprintf(stderr, "Error while initializing game.\n");
@@ -86,129 +85,139 @@ int main(int argc, char *argv[]){
 			}
 		}
 	}
-	
+
 	/* Game loop */
 	while((command_get_cmd(command) != QUIT) && !game_is_over(game)){	
+		num = game_get_num_players(game);
 		game_print_screen(game, player);
+		game_screen_refresh(game);
 		dialogue_set_command_prev(dialogue,command,status);
 		command_destroy(command); /* Destroy the previous command */
+		game_set_text(game, "");
 		command = get_user_input(game);
-		status = game_update(game, command, player);
+		status = game_update(game, command, &player, num, die);
 		dialogue_set_command_act(dialogue, command, status);
-		dialogue_set_cadena(dialogue); 
+		dialogue_set_text(dialogue);
+		game_add_text(game, dialogue_get_text(dialogue));
 		/* If the file is open, print there the status of the last command */
 		if(f != NULL){ 
 			cmd = command_get_cmd(command);
 			switch(cmd){
 				case UNKNOWN:
-					if(status == _OK){
-						fprintf(f, "UNKNOWN: _OK\n");
+					if(status == OK_){
+						fprintf(f, "UNKNOWN: OK_\n");
 					} else {
-						fprintf(f, "UNKNOWN: _ERROR\n");
+						fprintf(f, "UNKNOWN: ERROR_\n");
 					}
 					break;
 				case QUIT:
-					if(status == _OK){
-						fprintf(f, "QUIT: _OK\n");
+					if(status == OK_){
+						fprintf(f, "QUIT: OK_\n");
 					} else{
-						fprintf(f, "QUIT: _ERROR\n");
+						fprintf(f, "QUIT: ERROR_\n");
 					}
 					break;
 				case CATCH:
-					if(status == _OK){
-						fprintf(f, "CATCH %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "CATCH %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "CATCH %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "CATCH %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case LEAVE:
-					if(status == _OK){
-						fprintf(f, "LEAVE %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "LEAVE %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "LEAVE %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "LEAVE %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case GO:
-					if(status == _OK){
-						fprintf(f, "GO %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "GO %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "GO %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "GO %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case ROLL:
-					if(status == _OK){
-						fprintf(f, "ROLL: _OK\n");
+					if(status == OK_){
+						fprintf(f, "ROLL: OK_\n");
 					} else{
-						fprintf(f, "ROLL: _ERROR\n");
+						fprintf(f, "ROLL: ERROR_\n");
 					}
 					break;
 				case INSPECT:
-					if(status == _OK){
-						fprintf(f, "INSPECT %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "INSPECT %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "INSPECT %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "INSPECT %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case TURNON:
-					if(status == _OK){
-						fprintf(f, "TURNON %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "TURNON %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "TURNON %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "TURNON %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case TURNOFF:
-					if(status == _OK){
-						fprintf(f, "TURNOFF %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "TURNOFF %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "TURNOFF %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "TURNOFF %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case OPENL:
-					if(status == _OK){
-						fprintf(f, "OPENL %s WITH %s: _OK\n", command_get_arg(command), command_get_arg2(command_get_arg2));
+					if(status == OK_){
+						fprintf(f, "OPENL %s WITH %s: OK_\n", command_get_arg(command), command_get_arg2(command));
 					} else{
-						fprintf(f, "OPENL %s WITH %s: _ERROR\n", command_get_arg(command), command_get_arg2(command));
+						fprintf(f, "OPENL %s WITH %s: ERROR_\n", command_get_arg(command), command_get_arg2(command));
 					}
 					break;
 
 				case LOAD:
-					if(status == _OK){
-						fprintf(f, "LOAD GAME IN %s: _OK\n", command_get_arg2(command));
+					if(status == OK_){
+						fprintf(f, "LOAD GAME IN %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "LOAD GAME IN %s: _ERROR\n", command_get_arg2(command));
+						fprintf(f, "LOAD GAME IN %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 				case SAVE:
-					if(status == _OK){
-						fprintf(f, "SAVE GAME IN %s: _OK\n", command_get_arg2(command_get_arg2));
+					if(status == OK_){
+						fprintf(f, "SAVE GAME IN %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "SAVE GAME IN %s: _ERROR\n", command_get_arg2(command));
+						fprintf(f, "SAVE GAME IN %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 
 				case BUY:
-					if(status == _OK){
-						fprintf(f, "BUY %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "BUY %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "BUY %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "BUY %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
 
-				case SELLL:
-					if(status == _OK){
-						fprintf(f, "SELL %s: _OK\n", command_get_arg(command));
+				case SELL:
+					if(status == OK_){
+						fprintf(f, "SELL %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "SELL %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "SELL %s: ERROR_\n", command_get_arg(command));
 					}
 					break;
-
 				case ANSWER:
-					if(status == _OK){
-						fprintf(f, "ANSWER  %s: _OK\n", command_get_arg(command));
+					if(status == OK_){
+						fprintf(f, "ANSWER  %s: OK_\n", command_get_arg(command));
 					} else{
-						fprintf(f, "INSPECT %s: _ERROR\n", command_get_arg(command));
+						fprintf(f, "ANSWER %s: ERROR_\n", command_get_arg(command));
 					}
-					break;								
+					break;	
+				case TALK:
+					if(status == OK_){
+						fprintf(f, "TALK  %s: OK_\n", command_get_arg(command));
+					} else{
+						fprintf(f, "TALK %s: ERROR_\n", command_get_arg(command));
+					}
+					break;							
 				case NO_CMD:
 					break;
 				default: /* We must never arrive here */
@@ -223,8 +232,10 @@ int main(int argc, char *argv[]){
 	} 
 
 	command_destroy(command); /* Destroy the command */
-	game_destroy(game);
-	dialogue_destroy(dialogue);	/* The game finishes */
-		
+	dialogue_destroy(dialogue);	/* Destroy the dialogue */
+	game_destroy_screen(game); 	/* Destroy the screen */
+	game_destroy(game); 	/* The game finishes */
+	
+	printf("\n\n\nCONGRATULATIONS: YOU HAVE FAILED CIREL ;)\n\n\n\n");
 	return 0;
 }

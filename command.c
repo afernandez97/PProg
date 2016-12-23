@@ -55,130 +55,6 @@ struct _Command{
 /*!< Public functions definition */
 
 /**
-@brief get_user_input
-Interprets the user's input. 
-Input must be typed: 
- <command><blank space><arguments between blank spaces> 
- (space and argument only if needed)
-
-@date 05-11-2016 
-@author Ricardo Riol
-@param Game *game: the game.
-@return Command *: interpretation of user's input or NULL on error.
-*/
-
-Command * get_user_input(Game *game){
-	Command *command = NULL;
-	char input[CMD_LENGTH] = "", aux[CMD_LENGTH] = "";
-	char *toks = NULL, *cmd = NULL, *cmd2 = NULL, *arg = NULL, *arg2 = NULL;
-  Window *win = NULL;
-  _BOOL flag;
-
-  command = command_create();
-  if(!command){   /* Check if memory has been allocated */
-    return NULL;
-  }
-  
-  flag = game_get_keyboard(game);
-
-  /* Receive user's input from keyboard */
-  if(flag == _TRUE){
-    win = game_get_window(game, 2);
-		window_get_input(win, input);
-  }
- 
-  /* Receive the answer of the question */
-  if(flag == _FALSE){
-    if(game_get_answer(game) == NULL){
-      cmd(command) = NO_CMD;
-      return command;
-    }
-  	strcpy(input, aux);
-    game_set_keyboard(game, _TRUE);
-  }
-  /* Check that the user has entered at least 1 character */		
-  if(strcmp(input, "\n") == 0 || strcmp(input, "") ){
-    cmd(command) = NO_CMD;
-    return command;
-  }
-  
-  /* "Tokenize" input */
-  /* Delete \n because it's always read at the end of the line */ 
-  if(flag == 0){
-  	toks = strtok(input, "\n");
-  }
-  else{
-  	strcpy(toks,input); 
-  }
-  
-  /* Copy toks to an auxiliar string to break it and not toks */
-  strcpy(aux, toks);
-  /* Save the type of command in cmd. This can't be NULL */
-  cmd = strtok(aux, " ");
-  /* Save the argument of the command in arg */
-  arg = strtok(NULL, " ");
-
-  /* Check if user entered an argument or not */
-  if(arg != NULL){   /* There is an argument */
-    /* Check if user entered more things after the argument */
-    /*if(strtok(NULL, "\0") != NULL){
-      cmd(command) = UNKNOWN;
-      return command;
-    }*/
-    if(!strcmp(cmd, "c") || !strcmp(cmd, "catch") || !strcmp(cmd, "grab")){
-      cmd(command) = CATCH; /* "Catch" case */;
-      strcpy(arg(command), arg);
-    } else if(!strcmp(cmd, "l") || !strcmp(cmd, "leave")){    
-        cmd(command) = LEAVE; /* "Leave" case */
-        strcpy(arg(command), arg);
-    }  else if(!strcmp(cmd, "b") || !strcmp(cmd, "buy")){
-        cmd(command) = BUY; /* "Buy" case */;
-        strcpy(arg(command), arg);
-		} else if(!strcmp(cmd, "s") || !strcmp(cmd, "sell")){
-        cmd(command) = SELL; /* "Sell" case */;
-        strcpy(arg(command), arg);
-    } else if(!strcmp(cmd, "a") || !strcmp(cmd, "answer")){
-        cmd(command) = ANSWER ; /* "Answer" case */;
-        strcpy(arg(command), arg);
-    } else if(!strcmp(cmd, "i") || !strcmp(cmd, "inspect")){    
-        cmd(command) = INSPECT; /* "Inspect" case */
-        strcpy(arg(command), arg);
- 		} else if(!strcmp(cmd, "turnon")){    
-        cmd(command) = TURNON; /* "Turnon" case */
-        strcpy(arg(command), arg);
-		} else if(!strcmp(cmd, "turnoff")){    
-        cmd(command) = TURNOFF; /* "Turnoff" case */
-        strcpy(arg(command), arg);
-    } else if(!strcmp(cmd, "g") || !strcmp(cmd, "go")){
-				cmd(command) = GO;    /* "Go" case*/
-        strcpy(arg(command),arg);
-    } else if(!strcmp(cmd, "open")){
-        cmd2 = strtok(aux, " ");
-        if(!strcmp(cmd2, "with")){
-        	strcpy(arg(command), arg);
-        	arg2 = strtok(aux, " ");
-        	strcpy(arg2(command), arg2);
-        	cmd(command) = OPENL;  /* "Openl" case*/
-        }
-		} else{                           
-        cmd(command) = UNKNOWN; /* Wrong input */
-    }
-  } else{  /* There isn't any argument */
-    	if(!strcmp(toks, "q") || !strcmp(toks, "quit")){		 	
-    		cmd(command) = QUIT;		/* "Quit" case */
-    	} else if(!strcmp(toks, "r") || !strcmp(toks, "roll")){
-    		cmd(command) = ROLL;		/* "Roll" case */
-    	} else{ 													
-    		cmd(command) = UNKNOWN;	/* Wrong input */
-    	}
-  }
-
-	return command;
-}
-
-
-
-/**
 @brief command_create
 Creates a command.
 
@@ -212,17 +88,37 @@ Destroys a command.
 @date 30-10-2016 
 @author Alejandro Sanchez
 @param Command *command: the command to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS command_destroy(Command *command){
+STATUS_ command_destroy(Command *command){
   if(!command){   /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   free(command);    /* Eliminate the memory of the command */
 
-  return _OK;
+  return OK_;
+}
+
+
+/**
+@brief command_set_cmd
+Sets the type of the command.
+
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param Command *command: the command which you want to set its new type.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_cmd(Command *command, T_Command cmd){
+  if(!command){   /* Check that the input is not empty */
+    return ERROR_;
+  }
+
+  cmd(command) = cmd;
+
+  return OK_;
 }
 
 
@@ -244,6 +140,27 @@ T_Command command_get_cmd(Command *command){
 }
 
 
+/**
+@brief command_set_arg
+Sets the first argument for a command.
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param command *command: the command you want to change its first argument.
+@param char *arg: the new argument you want for the command.  
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_arg(Command *command, char *arg){
+  if(!command || !arg){     /* Check that the inputs are not empty */
+    return ERROR_;
+  }
+
+  /* Set the argument and check if it has worked */
+  if(!strcpy(arg(command), arg)){  
+    return ERROR_;
+  }
+
+  return OK_;
+}
 
 /**
 @brief command_get_arg
@@ -263,6 +180,28 @@ char * command_get_arg(Command *command){
   return arg(command);
 }
 
+
+/**
+@brief command_set_arg2
+Sets the second argument for a command.
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param command *command: the command you want to change its second argument.
+@param char *arg: the new argument you want for the command.  
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_arg2(Command *command, char *arg2){
+  if(!command || !arg2){     /* Check that the inputs are not empty */
+    return ERROR_;
+  }
+
+  /* Set the argument and check if it has worked */
+  if(!strcpy(arg2(command), arg2)){  
+    return ERROR_;
+  }
+
+  return OK_;
+}
 
 /**
 @brief command_get_arg2

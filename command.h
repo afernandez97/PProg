@@ -32,9 +32,7 @@ It implements the command interpreter.
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "graphic_engine.h"
 #include "types.h"
-#include "game.h"
       
 /**
 @def Constant values description 
@@ -63,7 +61,9 @@ typedef enum{
   SAVE, /*!< Command to save a game */
   BUY,  /*!< Command to buy an object from a shop */
   SELL,  /*!< Command to sell an object to a shop */
-  ANSWER /*!< Command to answer a question */
+  ANSWER, /*!< Command to answer a question */
+  TALK,  /*!< Command to talk with a person */
+  NEXT  /*!< Command to change turn */
 } T_Command;
 
 /*!< Data structures definition */
@@ -76,20 +76,6 @@ typedef struct _Command Command;
 
 
 /*!< Public functions description */
-
-/**
-@brief get_user_input
-Interprets the user's input. 
-Input must be typed: 
- <command><blank space><argument> (space and argument only if needed)
-
-@date 05-11-2016 
-@author Ricardo Riol
-@param Game * game: the game.
-@return Command *: interpretation of user's input or NULL on error.
-*/
-
-Command * get_user_input(Game *game);
 
 /**
 @brief command_create
@@ -110,10 +96,21 @@ Destroys a command.
 @date 30-10-2016 
 @author Alejandro Sanchez
 @param Command *command: the command to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS command_destroy(Command *command);
+STATUS_ command_destroy(Command *command);
+
+/**
+@brief command_set_cmd
+Sets the type of the command.
+
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param Command *command: the command which you want to set its new type.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_cmd(Command *command, T_Command cmd);
 
 /**
 @brief command_get_cmd
@@ -127,6 +124,19 @@ Returns the type of the command.
 
 T_Command command_get_cmd(Command *command);
 
+
+/**
+@brief command_set_arg
+Sets the first argument for a command.
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param command *command: the command you want to change its first argument.
+@param char *arg: the new argument you want for the command.  
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_arg(Command *command, char *arg);
+
+
 /**
 @brief command_get_arg
 Gives the information of the argument of the command.
@@ -139,6 +149,16 @@ Gives the information of the argument of the command.
 */
 char * command_get_arg(Command *command);
 
+/**
+@brief command_set_arg2
+Sets the second argument for a command.
+@date 21-12-2016 
+@author Alejandro Sanchez
+@param command *command: the command you want to change its second argument.
+@param char *arg: the new argument you want for the command.  
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
+*/
+STATUS_ command_set_arg2(Command *command, char *arg2);
 
 /**
 @brief command_get_arg2
@@ -151,5 +171,8 @@ Gives the information of the second argument of the command.
 @return char *: the  second argument of the command or NULL on error.
 */
 char * command_get_arg2(Command *command);
+
+
+
 
 #endif

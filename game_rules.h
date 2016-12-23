@@ -54,9 +54,9 @@ Rule * rule_create(Id id);
    @param 
     Rule *rule: the rule to destroy.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS rule_destroy(Rule *rule);
+STATUS_ rule_destroy(Rule *rule);
 
 
 /**
@@ -86,9 +86,9 @@ Id rule_get_id(Rule *rule);
     char *question: the new question of the rule.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS rule_set_question(Rule *rule, char *question);
+STATUS_ rule_set_question(Rule *rule, char *question);
 
 
 
@@ -103,9 +103,9 @@ _STATUS rule_set_question(Rule *rule, char *question);
     char *choice1: the new first choice of the rule.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS rule_set_choice1(Rule *rule, char *choice1);
+STATUS_ rule_set_choice1(Rule *rule, char *choice1);
  
 
 /**
@@ -119,9 +119,9 @@ _STATUS rule_set_choice1(Rule *rule, char *choice1);
     char *choice2: the new second choice of the rule.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS rule_set_choice2(Rule *rule, char *choice2);
+STATUS_ rule_set_choice2(Rule *rule, char *choice2);
  
 
 /**
@@ -183,9 +183,9 @@ char * rule_get_choice2(Rule *rule);
    @param 
     Rule *rule: the rule you want to print.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS rule_print(Rule *rule);
+STATUS_ rule_print(Rule *rule);
 
 
 

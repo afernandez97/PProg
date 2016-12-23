@@ -60,9 +60,9 @@ Inventory *inventory_create();
   	Inventory *: the inventory to destroy.
 
    @return
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
-_STATUS inventory_destroy(Inventory *inv);
+STATUS_ inventory_destroy(Inventory *inv);
 
 
 
@@ -78,9 +78,9 @@ _STATUS inventory_destroy(Inventory *inv);
    @param Id object: the new object you want for the inventory.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS inventory_add_object(Inventory *inventory, Id object);
+STATUS_ inventory_add_object(Inventory *inventory, Id object);
 
 
 
@@ -97,9 +97,9 @@ _STATUS inventory_add_object(Inventory *inventory, Id object);
     from the inventory.
    
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS inventory_del_object(Inventory *inventory, Id object);
+STATUS_ inventory_del_object(Inventory *inventory, Id object);
 
 
 
@@ -115,9 +115,9 @@ _STATUS inventory_del_object(Inventory *inventory, Id object);
    @param  Set *bag: the bag you want to set.
    
    @return
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
-_STATUS inventory_set_bag(Inventory *inv, Set *bag);
+STATUS_ inventory_set_bag(Inventory *inv, Set *bag);
 
 
 
@@ -188,9 +188,9 @@ int inventory_get_max(Inventory *inv);
    @param Id object: the id of the object you want to know if it is in the inventory.
                  
    @return 
-    _BOOL: _TRUE if the object is in the inventory and _FALSE in other cases. 
+    BOOL_: TRUE_ if the object is in the inventory and FALSE_ in other cases. 
    */
-_BOOL inventory_is_object(Inventory *inv, Id object);
+BOOL_ inventory_is_object(Inventory *inv, Id object);
 
 
 
@@ -205,9 +205,9 @@ _BOOL inventory_is_object(Inventory *inv, Id object);
     Inventory *inv: the inventory to check.
                  
    @return 
-    _BOOL: _TRUE is the inventory is empty or _FALSE if not.
+    BOOL_: TRUE_ is the inventory is empty or FALSE_ if not.
    */
-_BOOL inventory_is_empty(Inventory *inv);
+BOOL_ inventory_is_empty(Inventory *inv);
 
 
 
@@ -223,9 +223,9 @@ _BOOL inventory_is_empty(Inventory *inv);
     Inventory *inv: the inventory to check.
                  
    @return 
-    _BOOL: _TRUE is the inventory is full or _FALSE if not.
+    BOOL_: TRUE_ is the inventory is full or FALSE_ if not.
    */
-_BOOL inventory_is_full(Inventory *inv);
+BOOL_ inventory_is_full(Inventory *inv);
 
 
 /**
@@ -238,9 +238,9 @@ _BOOL inventory_is_full(Inventory *inv);
    @param 
 	  Inventory *inv: the inventory you want to print.
    @return 
-	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
+	  STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS inventory_print(Inventory *inv);
+STATUS_ inventory_print(Inventory *inv);
 
 #endif
 

@@ -1,4 +1,9 @@
-#r:1|Do you want me to drive you to the entry?|go east|
-#r:2|Odd looking student|buy o¬|
-#r:3|Santini|Let me help you find an object.|inspect space|
-#r:4|German|Do you want me to help you?||
+#r:1| Do you want me to drive you to the entry?|open east with IN|go south|
+#r:2| I think I have something you need. Do you want to buy it? Just 500€|buy o-|
+#r:3| Let me help you find an object.|inspect space|
+#r:4| Do you want me to help you?||
+#r:5| Do you want a pen?|catch <-|
+#r:6| I need a pen, could you give me yours?|leave <-|
+#r:7| You kow you are going to fail this exam, right?||
+#r:8| Have you seen my bottle of water?|leave {}|
+#r:9| Do you want to do the exam?|quit|quit

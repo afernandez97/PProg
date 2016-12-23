@@ -105,17 +105,17 @@ Player * player_create(Id id){
    @param 
 	  Player *player: the player to destroy.
    @return 
-	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
+	  STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS player_destroy(Player *player){
+STATUS_ player_destroy(Player *player){
   if(!player){	      /* Check that the input is not empty */ 
-    return _ERROR;
+    return ERROR_;
   }
 
   inventory_destroy(inv(player)); /* Destroy the bag of objects */
   free(player);   /* Eliminate the memory of the player */
  
-  return _OK;
+  return OK_;
 }
 
 
@@ -153,19 +153,19 @@ Id player_get_id(Player *player){
    @param char *name: the new name you want for the player.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS player_set_name(Player *player, char *name){
+STATUS_ player_set_name(Player *player, char *name){
   if(!player || !name){ 		/* Check that the inputs are not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Set the name and check if it hasworked */
   if(!strcpy(name(player), name)){ 	
-    return _ERROR;
+    return ERROR_;
   }
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -204,16 +204,16 @@ const char * player_get_name(Player *player){
    @param Id location: the new location you want for the player.
   
    @return 
-    Status: _OK if you do the operation well and _ERROR in other cases.
+    Status: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS player_set_location(Player *player, Id location){
+STATUS_ player_set_location(Player *player, Id location){
   if(!player || location == NO_ID){      /* Check that the inputs are not empty */
-  	return _ERROR;
+  	return ERROR_;
   }
 
   location(player) = location;  /* Set the location */
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -253,12 +253,12 @@ Id player_get_location(Player *player){
    @param Inventory *inv: the inventory you want to set.
    
    @return
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
  */
-_STATUS player_set_inventory(Player *player, Inventory *inv){
+STATUS_ player_set_inventory(Player *player, Inventory *inv){
   /* Check that the inputs are not empty */
   if(!player || !inv){
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Eliminate the memory of the inventory of objects if it exists */
@@ -269,7 +269,7 @@ _STATUS player_set_inventory(Player *player, Inventory *inv){
   /* Set the new inventory to the player */
   inv(player) = inv;
   
-  return _OK;
+  return OK_;
 }
 
 
@@ -286,19 +286,19 @@ _STATUS player_set_inventory(Player *player, Inventory *inv){
   @param  Id object: the new object you want for the player.
   
   @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS player_add_object(Player *player, Id object){
+STATUS_ player_add_object(Player *player, Id object){
   if(!player || object == NO_ID){    /* Check that the inputs are not empty */
-  	return _ERROR;
+  	return ERROR_;
   }
 
   /* Add the object to the player */ 
-  if(inventory_add_object(inv(player), object) == _ERROR){
-    return _ERROR;
+  if(inventory_add_object(inv(player), object) == ERROR_){
+    return ERROR_;
   }
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -315,19 +315,19 @@ _STATUS player_add_object(Player *player, Id object){
     from the player.
    
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS player_del_object(Player *player, Id object){
+STATUS_ player_del_object(Player *player, Id object){
   if(!player || object == NO_ID){  /* Check that the inputs are not empty */
-    return _ERROR;
+    return ERROR_;
   }
  
   /* Removes the object from the player */
-  if(inventory_del_object(inv(player), object) == _ERROR){
-    return _ERROR;
+  if(inventory_del_object(inv(player), object) == ERROR_){
+    return ERROR_;
   }      
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -368,11 +368,11 @@ Inventory * player_get_inventory(Player *player){
     of the player.
                  
     @return 
-    _BOOL: _TRUE if the object is in the bag of the player and _FALSE in other cases. 
+    BOOL_: TRUE_ if the object is in the bag of the player and FALSE_ in other cases. 
    */
-_BOOL player_has_object(Player *player, Id object){
+BOOL_ player_has_object(Player *player, Id object){
   if(!player || object == NO_ID){
-    return _FALSE;
+    return FALSE_;
   }
 
   return inventory_is_object(inv(player), object);
@@ -391,16 +391,16 @@ _BOOL player_has_object(Player *player, Id object){
    @param double money: the money you want to add or quit for a player.
   
    @return 
-    Status: _OK if you do the operation well and _ERROR in other cases.
+    Status: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS player_set_money(Player *player, double money){
+STATUS_ player_set_money(Player *player, double money){
   if(!player){      /* Check that the inputs are not empty */
-  	return _ERROR;
+  	return ERROR_;
   }
 
   money(player) += money;  /* Set the money */
 
-  return _OK;
+  return OK_;
 }
 
 
@@ -439,23 +439,23 @@ double player_get_money(Player *player){
    @param 
 	  Player *player: the player you want to print.
    @return 
-	  _STATUS: _ERROR if the input is NULL and _OK otherwise.
+	  STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS player_print(Player *player){
+STATUS_ player_print(Player *player){
   if(!player){      /* Check that the input is not empty */
-    return _ERROR;
+    return ERROR_;
   }
 
   /* Print the player fields */
   fprintf(stdout, "Player -->  (Id: %ld; Name: %s; Location:%ld; ", 
     id(player), name(player), location(player));
-  if(inventory_print(inv(player)) == _ERROR){
-	 return _ERROR;
+  if(inventory_print(inv(player)) == ERROR_){
+	 return ERROR_;
   }
 
   fprintf(stdout, ")\n");
 
-  return _OK;
+  return OK_;
 }
 
 

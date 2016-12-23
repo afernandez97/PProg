@@ -11,6 +11,7 @@ It defines common types.
 	Jan. 13, 2015  Version 1.0 (initial release)
 */
 
+
 #ifndef TYPES_H
 #define TYPES_H
 
@@ -28,15 +29,15 @@ Implementation of the data types used.
 typedef long Id;
 
 typedef enum {
-  _FALSE, _TRUE
-} _BOOL;
+  FALSE_, TRUE_
+} BOOL_;
 
 typedef enum {
-  _ERROR, _OK
-} _STATUS;
+  ERROR_, OK_
+} STATUS_;
 
 typedef enum {
-  N, S, E, W
+  N, S, E, W, U, D
 } DIRECTION;
 
 #endif

@@ -31,7 +31,7 @@ int main(){
     count++;
   }
 
-  if(die_destroy(die) == _ERROR){
+  if(die_destroy(die) == ERROR_){
 	  printf("Error when you destroy a die\n");
     count++;
   }
@@ -39,7 +39,7 @@ int main(){
   /* You must always point the pointer to NULL when you free it */
   die = NULL;
 
-  if(die_destroy(die) == _OK){
+  if(die_destroy(die) == OK_){
     printf("Error when you try to destroy a die two times\n");
     count++;
   }
@@ -53,7 +53,7 @@ int main(){
     count++;
   }
 
-  if(die_roll(die) == _ERROR){
+  if(die_roll(die) == ERROR_){
 		 printf("Error when you try to roll a die\n");
     count++;
 	}
@@ -63,12 +63,12 @@ int main(){
     count++;
   }
 
-  if(die_print(die) == _ERROR){
+  if(die_print(die) == ERROR_){
 		 printf("Error when you try to print a die\n");
     count++;
 	}
   
-  if(die_roll(die) == _ERROR){
+  if(die_roll(die) == ERROR_){
      printf("Error when you try to roll a die\n");
     count++;
   }
@@ -78,17 +78,17 @@ int main(){
     count++;
   }
 
-  if(die_print(die) == _ERROR){
+  if(die_print(die) == ERROR_){
      printf("Error when you try to print a die\n");
     count++;
   }
 
-  if(die_destroy(die) == _ERROR){
+  if(die_destroy(die) == ERROR_){
 	  printf("Error when you destroy a die\n");
     count++;
   }
 
-  if(die_roll(die) == _ERROR){
+  if(die_roll(die) == ERROR_){
      printf("Error when you try to roll a die\n");
     count++;
   }
@@ -98,7 +98,7 @@ int main(){
     count++;
   }
   
-  if(die_print(die) == _ERROR){
+  if(die_print(die) == ERROR_){
      printf("Error when you try to print a die\n");
     count++;
   }

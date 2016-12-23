@@ -56,10 +56,10 @@ Destroys an object.
 @date 02-10-2016 
 @author Alejandro Sanchez 
 @param Object *object: the object to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS object_destroy(Object *object);
+STATUS_ object_destroy(Object *object);
    
 
 
@@ -83,10 +83,10 @@ Sets a name for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to rename.
 @param char *name: the new name you want for the object.  
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_name(Object *object, char *name);
+STATUS_ object_set_name(Object *object, char *name);
 
 
 /**
@@ -108,10 +108,10 @@ Sets a location for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the location.
 @param Id location: the new location you want for the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_location(Object *object, Id location);
+STATUS_ object_set_location(Object *object, Id location);
 
 
 
@@ -134,10 +134,11 @@ Sets the description of the object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to change its description.
 @param char *desc: the new description of the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_desc(Object *object, char *desc);
+STATUS_ object_set_desc(Object *object, char *desc);
+STATUS_ object_set_printdesc(Object *object, char *printdesc);
 
 
 /**
@@ -150,6 +151,7 @@ Gives the information of the description of the object.
 */
 
 char * object_get_desc(Object *object);
+char * object_get_printdesc(Object *object);
 
 
 /**
@@ -159,10 +161,10 @@ Sets a price for an object.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set the price.
 @param double price: the new price you want for the object.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_price(Object *object, double price);
+STATUS_ object_set_price(Object *object, double price);
 
 
 /**
@@ -183,10 +185,10 @@ Sets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its hidden's field.
-@param _BOOL hidden: Choose if the object is hidden or not.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ hidden: Choose if the object is hidden or not.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
-_STATUS object_set_hidden(Object *object, _BOOL hidden);
+STATUS_ object_set_hidden(Object *object, BOOL_ hidden);
 
 
 /**
@@ -195,10 +197,10 @@ Gets if an object is hidden or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the hidden field of the object or _FALSE if the input is NULL.
+@return BOOL_: the hidden field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_is_hidden(Object *object);
+BOOL_ object_is_hidden(Object *object);
 
 
 /**
@@ -208,10 +210,10 @@ Sets if an object can open a link or not.
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its open's field.
 @param Id open: the identifier of the link that the object can open.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_open(Object *object, Id open);
+STATUS_ object_set_open(Object *object, Id open);
 
 
 /**
@@ -232,11 +234,11 @@ Sets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its light's field.
-@param _BOOL light: Choose if the object can light or not.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ light: Choose if the object can light or not.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_light(Object *object, _BOOL light);
+STATUS_ object_set_light(Object *object, BOOL_ light);
 
 
 /**
@@ -245,10 +247,10 @@ Gets if an object can light or not.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the light field of the object or _FALSE if the input is NULL.
+@return BOOL_: the light field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_can_light(Object *object);
+BOOL_ object_can_light(Object *object);
 
 
 /**
@@ -257,11 +259,11 @@ Sets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to set its on's field.
-@param _BOOL on: Choose if the object is on or off.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@param BOOL_ on: Choose if the object is on or off.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS object_set_on(Object *object, _BOOL on);
+STATUS_ object_set_on(Object *object, BOOL_ on);
 
 
 /**
@@ -270,10 +272,10 @@ Gets if an object is on or off.
 @date 03-12-2016 
 @author Alejandro Sanchez
 @param Object *object: the object you want to know that.
-@return _BOOL: the on field of the object or _FALSE if the input is NULL.
+@return BOOL_: the on field of the object or FALSE_ if the input is NULL.
 */
 
-_BOOL object_is_on(Object *object);
+BOOL_ object_is_on(Object *object);
 
 
 /**
@@ -282,10 +284,10 @@ Prints the information of the object on the screen.
 @date 27-10-2016 
 @author Alejandro Sanchez
 @param Object *object the object you want to print.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS object_print(Object *object);
+STATUS_ object_print(Object *object);
 
 
 #endif

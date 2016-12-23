@@ -112,7 +112,7 @@ void test1_screen_destroy(){
     Screen *scr = NULL;
 
     scr = screen_create();
-    FUNCTION_IS_CORRECT(screen_destroy(scr) == _OK);
+    FUNCTION_IS_CORRECT(screen_destroy(scr) == OK_);
     return;
 }
 
@@ -129,7 +129,7 @@ Tests if you can destroy an uninitialised screen.
 void test2_screen_destroy(){
     Screen *scr = NULL;
 
-    FUNCTION_IS_CORRECT(screen_destroy(scr) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_destroy(scr) == ERROR_);
     return;
 }
 
@@ -147,7 +147,7 @@ void test1_screen_refresh(){
 	Screen *scr = NULL;
 
     scr = screen_create();
-    FUNCTION_IS_CORRECT(screen_refresh(scr) == _OK);
+    FUNCTION_IS_CORRECT(screen_refresh(scr) == OK_);
 	screen_destroy(scr);
     return;
 }
@@ -165,7 +165,7 @@ Tests if you can refresh an uninitialised screen.
 void test2_screen_refresh(){
     Screen *scr = NULL;
 
-    FUNCTION_IS_CORRECT(screen_refresh(scr) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_refresh(scr) == ERROR_);
     return;
 }
 
@@ -183,7 +183,7 @@ void test1_screen_print(){
 	Screen *scr = NULL;
 
     scr = screen_create();
-    FUNCTION_IS_CORRECT(screen_print(scr) == _OK);
+    FUNCTION_IS_CORRECT(screen_print(scr) == OK_);
 	screen_destroy(scr);
     return;
 }
@@ -201,7 +201,7 @@ Tests if you can print an uninitialised screen.
 void test2_screen_print(){
     Screen *scr = NULL;
 
-    FUNCTION_IS_CORRECT(screen_print(scr) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_print(scr) == ERROR_);
     return;	
 }
 
@@ -221,7 +221,7 @@ void test1_screen_add_window(){
 
 	scr = screen_create();
 	win = window_create();
-    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == _OK);
+    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == OK_);
 	screen_destroy(scr);
     return;
 }
@@ -241,7 +241,7 @@ void test2_screen_add_window(){
 	Window *win = NULL;
 
 	win = window_create();
-    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == ERROR_);
 	window_destroy(win);
     return;
 }
@@ -261,7 +261,7 @@ void test3_screen_add_window(){
 	Window *win = NULL;
 
 	scr = screen_create();
-    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_add_window(scr, win) == ERROR_);
 	screen_destroy(scr);
     return;
 }
@@ -283,7 +283,7 @@ void test1_screen_del_window(){
 	scr = screen_create();
 	win = window_create();
 	screen_add_window(scr, win);
-    FUNCTION_IS_CORRECT(screen_del_window(scr) == _OK);
+    FUNCTION_IS_CORRECT(screen_del_window(scr) == OK_);
 	screen_destroy(scr);
     return;
 }
@@ -301,7 +301,7 @@ Tests if you can add delete the last window of an uninitialised screen.
 void test2_screen_del_window(){
 	Screen *scr = NULL;
 
-    FUNCTION_IS_CORRECT(screen_del_window(scr) == _ERROR);
+    FUNCTION_IS_CORRECT(screen_del_window(scr) == ERROR_);
     return;
 }
 
@@ -462,7 +462,7 @@ void test1_window_destroy(){
     int nrows = 1, ncols = 1, begin_y = 0, begin_x = 0;
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_destroy(win) == _OK);
+    FUNCTION_IS_CORRECT(window_destroy(win) == OK_);
     return;
 }
 
@@ -479,7 +479,7 @@ Tests if you can destroy an uninitialised window.
 void test2_window_destroy(){
     Window *win = NULL;
 
-    FUNCTION_IS_CORRECT(window_destroy(win) == _ERROR);
+    FUNCTION_IS_CORRECT(window_destroy(win) == ERROR_);
     return;	
 }
 
@@ -498,7 +498,7 @@ void test1_window_refresh(){
     int nrows = 1, ncols = 1, begin_y = 0, begin_x = 0;
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_refresh(win) == _OK);
+    FUNCTION_IS_CORRECT(window_refresh(win) == OK_);
 	window_destroy(win);
     return;
 }
@@ -516,7 +516,7 @@ Tests if you can refresh an uninitialised window.
 void test2_window_refresh(){
 	Window *win = NULL;
 
-    FUNCTION_IS_CORRECT(windown_refresh(win) == _ERROR);
+    FUNCTION_IS_CORRECT(windown_refresh(win) == ERROR_);
     return;
 }
 
@@ -535,7 +535,7 @@ void test1_window_print(){
     int nrows = 1, ncols = 1, begin_y = 0, begin_x = 0;
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_print(win) == _OK);
+    FUNCTION_IS_CORRECT(window_print(win) == OK_);
 	window_destroy(win);
     return;
 }
@@ -553,7 +553,7 @@ Tests if you can print an uninitialised window.
 void test2_window_print(){
 	Window *win = NULL;
 
-    FUNCTION_IS_CORRECT(windown_print(win) == _ERROR);
+    FUNCTION_IS_CORRECT(windown_print(win) == ERROR_);
     return;	
 }
 
@@ -721,7 +721,7 @@ void test1_window_set_text(){
     char text[WORD_SIZE] = "text";
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_set_text(win, text) == _OK);
+    FUNCTION_IS_CORRECT(window_set_text(win, text) == OK_);
     window_destroy(win);
     return;
 }
@@ -740,7 +740,7 @@ void test2_window_set_text(){
 	Window *win = NULL;
     char text[WORD_SIZE] = "text";
 
-    FUNCTION_IS_CORRECT(window_set_text(win, text) == _ERROR);
+    FUNCTION_IS_CORRECT(window_set_text(win, text) == ERROR_);
     return;
 }
 
@@ -760,7 +760,7 @@ void test3_window_set_text(){
     char *text = NULL;
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_set_text(win, text) == _ERROR);
+    FUNCTION_IS_CORRECT(window_set_text(win, text) == ERROR_);
     window_destroy(win);
     return;	
 }
@@ -781,7 +781,7 @@ void test1_window_add_text(){
     char text[WORD_SIZE] = "text";
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_add_text(win, text) == _OK);
+    FUNCTION_IS_CORRECT(window_add_text(win, text) == OK_);
     window_destroy(win);
     return;
 }
@@ -800,7 +800,7 @@ void test2_window_add_text(){
 	Window *win = NULL;
     char text[WORD_SIZE] = "text";
 
-    FUNCTION_IS_CORRECT(window_add_text(win, text) == _ERROR);
+    FUNCTION_IS_CORRECT(window_add_text(win, text) == ERROR_);
     return;
 }
 
@@ -820,7 +820,7 @@ void test3_window_add_text(){
     char *text = NULL;
 
     win = window_create(nrows, ncols, begin_y, begin_x);
-    FUNCTION_IS_CORRECT(window_add_text(win, text) == _ERROR);
+    FUNCTION_IS_CORRECT(window_add_text(win, text) == ERROR_);
     window_destroy(win);
     return;	
 }

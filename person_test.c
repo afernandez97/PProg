@@ -120,7 +120,7 @@ void test1_person_destroy(){
 	Id id = 1;
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_destroy(person) == _OK);
+	FUNCTION_IS_CORRECT(person_destroy(person) == OK_);
 	return;
 }
 
@@ -138,7 +138,7 @@ void test1_person_destroy(){
 void test2_person_destroy(){
 	Person * person = NULL;
 
-	FUNCTION_IS_CORRECT(person_destroy(person) == _ERROR);
+	FUNCTION_IS_CORRECT(person_destroy(person) == ERROR_);
 	return;
 }
 
@@ -173,7 +173,7 @@ void test1_person_get_id(){
 	@return
 */
 void test2_person_get_id(){
-	person * person = NULL;
+	Person * person = NULL;
 
 	FUNCTION_IS_CORRECT(person_get_id(person) == NO_ID);
 	return;
@@ -195,7 +195,7 @@ void test1_person_set_name(){
 	char name[WORD_SIZE] = "name";
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_set_name(person,name) == _OK);
+	FUNCTION_IS_CORRECT(person_set_name(person,name) == OK_);
 	person_destroy(person);
 	return;
 }
@@ -215,7 +215,7 @@ void test2_person_set_name(){
 	Person * person = NULL;
 	char name[WORD_SIZE] = "name";
 
-	FUNCTION_IS_CORRECT(person_set_name(person, name) == _ERROR);
+	FUNCTION_IS_CORRECT(person_set_name(person, name) == ERROR_);
 	return;
 }
 
@@ -238,7 +238,7 @@ void test3_person_set_name(){
 	char *noName = NULL;
 
 	person = person_create(id);
-	FUNCTION_IS_CORRECT(person_set_name(person, noName) == _ERROR);
+	FUNCTION_IS_CORRECT(person_set_name(person, noName) == ERROR_);
 	person_destroy(person);
 	return;
 }
@@ -287,13 +287,14 @@ void test2_person_get_name(){
 }
 
 
+
 /**
    @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
    Check if there aren't any errors when you try to set a location 
-   for an uninitialized person.test1_person_set_location()
+   for  a person.test1_person_set_location()
    @param 
     
  
@@ -303,7 +304,10 @@ void test2_person_get_name(){
 void test1_person_set_location(){
 	Person *person = NULL;
   Id idlocation = 345;
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _ERROR);
+  Id idperson = 3;
+  person = person_create(idperson);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == OK_);
+  person_destroy(person);
   return;
 }
 
@@ -314,7 +318,7 @@ void test1_person_set_location(){
  
    @brief 
    Check if there aren't any errors when you try to set a location 
-   for  a person.test2_person_set_location()
+   for an uninitialized person.test2_person_set_location()
    @param 
     
  
@@ -322,14 +326,12 @@ void test1_person_set_location(){
     
    */
 void test2_person_set_location(){
-	Person *person = NULL;
+  Person *person = NULL;
   Id idlocation = 345;
-  Id idperson = 3;
-  person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _OK);
-  person_destroy(person);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == ERROR_);
   return;
 }
+
 
 /**
    @date 16-12-2016 
@@ -349,10 +351,12 @@ void test3_person_set_location(){
   Id idlocation = NO_ID;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == _ERROR);
+  FUNCTION_IS_CORRECT(person_set_location(person, idlocation) == ERROR_);
   person_destroy(person);
   return;
 }
+
+
 
 /**
    @date 16-12-2016 
@@ -360,7 +364,7 @@ void test3_person_set_location(){
  
    @brief 
    Check if there aren't any errors when you try to get the person's location 
-   from an uninitialized person.test1_person_get_location()
+   from  a person.test1_person_get_location()
    @param 
     
  
@@ -368,26 +372,6 @@ void test3_person_set_location(){
     
    */
 void test1_person_get_location(){
-	Person *person = NULL;
-  FUNCTION_IS_CORRECT(person_get_location(person) == NO_ID);
-  return;
-}
-
-
-/**
-   @date 16-12-2016 
-   @author Guillermo Rodriguez
- 
-   @brief 
-   Check if there aren't any errors when you try to get the person's location 
-   from  a person.test2_person_get_location()
-   @param 
-    
- 
-   @return 
-    
-   */
-void test2_person_get_location(){
 	Person * person = NULL;
   Id idlocation = 345;
   Id idperson = 3;
@@ -398,13 +382,37 @@ void test2_person_get_location(){
   return;
 }
 
+
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the person's location 
+   from an uninitialized person.test2_person_get_location()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_person_get_location(){
+	Person *person = NULL;
+  FUNCTION_IS_CORRECT(person_get_location(person) == NO_ID);
+  return;
+}
+
+
+
+
 /**
    @date 16-12-2016 
    @author Guillermo Rodriguez
  
    @brief 
    Check if there aren't any errors when you try to set a rule 
-   for an uninitialized person.test1_person_set_rule()
+   for a person.test1_person_set_rule()
    @param 
     
  
@@ -414,9 +422,14 @@ void test2_person_get_location(){
 void test1_person_set_rule(){
 	Person *person = NULL;
   Id idrule = 345;
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _ERROR);
+  Id idperson = 3;
+  person = person_create(idperson);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == OK_);
+  person_destroy(person);
   return;
 }
+
+
 
 
 /**
@@ -425,7 +438,7 @@ void test1_person_set_rule(){
  
    @brief 
    Check if there aren't any errors when you try to set a rule 
-   for a person.test2_person_set_rule()
+   for an uninitialized person.test2_person_set_rule()
    @param 
     
  
@@ -435,12 +448,12 @@ void test1_person_set_rule(){
 void test2_person_set_rule(){
 	Person *person = NULL;
   Id idrule = 345;
-  Id idperson = 3;
-  person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _OK);
-  person_destroy(person);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR_);
   return;
 }
+
+
+
 
 /**
    Function: test3_person_set_rule
@@ -461,10 +474,11 @@ void test3_person_set_rule(){
   Id idrule = NO_ID;
   Id idperson = 3;
   person = person_create(idperson);
-  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == _ERROR);
+  FUNCTION_IS_CORRECT(person_set_rule(person, idrule) == ERROR_);
   person_destroy(person);
   return;
 }
+
 
 /**
    @date 16-12-2016 
@@ -472,7 +486,7 @@ void test3_person_set_rule(){
  
    @brief 
    Check if there aren't any errors when you try to get the person's rule 
-   from an uninitialized person.test1_person_get_rule()
+   from  a person.test1_person_get_rule()
    @param 
     
  
@@ -480,26 +494,6 @@ void test3_person_set_rule(){
     
    */
 void test1_person_get_rule(){
-	Person *person = NULL;
-  FUNCTION_IS_CORRECT(person_get_rule(person) == NO_ID);
-  return;
-}
-
-
-/**
-   @date 16-12-2016 
-   @author Guillermo Rodriguez
- 
-   @brief 
-   Check if there aren't any errors when you try to get the person's rule 
-   from  a person.test2_person_get_rule()
-   @param 
-    
- 
-   @return 
-    
-   */
-void test2_person_get_rule(){
 	Person * person = NULL;
   Id idrule = 345;
   Id idperson = 3;
@@ -509,6 +503,28 @@ void test2_person_get_rule(){
   person_destroy(person);
   return;
 }
+
+/**
+   @date 16-12-2016 
+   @author Guillermo Rodriguez
+ 
+   @brief 
+   Check if there aren't any errors when you try to get the person's rule 
+   from an uninitialized person.test2_person_get_rule()
+   @param 
+    
+ 
+   @return 
+    
+   */
+void test2_person_get_rule(){
+	Person *person = NULL;
+  FUNCTION_IS_CORRECT(person_get_rule(person) == NO_ID);
+  return;
+}
+
+
+
 
 /**
 @author Guillermo Rodriguez
@@ -533,7 +549,7 @@ void test1_person_print(){
 	person_set_name(person, name);
   person_set_rule(person,rule);
 	person_set_location(person,location);
-	FUNCTION_IS_CORRECT(person_print(person) == _OK);
+	FUNCTION_IS_CORRECT(person_print(person) == OK_);
 	person_destroy(person);
 	return;
 }
@@ -551,7 +567,7 @@ Tests if you can print an uninitialised person.
 void test2_person_print(){
 	Person * person = NULL;
 
-	FUNCTION_IS_CORRECT(person_print(person) == _ERROR);
+	FUNCTION_IS_CORRECT(person_print(person) == ERROR_);
 	return;
 }
 

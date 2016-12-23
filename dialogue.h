@@ -12,13 +12,10 @@ It implements the command's comments.
 #ifndef DIALOGUE_H
 #define DIALOGUE_H
 
-#include "types.h"
 #include "command.h"
+#include "types.h"
 
-/**
-@def Constant values description 
-*/
-#define MAX_DIALOGUE 1000
+
 
 /*!< Data structures definition */
 /**
@@ -47,9 +44,9 @@ Destroys a dialogue.
 @date 14-12-2016 
 @author Ricardo Riol
 @param Dilogue *dialogue: the dialogue to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
-_STATUS dialogue_destroy(Dialogue *dialogue);
+STATUS_ dialogue_destroy(Dialogue *dialogue);
 
 /**
 @brief dialogue_get_command_act
@@ -82,9 +79,9 @@ Sets the actual command of the game
 @param Dilogue *dialogue: the dialogue.
 Command* : The command that we want to set in the dialogue.
 Status : Tells us if the command has been done sucessfully.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
-_STATUS dialogue_set_command_act (Dialogue *dialogue, Command *command, _STATUS status);
+STATUS_ dialogue_set_command_act (Dialogue *dialogue, Command *command, STATUS_ status);
 
 /**
 @brief dialogue_set_command_prev
@@ -94,12 +91,12 @@ Sets teh previously command of the game.
 @param Dilogue *dialogue: the dialogue.
 Command* : The command that we wnat to set in the dialogue.
 Status : Tells us if the command has been done sucessfully.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
-_STATUS dialogue_set_command_prev (Dialogue *dialogue, Command *command, _STATUS status);
+STATUS_ dialogue_set_command_prev (Dialogue *dialogue, Command *command, STATUS_ status);
 
 /**
-@brief dialogue_get_cadena
+@brief dialogue_get_text
 Gets the string of the dialogue
 
 @date 14-12-2016 
@@ -107,18 +104,18 @@ Gets the string of the dialogue
 @param Dilogue *dialogue: the dialogue.
 @return char*: The text of the dialogue.
 */
-char * dialogue_get_cadena (Dialogue* dialogue);
+char * dialogue_get_text (Dialogue* dialogue);
 
 /**
-@brief dialogue_set_cadena
+@brief dialogue_set_text
 Sets the string of the dialogue
 
 @date 14-12-2016 
 @author Ricardo Riol
 @param Dilogue *dialogue: the dialogue.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
-_STATUS dialogue_set_cadena (Dialogue *dialogue);
+STATUS_ dialogue_set_text (Dialogue *dialogue);
  
 
 

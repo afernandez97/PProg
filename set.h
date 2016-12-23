@@ -54,9 +54,9 @@ Set * set_create();
    @param 
     Set *set: the set to destroy.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS set_destroy(Set *set);
+STATUS_ set_destroy(Set *set);
 
 
  
@@ -72,9 +72,9 @@ _STATUS set_destroy(Set *set);
     @param Set *set: the set to change.
     @param Id id: the id of the object you want to add.
      
-    @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    @return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS set_add(Set *set, Id id);
+STATUS_ set_add(Set *set, Id id);
 
 
  
@@ -90,9 +90,9 @@ _STATUS set_add(Set *set, Id id);
    @param Set *set: the set to change.
    @param the id of the object you want to delete.
     
-   @return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+   @return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS set_del(Set *set, Id id);
+STATUS_ set_del(Set *set, Id id);
 
 
 
@@ -127,9 +127,9 @@ int set_get_count(Set *set);
    @param Set *set: the set to check.
                  
     
-   @return _BOOL: _TRUE is the set is empty or _FALSE if not.
+   @return BOOL_: TRUE_ is the set is empty or FALSE_ if not.
    */
-_BOOL set_is_empty(Set *set);
+BOOL_ set_is_empty(Set *set);
 
 
 
@@ -145,9 +145,9 @@ _BOOL set_is_empty(Set *set);
    @param Set *set: the set to check.
                  
     
-   @return _BOOL: _TRUE is the set is full or _FALSE if not.
+   @return BOOL_: TRUE_ is the set is full or FALSE_ if not.
    */
-_BOOL set_is_full(Set *set);
+BOOL_ set_is_full(Set *set);
  
 
 
@@ -183,9 +183,9 @@ Id set_get_object_at_position(Set *set, int position);
    @param Set *set: the set where you want to find the object.
    @param Id object: the id of the object you want to know if it is in the set.
                   
-    @return _BOOL: _TRUE if the object is in the set and _FALSE in other cases. 
+    @return BOOL_: TRUE_ if the object is in the set and FALSE_ in other cases. 
    */
-_BOOL set_is_object(Set *set, Id object);
+BOOL_ set_is_object(Set *set, Id object);
 
 
 
@@ -201,9 +201,9 @@ _BOOL set_is_object(Set *set, Id object);
    @param Set *set: the set to print.
                  
     
-   @return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+   @return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS set_print(Set *set);
+STATUS_ set_print(Set *set);
 
 
 #endif

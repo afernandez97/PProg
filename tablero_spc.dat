@@ -1,55 +1,55 @@
-#s:1|Renfe|-1|-1|1|-1|-1|-1|-1|-1|1|0|0|Renfe's space.For you safety do not cross the tracks.Please, use the crossing points|       | ____  |/____\>|
-#s:2|Exit Renfe|2|-1|3|5|-1|-1|-1|-1|1|0|0|You just have got out renfe.Continue straight if you want to go to EPS|       |       |       |
-#s:3|Road EPS (Philosophy)|4|-1|6|-1|-1|-1|-1|-1|1|0|0|Continue straight to EPS (do not enter philosophy faculty, it is dangerous)|       | philo |       |
-#s:4|Road EPS (CCSS)|7|-1|8|-1|-1|-1|-1|-1|1|0|0|There are so much weird people. It is better not to be near them.|       |  CCSS |       |
-#s:5|Road EPS (science)|9|-1|10|-1|-1|-1|-1|-1|1|0|0|You do not have so much time and it is too easy to get lost here.|       |science|       |
-#s:6|Road EPS (square)|11|-1|12|-1|-1|-1|-1|-1|1|0|0|The square is closed.Motives:improvements in facilities.|       | square|  UAM  |
-#s:7|Road EPS|13|-1|14|-1|-1|-1|-1|-1|1|0|0|Come on! You are so close.|       |       |       |
-#s:8|EPS's doors|15|-1|16|-1|-1|-1|-1|-1|1|0|0|You can smoke here. If you want to enter push the door.|       |       |       |
-#s:9|EPS's lobby|17|18|-1|20|61|-1|-1|-1|1|0|0|Well done, try to find the correct class as soons as posible.|       |       |       |
-#s:10|Corredor1A|22|26|24|19|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
-#s:11|Class 10|-1|-1|23|-1|-1|-1|-1|-1|1|0|0|Class 10|       |       |       |
-#s:12|Class 5|25|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 5|       |       |       |
-#s:13|Corredor1B|28|32|30|27|34|-1|-1|-1|1|0|0|There are many classes, try to enter one by one|       |       |       |
-#s:14|Class 9|-1|-1|29|-1|-1|-1|-1|-1|1|0|0|Class 9|       |       |       |
-#s:15|Class 6|31|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 6|       |       |       |
-#s:16|Corredor1C|35|39|37|33|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
-#s:17|Class 8|-1|-1|36|-1|-1|-1|-1|-1|1|0|0|Class 8|       |       |       |
-#s:18|Class 7|38|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 7|       |       |       |
-#s:19|Sala de actos|-1|-1|-1|40|-1|-1|-1|-1|1|0|0|Try to find new objects, it would be worth it.|       |       |       |
+#s:1|Renfe|1|-1|-1|-1|-1|-1|-1|-1|1|0|0|Renfe's space./For you safety do not cross the tracks./Please, use the crossing points.|       | ____  |/____\>|
+#s:2|Exit Renfe|3|-1|2|5|-1|-1|1|1|1|0|0|You just have got out renfe./Continue straight if you want to go to EPS.|       |       |       |
+#s:3|Road EPS (Philosophy)|6|-1|4|-1|-1|-1|-1|-1|1|0|0|Continue straight to EPS/(do not enter philosophy faculty, it is dangerous).|       | PHILO |       |
+#s:4|Road EPS (CCSS)|8|-1|7|-1|-1|-1|-1|-1|1|0|0|There are so much weird people./It is better not to be near them.|       |  CCSS |       |
+#s:5|Road EPS (science)|10|-1|9|-1|-1|-1|-1|-1|1|0|0|You do not have so much time and it is too easy to get lost here.|       |SCIENCE|       |
+#s:6|Road EPS (square)|12|-1|11|-1|-1|-1|-1|-1|1|0|0|The square is closed./Motives: improvements in facilities.|       | SQUARE|  UAM  |
+#s:7|Road EPS|14|-1|13|-1|-1|-1|-1|-1|1|0|0|Come on! You are so close.|       |       |       |
+#s:8|EPS's doors|16|-1|15|-1|-1|-1|-1|-1|1|0|0|You can smoke here./If you want to enter push the door.|       |       |       |
+#s:9|EPS's lobby|-1|18|17|20|61|-1|3|3|1|0|0|Well done, try to find the correct class as soons as posible.| LOBBY |     _ |   _/ ^|
+#s:10|Corredor1A|22|26|24|19|-1|-1|8|9|1|0|0|There are many classes, try to enter one by one.|       |       |       |
+#s:11|Class 10|-1|-1|23|-1|-1|-1|-1|-1|1|0|0|Class 10|[]_O   |   T\  |   /\  |
+#s:12|Class 5|25|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 5|[]_O   |   T\  |   /\  |
+#s:13|Corredor1B|28|32|30|27|34|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |     _ |   _/ ^|
+#s:14|Class 9|-1|-1|29|-1|-1|-1|-1|-1|1|0|0|Class 9|[]_O   |   T\  |   /\  |
+#s:15|Class 6|31|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 6|[]_O   |   T\  |   /\  |
+#s:16|Corredor1C|35|39|37|33|-1|-1|-1|-1|0|0|0|There are many classes, try to enter one by one.|       |       |       |
+#s:17|Class 8|-1|-1|36|-1|-1|-1|6|7|1|0|0|Class 8|[]_O   |   T\  |   /\  |
+#s:18|Class 7|38|-1|-1|-1|-1|-1|5|6|1|0|0|Class 7|[]_O   |   T\  |   /\  |
+#s:19|Sala de actos|-1|-1|-1|40|-1|-1|-1|-1|0|0|0|Try to find new objects, it would be worth it.|       |       |       |
 #s:20|Corredor2A|41|21|43|45|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
-#s:21|Class 1|-1|-1|42|-1|-1|-1|-1|-1|1|0|0|Class 1|       |       |       |
-#s:22|Class 4|44|-1|-1|-1|-1|-1|-1|-1|1|0|0|Class 4|       |       |       |
-#s:23|Corredor2B|47|46|49|53|62|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
-#s:24|Class 2|-1|-1|48|-1|-1|-1|-1|-1|1|0|0|Class 2|       |       |       |
+#s:21|Class 1|-1|-1|42|-1|-1|-1|9|10|1|0|1|Class 1|[]_O   |   T\  |   /\  |
+#s:22|Class 4|44|-1|-1|-1|-1|-1|-1|-1|0|0|0|Class 4|[]_O   |   T\  |   /\  |
+#s:23|Corredor2B|47|46|49|53|62|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |     _ |   _/ ^|
+#s:24|Class 2|-1|-1|48|-1|-1|-1|-1|-1|0|0|0|Class 2|[]_O   |   T\  |   /\  |
 #s:25|Cantine|50|-1|51|-1|-1|-1|-1|-1|1|0|0|Cantine|       |       |       |
-#s:26|Deisi|52|-1|-1|-1|-1|-1|-1|-1|1|0|0|Deisi|       |       |       |
+#s:26|Deisi|52|-1|-1|-1|-1|-1|2|2|1|1|0|Deisi|       |       |       |
 #s:27|Corredor2C|55|54|57|59|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
-#s:28|Class 3|-1|-1|56|-1|-1|-1|-1|-1|1|0|0|Class 3|       |       |       |
-#s:29|Cantine|58|-1|-1|-1|-1|-1|-1|-1|1|0|0|Cantine|       |       |       |
-#s:30|Cafeteria|-1|60|-1|-1|-1|-1|-1|-1|1|0|0|Cafeteria|       |       |       |
-#s:31|lobby 2|-1|63|-1|65|-1|-1|-1|-1|-1|1|0|0|108|lobby|       |       |       |
+#s:28|Class 3|-1|-1|56|-1|-1|-1|-1|-1|1|0|0|Class 3|[]_O   |   T\  |   /\  |
+#s:29|Cantine|58|-1|-1|-1|-1|-1|-1|-1|0|0|0|Cantine|       |       |       |
+#s:30|Cafeteria|-1|60|-1|-1|-1|-1|-1|5|1|1|0|Cafeteria|       |       |       |
+#s:31|lobby 2|-1|63|-1|65|68|108|-1|-1|1|0|0|lobby| LOBBY |     _ |  v_/ ^|
 #s:32|Corredor3A|70|74|72|64|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one.|       |       |       |
 #s:33|Toilete1|-1|-1|71|-1|-1|-1|-1|-1|1|0|0|Toilete|       |       |       |
 #s:34|Lab 15|73|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 15|       |       |       |
-#s:35|Corredor3B|76|81|78|75|-1|80|-1|-1|1|0|0|There are many classes|       |       |       |
+#s:35|Corredor3B|76|81|78|75|-1|80|-1|-1|1|0|0|There are many classes|     _ |       |   v_/ |
 #s:36|Lab 5|-1|-1|77|-1|-1|-1|-1|-1|1|0|0|Lab 5|       |       |       |
 #s:37|Lab 3A|79|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 3A|       |       |       |
-#s:38|Corredor3C|83|87|85|82|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one|       |       |       |
+#s:38|Corredor3C|83|87|85|82|-1|-1|-1|-1|0|0|0|There are many classes, try to enter one by one|       |       |       |
 #s:39|Lab 6|-1|-1|84|-1|-1|-1|-1|-1|1|0|0|Lab 6|       |       |       |
 #s:40|Lab 3B|86|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 3B|       |       |       |
-#s:41|Toilete2|-1|-1|-1|88|-1|-1|-1|-1|1|0|0|Toilete|       |       |       |
+#s:41|Toilete2|-1|-1|-1|88|-1|-1|-1|-1|0|0|0|Toilete|       |       |       |
 #s:42|Corredor4A|89|66|91|93|-1|-1|-1|-1|1|0|0|There are many classes, try to enter one by one|       |       |       |
 #s:43|Toilete3|-1|-1|90|-1|-1|-1|-1|-1|1|0|0|Toilete|       |       |       |
-#s:44|Lab 16|92|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 16|       |       |       |
-#s:45|Corredor4B|95|94|97|100|-1|99|-1|-1|1|0|0|There are many classes, try to enter one by one|       |       |       |
+#s:44|Lab 16|92|-1|-1|-1|-1|-1|-1|-1|0|0|0|Lab 16|       |       |       |
+#s:45|Corredor4B|95|94|97|100|-1|99|-1|-1|1|0|0|There are many classes, try to enter one by one|     _ |       |   v_/ |
 #s:46|Lab 8|-1|-1|96|-1|-1|-1|-1|-1|1|0|0|Lab 8|       |       |       |
 #s:47|Lab 9|98|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 9|       |       |       |
-#s:48|Corredor4C|102|101|104|106|-1|-1|-1|-1|1|0|0|Corredor4C|       |       |       |
+#s:48|Corredor4C|102|101|104|106|-1|-1|-1|-1|0|0|0|Corredor4C|       |       |       |
 #s:49|Lab 7B|-1|-1|103|-1|-1|-1|-1|-1|1|0|0|Lab 7B|       |       |       |
-#s:50|Lab 7A|105|-1|-1|-1|-1|-1|-1|-1|1|0|0|Lab 7A|       |       |       |
-#s:51|Toilete4|-1|107|-1|-1|-1|-1|-1|-1|1|0|0|Toilete|       |       |       |
-#s:52|library|-1|-1|-1|-1|-1|69|-1|-1|1|0|0|library|       |       |       |
+#s:50|Lab 7A|105|-1|-1|-1|-1|-1|4|4|0|0|0|Lab 7A|       |       |       |
+#s:51|Toilete4|-1|107|-1|-1|-1|-1|7|8|0|0|0|Toilete|       |       |       |
+#s:52|library|-1|-1|-1|-1|-1|69|-1|-1|1|0|0|library|     _ |       |   v_/ |
 
 
 

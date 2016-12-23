@@ -123,7 +123,7 @@ void test1_link_destroy(){
 	Id id = 1;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_destroy(link) != _ERROR);
+	FUNCTION_IS_CORRECT(link_destroy(link) != ERROR_);
 
 	return;
 }
@@ -142,7 +142,7 @@ void test2_link_destroy(){
 
 	Link* link = NULL;
 
-	FUNCTION_IS_CORRECT(link_destroy(link) == _ERROR);
+	FUNCTION_IS_CORRECT(link_destroy(link) == ERROR_);
 
 	return;
 }
@@ -205,7 +205,7 @@ void test1_link_set_name(){
 	char name[WORD_SIZE] = "name";
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_name(link, name) != _ERROR);
+	FUNCTION_IS_CORRECT(link_set_name(link, name) != ERROR_);
 	link_destroy(link);
 
 	return;
@@ -226,7 +226,7 @@ void test2_link_set_name(){
 	Link* link = NULL;
 	char name[WORD_SIZE] = "name";
 
-	FUNCTION_IS_CORRECT(link_set_name(link, name) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_name(link, name) == ERROR_);
 
 	return;
 }
@@ -249,7 +249,7 @@ void test3_link_set_name(){
 	char* noName = NULL;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_name(link, noName) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_name(link, noName) == ERROR_);
 	link_destroy(link);
 
 	return;
@@ -312,7 +312,7 @@ void test1_link_set_space1(){
 	Id id = 1;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space1(link, id) != _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space1(link, id) != ERROR_);
 	link_destroy(link);
 
 	return;
@@ -333,7 +333,7 @@ void test2_link_set_space1(){
 	Link* link = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(link_set_space1(link, id) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space1(link, id) == ERROR_);
 
 	return;
 }
@@ -356,7 +356,7 @@ void test3_link_set_space1(){
 	Id noId = NO_ID;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space1(link, noId) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space1(link, noId) == ERROR_);
 	link_destroy(link);
 
 	return;
@@ -421,7 +421,7 @@ void test1_link_set_space2(){
 	Id id = 1;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space2(link, id) != _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space2(link, id) != ERROR_);
 	link_destroy(link);
 
 	return;
@@ -442,7 +442,7 @@ void test2_link_set_space2(){
 	Link* link = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(link_set_space2(link, id) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space2(link, id) == ERROR_);
 
 	return;
 }
@@ -465,7 +465,7 @@ void test3_link_set_space2(){
 	Id noId = NO_ID;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_space2(link, noId) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_space2(link, noId) == ERROR_);
 	link_destroy(link);
 
 	return;
@@ -530,7 +530,7 @@ void test1_link_set_state(){
 	STATE state = OPEN;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_state(link, state) != _ERROR);
+	FUNCTION_IS_CORRECT(link_set_state(link, state) != ERROR_);
 	link_destroy(link);
 	
 	return;
@@ -551,7 +551,7 @@ void test2_link_set_state(){
 	Link* link = NULL;
 	STATE state = OPEN;
 
-	FUNCTION_IS_CORRECT(link_set_state(link, state) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_state(link, state) == ERROR_);
 
 	return;
 }
@@ -574,7 +574,7 @@ void test3_link_set_state(){
 	STATE noState = NO_STATE;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_set_state(link, noState) == _ERROR);
+	FUNCTION_IS_CORRECT(link_set_state(link, noState) == ERROR_);
 	link_destroy(link);
 
 	return;
@@ -638,7 +638,7 @@ void test1_link_print(){
 	Id id = 1;
 
 	link = link_create(id);
-	FUNCTION_IS_CORRECT(link_print(link) != _ERROR);
+	FUNCTION_IS_CORRECT(link_print(link) != ERROR_);
 	link_destroy(link);
 
 	return;
@@ -658,7 +658,7 @@ void test2_link_print(){
 
 	Link* link = NULL;
 
-	FUNCTION_IS_CORRECT(link_print(link) == _ERROR);
+	FUNCTION_IS_CORRECT(link_print(link) == ERROR_);
 
 	return;
 }

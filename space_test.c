@@ -178,7 +178,7 @@ void test1_space_destroy(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_destroy(space) == _OK);
+	FUNCTION_IS_CORRECT(space_destroy(space) == OK_);
 	return;
 }
 
@@ -195,7 +195,7 @@ Tests if you can destroy an uninitialised space.
 void test2_space_destroy(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_destroy(space) == _ERROR);
+	FUNCTION_IS_CORRECT(space_destroy(space) == ERROR_);
 	return;
 }
 
@@ -252,7 +252,7 @@ void test1_space_set_name(){
 	char name[WORD_SIZE] = "name";
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_name(space, name) == _OK);
+	FUNCTION_IS_CORRECT(space_set_name(space, name) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -272,7 +272,7 @@ void test2_space_set_name(){
 	Space *space = NULL;
 	char name[WORD_SIZE] = "name";
 
-	FUNCTION_IS_CORRECT(space_set_name(space, name) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_name(space, name) == ERROR_);
 	return;
 }
 
@@ -295,7 +295,7 @@ void test3_space_set_name(){
 	char *noName = NULL;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_name(space, noName) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_name(space, noName) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -358,7 +358,7 @@ void test1_space_set_north(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_north(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_north(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -377,7 +377,7 @@ void test2_space_set_north(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_north(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_north(space, id) == ERROR_);
 	return;
 }
 
@@ -436,7 +436,7 @@ void test1_space_set_south(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_south(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_south(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -455,7 +455,7 @@ void test2_space_set_south(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_south(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_south(space, id) == ERROR_);
 	return;
 }
 
@@ -514,7 +514,7 @@ void test1_space_set_east(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_east(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_east(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -533,7 +533,7 @@ void test2_space_set_east(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_east(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_east(space, id) == ERROR_);
 	return;
 }
 
@@ -592,7 +592,7 @@ void test1_space_set_west(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_west(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_west(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -611,7 +611,7 @@ void test2_space_set_west(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_west(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_west(space, id) == ERROR_);
 	return;
 }
 
@@ -671,7 +671,7 @@ void test1_space_set_up(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_up(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_up(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -690,7 +690,7 @@ void test2_space_set_up(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_up(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_up(space, id) == ERROR_);
 	return;
 }
 
@@ -751,7 +751,7 @@ void test1_space_set_down(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_down(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_down(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -770,7 +770,7 @@ void test2_space_set_down(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_down(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_down(space, id) == ERROR_);
 	return;
 }
 
@@ -831,7 +831,7 @@ void test1_space_set_rule(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_rule(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_rule(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -850,7 +850,7 @@ void test2_space_set_rule(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_rule(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_rule(space, id) == ERROR_);
 	return;
 }
 
@@ -910,7 +910,7 @@ void test1_space_set_person(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_person(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_set_person(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -929,7 +929,7 @@ void test2_space_set_person(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_set_person(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_person(space, id) == ERROR_);
 	return;
 }
 
@@ -988,7 +988,7 @@ void test1_space_add_object(){
 	Id id = 1;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_add_object(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_add_object(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1010,7 +1010,7 @@ void test2_space_add_object(){
 	Id noId = NO_ID;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_add_object(space, noId) == _ERROR);
+	FUNCTION_IS_CORRECT(space_add_object(space, noId) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -1029,7 +1029,7 @@ void test3_space_add_object(){
 	Space *space = NULL;
 	Id id = 1;
 
-	FUNCTION_IS_CORRECT(space_add_object(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_add_object(space, id) == ERROR_);
 	return;
 }
 
@@ -1049,7 +1049,7 @@ void test1_space_del_object(){
 
 	space = space_create(id);
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_del_object(space, id) == _OK);
+	FUNCTION_IS_CORRECT(space_del_object(space, id) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1072,7 +1072,7 @@ void test2_space_del_object(){
 
 	space = space_create(id);
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_del_object(space, noId) == _ERROR);
+	FUNCTION_IS_CORRECT(space_del_object(space, noId) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -1092,7 +1092,7 @@ void test3_space_del_object(){
 	Id id = 1;
 
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_del_object(space, id) == _ERROR);
+	FUNCTION_IS_CORRECT(space_del_object(space, id) == ERROR_);
 	return;
 }
 
@@ -1152,7 +1152,7 @@ void test1_space_is_object(){
 
 	space = space_create(id);
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_is_object(space, id) == _TRUE);
+	FUNCTION_IS_CORRECT(space_is_object(space, id) == TRUE_);
 	space_destroy(space);
 	return;
 }
@@ -1175,7 +1175,7 @@ void test2_space_is_object(){
 
 	space = space_create(id);
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_is_object(space, noId) == _FALSE);
+	FUNCTION_IS_CORRECT(space_is_object(space, noId) == FALSE_);
 	space_destroy(space);
 	return;
 }
@@ -1195,7 +1195,7 @@ void test3_space_is_object(){
 	Id id = 1;
 
 	space_add_object(space, id);
-	FUNCTION_IS_CORRECT(space_is_object(space, id) == _FALSE);
+	FUNCTION_IS_CORRECT(space_is_object(space, id) == FALSE_);
 	return;
 }
 
@@ -1215,7 +1215,7 @@ void test1_space_set_desc(){
 	char desc[WORD_SIZE] = "desc";
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == _OK);
+	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1237,7 +1237,7 @@ void test2_space_set_desc(){
 	char *noDesc = NULL;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_desc(space, noDesc) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_desc(space, noDesc) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -1257,7 +1257,7 @@ void test3_space_set_desc(){
 
 	char desc[WORD_SIZE] = "desc";
 
-	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_desc(space, desc) == ERROR_);
 	return;
 }
 
@@ -1318,7 +1318,7 @@ void test1_space_set_gdesc(){
 	char gdesc[WORD_SIZE] = "gdesc";
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == _OK);
+	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1340,7 +1340,7 @@ void test2_space_set_gdesc(){
 	char *noGdesc = NULL;
 
 	space = space_create(id);
-	FUNCTION_IS_CORRECT(space_set_gdesc(space, noGdesc) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_gdesc(space, noGdesc) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -1360,7 +1360,7 @@ void test3_space_set_gdesc(){
 
 	char gdesc[WORD_SIZE] = "gdesc";
 
-	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_gdesc(space, gdesc) == ERROR_);
 	return;
 }
 
@@ -1423,7 +1423,7 @@ void test1_space_print_gdesc1(){
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == _OK);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1441,7 +1441,7 @@ Tests if you can print the gdesc field of an uninitialised space.
 void test2_space_print_gdesc1(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_print_gdesc1(space) == _ERROR);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space) == ERROR_);
 	return;
 }
 
@@ -1463,7 +1463,7 @@ void test3_space_print_gdesc1(){
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == _ERROR);
+	FUNCTION_IS_CORRECT(space_print_gdesc1(space, output) == ERROR_);
 	space_destroy(space);
 	return;
 }
@@ -1481,7 +1481,7 @@ Tests if you set an illumination for an unitialized space
 void test1_space_set_illumination(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_set_illumination(space,_TRUE) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_illumination(space,TRUE_) == ERROR_);
 	return;
 }
 /**
@@ -1499,7 +1499,7 @@ void test2_space_set_illumination(){
 	Space *space = NULL;
   Id id = 1;
   space = space_create(id);
-  FUNCTION_IS_CORRECT(space_set_illumination(space,_TRUE) == _OK);
+  FUNCTION_IS_CORRECT(space_set_illumination(space,TRUE_) == OK_);
 	return;
 }
 
@@ -1516,7 +1516,7 @@ Tests if can check if an unitialized space is illuminated or not
 void test1_space_is_illuminated(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_is_illuminated(space) == _FALSE);
+	FUNCTION_IS_CORRECT(space_is_illuminated(space) == FALSE_);
 	return;
 }
 
@@ -1534,8 +1534,8 @@ void test2_space_is_illuminated(){
 	Space *space = NULL;
   Id id = 1;
   space = space_create(id);
-  space_set_illumination(space,_TRUE);
-  FUNCTION_IS_CORRECT(space_is_illuminated(space) == _TRUE);
+  space_set_illumination(space,TRUE_);
+  FUNCTION_IS_CORRECT(space_is_illuminated(space) == TRUE_);
 	return;
 }
 
@@ -1553,7 +1553,7 @@ Tests if you set a shop characteristic for an unitialized space
 void test1_space_set_shop(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_set_shop(space,_TRUE) == _ERROR);
+	FUNCTION_IS_CORRECT(space_set_shop(space,TRUE_) == ERROR_);
 	return;
 }
 /**
@@ -1571,7 +1571,7 @@ void test2_space_set_shop(){
 	Space *space = NULL;
   Id id = 1;
   space = space_create(id);
-  FUNCTION_IS_CORRECT(space_set_space(space,_TRUE) == _OK);
+  FUNCTION_IS_CORRECT(space_set_space(space,TRUE_) == OK_);
 	return;
 }
 
@@ -1588,7 +1588,7 @@ Tests if can check if an unitialized space is a shop or not
 void test1_space_is_shop(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_is_shop(space) == _FALSE);
+	FUNCTION_IS_CORRECT(space_is_shop(space) == FALSE_);
 	return;
 }
 
@@ -1606,8 +1606,8 @@ void test2_space_is_shop(){
 	Space *space = NULL;
   Id id = 1;
   space = space_create(id);
-  space_set_shop(space,_TRUE);
-  FUNCTION_IS_CORRECT(space_is_shop(space) == _TRUE);
+  space_set_shop(space,TRUE_);
+  FUNCTION_IS_CORRECT(space_is_shop(space) == TRUE_);
 	return;
 }
 
@@ -1632,7 +1632,7 @@ void test1_space_print(){
 
 	space = space_create(id);
 	space_set_gdesc(space, gdesc);
-	FUNCTION_IS_CORRECT(space_print(space) == _OK);
+	FUNCTION_IS_CORRECT(space_print(space) == OK_);
 	space_destroy(space);
 	return;
 }
@@ -1650,7 +1650,7 @@ Tests if you can print an uninitialised space.
 void test2_space_print(){
 	Space *space = NULL;
 
-	FUNCTION_IS_CORRECT(space_print(space) == _ERROR);
+	FUNCTION_IS_CORRECT(space_print(space) == ERROR_);
 	return;
 }
 

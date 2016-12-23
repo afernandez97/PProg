@@ -88,9 +88,9 @@ Space * space_create(Id id);
    @param 
     Space *space: the space to destroy.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS space_destroy(Space *space);
+STATUS_ space_destroy(Space *space);
 
 
 /**
@@ -119,9 +119,9 @@ Id space_get_id(Space *space);
    @param char *name: the new name you want for the space.
    
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_name(Space *space, char *name);
+STATUS_ space_set_name(Space *space, char *name);
 
 
 
@@ -153,9 +153,9 @@ const char* space_get_name(Space *space);
    @param Id id: the new North link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_north(Space *space, Id id);
+STATUS_ space_set_north(Space *space, Id id);
 
 
 
@@ -186,9 +186,9 @@ Id space_get_north(Space *space);
    @param Id id: the new South link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_south(Space *space, Id id);
+STATUS_ space_set_south(Space *space, Id id);
 
 
 
@@ -220,9 +220,9 @@ Id space_get_south(Space *space);
    @param Id id: the new East link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_east(Space *space, Id id);
+STATUS_ space_set_east(Space *space, Id id);
 
 
 
@@ -257,9 +257,9 @@ Id space_get_east(Space *space);
 		Id id: the new West link you want for the space.
 
    Output: 
-		_STATUS: _OK if you do the operation well and _ERROR in other cases.
+		STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_west(Space *space, Id id);
+STATUS_ space_set_west(Space *space, Id id);
 
 
 
@@ -274,7 +274,7 @@ _STATUS space_set_west(Space *space, Id id);
    @param Id id: the new West link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
 Id space_get_west(Space *space);
 
@@ -290,9 +290,9 @@ Id space_get_west(Space *space);
    @param Id id: the new Up link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_up(Space *space, Id id);
+STATUS_ space_set_up(Space *space, Id id);
  
  
  
@@ -323,9 +323,9 @@ Id space_get_up(Space *space);
    @param Id id: the new Down link you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_down(Space *space, Id id);
+STATUS_ space_set_down(Space *space, Id id);
  
  
  
@@ -355,9 +355,9 @@ Id space_get_down(Space *space);
    @param Id id: the new rule you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_rule(Space *space, Id id);
+STATUS_ space_set_rule(Space *space, Id id);
  
  
  
@@ -387,9 +387,9 @@ Id space_get_rule(Space *space);
    @param Id id: the new person you want for the space.
  
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_person(Space *space, Id id);
+STATUS_ space_set_person(Space *space, Id id);
  
   
 /**
@@ -420,9 +420,9 @@ Id space_get_person(Space *space);
       into the space.
    
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
-_STATUS space_add_object(Space *space, Id object);
+STATUS_ space_add_object(Space *space, Id object);
 
    
 
@@ -439,9 +439,9 @@ _STATUS space_add_object(Space *space, Id object);
       from the space.
    
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_del_object(Space *space, Id object);
+STATUS_ space_del_object(Space *space, Id object);
 
 
 /**
@@ -475,9 +475,9 @@ Set* space_get_object(Space *space);
     Id object: the id of the object you want to know if it is in the space.
                  
    @return 
-    _BOOL: _TRUE if the object is in the space and _FALSE in other cases. 
+    BOOL_: TRUE_ if the object is in the space and FALSE_ in other cases. 
    */
-_BOOL space_is_object(Space *space, Id object);
+BOOL_ space_is_object(Space *space, Id object);
 
 
 
@@ -492,9 +492,10 @@ _BOOL space_is_object(Space *space, Id object);
    @param char *desc: the new description of the space.
 
    Output: 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_desc(Space *space, char *desc);
+STATUS_ space_set_desc(Space *space, char *desc);
+STATUS_ space_set_printdesc(Space *space, char *printdesc);
 
 
 
@@ -512,6 +513,7 @@ _STATUS space_set_desc(Space *space, char *desc);
     char *: the description of the space or NULL on error.
  */
 char *space_get_desc(Space *space);
+char *space_get_printdesc(Space *printspace);
 
 
 
@@ -526,9 +528,9 @@ char *space_get_desc(Space *space);
     char *gdesc: the new graphic description of the space.
   
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_set_gdesc(Space *space, char *gdesc);
+STATUS_ space_set_gdesc(Space *space, char *gdesc);
 
 
 
@@ -560,9 +562,9 @@ char * space_get_gdesc(Space *space);
     Space *space: the space you want to print its graphic description.
     char *output: string in which the gdesc is printed.
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_print_gdesc1(Space *space, char *output);
+STATUS_ space_print_gdesc1(Space *space, char *output);
 
 
 /**
@@ -576,9 +578,9 @@ _STATUS space_print_gdesc1(Space *space, char *output);
     Space *space: the space you want to print its graphic description.
     char *output: string in which the gdesc is printed.
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_print_gdesc2(Space *space, char *output);
+STATUS_ space_print_gdesc2(Space *space, char *output);
 
 
 /**
@@ -592,9 +594,9 @@ _STATUS space_print_gdesc2(Space *space, char *output);
     Space *space: the space you want to print its graphic description.
     char *output: string in which the gdesc3 is printed.
    @return 
-    _STATUS: _OK if you do the operation well and _ERROR in other cases.
+    STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
    */
-_STATUS space_print_gdesc1(Space *space, char *output);
+STATUS_ space_print_gdesc3(Space *space, char *output);  
 
 
 /**
@@ -607,12 +609,12 @@ _STATUS space_print_gdesc1(Space *space, char *output);
 
    @param 
     Space *space: the space you want to change.
-    _BOOL illumination : Choose if the space is illuminated or not.
+    BOOL_ illumination : Choose if the space is illuminated or not.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 
    */
-_STATUS space_set_illumination(Space *space, _BOOL illumination);
+STATUS_ space_set_illumination(Space *space, BOOL_ illumination);
 
 
 /**
@@ -625,9 +627,9 @@ _STATUS space_set_illumination(Space *space, _BOOL illumination);
    @param 
     Space *space: the space you want to know that.
    @return 
-    _BOOL: the illumination of the space or _FALSE if the input is NULL.
+    BOOL_: the illumination of the space or FALSE_ if the input is NULL.
    */
-_BOOL space_is_illuminated(Space *space);
+BOOL_ space_is_illuminated(Space *space);
 
 /**
 
@@ -639,12 +641,12 @@ _BOOL space_is_illuminated(Space *space);
 
    @param 
     Space *space: the space you want to change.
-    _BOOL shop : Choose if the space is a shop or not.
+    BOOL_ shop : Choose if the space is a shop or not.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 
    */
-_STATUS space_set_shop(Space *space, _BOOL shop);
+STATUS_ space_set_shop(Space *space, BOOL_ shop);
 
 /**
    @date 16-12-2016 
@@ -656,9 +658,9 @@ _STATUS space_set_shop(Space *space, _BOOL shop);
    @param 
     Space *space: the space you want to know that.
    @return 
-    _BOOL: _TRUE if the space is a shop or _FALSE if the input is NULL.
+    BOOL_: TRUE_ if the space is a shop or FALSE_ if the input is NULL.
    */
-_BOOL space_is_shop(Space *space);
+BOOL_ space_is_shop(Space *space);
 
 /**
 
@@ -670,12 +672,12 @@ _BOOL space_is_shop(Space *space);
 
    @param 
     Space *space: the space you want to change.
-    _BOOL exam: Choose if the space is where the exam will be or not.
+    BOOL_ exam: Choose if the space is where the exam will be or not.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 
    */
-_STATUS space_set_exam(Space *space, _BOOL exam);
+STATUS_ space_set_exam(Space *space, BOOL_ exam);
 
 /**
    @date 20-12-2016 
@@ -687,9 +689,9 @@ _STATUS space_set_exam(Space *space, _BOOL exam);
    @param 
     Space *space: the space you want to know that.
    @return 
-    _BOOL: _TRUE if the space will hold the exam or _FALSE if not or if the input is NULL.
+    BOOL_: TRUE_ if the space will hold the exam or FALSE_ if not or if the input is NULL.
    */
-_BOOL space_is_exam(Space *space);
+BOOL_ space_is_exam(Space *space);
 
 /**
    @date 20-12-2016 
@@ -701,9 +703,9 @@ _BOOL space_is_exam(Space *space);
    @param 
     Space *space: the space you want to know that.
    @return 
-    _BOOL: _TRUE if the space is linked by that link, _FALSE if not or if the input is NULL.
+    BOOL_: TRUE_ if the space is linked by that link, FALSE_ if not or if the input is NULL.
    */
-_BOOL space_is_linked_by(Space *space, Id link);
+BOOL_ space_is_linked_by(Space *space, Id link);
 
 /**
    @date 01-12-2016 
@@ -715,9 +717,9 @@ _BOOL space_is_linked_by(Space *space, Id link);
    @param 
     Space *space: the space you want to print.
    @return 
-    _STATUS: _ERROR if the input is NULL and _OK otherwise.
+    STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
    */
-_STATUS space_print(Space *space);
+STATUS_ space_print(Space *space);
 
 
 #endif

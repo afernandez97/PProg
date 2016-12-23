@@ -43,10 +43,10 @@ Destroys a person.
 @date 16-12-2016 
 @author Guillermo Rodriguez 
 @param Person *person: the person to destroy.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS person_destroy(Person * person);
+STATUS_ person_destroy(Person * person);
 
 
 
@@ -70,10 +70,10 @@ Sets a name for a person.
 @author Guillermo Rodriguez
 @param person *person: the person you want to rename.
 @param char *name: the new name you want for the person.  
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS person_set_name(Person *person, char *name);
+STATUS_ person_set_name(Person *person, char *name);
 
 
 
@@ -97,10 +97,10 @@ Sets a location for a person.
 @author Guillermo Rodriguez
 @param Person *person: the person you want to set the location.
 @param Id location: the new location you want for the person.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS person_set_location(Person *person, Id location);
+STATUS_ person_set_location(Person *person, Id location);
 
 /**
 @brief person_get_location
@@ -120,10 +120,10 @@ Sets a rule for a person.
 @author Guillermo Rodriguez
 @param Person *person: the person you want to set the rule.
 @param Id rule: the new rule you want for the person.
-@return _STATUS: _OK if you do the operation well and _ERROR in other cases.
+@return STATUS_: OK_ if you do the operation well and ERROR_ in other cases.
 */
 
-_STATUS person_set_rule(Person *person, Id rule);
+STATUS_ person_set_rule(Person *person, Id rule);
 
 
 
@@ -146,10 +146,10 @@ Prints the information of the person on the screen.
 @date 03-12-2016 
 @author Guillermo Rodriguez
 @param Person *person the person you want to print.
-@return _STATUS: _ERROR if the input is NULL and _OK otherwise.
+@return STATUS_: ERROR_ if the input is NULL and OK_ otherwise.
 */
 
-_STATUS person_print(Person *person);
+STATUS_ person_print(Person *person);
 
 
 
